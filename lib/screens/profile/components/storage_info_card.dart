@@ -29,7 +29,6 @@ class StorageInfoCard extends StatelessWidget {
             width: 200,
             child: SvgPicture.asset(svgSrc),
           ),
-          FileUploadButton(),
         ]));
   }
 }

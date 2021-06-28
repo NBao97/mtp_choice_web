@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
 
 import '../../../constants.dart';
 
@@ -18,7 +19,7 @@ class StarageDetails extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             "Hình đại diện",
@@ -31,6 +32,7 @@ class StarageDetails extends StatelessWidget {
           StorageInfoCard(
             svgSrc: "icons/Documents.svg",
           ),
+          FileUploadButton(),
         ],
       ),
     );

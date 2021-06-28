@@ -1,16 +1,27 @@
 import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mtp_choice_web/screens/all_question/components/recent_files.dart';
 
 import '../../../constants.dart';
 
 class RecentFiles extends StatelessWidget {
-  const RecentFiles({
+  @override
+  Widget build(BuildContext context) {
+    return new Theme(child: UserFiles(), data: new ThemeData.dark());
+  }
+}
+
+class UserFiles extends StatelessWidget {
+  const UserFiles({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _dtSource = DTS(
+      data: demoRecentFiles,
+    );
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -26,12 +37,12 @@ class RecentFiles extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: DataTable(
+            child: PaginatedDataTable(
               horizontalMargin: 0,
               columnSpacing: defaultPadding,
               columns: [
                 DataColumn(
-                  label: Text("UserID"),
+                  label: Text(" UserID"),
                 ),
                 DataColumn(
                   label: Text("Ngày tạo"),
@@ -40,10 +51,12 @@ class RecentFiles extends StatelessWidget {
                   label: Text("Tổng điểm"),
                 ),
               ],
-              rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
-              ),
+              rowsPerPage: 10,
+              source: _dtSource,
+              // rows: List.generate(
+              //   demoRecentFiles.length,
+              //   (index) => recentFileDataRow(demoRecentFiles[index]),
+              // ),
             ),
           ),
         ],
@@ -52,21 +65,39 @@ class RecentFiles extends StatelessWidget {
   }
 }
 
-DataRow recentFileDataRow(RecentFile fileInfo) {
-  return DataRow(
-    cells: [
-      DataCell(
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text(fileInfo.title!),
-            ),
-          ],
-        ),
-      ),
-      DataCell(Text(fileInfo.date!)),
-      DataCell(Text(fileInfo.score!)),
-    ],
-  );
+class DTS extends DataTableSource {
+  DTS({
+    required List data,
+  }) : _data = data;
+  final List _data;
+
+  @override
+  DataRow? getRow(int index) {
+    assert(index >= 0);
+
+    if (index >= _data.length) {
+      return null;
+    }
+    final _user = _data[index];
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        DataCell(Padding(
+          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+          child: Text('${_user.title}'),
+        )),
+        DataCell(Text('${_user.date}')),
+        DataCell(Text('${_user.score}')),
+      ],
+    );
+  }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get rowCount => _data.length;
+
+  @override
+  int get selectedRowCount => 0;
 }

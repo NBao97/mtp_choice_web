@@ -36,7 +36,6 @@ class AcceptForm extends StatelessWidget {
     final double heightSize = MediaQuery.of(context).size.height;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
-      padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
@@ -107,7 +106,11 @@ class AcceptForm extends StatelessWidget {
               SizedBox(height: heightSize * spaceBetweenFieldAndButton),
               Row(children: <Widget>[
                 SizedBox(
-                    width: 150,
+                  width: 50,
+                ),
+                SizedBox(
+                    width: 200,
+                    height: 50,
                     child: TextButton(
                         style: flatButtonStyle,
                         onPressed: () async {
@@ -115,11 +118,15 @@ class AcceptForm extends StatelessWidget {
                         },
                         child: Text('Chấp nhận',
                             style: TextStyle(
-                                fontSize: widthSize * fontSizeButton,
+                                fontSize: 20,
                                 fontFamily: 'Poppins',
                                 color: Colors.white)))),
                 SizedBox(
-                    width: 150,
+                  width: 10,
+                ),
+                SizedBox(
+                    width: 200,
+                    height: 50,
                     child: TextButton(
                         style: flatButtonStyle,
                         onPressed: () async {
@@ -127,7 +134,7 @@ class AcceptForm extends StatelessWidget {
                         },
                         child: Text('từ chối',
                             style: TextStyle(
-                                fontSize: widthSize * fontSizeButton,
+                                fontSize: 20,
                                 fontFamily: 'Poppins',
                                 color: Colors.white)))),
               ]),
