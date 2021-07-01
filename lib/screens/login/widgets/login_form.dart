@@ -133,10 +133,7 @@ class LoginForm extends StatelessWidget {
                   style: flatButtonStyle,
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => FirstScreen()),
-                      );
+                      Navigator.of(context).pushNamed(FirstScreen.route);
                     }
                   },
                   child: Text('Login',

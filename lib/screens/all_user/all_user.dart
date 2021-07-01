@@ -3,7 +3,14 @@ import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
 
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/screens/accept/accept_question.dart';
+import 'package:mtp_choice_web/screens/add/add_question.dart';
+import 'package:mtp_choice_web/screens/all_question/all_question.dart';
+import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
+import 'package:mtp_choice_web/screens/notification/notification.dart';
+import 'package:mtp_choice_web/screens/profile/update_screen.dart';
+import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 import 'package:provider/provider.dart';
 import '../../constants.dart';
 import 'components/header.dart';
@@ -51,11 +58,11 @@ class AllUserList extends StatelessWidget {
   }
 }
 
-class AllUser extends StatelessWidget {
+class AllUserScreen extends StatelessWidget {
+  static const String route = "/Account";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
@@ -75,30 +82,6 @@ class AllUser extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class AllUserScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Admin Panel',
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
-      ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuController(),
-          ),
-        ],
-        child: AllUser(),
       ),
     );
   }
