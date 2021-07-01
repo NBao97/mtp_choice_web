@@ -6,6 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'screens/accept/accept_question.dart';
+import 'screens/add/add_question.dart';
+import 'screens/all_question/all_question.dart';
+import 'screens/all_user/all_user.dart';
+import 'screens/main/FirstScreen.dart';
+import 'screens/notification/notification.dart';
+import 'screens/profile/update_screen.dart';
+import 'screens/question_detail/question_detail.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -17,7 +26,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'flutter web login ui',
-        initialRoute: '/login',
-        routes: {'/login': (context) => LoginPage()});
+        initialRoute: "/login",
+        routes: {
+          LoginPage.route: (context) => LoginPage(),
+          FirstScreen.route: (context) => FirstScreen(),
+        });
   }
 }

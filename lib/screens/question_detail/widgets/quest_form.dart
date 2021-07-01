@@ -36,7 +36,6 @@ class AcceptForm extends StatelessWidget {
     final double heightSize = MediaQuery.of(context).size.height;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
-      padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
@@ -105,33 +104,6 @@ class AcceptForm extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
               SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-              Row(children: <Widget>[
-                SizedBox(
-                    width: 150,
-                    child: TextButton(
-                        style: flatButtonStyle,
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {}
-                        },
-                        child: Text('Chấp nhận',
-                            style: TextStyle(
-                                fontSize: widthSize * fontSizeButton,
-                                fontFamily: 'Poppins',
-                                color: Colors.white)))),
-                SizedBox(
-                    width: 150,
-                    child: TextButton(
-                        style: flatButtonStyle,
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {}
-                        },
-                        child: Text('từ chối',
-                            style: TextStyle(
-                                fontSize: widthSize * fontSizeButton,
-                                fontFamily: 'Poppins',
-                                color: Colors.white)))),
-              ]),
-              SizedBox(height: heightSize * 0.01),
             ])));
   }
 }

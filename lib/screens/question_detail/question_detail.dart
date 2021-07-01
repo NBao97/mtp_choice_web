@@ -2,20 +2,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
+import 'package:mtp_choice_web/screens/accept/accept_question.dart';
+import 'package:mtp_choice_web/screens/add/add_question.dart';
+import 'package:mtp_choice_web/screens/all_question/all_question.dart';
+import 'package:mtp_choice_web/screens/all_user/all_user.dart';
+import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
+import 'package:mtp_choice_web/screens/notification/notification.dart';
+import 'package:mtp_choice_web/screens/profile/update_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
 import '../../constants.dart';
 import 'package:mtp_choice_web/responsive.dart';
-import 'package:mtp_choice_web/screens/update_question/widgets/update_form.dart';
-import 'package:mtp_choice_web/screens/update_question/widgets/update_file.dart';
-import 'components/header.dart';
+import 'package:mtp_choice_web/screens/accept/widgets/accept_form.dart';
+
+import 'package:mtp_choice_web/screens/accept/components/header.dart';
 
 import 'components/storage_details.dart';
 
-class UpdateQuestion extends StatelessWidget {
+
+class QuestionDetail extends StatelessWidget {
+  static const String route = "/QuestionDetail";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
@@ -48,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            Header(),
+            header(),
             SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,8 +74,8 @@ class DashboardScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
                       //     0.02, 0.012),
-                      AddFile(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
-                          0.02, 0.012),
+                      AcceptForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02,
+                          0.014, 0.02, 0.012),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),

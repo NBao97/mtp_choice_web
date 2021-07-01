@@ -40,4 +40,69 @@ List demoRecentFiles = [
     date: "25-02-2021",
     score: "700",
   ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
+  RecentFile(
+    title: "Excel File",
+    date: "25-02-2021",
+    score: "700",
+  ),
 ];

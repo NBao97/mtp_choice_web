@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
 
 import '../../../constants.dart';
 
@@ -19,10 +18,10 @@ class StarageDetails extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Hình đại diện",
+            "Tình trạng câu hỏi",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -30,9 +29,9 @@ class StarageDetails extends StatelessWidget {
           ),
           SizedBox(height: defaultPadding),
           StorageInfoCard(
-            svgSrc: "icons/Documents.svg",
-          ),
-          FileUploadButton(),
+              svgSrc: "icons/Documents.svg", title: "text", status: "Active"),
+          StorageInfoCard(
+              svgSrc: "icons/Documents.svg", title: "text", status: "Deactive"),
         ],
       ),
     );
