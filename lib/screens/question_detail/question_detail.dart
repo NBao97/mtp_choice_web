@@ -19,13 +19,26 @@ import 'package:mtp_choice_web/screens/accept/components/header.dart';
 
 import 'components/storage_details.dart';
 
-
 class QuestionDetail extends StatelessWidget {
   static const String route = "/QuestionDetail";
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: QuestionDetailS(),
+    );
+  }
+}
+class QuestionDetailS extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
 
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

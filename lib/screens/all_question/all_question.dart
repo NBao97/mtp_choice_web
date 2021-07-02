@@ -57,13 +57,27 @@ class AllQuestionList extends StatelessWidget {
     );
   }
 }
-
 class AllQuestionScreen extends StatelessWidget {
   static const String route = "/QuestionManage";
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: AllQuestionS(),
+    );
+  }
+}
+class AllQuestionS extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
 
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

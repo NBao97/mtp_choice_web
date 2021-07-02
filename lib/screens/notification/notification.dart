@@ -20,13 +20,27 @@ import 'component/storage_details.dart';
 import 'widget/remind_main.dart';
 
 
-
 class NotificationScreen extends StatelessWidget {
   static const String route = "/Notification";
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: NotificationS(),
+    );
+  }
+}
+class NotificationS extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
 
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(
