@@ -1,7 +1,5 @@
 import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mtp_choice_web/screens/all_question/components/recent_files.dart';
 
 import '../../../constants.dart';
 
@@ -39,6 +37,7 @@ class UserFiles extends StatelessWidget {
             width: double.infinity,
             child: PaginatedDataTable(
               horizontalMargin: 0,
+              showFirstLastButtons: true,
               columnSpacing: defaultPadding,
               columns: [
                 DataColumn(

@@ -23,7 +23,22 @@ class UpdateScreen extends StatelessWidget {
   static const String route = "/Profile";
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: UpdateS(),
+    );
+  }
+}
+
+class UpdateS extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

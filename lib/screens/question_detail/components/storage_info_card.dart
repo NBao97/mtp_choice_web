@@ -3,23 +3,25 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
-Color colorS = bgColor.withOpacity(0.15);
+Color colorS = Colors.blue;
+IconData icon = Icons.check_circle_outline;
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
     required this.title,
-    required this.svgSrc,
     required this.status,
   }) : super(key: key);
 
-  final String title, svgSrc, status;
+  final String title, status;
 
   void checkStatus() {
     if (status == 'Active') {
       colorS = Colors.blue;
+      icon = Icons.check_circle_outline;
     } else {
-      colorS = bgColor.withOpacity(0.15);
+      colorS = Colors.red;
+      icon = Icons.close_outlined;
     }
   }
 
@@ -30,7 +32,7 @@ class StorageInfoCard extends StatelessWidget {
       margin: EdgeInsets.only(top: defaultPadding),
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
-        color: colorS,
+        color: bgColor.withOpacity(0.15),
         border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
         borderRadius: const BorderRadius.all(
           Radius.circular(defaultPadding),
@@ -38,10 +40,10 @@ class StorageInfoCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SizedBox(
-            height: 20,
-            width: 20,
-            child: SvgPicture.asset(svgSrc),
+          Icon(
+            icon,
+            size: 20,
+            color: colorS,
           ),
           Expanded(
             child: Padding(
@@ -50,7 +52,7 @@ class StorageInfoCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    status,
+                    title,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),

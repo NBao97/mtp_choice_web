@@ -23,7 +23,22 @@ class AddQuestion extends StatelessWidget {
   static const String route = "/AddQuestion";
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: AddQuest(),
+    );
+  }
+}
+
+class AddQuest extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

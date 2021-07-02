@@ -11,11 +11,25 @@ import 'package:mtp_choice_web/screens/update_question/widgets/update_file.dart'
 import 'components/header.dart';
 
 import 'components/storage_details.dart';
-
 class UpdateQuestion extends StatelessWidget {
+  static const String route = "/QuestionDetail";
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: UpdateQuestionS(),
+    );
+  }
+}
+class UpdateQuestionS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(
         child: Row(

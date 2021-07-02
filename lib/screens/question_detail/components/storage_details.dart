@@ -28,10 +28,8 @@ class StarageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: defaultPadding),
-          StorageInfoCard(
-              svgSrc: "icons/Documents.svg", title: "text", status: "Active"),
-          StorageInfoCard(
-              svgSrc: "icons/Documents.svg", title: "text", status: "Deactive"),
+          StorageInfoCard(title: "Hiện", status: "Active"),
+          StorageInfoCard(title: "Ẩn", status: "Deactive"),
         ],
       ),
     );
