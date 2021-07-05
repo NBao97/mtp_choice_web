@@ -1,24 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
-import 'package:mtp_choice_web/screens/accept/accept_question.dart';
-import 'package:mtp_choice_web/screens/add/add_question.dart';
-import 'package:mtp_choice_web/screens/all_question/all_question.dart';
-import 'package:mtp_choice_web/screens/all_user/all_user.dart';
-import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
-import 'package:mtp_choice_web/screens/profile/update_screen.dart';
-import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
-import 'package:provider/provider.dart';
-import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
-import '../../constants.dart';
 import 'package:mtp_choice_web/responsive.dart';
-import 'component/ListView.dart';
-import 'component/header.dart';
+import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
+import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
+import 'package:provider/provider.dart';
 
+import '../../constants.dart';
 import 'component/storage_details.dart';
 import 'widget/remind_main.dart';
-
 
 class NotificationScreen extends StatelessWidget {
   static const String route = "/Notification";
@@ -34,12 +24,11 @@ class NotificationScreen extends StatelessWidget {
     );
   }
 }
-class NotificationS extends StatelessWidget {
 
+class NotificationS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       key: context.read<MenuController>().scaffoldKey,
       drawer: SideMenu(),
       body: SafeArea(

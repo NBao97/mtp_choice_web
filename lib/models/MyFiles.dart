@@ -1,5 +1,5 @@
-import 'package:mtp_choice_web/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/constants.dart';
 
 class CloudStorageInfo {
   final String? svgSrc, title;

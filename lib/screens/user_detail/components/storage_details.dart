@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
 
 import '../../../constants.dart';
 import 'storage_info_card.dart';
@@ -18,20 +17,18 @@ class StarageDetails extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Hình đại diện",
+            "Tình trạng câu hỏi",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: defaultPadding),
-          StorageInfoCard(
-            svgSrc: "icons/Documents.svg",
-          ),
-          FileUploadButton(),
+          StorageInfoCard(title: "Active", status: "Active"),
+          StorageInfoCard(title: "Banned", status: "Deactive"),
         ],
       ),
     );

@@ -1,6 +1,8 @@
-import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:mtp_choice_web/models/RecentFile.dart';
+import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 
 import '../../../constants.dart';
 
@@ -81,6 +83,9 @@ class DTS extends DataTableSource {
     final _user = _data[index];
     return DataRow.byIndex(
       index: index,
+      onSelectChanged: (value) {
+        Get.toNamed(QuestionDetail.route);
+      },
       cells: [
         DataCell(
           Row(

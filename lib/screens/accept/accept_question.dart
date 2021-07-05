@@ -1,22 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
-import 'package:mtp_choice_web/screens/add/add_question.dart';
-import 'package:mtp_choice_web/screens/all_question/all_question.dart';
-import 'package:mtp_choice_web/screens/all_user/all_user.dart';
-import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
-import 'package:mtp_choice_web/screens/notification/notification.dart';
-import 'package:mtp_choice_web/screens/profile/update_screen.dart';
-import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
-import 'package:provider/provider.dart';
-import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
-import '../../constants.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/accept/widgets/accept_form.dart';
+import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
+import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
+import 'package:provider/provider.dart';
 
-import 'package:mtp_choice_web/screens/accept/components/header.dart';
-
+import '../../constants.dart';
 import 'components/storage_details.dart';
 
 class AcceptQuestion extends StatelessWidget {
@@ -35,7 +26,6 @@ class AcceptQuestion extends StatelessWidget {
 }
 
 class AcceptQuest extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +62,7 @@ class DashboardScreen extends StatelessWidget {
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: [
-            header(),
+            Header(),
             SizedBox(height: defaultPadding),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,

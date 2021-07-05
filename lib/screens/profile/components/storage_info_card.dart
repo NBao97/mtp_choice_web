@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
 
 import '../../../constants.dart';
 

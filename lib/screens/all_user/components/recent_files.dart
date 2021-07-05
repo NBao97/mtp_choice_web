@@ -1,5 +1,7 @@
-import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mtp_choice_web/models/UserFile.dart';
+import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
 
 import '../../../constants.dart';
 
@@ -80,6 +82,9 @@ class DTS extends DataTableSource {
     final _user = _data[index];
     return DataRow.byIndex(
       index: index,
+      onSelectChanged: (value) {
+        Get.toNamed(UserDetail.route);
+      },
       cells: [
         DataCell(Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
