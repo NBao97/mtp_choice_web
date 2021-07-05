@@ -5,7 +5,6 @@ import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/all_question/all_question.dart';
 import 'package:mtp_choice_web/screens/all_user/all_user.dart';
 import 'package:mtp_choice_web/screens/notification/notification.dart';
-import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'package:mtp_choice_web/screens/profile/update_screen.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 
