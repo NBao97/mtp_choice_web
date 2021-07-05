@@ -40,6 +40,7 @@ class UserFiles extends StatelessWidget {
             child: PaginatedDataTable(
               horizontalMargin: 0,
               showFirstLastButtons: true,
+              showCheckboxColumn: false,
               columnSpacing: defaultPadding,
               columns: [
                 DataColumn(

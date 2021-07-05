@@ -30,6 +30,7 @@ class RecentFiles extends StatelessWidget {
             width: double.infinity,
             child: DataTable(
               horizontalMargin: 0,
+              showCheckboxColumn: false,
               columnSpacing: defaultPadding,
               columns: [
                 DataColumn(

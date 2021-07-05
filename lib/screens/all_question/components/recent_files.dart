@@ -40,6 +40,7 @@ class QuestionFiles extends StatelessWidget {
             width: double.infinity,
             child: PaginatedDataTable(
               horizontalMargin: 0,
+              showCheckboxColumn: false,
               showFirstLastButtons: true,
               columnSpacing: defaultPadding,
               columns: [
