@@ -35,6 +35,8 @@ dependencies:
   file_picker: ^3.0.2+2
   get: ^4.1.4
   http: ^0.13.3
+  google_sign_in: ^5.0.4
+  firebase_auth: ^2.0.0
 
 dev_dependencies:
   flutter_test:

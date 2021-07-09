@@ -1,7 +1,37 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+Future<List<RecentFile>> fetchQuestion() async {
+  final response = await http
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => new RecentFile.fromJson(data)).toList();
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  }
+}
+
 class RecentFile {
   final String? type, title, date, author;
 
   RecentFile({this.type, this.title, this.date, this.author});
+
+  factory RecentFile.fromJson(Map<String, dynamic> json) {
+    return RecentFile(
+      type: json['type'],
+      title: json['title'],
+      date: json['date'],
+      author: json['author'],
+    );
+  }
 }
 
 List demoRecentFiles = [

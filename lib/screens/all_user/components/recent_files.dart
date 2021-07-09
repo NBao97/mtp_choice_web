@@ -12,75 +12,93 @@ class RecentFiles extends StatelessWidget {
   }
 }
 
-class UserFiles extends StatelessWidget {
+class UserFiles extends StatefulWidget {
   const UserFiles({
     Key? key,
   }) : super(key: key);
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<UserFiles> {
+  late Future<List<RecentFile>> futureData;
+
+  @override
+  void initState() {
+    super.initState();
+    futureData = fetchUser();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final _dtSource = DTS(
-      data: demoRecentFiles,
-    );
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Người dùng mới",
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: PaginatedDataTable(
-              horizontalMargin: 0,
-              showFirstLastButtons: true,
-              showCheckboxColumn: false,
-              columnSpacing: defaultPadding,
-              columns: [
-                DataColumn(
-                  label: Text(" UserID"),
-                ),
-                DataColumn(
-                  label: Text("Ngày tạo"),
-                ),
-                DataColumn(
-                  label: Text("Tổng điểm"),
-                ),
-              ],
-              rowsPerPage: 10,
-              source: _dtSource,
-              // rows: List.generate(
-              //   demoRecentFiles.length,
-              //   (index) => recentFileDataRow(demoRecentFiles[index]),
-              // ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return FutureBuilder<List<RecentFile>>(
+        future: futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<RecentFile>? data = snapshot.data;
+            final _dtSource = DTS(
+              data: data,
+            );
+            return Container(
+              padding: EdgeInsets.all(defaultPadding),
+              decoration: BoxDecoration(
+                color: secondaryColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Người dùng mới",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: PaginatedDataTable(
+                      horizontalMargin: 0,
+                      showFirstLastButtons: true,
+                      showCheckboxColumn: false,
+                      columnSpacing: defaultPadding,
+                      columns: [
+                        DataColumn(
+                          label: Text(" UserID"),
+                        ),
+                        DataColumn(
+                          label: Text("Ngày tạo"),
+                        ),
+                        DataColumn(
+                          label: Text("Tổng điểm"),
+                        ),
+                      ],
+                      rowsPerPage: 10,
+                      source: _dtSource,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return CircularProgressIndicator();
+        });
   }
 }
 
 class DTS extends DataTableSource {
   DTS({
-    required List data,
+    required List<RecentFile>? data,
   }) : _data = data;
-  final List _data;
+  final List<RecentFile>? _data;
 
   @override
   DataRow? getRow(int index) {
     assert(index >= 0);
 
-    if (index >= _data.length) {
+    if (index >= _data!.length) {
       return null;
     }
-    final _user = _data[index];
+    final _user = _data![index];
     return DataRow.byIndex(
       index: index,
       onSelectChanged: (value) {
@@ -101,7 +119,7 @@ class DTS extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => _data.length;
+  int get rowCount => _data!.length;
 
   @override
   int get selectedRowCount => 0;
