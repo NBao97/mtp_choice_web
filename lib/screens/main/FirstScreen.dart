@@ -7,6 +7,7 @@ import 'package:mtp_choice_web/screens/accept/accept_question.dart';
 import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/all_question/all_question.dart';
 import 'package:mtp_choice_web/screens/all_user/all_user.dart';
+import 'package:mtp_choice_web/screens/login/login_page.dart';
 import 'package:mtp_choice_web/screens/notification/notification.dart';
 import 'package:mtp_choice_web/screens/profile/update_screen.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
@@ -30,6 +31,7 @@ class FirstScreen extends StatelessWidget {
       initialRoute: "/",
       routes: {
         QuestionDetail.route: (context) => QuestionDetail(),
+        LoginPage.route: (context) => LoginPage(),
         AllUserScreen.route: (context) => AllUserScreen(),
         AddQuestion.route: (context) => AddQuestion(),
         AcceptQuestion.route: (context) => AcceptQuestion(),

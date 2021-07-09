@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
+import 'package:mtp_choice_web/screens/login/login_page.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
@@ -62,9 +63,25 @@ class ProfileCard extends StatelessWidget {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-              child: Text("Nguyễn Hoàng Ngọc Bảo"),
+              child: DropdownButton<String>(
+                  icon: const Icon(Icons.arrow_downward),
+                  iconSize: 20,
+                  elevation: 16,
+                  hint: Text(
+                    "Nguyễn Hoàng Ngọc Bảo",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                  items: [
+                    DropdownMenuItem<String>(
+                      child: Text("Log out"),
+                      value: "Log out",
+                    ),
+                  ],
+                  onChanged: (value) {
+                    Navigator.of(context).pushNamed(LoginPage.route);
+                  }),
             ),
-          Icon(Icons.keyboard_arrow_down),
         ],
       ),
     );
