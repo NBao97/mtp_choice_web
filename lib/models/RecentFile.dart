@@ -13,7 +13,7 @@ Future<List<RecentFile>> fetchQuestion() async {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new RecentFile.fromJson(data)).toList();
   } else {
-    // If the server did not return a 200 OK response,
+    // If   the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
   }

@@ -37,6 +37,7 @@ dependencies:
   http: ^0.13.3
   google_sign_in: ^5.0.4
   firebase_auth: ^2.0.0
+  bs_flutter_datatable: ^1.1.1
 
 dev_dependencies:
   flutter_test:
