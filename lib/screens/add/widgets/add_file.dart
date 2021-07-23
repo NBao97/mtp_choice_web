@@ -1,7 +1,5 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
 
 class AddFile extends StatelessWidget {
@@ -60,17 +58,7 @@ class AddFile extends StatelessWidget {
                           fontSize: widthSize * fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
-              ElevatedButton(
-                style: raisedButtonStyle,
-                child: Text('UPLOAD FILE'),
-                onPressed: () async {
-                  var picked = await FilePicker.platform.pickFiles();
-
-                  if (picked != null) {
-                    print(picked.files.first.name);
-                  }
-                },
-              ),
+              FileUploadButton(),
               SizedBox(height: heightSize * spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
@@ -84,7 +72,7 @@ class AddFile extends StatelessWidget {
                   // controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Không thể bỏ trống đáp án';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -123,7 +111,7 @@ class AddFile extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Không thể bỏ trống câu sai';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -162,7 +150,7 @@ class AddFile extends StatelessWidget {
                   //    controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Không thể bỏ trống câu sai';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -201,7 +189,7 @@ class AddFile extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Không thể bỏ trống câu sai';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,

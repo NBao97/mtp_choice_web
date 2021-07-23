@@ -1,13 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class UpdateProfile extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _passwordController = TextEditingController();
+  // final _usernameController = TextEditingController();
 
   final paddingTopForm,
       fontSizeTextField,
@@ -63,7 +59,7 @@ class UpdateProfile extends StatelessWidget {
                           color: Colors.white))),
               TextFormField(
                   initialValue: "user123",
-                  controller: _usernameController,
+                  // controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
                       return 'Nhập tên người dùng của bạn để tiếp tục';
@@ -95,22 +91,17 @@ class UpdateProfile extends StatelessWidget {
               SizedBox(height: heightSize * spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: Text('email',
+                  child: Text('Gmail ID',
                       style: TextStyle(
                           fontSize: widthSize * fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
                   initialValue: "aido@gmail.com.vn",
-                  controller: _emailController,
+                  // controller: _usernameController,
                   validator: (value) {
-                    String check = '';
-                    GetUtils.isEmail(value!) ? check = '' : check = 'fail';
                     if (value == '') {
-                      return 'Email không thể bỏ trống';
-                    }
-                    if (check == 'fail') {
-                      return 'Email không hợp lệ';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -146,14 +137,10 @@ class UpdateProfile extends StatelessWidget {
                           color: Colors.white))),
               TextFormField(
                   initialValue: "0908812562",
-                  controller: _phoneController,
+                  //  controller: _usernameController,
                   validator: (value) {
-                    String check = '';
-                    GetUtils.isPhoneNumber(value!)
-                        ? check = ''
-                        : check = 'fail';
-                    if (check == 'fail') {
-                      return 'phone không hợp lệ';
+                    if (value == '') {
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -188,11 +175,11 @@ class UpdateProfile extends StatelessWidget {
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
-                  initialValue: "mật khẩu",
-                  controller: _passwordController,
+                  initialValue: "mat khau",
+                  //    controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Mật khẩu không thể ỏ trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   obscureText: true,
@@ -228,11 +215,11 @@ class UpdateProfile extends StatelessWidget {
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
-                  initialValue: "nhập lại mật khẩu",
+                  initialValue: "mat khau",
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'xác nhận mật khẩu không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   obscureText: true,

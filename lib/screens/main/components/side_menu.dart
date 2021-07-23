@@ -30,7 +30,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Detail",
+            title: "QuestionDetail",
             svgSrc: "icons/menu_dashbord.svg",
             onPressed: () {
               Navigator.of(context).pushNamed(QuestionDetail.route);
@@ -38,7 +38,7 @@ class SideMenu extends StatelessWidget {
           ),
 
           DrawerListTile(
-            title: "Quản lý Tài khoản",
+            title: "Tài khoản",
             svgSrc: "icons/menu_tran.svg",
             onPressed: () {
               Navigator.of(context).pushNamed(AllUserScreen.route);

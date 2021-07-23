@@ -63,7 +63,7 @@ class AddForm extends StatelessWidget {
                   // controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Câu hỏi sai không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -103,7 +103,7 @@ class AddForm extends StatelessWidget {
                   // controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Đáp án không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -143,7 +143,7 @@ class AddForm extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Đáp án sai không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -183,7 +183,7 @@ class AddForm extends StatelessWidget {
                   //    controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Đáp án sai không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,
@@ -223,7 +223,7 @@ class AddForm extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Đáp án sai không thể để trống';
+                      return 'Nhập tên người dùng của bạn để tiếp tục';
                     }
                   },
                   cursorColor: Colors.white,

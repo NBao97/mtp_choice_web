@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 
-import 'google_button.dart';
-
 class LoginForm extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
@@ -143,8 +141,6 @@ class LoginForm extends StatelessWidget {
                           fontSize: widthSize * fontSizeButton,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
-              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-              GoogleButton(),
               SizedBox(height: heightSize * 0.01),
               Text('Quên mật Khẩu?',
                   style: TextStyle(

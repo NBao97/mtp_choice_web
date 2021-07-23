@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
-import 'package:mtp_choice_web/constants.dart' as constant;
+
 import '../../../constants.dart';
-import '../add_question.dart';
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
@@ -16,48 +14,38 @@ class StorageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: bgColor,
-      ),
-      onPressed: () {
-        constant.form = title;
-        Get.back();
-        Get.toNamed(AddQuestion.route);
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: defaultPadding),
-        padding: EdgeInsets.all(defaultPadding),
-        decoration: BoxDecoration(
-          border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(defaultPadding),
-          ),
+    return Container(
+      margin: EdgeInsets.only(top: defaultPadding),
+      padding: EdgeInsets.all(defaultPadding),
+      decoration: BoxDecoration(
+        border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(defaultPadding),
         ),
-        child: Row(
-          children: [
-            SizedBox(
-              height: 20,
-              width: 20,
-              child: SvgPicture.asset(svgSrc),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+      ),
+      child: Row(
+        children: [
+          SizedBox(
+            height: 20,
+            width: 20,
+            child: SvgPicture.asset(svgSrc),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
