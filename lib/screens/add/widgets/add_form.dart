@@ -2,17 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
 Future<Album> createAlbum(String title) async {
   final response = await http.post(
-    Uri.parse('https://jsonplaceholder.typicode.com/albums'),
+    Uri.parse('https://api.wimln.ml/api/Question'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
     },
     body: jsonEncode(<String, String>{
-      'title': title,
+      'questionContent': title,
     }),
   );
 
@@ -121,7 +122,7 @@ class _AddFormState extends State<AddForm> {
           // controller: _usernameController,
           validator: (value) {
             if (value == '') {
-              return 'Nhập tên người dùng của bạn để tiếp tục';
+              return 'Câu hỏi không thể để trống';
             }
           },
           cursorColor: Colors.white,
@@ -159,7 +160,7 @@ class _AddFormState extends State<AddForm> {
           // controller: _usernameController,
           validator: (value) {
             if (value == '') {
-              return 'Nhập tên người dùng của bạn để tiếp tục';
+              return 'Đáp án không thể để trống';
             }
           },
           cursorColor: Colors.white,
@@ -197,7 +198,7 @@ class _AddFormState extends State<AddForm> {
           //  controller: _usernameController,
           validator: (value) {
             if (value == '') {
-              return 'Nhập tên người dùng của bạn để tiếp tục';
+              return 'không thể để trống câu sai';
             }
           },
           cursorColor: Colors.white,
@@ -235,7 +236,7 @@ class _AddFormState extends State<AddForm> {
           //    controller: _usernameController,
           validator: (value) {
             if (value == '') {
-              return 'Nhập tên người dùng của bạn để tiếp tục';
+              return 'không thể để trống câu sai';
             }
           },
           cursorColor: Colors.white,
@@ -273,7 +274,7 @@ class _AddFormState extends State<AddForm> {
           //  controller: _usernameController,
           validator: (value) {
             if (value == '') {
-              return 'Nhập tên người dùng của bạn để tiếp tục';
+              return 'không thể để trống câu sai';
             }
           },
           cursorColor: Colors.white,
