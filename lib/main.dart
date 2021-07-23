@@ -7,6 +7,8 @@ void main() {
   runApp(MyApp());
 }
 
+//flutter run -d chrome --web-hostname localhost --web-port
+//  8080
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override

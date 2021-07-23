@@ -73,7 +73,7 @@ class AddFile extends StatelessWidget {
                   // controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Nhập tên người dùng của bạn để tiếp tục';
+                      return 'Đáp án không thể để trống';
                     }
                   },
                   cursorColor: Colors.white,
@@ -113,7 +113,7 @@ class AddFile extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Nhập tên người dùng của bạn để tiếp tục';
+                      return 'Đáp án sai không thể để trống';
                     }
                   },
                   cursorColor: Colors.white,
@@ -153,7 +153,7 @@ class AddFile extends StatelessWidget {
                   //    controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Nhập tên người dùng của bạn để tiếp tục';
+                      return 'Đáp án sai không thể để trống';
                     }
                   },
                   cursorColor: Colors.white,
@@ -193,7 +193,7 @@ class AddFile extends StatelessWidget {
                   //  controller: _usernameController,
                   validator: (value) {
                     if (value == '') {
-                      return 'Nhập tên người dùng của bạn để tiếp tục';
+                      return 'Đáp án sai không thể để trống';
                     }
                   },
                   cursorColor: Colors.white,

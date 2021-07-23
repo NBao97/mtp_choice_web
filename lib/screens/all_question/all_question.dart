@@ -6,7 +6,7 @@ import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
-import 'components/recent_files.dart';
+import 'components/question_files.dart';
 import 'components/storage_details.dart';
 
 class AllQuestionList extends StatelessWidget {

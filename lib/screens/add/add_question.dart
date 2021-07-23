@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/add/widgets/add_file.dart';
+import 'package:mtp_choice_web/screens/add/widgets/add_form.dart';
 import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mtp_choice_web/constants.dart' as constant;
 import '../../constants.dart';
 import 'components/storage_details.dart';
 
@@ -76,10 +77,10 @@ class DashboardScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       SizedBox(height: defaultPadding),
-                      // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
-                      //     0.02, 0.012),
-                      AddFile(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
-                          0.02, 0.012),
+                      constant.form == 'text'
+                          ? AddForm()
+                          : AddFile(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02,
+                              0.014, 0.02, 0.012),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),
