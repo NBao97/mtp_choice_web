@@ -18,12 +18,29 @@ Future<String> login(String title) async {
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-
-    return 'Success';
+    Map<String, dynamic> map = jsonDecode(response.body.toString());
+    Key tok = Key.fromJson(map);
+    constant.key = tok.token.toString();
+    print(constant.key);
+    return 'Success ';
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     return 'Failed.' + response.statusCode.toString();
+  }
+}
+
+class Key {
+  final String token;
+
+  Key({
+    required this.token,
+  });
+
+  factory Key.fromJson(Map<String, dynamic> json) {
+    return Key(
+      token: json['token'],
+    );
   }
 }
 
@@ -42,7 +59,6 @@ Future<String> signInWithGoogle() async {
   );
   final user1 = await FirebaseAuth.instance.signInWithCredential(credential);
   constant.userName = user1.user!.displayName.toString();
-  constant.key = user1.user!.getIdToken().toString();
   if (constant.userName == '') {
     constant.userName = user1.user!.email.toString();
   }
