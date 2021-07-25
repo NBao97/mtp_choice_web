@@ -1,46 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:async';
-import 'dart:convert';
-import 'package:mtp_choice_web/constants.dart' as constant;
-import 'package:http/http.dart' as http;
 
-Future<Album> createAlbum(String title) async {
-  final response = await http.post(
-    Uri.parse('https://api.wimln.ml/api/Question'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer ' + constant.key,
-    },
-    body: jsonEncode(<String, String>{
-      'questionContent': title,
-    }),
-  );
-
-  if (response.statusCode == 201) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
-  } else {
-    // If the server did not return a 201 CREATED response,
-    // then throw an exception.
-    throw Exception('Failed to create album.');
-  }
-}
-
-class Album {
-  final int id;
-  final String title;
-
-  Album({required this.id, required this.title});
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      id: json['id'],
-      title: json['title'],
-    );
-  }
-}
+import 'package:mtp_choice_web/models/QuestFile.dart';
 
 class AddForm extends StatefulWidget {
   AddForm({Key? key}) : super(key: key);
@@ -54,8 +17,14 @@ class AddForm extends StatefulWidget {
 
 class _AddFormState extends State<AddForm> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  Future<Album>? _futureAlbum;
+  final _questionContentController = TextEditingController();
+  final _difficultyController = TextEditingController();
+  final _creatorController = TextEditingController();
+  final _answersCorrectController = TextEditingController();
+  final _answers1Controller = TextEditingController();
+  final _answers2Controller = TextEditingController();
+  final _answers3Controller = TextEditingController();
+  Future<Question>? _futureQuestion;
 
   final paddingTopForm,
       fontSizeTextField,
@@ -101,7 +70,7 @@ class _AddFormState extends State<AddForm> {
               left: widthSize * 0.05,
               right: widthSize * 0.05,
               top: heightSize * paddingTopForm),
-          child: (_futureAlbum == null)
+          child: (_futureQuestion == null)
               ? buildColumn(widthSize, heightSize, flatButtonStyle)
               : buildFutureBuilder(),
         ));
@@ -119,7 +88,7 @@ class _AddFormState extends State<AddForm> {
                   color: Colors.white))),
       TextFormField(
           maxLines: null,
-          // controller: _usernameController,
+          controller: _questionContentController,
           validator: (value) {
             if (value == '') {
               return 'Câu hỏi không thể để trống';
@@ -157,7 +126,7 @@ class _AddFormState extends State<AddForm> {
                   color: Colors.white))),
       TextFormField(
           maxLines: null,
-          // controller: _usernameController,
+          controller: _answersCorrectController,
           validator: (value) {
             if (value == '') {
               return 'Đáp án không thể để trống';
@@ -195,7 +164,7 @@ class _AddFormState extends State<AddForm> {
                   color: Colors.white))),
       TextFormField(
           maxLines: null,
-          //  controller: _usernameController,
+          controller: _answers1Controller,
           validator: (value) {
             if (value == '') {
               return 'không thể để trống câu sai';
@@ -233,7 +202,7 @@ class _AddFormState extends State<AddForm> {
                   color: Colors.white))),
       TextFormField(
           maxLines: null,
-          //    controller: _usernameController,
+          controller: _answers2Controller,
           validator: (value) {
             if (value == '') {
               return 'không thể để trống câu sai';
@@ -271,7 +240,46 @@ class _AddFormState extends State<AddForm> {
                   color: Colors.white))),
       TextFormField(
           maxLines: null,
-          //  controller: _usernameController,
+          controller: _answers3Controller,
+          validator: (value) {
+            if (value == '') {
+              return 'không thể để trống câu sai';
+            }
+          },
+          cursorColor: Colors.white,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            fillColor: Colors.white,
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.red, width: 2)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2)),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.white, width: 2)),
+            labelStyle: TextStyle(color: Colors.white),
+            errorStyle: TextStyle(
+                color: Colors.white, fontSize: widthSize * errorFormMessage),
+            prefixIcon: Icon(
+              Icons.clear_sharp,
+              size: widthSize * iconFormSize,
+              color: Colors.white,
+            ),
+          ),
+          textAlign: TextAlign.start,
+          style:
+              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
+      SizedBox(height: heightSize * spaceBetweenFields),
+      Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Độ khó',
+              style: TextStyle(
+                  fontSize: widthSize * fontSizeTextField,
+                  fontFamily: 'Poppins',
+                  color: Colors.white))),
+      TextFormField(
+          maxLines: null,
+          controller: _difficultyController,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           validator: (value) {
             if (value == '') {
               return 'không thể để trống câu sai';
@@ -303,7 +311,17 @@ class _AddFormState extends State<AddForm> {
       TextButton(
           style: flatButtonStyle,
           onPressed: () async {
-            if (_formKey.currentState!.validate()) {}
+            if (_formKey.currentState!.validate()) {
+            } else {
+              createQuestion(
+                  _questionContentController.text,
+                  _creatorController.text,
+                  _difficultyController.text,
+                  _answersCorrectController.text,
+                  _answers1Controller.text,
+                  _answers2Controller.text,
+                  _answers3Controller.text);
+            }
           },
           child: Text('Thêm câu hỏi',
               style: TextStyle(
@@ -314,12 +332,12 @@ class _AddFormState extends State<AddForm> {
     ]);
   }
 
-  FutureBuilder<Album> buildFutureBuilder() {
-    return FutureBuilder<Album>(
-      future: _futureAlbum,
+  FutureBuilder<Question> buildFutureBuilder() {
+    return FutureBuilder<Question>(
+      future: _futureQuestion,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return Text(snapshot.data!.title);
+          return Text(snapshot.data!.difficulty.toString());
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }

@@ -1,21 +1,40 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
-Future<List<RecentFile>> fetchQuestion() async {
-  final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+Future<List<QuestionFile>> fetchQuestion(int page) async {
+  final response = await http.get(
+    Uri.parse('https://api.wimln.ml/api/Question'),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-    return jsonResponse.map((data) => new RecentFile.fromJson(data)).toList();
+    return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
+  }
+}
+
+class QuestionFile {
+  final String? questionContent, difficulty, creator;
+
+  QuestionFile({this.questionContent, this.difficulty, this.creator});
+
+  factory QuestionFile.fromJson(Map<String, dynamic> json) {
+    return QuestionFile(
+      questionContent: json['questionContent'],
+      difficulty: json['difficulty'],
+      creator: json['creator'],
+    );
   }
 }
 
