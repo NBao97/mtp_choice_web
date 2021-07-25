@@ -9,3 +9,6 @@ String key = '';
 String id = '';
 String userName = '';
 String form = '';
+int page = 1;
+String order = '';
+String search = '';
