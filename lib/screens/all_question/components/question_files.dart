@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
-import 'package:bs_flutter_datatable/bs_flutter_datatable.dart';
-import '../../../constants.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:mtp_choice_web/constants.dart' as constant;
+
+import '../../../constants.dart' as constant;
 
 class RecentFiles extends StatelessWidget {
   @override
@@ -24,94 +23,192 @@ class QuestionFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<QuestionFiles> {
-  late Future<List<RecentFile>> futureData;
-  DTS _source = DTS();
+  late Future<List<QuestionFile>> futureData;
   @override
   void initState() {
     super.initState();
-    _source.controller = BsDatatableController();
-    super.initState();
+    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
-  Future loadApi(Map<String, dynamic> params) {
-    return http.get(
-      Uri.parse('https://api.wimln.ml/api/Question'),
-      headers: <String, String>{
-        'Content-Type': 'application/json ; charset=UTF-8',
-        'Authorization': 'Bearer ' + constant.key,
-      },
-    ).then((value) {
-      Map<String, dynamic> json = jsonDecode(value.body);
-      setState(() {
-        _source.response = BsDatatableResponse.createFromJson(json['data']);
-        // _source.onEditListener = (typeid) {
-        //   _source.controller.reload();
-        // };
-      });
-    });
-  }
-
+  final TextEditingController _controller = TextEditingController();
+  String namR = '';
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Câu hỏi mới",
-            style: Theme.of(context).textTheme.subtitle1,
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: BsDatatable(
-              source: _source,
-              title: Text('Datatables Data'),
-              columns: DTS.columns,
-              pagination: BsPagination.input,
-              language: BsDatatableLanguage(
-                  nextPagination: 'Next',
-                  previousPagination: 'Previous',
-                  information:
-                      'Show __START__ to __END__ of __FILTERED__ entries',
-                  informationFiltered: 'filtered from __DATA__ total entries',
-                  firstPagination: 'First Page',
-                  lastPagination: 'Last Page',
-                  hintTextSearch: 'Search data ...',
-                  perPageLabel: 'Page Length',
-                  searchLabel: 'Search Form'),
-              serverSide: loadApi,
-            ),
-          )
-        ],
-      ),
-    );
+    return FutureBuilder<List<QuestionFile>>(
+        future: futureData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<QuestionFile>? data = snapshot.data;
+            final _dtSource = DTS(
+              data: data,
+            );
+            return Container(
+              padding: EdgeInsets.all(constant.defaultPadding),
+              decoration: BoxDecoration(
+                color: constant.secondaryColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 1000.0,
+                    alignment: Alignment.topRight,
+                    child: TextField(
+                      controller: _controller,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) {
+                        constant.search = _controller.text;
+                        setState(() {});
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        hintStyle: TextStyle(color: Colors.white),
+                        fillColor: constant.secondaryColor,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            constant.search = _controller.text;
+                            setState(() {});
+                          },
+                          child: Container(
+                            padding:
+                                EdgeInsets.all(constant.defaultPadding * 0.75),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: constant.defaultPadding / 2),
+                            decoration: BoxDecoration(
+                              color: constant.primaryColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SvgPicture.asset('icons/Search.svg'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Câu hỏi mới",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: PaginatedDataTable(
+                      horizontalMargin: 0,
+
+                      onPageChanged: (value) => {
+                        namR = Get.currentRoute,
+                        if (value < 1 && constant.page > 1)
+                          {constant.page = constant.page - 1, setState(() {})}
+                        else if (value < constant.page && constant.page > 1)
+                          {constant.page = constant.page - 1, setState(() {})}
+                        else if (value > constant.page)
+                          {constant.page = constant.page + 1, setState(() {})}
+                      },
+                      showCheckboxColumn: false,
+                      showFirstLastButtons: false,
+                      columnSpacing: constant.defaultPadding,
+                      columns: [
+                        DataColumn(
+                          label: Text("Nội dung"),
+                        ),
+                        DataColumn(
+                          label: Text("độ khó"),
+                        ),
+                        DataColumn(
+                          label: Text("Người tạo"),
+                        ),
+                      ],
+                      rowsPerPage: 10,
+                      source: _dtSource,
+                      // rows: List.generate(
+                      //   demoRecentFiles.length,
+                      //   (index) => recentFileDataRow(demoRecentFiles[index]),
+                      // ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return CircularProgressIndicator();
+        });
   }
 }
 
-class DTS extends BsDatatableSource {
-  ValueChanged<RecentFile> onEditListener = (value) {};
-  ValueChanged<RecentFile> onDeleteListener = (value) {};
-  static List<BsDataColumn> get columns => <BsDataColumn>[
-        BsDataColumn(
-            label: Text('Nội dung'), columnName: 'summary', width: 100.0),
-        BsDataColumn(
-            label: Text('Ngày chấp nhận'), columnName: 'Date', width: 200.0),
-        BsDataColumn(
-          label: Text('Người tạo'),
-          columnName: 'Author',
-        ),
-      ];
+List<QuestionFile>? dataSave = [];
+
+class DTS extends DataTableSource {
+  DTS({
+    required List<QuestionFile>? data,
+  }) : _data = data;
+  List<QuestionFile>? _data;
   @override
-  BsDataRow getRow(int index) {
-    return BsDataRow(index: index, cells: <BsDataCell>[
-      BsDataCell(Text('${response.data[index]['summary']}')),
-      BsDataCell(Text('${response.data[index]['Date']}')),
-      BsDataCell(Text('${response.data[index]['Author']}')),
-    ]);
+  DataRow? getRow(int index) {
+    assert(index >= 0);
+    _data!.addAll(dataSave!);
+    if (index >= _data!.length) {
+      return null;
+    }
+    final _user = _data![index];
+    dataSave!.add(_user);
+    return DataRow.byIndex(
+      index: index,
+      onSelectChanged: (value) {
+        constant.questId = _user.questionId!;
+        Get.toNamed(QuestionDetail.route);
+      },
+      cells: [
+        DataCell(
+          Row(
+            children: [
+              SvgPicture.asset(
+                "icons/xd_file.svg",
+                height: 30,
+                width: 30,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: constant.defaultPadding),
+                child: Text(
+                  _user.questionContent!.substring(0, 5),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
+            ],
+          ),
+        ),
+        DataCell(Text(
+          '${_user.difficulty}',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        )),
+        DataCell(Text(
+          '${_user.creator}',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        )),
+      ],
+    );
   }
+
+  @override
+  bool get isRowCountApproximate => true;
+
+  @override
+  int get rowCount => 10;
+
+  @override
+  int get selectedRowCount => 0;
 }

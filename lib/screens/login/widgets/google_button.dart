@@ -34,11 +34,9 @@ class _GoogleButtonState extends State<GoogleButton> {
             _isProcessing = true;
           });
           await signInWithGoogle().then((result) async {
-            print("bearer" + result);
             if (result != "") {
               await login(result.toString()).then((value) async {
-                print('Bearer ' + result);
-                if (value == 'Success') {
+                if (value.contains("Success")) {
                   Navigator.of(context).pushNamed(FirstScreen.route);
                 } else {
                   Get.snackbar(
