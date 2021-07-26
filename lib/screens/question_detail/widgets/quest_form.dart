@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mtp_choice_web/models/QuestFile.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
+import '../../../constants.dart' as constant;
 
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _AddFormState extends State<AcceptForm> {
   @override
   void initState() {
     super.initState();
-    futureData = fetchQuestion(0);
+    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   final paddingTopForm,
@@ -85,7 +85,7 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.difficulty!,
+                      Text(quest.difficulty!.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
-import 'package:get/get.dart';
+
 import '../../../constants.dart' as constant;
 
 class RecentFiles extends StatelessWidget {
@@ -23,13 +24,14 @@ class QuestionFiles extends StatefulWidget {
 
 class _MyAppState extends State<QuestionFiles> {
   late Future<List<QuestionFile>> futureData;
-
   @override
   void initState() {
     super.initState();
-    futureData = fetchQuestion(constant.page);
+    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
+  final TextEditingController _controller = TextEditingController();
+  String namR = '';
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<QuestionFile>>(
@@ -49,6 +51,47 @@ class _MyAppState extends State<QuestionFiles> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Container(
+                    width: 1000.0,
+                    alignment: Alignment.topRight,
+                    child: TextField(
+                      controller: _controller,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (value) {
+                        constant.search = _controller.text;
+                        setState(() {});
+                      },
+                      decoration: InputDecoration(
+                        hintText: "Search",
+                        hintStyle: TextStyle(color: Colors.white),
+                        fillColor: constant.secondaryColor,
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                        ),
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            constant.search = _controller.text;
+                            setState(() {});
+                          },
+                          child: Container(
+                            padding:
+                                EdgeInsets.all(constant.defaultPadding * 0.75),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: constant.defaultPadding / 2),
+                            decoration: BoxDecoration(
+                              color: constant.primaryColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                            ),
+                            child: SvgPicture.asset('icons/Search.svg'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                   Text(
                     "Câu hỏi mới",
                     style: Theme.of(context).textTheme.subtitle1,
@@ -57,16 +100,18 @@ class _MyAppState extends State<QuestionFiles> {
                     width: double.infinity,
                     child: PaginatedDataTable(
                       horizontalMargin: 0,
+
                       onPageChanged: (value) => {
-                        if (value < 1)
-                          {constant.page = 1, setState(() {})}
-                        else if (value < constant.page)
-                          {constant.page = constant.page--, setState(() {})}
+                        namR = Get.currentRoute,
+                        if (value < 1 && constant.page > 1)
+                          {constant.page = constant.page - 1, setState(() {})}
+                        else if (value < constant.page && constant.page > 1)
+                          {constant.page = constant.page - 1, setState(() {})}
                         else if (value > constant.page)
-                          {constant.page = constant.page++, setState(() {})}
+                          {constant.page = constant.page + 1, setState(() {})}
                       },
                       showCheckboxColumn: false,
-                      showFirstLastButtons: true,
+                      showFirstLastButtons: false,
                       columnSpacing: constant.defaultPadding,
                       columns: [
                         DataColumn(
@@ -98,59 +143,26 @@ class _MyAppState extends State<QuestionFiles> {
   }
 }
 
-class SearchField extends State<QuestionFiles> {
-  final TextEditingController _controller = TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: _controller,
-      decoration: InputDecoration(
-        hintText: "Search",
-        hintStyle: TextStyle(color: Colors.white),
-        fillColor: constant.secondaryColor,
-        filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        suffixIcon: InkWell(
-          onTap: () {
-            constant.search = _controller.text;
-            setState(() {});
-          },
-          child: Container(
-            padding: EdgeInsets.all(constant.defaultPadding * 0.75),
-            margin:
-                EdgeInsets.symmetric(horizontal: constant.defaultPadding / 2),
-            decoration: BoxDecoration(
-              color: constant.primaryColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: SvgPicture.asset('icons/Search.svg'),
-          ),
-        ),
-      ),
-    );
-  }
-}
+List<QuestionFile>? dataSave = [];
 
 class DTS extends DataTableSource {
   DTS({
     required List<QuestionFile>? data,
   }) : _data = data;
-  final List<QuestionFile>? _data;
-
+  List<QuestionFile>? _data;
   @override
   DataRow? getRow(int index) {
     assert(index >= 0);
-
+    _data!.addAll(dataSave!);
     if (index >= _data!.length) {
       return null;
     }
     final _user = _data![index];
+    dataSave!.add(_user);
     return DataRow.byIndex(
       index: index,
       onSelectChanged: (value) {
+        constant.questId = _user.questionId!;
         Get.toNamed(QuestionDetail.route);
       },
       cells: [
@@ -165,22 +177,37 @@ class DTS extends DataTableSource {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: constant.defaultPadding),
-                child: Text(_user.questionContent!),
+                child: Text(
+                  _user.questionContent!.substring(0, 5),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
               ),
             ],
           ),
         ),
-        DataCell(Text('${_user.difficulty}')),
-        DataCell(Text('${_user.creator}')),
+        DataCell(Text(
+          '${_user.difficulty}',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        )),
+        DataCell(Text(
+          '${_user.creator}',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        )),
       ],
     );
   }
 
   @override
-  bool get isRowCountApproximate => false;
+  bool get isRowCountApproximate => true;
 
   @override
-  int get rowCount => 0;
+  int get rowCount => 10;
 
   @override
   int get selectedRowCount => 0;

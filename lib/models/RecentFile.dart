@@ -3,9 +3,20 @@ import 'dart:convert';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
-Future<List<QuestionFile>> fetchQuestion(int page) async {
+Future<List<QuestionFile>> fetchQuestion(
+    int page, String orderBy, String questId) async {
+  String quesUrl = '';
+  if (questId != '') {
+    quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
+    constant.questId = '';
+  } else {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?OrderBy=difficulty&IsAscending=true&PageNumber=' +
+            page.toString() +
+            '&PageSize=10';
+  }
   final response = await http.get(
-    Uri.parse('https://api.wimln.ml/api/Question'),
+    Uri.parse(quesUrl),
     headers: <String, String>{
       'Content-Type': 'application/json ; charset=UTF-8',
       'Authorization': 'Bearer ' + constant.key,
@@ -15,6 +26,7 @@ Future<List<QuestionFile>> fetchQuestion(int page) async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
+    print(page);
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
@@ -25,15 +37,17 @@ Future<List<QuestionFile>> fetchQuestion(int page) async {
 }
 
 class QuestionFile {
-  final String? questionContent, difficulty, creator;
-
-  QuestionFile({this.questionContent, this.difficulty, this.creator});
+  final String? questionContent, creator, questionId;
+  final int? difficulty;
+  QuestionFile(
+      {this.questionContent, this.difficulty, this.creator, this.questionId});
 
   factory QuestionFile.fromJson(Map<String, dynamic> json) {
     return QuestionFile(
       questionContent: json['questionContent'],
       difficulty: json['difficulty'],
       creator: json['creator'],
+      questionId: json['questionId'],
     );
   }
 }

@@ -21,7 +21,7 @@ Future<String> login(String title) async {
     Map<String, dynamic> map = jsonDecode(response.body.toString());
     Key tok = Key.fromJson(map);
     constant.key = tok.token.toString();
-    print(constant.key);
+
     return 'Success ';
   } else {
     // If the server did not return a 201 CREATED response,
@@ -59,6 +59,7 @@ Future<String> signInWithGoogle() async {
   );
   final user1 = await FirebaseAuth.instance.signInWithCredential(credential);
   constant.userName = user1.user!.displayName.toString();
+  constant.email = user1.user!.email.toString();
   if (constant.userName == '') {
     constant.userName = user1.user!.email.toString();
   }

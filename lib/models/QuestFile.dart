@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:convert';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';

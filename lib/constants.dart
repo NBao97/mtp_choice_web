@@ -12,3 +12,5 @@ String form = '';
 int page = 1;
 String order = '';
 String search = '';
+String email = '';
+String questId = '';

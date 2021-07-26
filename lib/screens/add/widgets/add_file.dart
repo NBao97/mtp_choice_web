@@ -1,7 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+
 import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
 
 class AddFile extends StatelessWidget {
