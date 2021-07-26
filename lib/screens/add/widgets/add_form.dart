@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
-
+import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
 
 class AddForm extends StatefulWidget {
@@ -19,7 +19,6 @@ class _AddFormState extends State<AddForm> {
   final _formKey = GlobalKey<FormState>();
   final _questionContentController = TextEditingController();
   final _difficultyController = TextEditingController();
-  final _creatorController = TextEditingController();
   final _answersCorrectController = TextEditingController();
   final _answers1Controller = TextEditingController();
   final _answers2Controller = TextEditingController();
@@ -312,10 +311,9 @@ class _AddFormState extends State<AddForm> {
           style: flatButtonStyle,
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
-            } else {
               createQuestion(
                   _questionContentController.text,
-                  _creatorController.text,
+                  constant.userName,
                   _difficultyController.text,
                   _answersCorrectController.text,
                   _answers1Controller.text,

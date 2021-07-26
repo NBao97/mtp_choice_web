@@ -102,12 +102,7 @@ class _MyAppState extends State<QuestionFiles> {
                       horizontalMargin: 0,
 
                       onPageChanged: (value) => {
-                        namR = Get.currentRoute,
-                        if (value < 1 && constant.page > 1)
-                          {constant.page = constant.page - 1, setState(() {})}
-                        else if (value < constant.page && constant.page > 1)
-                          {constant.page = constant.page - 1, setState(() {})}
-                        else if (value > constant.page)
+                        if (value > constant.page)
                           {constant.page = constant.page + 1, setState(() {})}
                       },
                       showCheckboxColumn: false,
