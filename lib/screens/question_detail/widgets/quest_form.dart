@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import '../../../constants.dart' as constant;
 
+final String qus = constant.questId;
+
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
 
@@ -20,7 +22,7 @@ class _AddFormState extends State<AcceptForm> {
   @override
   void initState() {
     super.initState();
-    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
+    futureData = fetchQuestion(constant.page, constant.order, qus);
   }
 
   final paddingTopForm,
@@ -57,7 +59,8 @@ class _AddFormState extends State<AcceptForm> {
         future: futureData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final quest = snapshot.data!.first;
+            final QuestionFile quest = snapshot.data!.single;
+            constant.status = quest.ans!.first.status!;
             return Form(
                 key: _formKey,
                 child: Padding(
@@ -97,35 +100,40 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.creator!,
+                      Text((quest.creator == null) ? "" : quest.creator!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      // Align(
-                      //     alignment: Alignment.centerLeft,
-                      //     child: Text('Câu sai 2',
-                      //         style: TextStyle(
-                      //             fontSize: widthSize * fontSizeTextField,
-                      //             fontFamily: 'Poppins',
-                      //             color: Colors.white))),
-                      // Text('nội dung câu sai 2',
-                      //     style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: fontSizeTextFormField)),
-                      // SizedBox(height: heightSize * spaceBetweenFields),
-                      // Align(
-                      //     alignment: Alignment.centerLeft,
-                      //     child: Text('Câu sai 3',
-                      //         style: TextStyle(
-                      //             fontSize: widthSize * fontSizeTextField,
-                      //             fontFamily: 'Poppins',
-                      //             color: Colors.white))),
-                      // Text('nội dung câu sai 3',
-                      //     style: TextStyle(
-                      //         color: Colors.white,
-                      //         fontSize: fontSizeTextFormField)),
-                      // SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                      if (quest.ans!.isNotEmpty)
+                        for (Answers ans in quest.ans!)
+                          Container(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                        (ans.isCorrect == true)
+                                            ? 'Đáp án'
+                                            : 'Câu sai',
+                                        style: TextStyle(
+                                            fontSize:
+                                                widthSize * fontSizeTextField,
+                                            fontFamily: 'Poppins',
+                                            color: Colors.white))),
+                                Text(
+                                    (ans.answerContent == null)
+                                        ? ''
+                                        : ans.answerContent!,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: fontSizeTextFormField)),
+                                SizedBox(
+                                    height: heightSize * spaceBetweenFields),
+                              ]))
+                      else
+                        Text('Something wong happen'),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

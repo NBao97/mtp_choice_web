@@ -1,21 +1,72 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:mtp_choice_web/constants.dart' as constant;
 
 import '../../../constants.dart';
 
 Color colorS = Colors.blue;
 IconData icon = Icons.check_circle_outline;
+final String qusId = constant.questId;
+
+Future<dynamic> approveQuestion() async {
+  String url = 'https://api.wimln.ml/api/Question/approve';
+  print([jsonEncode(qusId)]);
+  final response = await http.put(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'accept': 'text/plain',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+    body: "[\"" + qusId + "\"]",
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    refQuest();
+    return "Success";
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception(response.statusCode);
+  }
+}
+
+Future<String> refQuest() async {
+  final response = await http.put(
+    Uri.parse('https://api.wimln.ml/api/Question/refresh-altp-questions'),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print('is it ok');
+    return "Success";
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception(response.body);
+  }
+}
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
     required this.title,
-    required this.status,
+    required this.stat,
   }) : super(key: key);
 
-  final String title, status;
+  final String title, stat;
 
   void checkStatus() {
-    if (status == 'Active') {
+    if (stat == 'Active') {
       colorS = Colors.blue;
       icon = Icons.check_circle_outline;
     } else {
@@ -50,11 +101,47 @@ class StorageInfoCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: bgColor,
+                    ),
+                    onPressed: () async {
+                      await approveQuestion().then((value) async {
+                        print("pls" + value);
+                        if (value != "") {
+                          if (value.contains("Success")) {
+                            Get.snackbar(
+                                'Alert', 'Cập nhật trạng thái thành công',
+                                duration: Duration(seconds: 4),
+                                animationDuration: Duration(milliseconds: 800),
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.white);
+                          } else {
+                            Get.snackbar(
+                                'Alert', 'Cập nhật trạng thái thất bại',
+                                duration: Duration(seconds: 4),
+                                animationDuration: Duration(milliseconds: 800),
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.white);
+                          }
+                        }
+                      }).catchError((error) {
+                        Get.snackbar(
+                          'Alert',
+                          'Cập nhật trạng thái thất bại',
+                          duration: Duration(seconds: 4),
+                          animationDuration: Duration(milliseconds: 800),
+                          snackPosition: SnackPosition.TOP,
+                        );
+                        print(error);
+                      });
+                    },
+                    child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
                 ],
               ),
             ),

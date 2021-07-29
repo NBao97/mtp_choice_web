@@ -1,28 +1,7 @@
 import 'dart:convert';
-import 'package:get/get_connect/http/src/http/utils/body_decoder.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-
-class Question {
-  final String questionContent;
-  final int difficulty;
-  final String creator;
-
-  Question({
-    required this.questionContent,
-    required this.difficulty,
-    required this.creator,
-  });
-
-  factory Question.fromJson(Map<String, dynamic> json) {
-    return Question(
-      questionContent: json['questionContent'],
-      difficulty: json['difficulty'],
-      creator: json['creator'],
-    );
-  }
-}
 
 Future<String> createQuestion(String title, String creator, String difficult,
     String rightAns, String as1, String as2, String as3) async {
@@ -78,7 +57,6 @@ Future<String> createQuestion(String title, String creator, String difficult,
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    print(response.body);
     Get.snackbar(
       'Alert',
       'Nhập thất bại',

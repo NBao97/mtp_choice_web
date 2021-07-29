@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
@@ -23,7 +24,7 @@ class _AddFormState extends State<AddForm> {
   final _answers1Controller = TextEditingController();
   final _answers2Controller = TextEditingController();
   final _answers3Controller = TextEditingController();
-  Future<Question>? _futureQuestion;
+  Future<QuestionFile>? _futureQuestion;
 
   final paddingTopForm,
       fontSizeTextField,
@@ -330,8 +331,8 @@ class _AddFormState extends State<AddForm> {
     ]);
   }
 
-  FutureBuilder<Question> buildFutureBuilder() {
-    return FutureBuilder<Question>(
+  FutureBuilder<QuestionFile> buildFutureBuilder() {
+    return FutureBuilder<QuestionFile>(
       future: _futureQuestion,
       builder: (context, snapshot) {
         if (snapshot.hasData) {

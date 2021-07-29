@@ -8,7 +8,10 @@ Future<List<QuestionFile>> fetchQuestion(
   String quesUrl = '';
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
-    constant.questId = '';
+  }
+  if (orderBy == 'first page') {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?IsAscending=true&PageNumber=1&PageSize=4';
   } else {
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=difficulty&IsAscending=true&PageNumber=' +
@@ -22,12 +25,12 @@ Future<List<QuestionFile>> fetchQuestion(
       'Authorization': 'Bearer ' + constant.key,
     },
   );
-
+  print(response.body);
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print(page);
     List jsonResponse = json.decode(response.body);
+
     return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,
@@ -36,11 +39,38 @@ Future<List<QuestionFile>> fetchQuestion(
   }
 }
 
+class Answers {
+  final String? answerId, questionId, answerContent;
+  final bool? isCorrect;
+  final int? status;
+  Answers(
+      {this.answerId,
+      this.questionId,
+      this.answerContent,
+      this.isCorrect,
+      this.status});
+
+  factory Answers.fromJson(Map<String, dynamic> json) {
+    return Answers(
+      answerId: json['answerId'],
+      questionId: json['questionId'],
+      answerContent: json['answerContent'],
+      isCorrect: json['isCorrect'],
+      status: json['status'],
+    );
+  }
+}
+
 class QuestionFile {
   final String? questionContent, creator, questionId;
   final int? difficulty;
+  final List<Answers>? ans;
   QuestionFile(
-      {this.questionContent, this.difficulty, this.creator, this.questionId});
+      {this.questionContent,
+      this.difficulty,
+      this.creator,
+      this.questionId,
+      this.ans});
 
   factory QuestionFile.fromJson(Map<String, dynamic> json) {
     return QuestionFile(
@@ -48,6 +78,11 @@ class QuestionFile {
       difficulty: json['difficulty'],
       creator: json['creator'],
       questionId: json['questionId'],
+      ans: json['answers'] != null
+          ? json['answers']
+              .map<Answers>((data) => Answers.fromJson(data))
+              .toList()
+          : null,
     );
   }
 }

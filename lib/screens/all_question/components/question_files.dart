@@ -27,11 +27,15 @@ class _MyAppState extends State<QuestionFiles> {
   @override
   void initState() {
     super.initState();
+    constant.order = constant.questId = '';
+    constant.page = 1;
+
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   final TextEditingController _controller = TextEditingController();
   String namR = '';
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<QuestionFile>>(
@@ -189,7 +193,7 @@ class DTS extends DataTableSource {
           maxLines: 1,
         )),
         DataCell(Text(
-          '${_user.creator}',
+          (_user.creator == null) ? "no information" : '${_user.creator}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
