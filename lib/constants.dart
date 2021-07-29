@@ -14,3 +14,4 @@ String order = '';
 String search = '';
 String email = '';
 String questId = '';
+int status = 0;

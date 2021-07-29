@@ -27,11 +27,15 @@ class _MyAppState extends State<QuestionFiles> {
   @override
   void initState() {
     super.initState();
+    constant.order = constant.questId = '';
+    constant.page = 1;
+
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   final TextEditingController _controller = TextEditingController();
   String namR = '';
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<QuestionFile>>(
@@ -102,12 +106,7 @@ class _MyAppState extends State<QuestionFiles> {
                       horizontalMargin: 0,
 
                       onPageChanged: (value) => {
-                        namR = Get.currentRoute,
-                        if (value < 1 && constant.page > 1)
-                          {constant.page = constant.page - 1, setState(() {})}
-                        else if (value < constant.page && constant.page > 1)
-                          {constant.page = constant.page - 1, setState(() {})}
-                        else if (value > constant.page)
+                        if (value > constant.page)
                           {constant.page = constant.page + 1, setState(() {})}
                       },
                       showCheckboxColumn: false,
@@ -194,7 +193,7 @@ class DTS extends DataTableSource {
           maxLines: 1,
         )),
         DataCell(Text(
-          '${_user.creator}',
+          (_user.creator == null) ? "no information" : '${_user.creator}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
