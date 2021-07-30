@@ -125,12 +125,11 @@ class StorageInfoCard extends StatelessWidget {
                         }
                       }).catchError((error) {
                         Get.snackbar(
-                          'Alert',
-                          'Cập nhật trạng thái thất bại' + error,
-                          duration: Duration(seconds: 4),
-                          animationDuration: Duration(milliseconds: 800),
-                          snackPosition: SnackPosition.TOP,
-                        );
+                            'Alert', 'Cập nhật trạng thái thất bại' + error,
+                            duration: Duration(seconds: 4),
+                            animationDuration: Duration(milliseconds: 800),
+                            snackPosition: SnackPosition.TOP,
+                            backgroundColor: Colors.white);
                       });
                     },
                     child: Text(

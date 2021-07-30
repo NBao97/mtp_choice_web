@@ -39,13 +39,11 @@ class _GoogleButtonState extends State<GoogleButton> {
                 if (value.contains("Success")) {
                   Navigator.of(context).pushNamed(FirstScreen.route);
                 } else {
-                  Get.snackbar(
-                    'Alert',
-                    'Tài khoản chưa được đăng ký',
-                    duration: Duration(seconds: 4),
-                    animationDuration: Duration(milliseconds: 800),
-                    snackPosition: SnackPosition.TOP,
-                  );
+                  Get.snackbar('Alert', 'Tài khoản chưa được đăng ký',
+                      duration: Duration(seconds: 4),
+                      animationDuration: Duration(milliseconds: 800),
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: Colors.white);
                 }
               });
             }

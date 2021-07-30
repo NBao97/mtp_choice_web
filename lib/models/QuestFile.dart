@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -46,24 +47,20 @@ Future<String> createQuestion(String title, String creator, String difficult,
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    Get.snackbar(
-      'Alert',
-      'Nhập thành công',
-      duration: Duration(seconds: 4),
-      animationDuration: Duration(milliseconds: 800),
-      snackPosition: SnackPosition.TOP,
-    );
+    Get.snackbar('Alert', 'Nhập thành công',
+        duration: Duration(seconds: 4),
+        animationDuration: Duration(milliseconds: 800),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white);
     return 'Success';
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    Get.snackbar(
-      'Alert',
-      'Nhập thất bại',
-      duration: Duration(seconds: 4),
-      animationDuration: Duration(milliseconds: 800),
-      snackPosition: SnackPosition.TOP,
-    );
+    Get.snackbar('Alert', 'Nhập thất bại',
+        duration: Duration(seconds: 4),
+        animationDuration: Duration(milliseconds: 800),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white);
     throw Exception(response.statusCode);
   }
 }
