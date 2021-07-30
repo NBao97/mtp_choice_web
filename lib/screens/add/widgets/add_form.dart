@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'dart:async';
 import '../../../constants.dart' as constant;
@@ -313,13 +314,20 @@ class _AddFormState extends State<AddForm> {
           onPressed: () async {
             if (_formKey.currentState!.validate()) {
               createQuestion(
-                  _questionContentController.text,
-                  constant.userName,
-                  _difficultyController.text,
-                  _answersCorrectController.text,
-                  _answers1Controller.text,
-                  _answers2Controller.text,
-                  _answers3Controller.text);
+                      _questionContentController.text,
+                      constant.userName,
+                      _difficultyController.text,
+                      _answersCorrectController.text,
+                      _answers1Controller.text,
+                      _answers2Controller.text,
+                      _answers3Controller.text)
+                  .catchError((error) {
+                Get.snackbar('Alert', 'Nhập thất bại',
+                    duration: Duration(seconds: 4),
+                    animationDuration: Duration(milliseconds: 800),
+                    snackPosition: SnackPosition.TOP,
+                    backgroundColor: Colors.white);
+              });
             }
           },
           child: Text('Thêm câu hỏi',
