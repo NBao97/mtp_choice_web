@@ -8,10 +8,12 @@ Future<List<QuestionFile>> fetchQuestion(
   String quesUrl = '';
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
-  }
-  if (orderBy == 'first page') {
+
+    orderBy = '';
+  } else if (orderBy == 'first page') {
     quesUrl =
         'https://api.wimln.ml/api/Question?IsAscending=true&PageNumber=1&PageSize=4';
+    constant.order = '';
   } else {
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=difficulty&IsAscending=true&PageNumber=' +
@@ -25,7 +27,6 @@ Future<List<QuestionFile>> fetchQuestion(
       'Authorization': 'Bearer ' + constant.key,
     },
   );
-  print(response.body);
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.

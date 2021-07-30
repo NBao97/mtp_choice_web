@@ -47,7 +47,6 @@ Future<String> refQuest() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    print('is it ok');
     return "Success";
   } else {
     // If   the server did not return a 200 OK response,
@@ -107,7 +106,6 @@ class StorageInfoCard extends StatelessWidget {
                     ),
                     onPressed: () async {
                       await approveQuestion().then((value) async {
-                        print("pls" + value);
                         if (value != "") {
                           if (value.contains("Success")) {
                             Get.snackbar(
@@ -128,12 +126,11 @@ class StorageInfoCard extends StatelessWidget {
                       }).catchError((error) {
                         Get.snackbar(
                           'Alert',
-                          'Cập nhật trạng thái thất bại',
+                          'Cập nhật trạng thái thất bại' + error,
                           duration: Duration(seconds: 4),
                           animationDuration: Duration(milliseconds: 800),
                           snackPosition: SnackPosition.TOP,
                         );
-                        print(error);
                       });
                     },
                     child: Text(
