@@ -13,6 +13,7 @@ class StorageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(svgSrc);
     return Container(
         margin: EdgeInsets.only(top: defaultPadding),
         padding: EdgeInsets.all(defaultPadding),
@@ -23,11 +24,7 @@ class StorageInfoCard extends StatelessWidget {
           ),
         ),
         child: Row(children: [
-          SizedBox(
-            height: 400,
-            width: 200,
-            child: SvgPicture.asset(svgSrc),
-          ),
+          SizedBox(height: 400, width: 200, child: Image.network(svgSrc)),
         ]));
   }
 }

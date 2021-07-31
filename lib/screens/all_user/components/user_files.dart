@@ -21,21 +21,21 @@ class UserFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<UserFiles> {
-  late Future<List<RecentFile>> futureData;
+  late Future<List<User>> futureData;
 
   @override
   void initState() {
     super.initState();
-    futureData = fetchUser();
+    // futureData = fetchUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<RecentFile>>(
+    return FutureBuilder<List<User>>(
         future: futureData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<RecentFile>? data = snapshot.data;
+            List<User>? data = snapshot.data;
             final _dtSource = DTS(
               data: data,
             );
@@ -87,9 +87,9 @@ class _MyAppState extends State<UserFiles> {
 
 class DTS extends DataTableSource {
   DTS({
-    required List<RecentFile>? data,
+    required List<User>? data,
   }) : _data = data;
-  final List<RecentFile>? _data;
+  final List<User>? _data;
 
   @override
   DataRow? getRow(int index) {
@@ -107,10 +107,10 @@ class DTS extends DataTableSource {
       cells: [
         DataCell(Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: Text('${_user.title}'),
+          child: Text('${_user.userId}'),
         )),
-        DataCell(Text('${_user.date}')),
-        DataCell(Text('${_user.score}')),
+        DataCell(Text('${_user.fullname}')),
+        DataCell(Text('${_user.phone}')),
       ],
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
-
+import 'package:mtp_choice_web/constants.dart' as constant;
 import '../../../constants.dart';
 import 'storage_info_card.dart';
 
@@ -11,29 +11,34 @@ class StarageDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Hình đại diện",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          SizedBox(height: defaultPadding),
-          StorageInfoCard(
-            svgSrc: "icons/Documents.svg",
-          ),
-          FileUploadButton(),
-        ],
-      ),
+    return FutureBuilder(
+      future: Future.delayed(Duration(seconds: 2)),
+      builder: (c, s) => s.connectionState == ConnectionState.done
+          ? Container(
+              padding: EdgeInsets.all(defaultPadding),
+              decoration: BoxDecoration(
+                color: secondaryColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Hình đại diện",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: defaultPadding),
+                  StorageInfoCard(
+                    svgSrc: constant.image,
+                  ),
+                  FileUploadButton(),
+                ],
+              ),
+            )
+          : const CircularProgressIndicator(),
     );
   }
 }

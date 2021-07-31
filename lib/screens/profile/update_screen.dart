@@ -78,8 +78,7 @@ class DashboardScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
                       //     0.02, 0.012),
-                      UpdateProfile(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02,
-                          0.014, 0.02, 0.012),
+                      UpdateProfile(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),

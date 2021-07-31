@@ -1,33 +1,83 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
-Future<List<RecentFile>> fetchUser() async {
-  final response = await http
-      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+Future<User> fetchUser() async {
+  final response = await http.get(
+    Uri.parse('https://api.wimln.ml/api/User'),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    List jsonResponse = json.decode(response.body);
-    return jsonResponse.map((data) => new RecentFile.fromJson(data)).toList();
+
+    return User.fromJson(json.decode(response.body));
   } else {
-    // If the server did not return a 200 OK response,
+    // If   the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load User');
+    throw Exception('Failed to load album');
   }
 }
 
-class RecentFile {
-  final String? title, date, score;
+Future<String> patchUser(
+    String userId, String phone, String password, String fullname) async {
+  final response = await http.patch(
+    Uri.parse('https://api.wimln.ml/api/User'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+    body: jsonEncode(<String, String>{
+      "userId": "baonhnse62490@fpt.edu.vn",
+      "phone": phone,
+      "password": password,
+      "fullname": fullname,
+    }),
+  );
+  print(response.body);
+  print(jsonEncode(<String, String>{
+    "userId": "baonhnse62490@fpt.edu.vn",
+    "email": 'baonhnse62490@fpt.edu.vn',
+    "phone": phone,
+    "password": password,
+    "fullname": fullname,
+  }));
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
 
-  RecentFile({this.title, this.date, this.score});
-  factory RecentFile.fromJson(Map<String, dynamic> json) {
-    return RecentFile(
-      title: json['title'],
-      date: json['date'],
-      score: json['score'],
+    Get.snackbar('Alert', 'Nhập thành công',
+        duration: Duration(seconds: 4),
+        animationDuration: Duration(milliseconds: 800),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white);
+    return 'Success';
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to update album.');
+  }
+}
+
+class User {
+  final String? userId, phone, password, fullname, image;
+
+  User({this.userId, this.phone, this.password, this.fullname, this.image});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      userId: json['userId'],
+      phone: json['phone'],
+      password: json['password'],
+      fullname: json['fullname'],
+      image: json['image'],
     );
   }
 }

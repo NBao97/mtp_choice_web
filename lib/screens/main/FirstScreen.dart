@@ -28,7 +28,6 @@ class FirstScreen extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
-      initialRoute: "/",
       routes: {
         QuestionDetail.route: (context) => QuestionDetail(),
         LoginPage.route: (context) => LoginPage(),
