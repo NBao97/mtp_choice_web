@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AcceptForm extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formAc =
+      new GlobalKey<FormState>(debugLabel: '_AcceptFormState');
   // final _usernameController = TextEditingController();
 
   final paddingTopForm,
@@ -42,7 +43,7 @@ class AcceptForm extends StatelessWidget {
       backgroundColor: Colors.blue,
     );
     return Form(
-        key: _formKey,
+        key: _formAc,
         child: Padding(
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
@@ -114,7 +115,7 @@ class AcceptForm extends StatelessWidget {
                     child: TextButton(
                         style: flatButtonStyle,
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formAc.currentState!.validate()) {}
                         },
                         child: Text('Chấp nhận',
                             style: TextStyle(
@@ -130,7 +131,7 @@ class AcceptForm extends StatelessWidget {
                     child: TextButton(
                         style: flatButtonStyle,
                         onPressed: () async {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formAc.currentState!.validate()) {}
                         },
                         child: Text('từ chối',
                             style: TextStyle(

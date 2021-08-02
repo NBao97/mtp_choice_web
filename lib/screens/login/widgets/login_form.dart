@@ -5,7 +5,8 @@ import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'google_button.dart';
 
 class LoginForm extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formLog =
+      new GlobalKey<FormState>(debugLabel: '_LoginFormState');
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -47,7 +48,7 @@ class LoginForm extends StatelessWidget {
       backgroundColor: Colors.blue,
     );
     return Form(
-        key: _formKey,
+        key: _formLog,
         child: Padding(
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
@@ -134,7 +135,7 @@ class LoginForm extends StatelessWidget {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formLog.currentState!.validate()) {
                       Navigator.of(context).pushNamed(FirstScreen.route);
                     }
                   },

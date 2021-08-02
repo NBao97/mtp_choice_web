@@ -16,7 +16,8 @@ class AcceptForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AcceptForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formQus =
+      new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
   // final _usernameController = TextEditingController();
   late Future<List<QuestionFile>> futureData;
   @override
@@ -60,9 +61,9 @@ class _AddFormState extends State<AcceptForm> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final QuestionFile quest = snapshot.data!.single;
-            constant.status = quest.ans!.first.status!;
+            constant.status = quest.status!;
             return Form(
-                key: _formKey,
+                key: _formQus,
                 child: Padding(
                     padding: EdgeInsets.only(
                         left: widthSize * 0.05,

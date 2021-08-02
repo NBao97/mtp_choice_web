@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
+import 'package:mtp_choice_web/models/SurveyFile.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
 import 'package:mtp_choice_web/screens/accept/accept_question.dart';
 import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/all_question/all_question.dart';
+import 'package:mtp_choice_web/screens/all_survey/all_survey.dart';
 import 'package:mtp_choice_web/screens/all_user/all_user.dart';
 import 'package:mtp_choice_web/screens/login/login_page.dart';
 import 'package:mtp_choice_web/screens/notification/notification.dart';
 import 'package:mtp_choice_web/screens/profile/update_screen.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
+import 'package:mtp_choice_web/screens/survey_detail/survey_detail.dart';
 import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +32,7 @@ class FirstScreen extends StatelessWidget {
             .apply(bodyColor: Colors.white),
         canvasColor: secondaryColor,
       ),
+      initialRoute: "/",
       routes: {
         QuestionDetail.route: (context) => QuestionDetail(),
         LoginPage.route: (context) => LoginPage(),
@@ -38,6 +43,9 @@ class FirstScreen extends StatelessWidget {
         UpdateScreen.route: (context) => UpdateScreen(),
         AllQuestionScreen.route: (context) => AllQuestionScreen(),
         UserDetail.route: (context) => UserDetail(),
+        AllSurveyScreen.route: (context) => AllSurveyScreen(),
+        SurveyDetail.route: (context) => SurveyDetail(),
+        CreateSurvey.route: (context) => CreateSurvey(),
       },
       home: MultiProvider(
         providers: [

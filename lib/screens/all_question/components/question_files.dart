@@ -177,7 +177,9 @@ class DTS extends DataTableSource {
                 padding: const EdgeInsets.symmetric(
                     horizontal: constant.defaultPadding),
                 child: Text(
-                  _user.questionContent!.substring(0, 5),
+                  _user.questionContent!.length > 10
+                      ? _user.questionContent!.substring(0, 10)
+                      : _user.questionContent!,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
@@ -206,7 +208,7 @@ class DTS extends DataTableSource {
   bool get isRowCountApproximate => true;
 
   @override
-  int get rowCount => 10;
+  int get rowCount => 100;
 
   @override
   int get selectedRowCount => 0;

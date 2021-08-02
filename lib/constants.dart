@@ -15,4 +15,4 @@ String search = '';
 String email = '';
 String questId = '';
 String image = '';
-int status = 0;
+String status = "";

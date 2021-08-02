@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mtp_choice_web/screens/accept/accept_question.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
 import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/all_question/all_question.dart';
+import 'package:mtp_choice_web/screens/all_survey/all_survey.dart';
 import 'package:mtp_choice_web/screens/all_user/all_user.dart';
 import 'package:mtp_choice_web/screens/notification/notification.dart';
 import 'package:mtp_choice_web/screens/profile/update_screen.dart';
@@ -38,6 +39,13 @@ class SideMenu extends StatelessWidget {
           ),
 
           DrawerListTile(
+            title: "Tạo khảo sát",
+            svgSrc: "icons/menu_tran.svg",
+            onPressed: () {
+              Navigator.of(context).pushNamed(CreateSurvey.route);
+            },
+          ),
+          DrawerListTile(
             title: "Quản lý Tài khoản",
             svgSrc: "icons/menu_tran.svg",
             onPressed: () {
@@ -57,10 +65,10 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Câu hỏi đóng góp",
+            title: "Quản lý khảo sát",
             svgSrc: "icons/menu_store.svg",
             onPressed: () {
-              Navigator.of(context).pushNamed(AcceptQuestion.route);
+              Navigator.of(context).pushNamed(AllSurveyScreen.route);
             },
           ),
           DrawerListTile(

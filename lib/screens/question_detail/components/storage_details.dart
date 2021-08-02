@@ -27,14 +27,7 @@ class StarageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: constant.defaultPadding),
-          (constant.status == 0)
-              ? StorageInfoCard(title: "Chấp nhận", stat: "Active")
-              : (constant.status == 1)
-                  ? StorageInfoCard(title: "Ẩn", stat: "Deactive")
-                  : (constant.status == 4)
-                      ? StorageInfoCard(
-                          title: "Câu hõi khảo sát", stat: "Active")
-                      : StorageInfoCard(title: "??? status", stat: "Active"),
+          StorageInfoCard(title: constant.status, stat: "Created"),
           Text(constant.status.toString()),
         ],
       ),

@@ -4,14 +4,14 @@ import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
-import 'package:mtp_choice_web/screens/user_detail/widgets/user_form.dart';
+import 'package:mtp_choice_web/screens/survey_detail/widgets/Survey_form.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 import 'components/storage_details.dart';
 
-class UserDetail extends StatelessWidget {
-  static const String route = "/UserDetail";
+class SurveyDetail extends StatelessWidget {
+  static const String route = "/SurveyDetail";
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

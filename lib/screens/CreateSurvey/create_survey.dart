@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/widgets/survey_form.dart';
 import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
-import 'package:mtp_choice_web/screens/user_detail/widgets/user_form.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 import 'components/storage_details.dart';
 
-class UserDetail extends StatelessWidget {
-  static const String route = "/UserDetail";
+class CreateSurvey extends StatelessWidget {
+  static const String route = "/CreateSurvey";
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -20,12 +20,12 @@ class UserDetail extends StatelessWidget {
           create: (context) => MenuController(),
         ),
       ],
-      child: QuestionDetailS(),
+      child: UpdateS(),
     );
   }
 }
 
-class QuestionDetailS extends StatelessWidget {
+class UpdateS extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,11 +72,13 @@ class DashboardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Câu hỏi mới",
+                        "Tạo khảo sát",
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       SizedBox(height: defaultPadding),
-                      AcceptForm(),
+                      // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
+                      //     0.02, 0.012),
+                      UpdateProfile(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),

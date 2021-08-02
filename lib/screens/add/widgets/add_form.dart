@@ -18,7 +18,8 @@ class AddForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AddForm> {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formAdf =
+      new GlobalKey<FormState>(debugLabel: '_AddFFormState');
   final _questionContentController = TextEditingController();
   final _difficultyController = TextEditingController();
   final _answersCorrectController = TextEditingController();
@@ -65,7 +66,7 @@ class _AddFormState extends State<AddForm> {
       backgroundColor: Colors.blue,
     );
     return Form(
-        key: _formKey,
+        key: _formAdf,
         child: Padding(
           padding: EdgeInsets.only(
               left: widthSize * 0.05,
@@ -312,7 +313,7 @@ class _AddFormState extends State<AddForm> {
       TextButton(
           style: flatButtonStyle,
           onPressed: () async {
-            if (_formKey.currentState!.validate()) {
+            if (_formAdf.currentState!.validate()) {
               createQuestion(
                       _questionContentController.text,
                       constant.userName,

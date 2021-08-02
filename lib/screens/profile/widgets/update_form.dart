@@ -13,7 +13,7 @@ class UpdateProfile extends StatefulWidget {
 }
 
 class _MyAppState extends State<UpdateProfile> {
-  late Future<User> futureAlbum;
+  late Future<Users> futureAlbum;
 
   @override
   void initState() {
@@ -21,7 +21,8 @@ class _MyAppState extends State<UpdateProfile> {
     futureAlbum = fetchUser();
   }
 
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formUpUs =
+      new GlobalKey<FormState>(debugLabel: '_UpUsFormState');
 
   final paddingTopForm,
       fontSizeTextField,
@@ -59,7 +60,7 @@ class _MyAppState extends State<UpdateProfile> {
       ),
       backgroundColor: Colors.blue,
     );
-    return FutureBuilder<User>(
+    return FutureBuilder<Users>(
         future: futureAlbum,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -89,7 +90,7 @@ class _MyAppState extends State<UpdateProfile> {
                 : constant.image = snapshot.data!.image!;
             print(snapshot.data);
             return Form(
-                key: _formKey,
+                key: _formUpUs,
                 child: Padding(
                     padding: EdgeInsets.only(
                         left: widthSize * 0.05,
@@ -327,7 +328,7 @@ class _MyAppState extends State<UpdateProfile> {
                       TextButton(
                           style: flatButtonStyle,
                           onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
+                            if (_formUpUs.currentState!.validate()) {
                               patchUser(
                                       _usernameController.text,
                                       _phoneController.text,

@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
 
 class AddFile extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formAd =
+      new GlobalKey<FormState>(debugLabel: '_AddBFormState');
   // final _usernameController = TextEditingController();
 
   final paddingTopForm,
@@ -46,7 +47,7 @@ class AddFile extends StatelessWidget {
       backgroundColor: Colors.blue,
     );
     return Form(
-        key: _formKey,
+        key: _formAd,
         child: Padding(
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
@@ -231,7 +232,7 @@ class AddFile extends StatelessWidget {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formAd.currentState!.validate()) {}
                   },
                   child: Text('Thêm câu hỏi',
                       style: TextStyle(

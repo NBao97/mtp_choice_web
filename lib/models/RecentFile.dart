@@ -20,6 +20,7 @@ Future<List<QuestionFile>> fetchQuestion(
             page.toString() +
             '&PageSize=10';
   }
+
   final response = await http.get(
     Uri.parse(quesUrl),
     headers: <String, String>{
@@ -31,7 +32,7 @@ Future<List<QuestionFile>> fetchQuestion(
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-
+    print(jsonResponse);
     return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,
@@ -43,13 +44,13 @@ Future<List<QuestionFile>> fetchQuestion(
 class Answers {
   final String? answerId, questionId, answerContent;
   final bool? isCorrect;
-  final int? status;
-  Answers(
-      {this.answerId,
-      this.questionId,
-      this.answerContent,
-      this.isCorrect,
-      this.status});
+
+  Answers({
+    this.answerId,
+    this.questionId,
+    this.answerContent,
+    this.isCorrect,
+  });
 
   factory Answers.fromJson(Map<String, dynamic> json) {
     return Answers(
@@ -57,13 +58,12 @@ class Answers {
       questionId: json['questionId'],
       answerContent: json['answerContent'],
       isCorrect: json['isCorrect'],
-      status: json['status'],
     );
   }
 }
 
 class QuestionFile {
-  final String? questionContent, creator, questionId;
+  final String? questionContent, creator, questionId, status;
   final int? difficulty;
   final List<Answers>? ans;
   QuestionFile(
@@ -71,7 +71,8 @@ class QuestionFile {
       this.difficulty,
       this.creator,
       this.questionId,
-      this.ans});
+      this.ans,
+      this.status});
 
   factory QuestionFile.fromJson(Map<String, dynamic> json) {
     return QuestionFile(
@@ -79,6 +80,7 @@ class QuestionFile {
       difficulty: json['difficulty'],
       creator: json['creator'],
       questionId: json['questionId'],
+      status: json['status'],
       ans: json['answers'] != null
           ? json['answers']
               .map<Answers>((data) => Answers.fromJson(data))

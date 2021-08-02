@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
-Future<User> fetchUser() async {
+Future<Users> fetchUser() async {
   final response = await http.get(
     Uri.parse('https://api.wimln.ml/api/User'),
     headers: <String, String>{
@@ -18,11 +18,47 @@ Future<User> fetchUser() async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
 
-    return User.fromJson(json.decode(response.body));
+    return Users.fromJson(json.decode(response.body));
   } else {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
+  }
+}
+
+Future<List<Users>> fetchUserAll(String questId) async {
+  // int page, String orderBy,
+  String quesUrl = '';
+  if (questId != '') {
+    quesUrl = 'https://api.wimln.ml/api/User/many?userIds=' + questId;
+  }
+  // orderBy = '';
+  // } else if (orderBy == 'first page') {
+  //   quesUrl =
+  //       'https://api.wimln.ml/api/Question?IsAscending=true&PageNumber=1&PageSize=4';
+  //   constant.order = '';
+  // }
+  else {
+    quesUrl =
+        'https://api.wimln.ml/api/User/many?OrderBy=userRole&PageNumber=0&PageSize=0';
+  }
+  final response = await http.get(
+    Uri.parse(quesUrl),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    List jsonResponse = json.decode(response.body);
+
+    return jsonResponse.map((data) => new Users.fromJson(data)).toList();
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load User');
   }
 }
 
@@ -35,20 +71,13 @@ Future<String> patchUser(
       'Authorization': 'Bearer ' + constant.key,
     },
     body: jsonEncode(<String, String>{
-      "userId": "baonhnse62490@fpt.edu.vn",
+      "userId": userId,
       "phone": phone,
       "password": password,
       "fullname": fullname,
     }),
   );
   print(response.body);
-  print(jsonEncode(<String, String>{
-    "userId": "baonhnse62490@fpt.edu.vn",
-    "email": 'baonhnse62490@fpt.edu.vn',
-    "phone": phone,
-    "password": password,
-    "fullname": fullname,
-  }));
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -66,18 +95,93 @@ Future<String> patchUser(
   }
 }
 
-class User {
-  final String? userId, phone, password, fullname, image;
+class Game {
+  final String? gameDescription;
 
-  User({this.userId, this.phone, this.password, this.fullname, this.image});
+  Game({
+    this.gameDescription,
+  });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Game.fromJson(Map<String, dynamic> json) {
+    return Game(
+      gameDescription: json['gameDescription'],
+    );
+  }
+}
+
+class Histories {
+  final String? historyId, session, timeFinished, date;
+
+  final int? score, totalQuestion, numOfCorrect, status;
+  final Game? game;
+  Histories({
+    this.historyId,
+    this.session,
+    this.timeFinished,
+    this.date,
+    this.score,
+    this.totalQuestion,
+    this.numOfCorrect,
+    this.status,
+    this.game,
+  });
+
+  factory Histories.fromJson(Map<String, dynamic> json) {
+    return Histories(
+      historyId: json['historyId'],
+      session: json['session'],
+      timeFinished: json['timeFinished'],
+      date: json['date'],
+      score: json['score'],
+      totalQuestion: json['totalQuestion'],
+      numOfCorrect: json['numOfCorrect'],
+      status: json['status'],
+      game: json['game'] != null
+          ? json['game'].map<Game>((data) => Game.fromJson(data))
+          : null,
+    );
+  }
+}
+
+class Users {
+  final String? userId,
+      phone,
+      password,
+      fullname,
+      image,
+      email,
+      deviceId,
+      userRole;
+  final int? userStatus, bonusPoint;
+  final List<Histories>? his;
+  Users(
+      {this.userId,
+      this.phone,
+      this.password,
+      this.fullname,
+      this.image,
+      this.bonusPoint,
+      this.userStatus,
+      this.deviceId,
+      this.email,
+      this.userRole,
+      this.his});
+
+  factory Users.fromJson(Map<String, dynamic> json) {
+    return Users(
       userId: json['userId'],
       phone: json['phone'],
       password: json['password'],
       fullname: json['fullname'],
+      email: json['email'],
       image: json['image'],
+      bonusPoint: json['bonusPoint'],
+      userStatus: json['userStatus'],
+      his: json['histories'] != null
+          ? json['histories']
+              .map<Histories>((data) => Histories.fromJson(data))
+              .toList()
+          : null,
     );
   }
 }

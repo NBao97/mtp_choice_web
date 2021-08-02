@@ -32,7 +32,7 @@ Future<dynamic> approveQuestion() async {
   } else {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception(response.statusCode);
+    return response.statusCode.toString();
   }
 }
 
@@ -51,7 +51,7 @@ Future<String> refQuest() async {
   } else {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception(response.body);
+    return response.statusCode.toString();
   }
 }
 
@@ -116,7 +116,7 @@ class StorageInfoCard extends StatelessWidget {
                                 backgroundColor: Colors.white);
                           } else {
                             Get.snackbar(
-                                'Alert', 'Cập nhật trạng thái thất bại',
+                                'Alert', 'Cập nhật trạng thái thất bại' + value,
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,

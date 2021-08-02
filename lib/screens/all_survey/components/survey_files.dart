@@ -1,42 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mtp_choice_web/models/UserFile.dart';
-import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
+import 'package:mtp_choice_web/models/SurveyFile.dart';
+import 'package:mtp_choice_web/screens/survey_detail/survey_detail.dart';
 import '../../../constants.dart';
 
 class RecentFiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new Theme(child: UserFiles(), data: new ThemeData.dark());
+    return new Theme(child: SurveyFiles(), data: new ThemeData.dark());
   }
 }
 
-class UserFiles extends StatefulWidget {
-  const UserFiles({
+class SurveyFiles extends StatefulWidget {
+  const SurveyFiles({
     Key? key,
   }) : super(key: key);
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<UserFiles> {
-  late Future<List<Users>> futureData;
+class _MyAppState extends State<SurveyFiles> {
+  late Future<List<Survey>> futureData;
 
   @override
   void initState() {
     super.initState();
     constant.questId = '';
-    futureData = fetchUserAll(constant.questId);
+    futureData = fetchSurAll(constant.questId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Users>>(
+    return FutureBuilder<List<Survey>>(
         future: futureData,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<Users>? data = snapshot.data;
+            List<Survey>? data = snapshot.data;
             final _dtSource = DTS(
               data: data,
             );
@@ -62,13 +62,13 @@ class _MyAppState extends State<UserFiles> {
                       columnSpacing: defaultPadding,
                       columns: [
                         DataColumn(
-                          label: Text(" UserID"),
+                          label: Text("Nội dung"),
                         ),
                         DataColumn(
                           label: Text("Ngày tạo"),
                         ),
                         DataColumn(
-                          label: Text("Tổng điểm"),
+                          label: Text("Ngày kết thúc"),
                         ),
                       ],
                       rowsPerPage: 10,
@@ -88,9 +88,9 @@ class _MyAppState extends State<UserFiles> {
 
 class DTS extends DataTableSource {
   DTS({
-    required List<Users>? data,
+    required List<Survey>? data,
   }) : _data = data;
-  final List<Users>? _data;
+  final List<Survey>? _data;
 
   @override
   DataRow? getRow(int index) {
@@ -103,16 +103,18 @@ class DTS extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       onSelectChanged: (value) {
-        constant.questId = _user.userId!;
-        Get.toNamed(UserDetail.route);
+        constant.questId = _user.gameId!;
+        Get.toNamed(SurveyDetail.route);
       },
       cells: [
         DataCell(Padding(
           padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: Text('${_user.userId}'),
+          child: Text((_user.description!.length < 10)
+              ? '${_user.description}'
+              : _user.description!.substring(0, 10)),
         )),
-        DataCell(Text('${_user.fullname}')),
-        DataCell(Text('${_user.phone}')),
+        DataCell(Text('${_user.startTime.toString()}')),
+        DataCell(Text('${_user.endTime.toString()}')),
       ],
     );
   }

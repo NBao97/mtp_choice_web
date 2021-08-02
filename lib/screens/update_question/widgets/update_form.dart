@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddForm extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formUpF =
+      new GlobalKey<FormState>(debugLabel: '_UpdateFormState');
   // final _usernameController = TextEditingController();
 
   final paddingTopForm,
@@ -43,7 +44,7 @@ class AddForm extends StatelessWidget {
       backgroundColor: Colors.blue,
     );
     return Form(
-        key: _formKey,
+        key: _formUpF,
         child: Padding(
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
@@ -253,7 +254,7 @@ class AddForm extends StatelessWidget {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formUpF.currentState!.validate()) {}
                   },
                   child: Text('cập nhật câu hỏi',
                       style: TextStyle(
@@ -263,7 +264,7 @@ class AddForm extends StatelessWidget {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formUpF.currentState!.validate()) {}
                   },
                   child: Text('Ẩn câu hỏi',
                       style: TextStyle(
