@@ -24,30 +24,16 @@ class SideMenu extends StatelessWidget {
           ),
           DrawerListTile(
             title: "Home",
-            svgSrc: "icons/menu_dashbord.svg",
+            svgSrc: IconData(58136, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   '/', (Route<dynamic> route) => false);
             },
           ),
-          DrawerListTile(
-            title: "Detail",
-            svgSrc: "icons/menu_dashbord.svg",
-            onPressed: () {
-              Navigator.of(context).pushNamed(QuestionDetail.route);
-            },
-          ),
 
           DrawerListTile(
-            title: "Tạo khảo sát",
-            svgSrc: "icons/menu_tran.svg",
-            onPressed: () {
-              Navigator.of(context).pushNamed(CreateSurvey.route);
-            },
-          ),
-          DrawerListTile(
             title: "Quản lý Tài khoản",
-            svgSrc: "icons/menu_tran.svg",
+            svgSrc: IconData(60692, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(AllUserScreen.route);
             },
@@ -57,37 +43,31 @@ class SideMenu extends StatelessWidget {
           //   svgSrc: "icons/menu_task.svg",
           //   onPressed: () {},
           // ),
-          DrawerListTile(
-            title: "Thêm câu hỏi",
-            svgSrc: "icons/menu_doc.svg",
-            onPressed: () {
-              Navigator.of(context).pushNamed(AddQuestion.route);
-            },
-          ),
+
           DrawerListTile(
             title: "Quản lý khảo sát",
-            svgSrc: "icons/menu_store.svg",
+            svgSrc: IconData(62173, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(AllSurveyScreen.route);
             },
           ),
           DrawerListTile(
             title: "Notification",
-            svgSrc: "icons/menu_notification.svg",
+            svgSrc: IconData(62002, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(NotificationScreen.route);
             },
           ),
           DrawerListTile(
             title: "Profile",
-            svgSrc: "icons/menu_profile.svg",
+            svgSrc: IconData(62074, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(UpdateScreen.route);
             },
           ),
           DrawerListTile(
             title: "Quản lý câu hỏi",
-            svgSrc: "icons/menu_setting.svg",
+            svgSrc: IconData(60990, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(AllQuestionScreen.route);
             },
@@ -107,7 +87,8 @@ class DrawerListTile extends StatelessWidget {
     required this.onPressed,
   }) : super(key: key);
 
-  final String title, svgSrc;
+  final String title;
+  final IconData svgSrc;
   final VoidCallback onPressed;
 
   @override
@@ -115,10 +96,10 @@ class DrawerListTile extends StatelessWidget {
     return ListTile(
       onTap: onPressed,
       horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
+      leading: Icon(
         svgSrc,
         color: Colors.white54,
-        height: 16,
+        size: 16,
       ),
       title: Text(
         title,

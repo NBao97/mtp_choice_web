@@ -72,7 +72,7 @@ class DashboardScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "Câu hỏi mới",
+                        "Thông tin người dùng",
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                       SizedBox(height: defaultPadding),

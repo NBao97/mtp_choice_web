@@ -54,6 +54,11 @@ class _MyAppState extends State<UserFiles> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    "Bảng Người dùng ",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  SizedBox(height: defaultPadding),
                   Container(
                     width: 1000.0,
                     alignment: Alignment.topRight,
@@ -101,10 +106,7 @@ class _MyAppState extends State<UserFiles> {
                       ),
                     ),
                   ),
-                  Text(
-                    "Bảng Người dùng ",
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
+                  SizedBox(height: defaultPadding),
                   SizedBox(
                     width: double.infinity,
                     child: PaginatedDataTable(
@@ -182,6 +184,8 @@ class MyData extends DataTableSource {
     return DataRow(
       onSelectChanged: (value) {
         constant.questId = _user.userId!;
+        // print(constant.questId);
+        // print(_user.userId!);
         Get.toNamed(UserDetail.route);
       },
       cells: [

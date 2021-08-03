@@ -3,8 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:mtp_choice_web/models/SurveyFile.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
 import 'package:mtp_choice_web/screens/survey_detail/survey_detail.dart';
 import '../../../constants.dart';
+import '../../../responsive.dart';
 
 class RecentFiles extends StatelessWidget {
   @override
@@ -54,6 +56,30 @@ class _MyAppState extends State<SurveyFiles> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Bảng khảo sát",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      ElevatedButton.icon(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding /
+                                (Responsive.isMobile(context) ? 2 : 1),
+                          ),
+                        ),
+                        onPressed: () {
+                          Get.toNamed(CreateSurvey.route);
+                        },
+                        icon: Icon(Icons.add),
+                        label: Text("Thêm khảo sát"),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: defaultPadding),
                   TextField(
                     controller: _controller,
                     onSubmitted: (value) {
@@ -104,10 +130,7 @@ class _MyAppState extends State<SurveyFiles> {
                       ),
                     ),
                   ),
-                  Text(
-                    "Bảng khảo sát",
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
+                  SizedBox(height: defaultPadding),
                   SizedBox(
                     width: double.infinity,
                     child: PaginatedDataTable(
@@ -214,6 +237,7 @@ class MyData extends DataTableSource {
     return DataRow(
       onSelectChanged: (value) {
         constant.questId = _user.gameId!;
+
         Get.toNamed(SurveyDetail.route);
       },
       cells: [

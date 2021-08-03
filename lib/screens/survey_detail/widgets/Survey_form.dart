@@ -5,8 +5,6 @@ import 'package:mtp_choice_web/models/SurveyFile.dart';
 import '../../../constants.dart' as constant;
 import '../../../constants.dart';
 
-final String qus = constant.questId;
-
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
 
@@ -19,6 +17,7 @@ class AcceptForm extends StatefulWidget {
 
 class _AddFormState extends State<AcceptForm> {
   late Future<List<Survey>> futureData;
+  String qus = constant.questId;
 
   @override
   void initState() {

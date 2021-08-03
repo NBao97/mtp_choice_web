@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/models/UserFile.dart';
 import '../../../constants.dart' as constant;
 
-final String qus = constant.questId;
-
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
 
@@ -17,6 +15,7 @@ class AcceptForm extends StatefulWidget {
 
 class _AddFormState extends State<AcceptForm> {
   late Future<List<Users>> futureData;
+  String qus = constant.questId;
 
   @override
   void initState() {
@@ -122,7 +121,7 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.fullname!,
+                      Text(quest.fullname == null ? '' : quest.fullname!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),

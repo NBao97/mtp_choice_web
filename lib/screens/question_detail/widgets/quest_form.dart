@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import '../../../constants.dart' as constant;
 
-final String qus = constant.questId;
-
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
 
@@ -20,6 +18,8 @@ class _AddFormState extends State<AcceptForm> {
       new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
   // final _usernameController = TextEditingController();
   late Future<List<QuestionFile>> futureData;
+  String qus = constant.questId;
+
   @override
   void initState() {
     super.initState();

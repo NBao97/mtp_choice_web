@@ -1,6 +1,8 @@
+import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/MyFiles.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/screens/add/add_question.dart';
 
 import '../../../constants.dart';
 import 'file_info_card.dart';
@@ -30,7 +32,9 @@ class MyFiles extends StatelessWidget {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(AddQuestion.route);
+              },
               icon: Icon(Icons.add),
               label: Text("Thêm câu hỏi"),
             ),

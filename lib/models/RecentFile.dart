@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 Future<List<QuestionFile>> fetchQuestion(
     int page, String orderBy, String questId) async {
   String quesUrl = '';
+
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
 
@@ -32,7 +33,6 @@ Future<List<QuestionFile>> fetchQuestion(
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-
     return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,

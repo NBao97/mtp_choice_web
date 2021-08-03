@@ -14,7 +14,6 @@ final String qusId = constant.questId;
 
 Future<dynamic> approveQuestion() async {
   String url = 'https://api.wimln.ml/api/Question/approve';
-  print([jsonEncode(qusId)]);
   final response = await http.put(
     Uri.parse(url),
     headers: <String, String>{
@@ -76,6 +75,7 @@ class StorageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    constant.questId = '';
     checkStatus();
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),

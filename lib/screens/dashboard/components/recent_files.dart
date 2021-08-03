@@ -43,7 +43,7 @@ class _MyAppState extends State<RecentFiles> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Câu hỏi mới",
+                    "Bảng câu hỏi mới",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   SizedBox(

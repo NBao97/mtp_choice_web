@@ -29,8 +29,10 @@ Future<Survey> fetchSurvey() async {
 Future<List<Survey>> fetchSurAll(String questId) async {
   // int page, String orderBy,
   String quesUrl = '';
+
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Game/khao-sat?gameIds=' + questId;
+    constant.questId = '';
   }
   // orderBy = '';
   // } else if (orderBy == 'first page') {
@@ -52,7 +54,6 @@ Future<List<Survey>> fetchSurAll(String questId) async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-    print(jsonResponse);
     return jsonResponse.map((data) => new Survey.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,
@@ -63,25 +64,6 @@ Future<List<Survey>> fetchSurAll(String questId) async {
 
 Future<String> postSurvey(String name, String des, String start, String end,
     List ques, List ans) async {
-  print('ok2');
-  print(jsonEncode(<String, dynamic>{
-    "name": name,
-    "description": des,
-    "startTime": start,
-    "endTime": end,
-    "questions": [
-      for (int i = 0; i < ques.length; i++)
-        {
-          "questionContent": ques[i],
-          "answers": [
-            for (int an = 0; an < 4; an++)
-              {
-                "answerContent": ans[i + an + 3 * i],
-              },
-          ]
-        },
-    ],
-  }));
   // jsonEncode(<String, dynamic>{
   //   "name": name,
   //   "description": des,
@@ -199,7 +181,6 @@ Future<String> postSurvey(String name, String des, String start, String end,
                 },
             ],
           }));
-  print(response.statusCode);
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -210,7 +191,6 @@ Future<String> postSurvey(String name, String des, String start, String end,
         backgroundColor: Colors.white);
     return 'Success';
   } else {
-    print(response.statusCode);
     Get.snackbar('Alert', 'Nhập thất bại ' + response.statusCode.toString(),
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),

@@ -27,14 +27,13 @@ class _MyAppState extends State<QuestionFiles> {
   @override
   void initState() {
     super.initState();
-    constant.order = constant.questId = '';
+    constant.order = '';
     constant.page = 1;
-
+    constant.questId = '';
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   final TextEditingController _controller = TextEditingController();
-  String namR = '';
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +96,7 @@ class _MyAppState extends State<QuestionFiles> {
                     ),
                   ),
                   Text(
-                    "Câu hỏi mới",
+                    "Bảng câu hỏi",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   SizedBox(
@@ -162,6 +161,7 @@ class DTS extends DataTableSource {
       index: index,
       onSelectChanged: (value) {
         constant.questId = _user.questionId!;
+
         Get.toNamed(QuestionDetail.route);
       },
       cells: [

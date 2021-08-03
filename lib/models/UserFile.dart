@@ -39,8 +39,7 @@ Future<List<Users>> fetchUserAll(String questId) async {
   //   constant.order = '';
   // }
   else {
-    quesUrl =
-        'https://api.wimln.ml/api/User/many?OrderBy=userRole&PageNumber=0&PageSize=0';
+    quesUrl = 'https://api.wimln.ml/api/User/many';
   }
   final response = await http.get(
     Uri.parse(quesUrl),
@@ -174,6 +173,7 @@ class Users {
       fullname: json['fullname'],
       email: json['email'],
       image: json['image'],
+      userRole: json['userRole'],
       bonusPoint: json['bonusPoint'],
       userStatus: json['userStatus'],
       his: json['histories'] != null
