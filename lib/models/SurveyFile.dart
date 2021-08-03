@@ -61,25 +61,6 @@ Future<List<Survey>> fetchSurAll(String questId) async {
   }
 }
 
-//   jsonEncode(<String, dynamic>{
-//     "name": name,
-//     "description": des,
-//     "startTime": start,
-//     "endTime": end,
-//     "questions": [
-//       for (int i = 0; i < ques.length + 1; i++)
-//         {
-//           "questionContent": ques[i]  ,
-//           "answers": [
-//             for (int an = 0; an < 4; an++)
-//               {
-//                 "answerContent": ans[i + an + 3 * i]  ,
-//               },
-//           ]
-//         },
-//     ],
-//   })
-// }
 Future<String> postSurvey(String name, String des, String start, String end,
     List ques, List ans) async {
   print('ok2');
@@ -89,93 +70,111 @@ Future<String> postSurvey(String name, String des, String start, String end,
     "startTime": start,
     "endTime": end,
     "questions": [
-      {
-        "questionContent": ques[0],
-        "answers": [
-          {
-            "answerContent": ans[0],
-          },
-          {
-            "answerContent": ans[1],
-          },
-          {
-            "answerContent": ans[2],
-          },
-          {
-            "answerContent": ans[3],
-          }
-        ]
-      },
-      {
-        "questionContent": ques[1],
-        "answers": [
-          {
-            "answerContent": ans[4],
-          },
-          {
-            "answerContent": ans[5],
-          },
-          {
-            "answerContent": ans[6],
-          },
-          {
-            "answerContent": ans[7],
-          }
-        ]
-      },
-      {
-        "questionContent": ques[2],
-        "answers": [
-          {
-            "answerContent": ans[8],
-          },
-          {
-            "answerContent": ans[9],
-          },
-          {
-            "answerContent": ans[10],
-          },
-          {
-            "answerContent": ans[11],
-          }
-        ]
-      },
-      {
-        "questionContent": ques[3],
-        "answers": [
-          {
-            "answerContent": ans[12],
-          },
-          {
-            "answerContent": ans[13],
-          },
-          {
-            "answerContent": ans[14],
-          },
-          {
-            "answerContent": ans[15],
-          }
-        ]
-      },
-      {
-        "questionContent": ques[4],
-        "answers": [
-          {
-            "answerContent": ans[16],
-          },
-          {
-            "answerContent": ans[17],
-          },
-          {
-            "answerContent": ans[18],
-          },
-          {
-            "answerContent": ans[19],
-          }
-        ]
-      }
+      for (int i = 0; i < ques.length; i++)
+        {
+          "questionContent": ques[i],
+          "answers": [
+            for (int an = 0; an < 4; an++)
+              {
+                "answerContent": ans[i + an + 3 * i],
+              },
+          ]
+        },
     ],
   }));
+  // jsonEncode(<String, dynamic>{
+  //   "name": name,
+  //   "description": des,
+  //   "startTime": start,
+  //   "endTime": end,
+  //   "questions": [
+  //     {
+  //       "questionContent": ques[0],
+  //       "answers": [
+  //         {
+  //           "answerContent": ans[0],
+  //         },
+  //         {
+  //           "answerContent": ans[1],
+  //         },
+  //         {
+  //           "answerContent": ans[2],
+  //         },
+  //         {
+  //           "answerContent": ans[3],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "questionContent": ques[1],
+  //       "answers": [
+  //         {
+  //           "answerContent": ans[4],
+  //         },
+  //         {
+  //           "answerContent": ans[5],
+  //         },
+  //         {
+  //           "answerContent": ans[6],
+  //         },
+  //         {
+  //           "answerContent": ans[7],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "questionContent": ques[2],
+  //       "answers": [
+  //         {
+  //           "answerContent": ans[8],
+  //         },
+  //         {
+  //           "answerContent": ans[9],
+  //         },
+  //         {
+  //           "answerContent": ans[10],
+  //         },
+  //         {
+  //           "answerContent": ans[11],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "questionContent": ques[3],
+  //       "answers": [
+  //         {
+  //           "answerContent": ans[12],
+  //         },
+  //         {
+  //           "answerContent": ans[13],
+  //         },
+  //         {
+  //           "answerContent": ans[14],
+  //         },
+  //         {
+  //           "answerContent": ans[15],
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "questionContent": ques[4],
+  //       "answers": [
+  //         {
+  //           "answerContent": ans[16],
+  //         },
+  //         {
+  //           "answerContent": ans[17],
+  //         },
+  //         {
+  //           "answerContent": ans[18],
+  //         },
+  //         {
+  //           "answerContent": ans[19],
+  //         }
+  //       ]
+  //     }
+  //   ],
+  // }
   final response =
       await http.post(Uri.parse('https://api.wimln.ml/api/Game/khao-sat'),
           headers: <String, String>{
@@ -188,93 +187,19 @@ Future<String> postSurvey(String name, String des, String start, String end,
             "startTime": start,
             "endTime": end,
             "questions": [
-              {
-                "questionContent": ques[0],
-                "answers": [
-                  {
-                    "answerContent": ans[0],
-                  },
-                  {
-                    "answerContent": ans[1],
-                  },
-                  {
-                    "answerContent": ans[2],
-                  },
-                  {
-                    "answerContent": ans[3],
-                  }
-                ]
-              },
-              {
-                "questionContent": ques[1],
-                "answers": [
-                  {
-                    "answerContent": ans[4],
-                  },
-                  {
-                    "answerContent": ans[5],
-                  },
-                  {
-                    "answerContent": ans[6],
-                  },
-                  {
-                    "answerContent": ans[7],
-                  }
-                ]
-              },
-              {
-                "questionContent": ques[2],
-                "answers": [
-                  {
-                    "answerContent": ans[8],
-                  },
-                  {
-                    "answerContent": ans[9],
-                  },
-                  {
-                    "answerContent": ans[10],
-                  },
-                  {
-                    "answerContent": ans[11],
-                  }
-                ]
-              },
-              {
-                "questionContent": ques[3],
-                "answers": [
-                  {
-                    "answerContent": ans[12],
-                  },
-                  {
-                    "answerContent": ans[13],
-                  },
-                  {
-                    "answerContent": ans[14],
-                  },
-                  {
-                    "answerContent": ans[15],
-                  }
-                ]
-              },
-              {
-                "questionContent": ques[4],
-                "answers": [
-                  {
-                    "answerContent": ans[16],
-                  },
-                  {
-                    "answerContent": ans[17],
-                  },
-                  {
-                    "answerContent": ans[18],
-                  },
-                  {
-                    "answerContent": ans[19],
-                  }
-                ]
-              }
+              for (int i = 0; i < ques.length; i++)
+                {
+                  "questionContent": ques[i],
+                  "answers": [
+                    for (int an = 0; an < 4; an++)
+                      {
+                        "answerContent": ans[i + an + 3 * i],
+                      },
+                  ]
+                },
             ],
           }));
+  print(response.statusCode);
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
@@ -285,6 +210,7 @@ Future<String> postSurvey(String name, String des, String start, String end,
         backgroundColor: Colors.white);
     return 'Success';
   } else {
+    print(response.statusCode);
     Get.snackbar('Alert', 'Nhập thất bại ' + response.statusCode.toString(),
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
