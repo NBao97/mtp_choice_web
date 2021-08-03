@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:mtp_choice_web/models/SurveyFile.dart';
 
 class UpdateProfile extends StatefulWidget {
@@ -18,6 +16,7 @@ class _MyAppState extends State<UpdateProfile> {
     super.initState();
   }
 
+  DateTime currentDate = DateTime.now();
   final GlobalKey<FormState> _formKey =
       new GlobalKey<FormState>(debugLabel: '_UpUserSFormState');
 
@@ -57,17 +56,18 @@ class _MyAppState extends State<UpdateProfile> {
       ),
       backgroundColor: Colors.blue,
     );
-    final _nameController = TextEditingController();
+    TextEditingController _nameController = TextEditingController();
 
-    final _descriptionController = TextEditingController();
+    TextEditingController _descriptionController = TextEditingController();
     // final _quesController = TextEditingController();
     // final _ansTimeController = TextEditingController();
-    //
-    // final _startTimeController = TextEditingController();
-    //
-    // final _endTimeController = TextEditingController();
+
+    TextEditingController _startTimeController = TextEditingController();
+
+    TextEditingController _endTimeController = TextEditingController();
     List question = [];
     List answer = [];
+
     return Form(
         key: _formKey,
         child: Padding(
@@ -152,132 +152,140 @@ class _MyAppState extends State<UpdateProfile> {
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
               SizedBox(height: heightSize * spaceBetweenFields),
-              // Align(
-              //     alignment: Alignment.centerLeft,
-              //     child: Text('Ngày bắt đầu',
-              //         style: TextStyle(
-              //             fontSize: widthSize * fontSizeTextField,
-              //             fontFamily: 'Poppins',
-              //             color: Colors.white))),
-              // Align(
-              //     alignment: Alignment.centerLeft,
-              //     child: TextFormField(
-              //         controller: _startTimeController,
-              //         onTap: () async {
-              //           DateTime date = DateTime(1900);
-              //           FocusScope.of(context).requestFocus(new FocusNode());
-              //           date = (await showDatePicker(
-              //             context: context,
-              //             initialDate: DateTime.now(),
-              //             firstDate: DateTime(2021, 1),
-              //             lastDate: DateTime.now().add(Duration(days: 365)),
-              //           ))!;
-              //           _startTimeController.text = date.toIso8601String();
-              //         },
-              //         validator: (value) {
-              //           if (value == null) {
-              //             return 'Ô này không thể để trống';
-              //           }
-              //           if (value == DateTime(1900).toIso8601String()) {
-              //             return 'Ô này không thể để trống';
-              //           }
-              //           return null;
-              //         },
-              //         cursorColor: Colors.white,
-              //         keyboardType: TextInputType.text,
-              //         decoration: InputDecoration(
-              //           labelText: 'Xin hãy chọn  thời gian kết thúc',
-              //           fillColor: Colors.white,
-              //           border: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.red, width: 2)),
-              //           enabledBorder: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.white, width: 2)),
-              //           focusedBorder: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.white, width: 2)),
-              //           labelStyle: TextStyle(color: Colors.white),
-              //           errorStyle: TextStyle(
-              //               color: Colors.white,
-              //               fontSize: widthSize * errorFormMessage),
-              //           prefixIcon: Icon(
-              //             Icons.check_circle_outline,
-              //             size: widthSize * iconFormSize,
-              //             color: Colors.white,
-              //           ),
-              //         ),
-              //         textAlign: TextAlign.start,
-              //         style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: widthSize * fontSizeTextFormField))),
-              // Align(
-              //     alignment: Alignment.topRight,
-              //     child: Text('Ngày kết thúc',
-              //         style: TextStyle(
-              //             fontSize: widthSize * fontSizeTextField,
-              //             fontFamily: 'Poppins',
-              //             color: Colors.white))),
-              // Align(
-              //     alignment: Alignment.centerRight,
-              //     child: TextFormField(
-              //         controller: _endTimeController,
-              //         onTap: () async {
-              //           DateTime date = DateTime(1900);
-              //           FocusScope.of(context).requestFocus(new FocusNode());
-              //           date = (await showDatePicker(
-              //             context: context,
-              //             initialDate: DateTime.now(),
-              //             firstDate: DateTime(2021, 1),
-              //             lastDate: DateTime.now().add(Duration(days: 365)),
-              //           ))!;
-              //           _endTimeController.text = date.toIso8601String();
-              //         },
-              //         validator: (value) {
-              //           if (value == null) {
-              //             return 'Ô này không thể để trống';
-              //           }
-              //           if (value == DateTime(1900).toIso8601String()) {
-              //             return 'Ô này không thể để trống';
-              //           }
-              //           if (DateTime.parse(value).isBefore(
-              //               DateTime.parse(_startTimeController.text))) {
-              //             return 'Ngày kết thúc phải trước ngày bắt đầu';
-              //           }
-              //           return null;
-              //         },
-              //         obscureText: true,
-              //         cursorColor: Colors.white,
-              //         keyboardType: TextInputType.text,
-              //         decoration: InputDecoration(
-              //           labelText: 'Xin hãy chọn  thời gian kết thúc',
-              //           fillColor: Colors.white,
-              //           border: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.red, width: 2)),
-              //           enabledBorder: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.white, width: 2)),
-              //           focusedBorder: UnderlineInputBorder(
-              //               borderSide:
-              //                   BorderSide(color: Colors.white, width: 2)),
-              //           labelStyle: TextStyle(color: Colors.white),
-              //           errorStyle: TextStyle(
-              //               color: Colors.white,
-              //               fontSize: widthSize * errorFormMessage),
-              //           prefixIcon: Icon(
-              //             Icons.check_circle_outline,
-              //             size: widthSize * iconFormSize,
-              //             color: Colors.white,
-              //           ),
-              //         ),
-              //         textAlign: TextAlign.start,
-              //         style: TextStyle(
-              //             color: Colors.white,
-              //             fontSize: widthSize * fontSizeTextFormField))),
-              // SizedBox(height: heightSize * spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
+                  child: Text('Ngày bắt đầu',
+                      style: TextStyle(
+                          fontSize: widthSize * fontSizeTextField,
+                          fontFamily: 'Poppins',
+                          color: Colors.white))),
+              TextFormField(
+                  readOnly: true,
+                  controller: _startTimeController,
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Nội dung không thể để trống';
+                    } else if (DateTime.parse(value!)
+                        .isAfter(DateTime.parse(_endTimeController!.text))) {
+                      return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
+                    }
+                  },
+                  onTap: () async {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2019, 1),
+                      lastDate: DateTime(2021, 12),
+                      builder: (context, child) {
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            primaryColor: Colors.blueAccent,
+                            accentColor: const Color(0xFF8CE7F1),
+                            colorScheme:
+                                ColorScheme.light(primary: Colors.blueAccent),
+                            buttonTheme: ButtonThemeData(
+                                textTheme: ButtonTextTheme.primary),
+                          ),
+                          child: child!,
+                        );
+                      },
+                    ).then((pickedDate) {
+                      //do whatever you want
+                      _startTimeController.text = pickedDate!.toIso8601String();
+                    });
+                  },
+                  cursorColor: Colors.white,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 2)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2)),
+                    labelStyle: TextStyle(color: Colors.white),
+                    errorStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: widthSize * errorFormMessage),
+                    prefixIcon: Icon(
+                      Icons.check_circle_outline,
+                      size: widthSize * iconFormSize,
+                      color: Colors.white,
+                    ),
+                  ),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: fontSizeTextFormField)),
+              SizedBox(height: heightSize * spaceBetweenFields),
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Text('Ngày kết thúc',
+                      style: TextStyle(
+                          fontSize: widthSize * fontSizeTextField,
+                          fontFamily: 'Poppins',
+                          color: Colors.white))),
+              TextFormField(
+                  readOnly: true,
+                  controller: _endTimeController,
+                  validator: (value) {
+                    if (value == '') {
+                      return 'Nội dung không thể để trống';
+                    } else if (DateTime.parse(value!)
+                        .isBefore(DateTime.parse(_startTimeController!.text))) {
+                      return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
+                    }
+                  },
+                  onTap: () async {
+                    showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(2019, 1),
+                      lastDate: DateTime(2021, 12),
+                      builder: (context, child) {
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            primaryColor: Colors.blueAccent,
+                            accentColor: const Color(0xFF8CE7F1),
+                            colorScheme:
+                                ColorScheme.light(primary: Colors.blueAccent),
+                            buttonTheme: ButtonThemeData(
+                                textTheme: ButtonTextTheme.primary),
+                          ),
+                          child: child!,
+                        );
+                      },
+                    ).then((pickedDate) {
+                      //do whatever you want
+                      _endTimeController.text = pickedDate!.toIso8601String();
+                    });
+                  },
+                  cursorColor: Colors.white,
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    fillColor: Colors.white,
+                    border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 2)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white, width: 2)),
+                    labelStyle: TextStyle(color: Colors.white),
+                    errorStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: widthSize * errorFormMessage),
+                    prefixIcon: Icon(
+                      Icons.check_circle_outline,
+                      size: widthSize * iconFormSize,
+                      color: Colors.white,
+                    ),
+                  ),
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: fontSizeTextFormField)),
+              SizedBox(width: heightSize * spaceBetweenFields),
+              Align(
+                  alignment: Alignment.topLeft,
                   child: Text('Câu hỏi',
                       style: TextStyle(
                           fontSize: widthSize * fontSizeTextField,
@@ -1308,12 +1316,8 @@ class _MyAppState extends State<UpdateProfile> {
                       postSurvey(
                               _nameController.text,
                               _descriptionController.text,
-                              DateTime.now()
-                                  .add(Duration(days: 10))
-                                  .toIso8601String(),
-                              DateTime.now()
-                                  .add(Duration(days: 365))
-                                  .toIso8601String(),
+                              _startTimeController.text,
+                              _endTimeController.text,
                               question,
                               answer)
                           .catchError((error) {
