@@ -13,11 +13,11 @@ Future<List<QuestionFile>> fetchQuestion(
     orderBy = '';
   } else if (orderBy == 'first page') {
     quesUrl =
-        'https://api.wimln.ml/api/Question?IsAscending=true&PageNumber=1&PageSize=4';
+        'https://api.wimln.ml/api/Question?IsAscending=false&PageNumber=1&PageSize=4';
     constant.order = '';
   } else {
     quesUrl =
-        'https://api.wimln.ml/api/Question?OrderBy=difficulty&IsAscending=true&PageNumber=' +
+        'https://api.wimln.ml/api/Question?OrderBy=difficulty&IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
   }

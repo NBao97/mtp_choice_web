@@ -21,7 +21,7 @@ class _AddFormState extends State<AddForm> {
   final GlobalKey<FormState> _formAdf =
       new GlobalKey<FormState>(debugLabel: '_AddFFormState');
   final _questionContentController = TextEditingController();
-  final _difficultyController = TextEditingController();
+  // final _difficultyController = TextEditingController(text: "0");
   final _answersCorrectController = TextEditingController();
   final _answers1Controller = TextEditingController();
   final _answers2Controller = TextEditingController();
@@ -52,7 +52,7 @@ class _AddFormState extends State<AddForm> {
       this.fontSizeForgotPassword,
       this.fontSizeSnackBar,
       this.errorFormMessage);
-
+  int _value = 0;
   @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
@@ -73,271 +73,282 @@ class _AddFormState extends State<AddForm> {
               right: widthSize * 0.05,
               top: heightSize * paddingTopForm),
           child: (_futureQuestion == null)
-              ? buildColumn(widthSize, heightSize, flatButtonStyle)
+              ? Column(children: <Widget>[
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Câu hỏi',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _questionContentController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Câu hỏi không thể để trống';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.chat_outlined,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Đáp án',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _answersCorrectController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'Đáp án không thể để trống';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.check_circle_outline,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Câu sai 1',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _answers1Controller,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'không thể để trống câu sai';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.clear_sharp,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Câu sai 2',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _answers2Controller,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'không thể để trống câu sai';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.clear_sharp,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Câu sai 3',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _answers3Controller,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'không thể để trống câu sai';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2)),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.clear_sharp,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Độ khó',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  DropdownButton(
+                      value: _value,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text("Dễ"),
+                          value: 0,
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Trung Bình"),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text("Khó"),
+                          value: 2,
+                        )
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          _value = int.parse(value.toString());
+                        });
+                      },
+                      hint: Text("Select item")),
+                  SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                  TextButton(
+                      style: flatButtonStyle,
+                      onPressed: () async {
+                        if (_formAdf.currentState!.validate()) {
+                          createQuestion(
+                                  _questionContentController.text,
+                                  constant.userName,
+                                  _value,
+                                  _answersCorrectController.text,
+                                  _answers1Controller.text,
+                                  _answers2Controller.text,
+                                  _answers3Controller.text)
+                              .catchError((error) {
+                            Get.snackbar('Alert', 'Nhập thất bại',
+                                duration: Duration(seconds: 4),
+                                animationDuration: Duration(milliseconds: 800),
+                                snackPosition: SnackPosition.TOP,
+                                backgroundColor: Colors.white);
+                          });
+                        }
+                      },
+                      child: Text('Thêm câu hỏi',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeButton,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  SizedBox(height: heightSize * 0.01),
+                ])
               : buildFutureBuilder(),
         ));
-  }
-
-  Column buildColumn(
-      double widthSize, double heightSize, ButtonStyle flatButtonStyle) {
-    return Column(children: <Widget>[
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Câu hỏi',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _questionContentController,
-          validator: (value) {
-            if (value == '') {
-              return 'Câu hỏi không thể để trống';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.chat_outlined,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFields),
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Đáp án',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _answersCorrectController,
-          validator: (value) {
-            if (value == '') {
-              return 'Đáp án không thể để trống';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.check_circle_outline,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFields),
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Câu sai 1',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _answers1Controller,
-          validator: (value) {
-            if (value == '') {
-              return 'không thể để trống câu sai';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.clear_sharp,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFields),
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Câu sai 2',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _answers2Controller,
-          validator: (value) {
-            if (value == '') {
-              return 'không thể để trống câu sai';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.clear_sharp,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFields),
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Câu sai 3',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _answers3Controller,
-          validator: (value) {
-            if (value == '') {
-              return 'không thể để trống câu sai';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.clear_sharp,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFields),
-      Align(
-          alignment: Alignment.centerLeft,
-          child: Text('Độ khó',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeTextField,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      TextFormField(
-          maxLines: null,
-          controller: _difficultyController,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          validator: (value) {
-            if (value == '') {
-              return 'không thể để trống câu sai';
-            }
-          },
-          cursorColor: Colors.white,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.red, width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 2)),
-            labelStyle: TextStyle(color: Colors.white),
-            errorStyle: TextStyle(
-                color: Colors.white, fontSize: widthSize * errorFormMessage),
-            prefixIcon: Icon(
-              Icons.clear_sharp,
-              size: widthSize * iconFormSize,
-              color: Colors.white,
-            ),
-          ),
-          textAlign: TextAlign.start,
-          style:
-              TextStyle(color: Colors.white, fontSize: fontSizeTextFormField)),
-      SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-      TextButton(
-          style: flatButtonStyle,
-          onPressed: () async {
-            if (_formAdf.currentState!.validate()) {
-              createQuestion(
-                      _questionContentController.text,
-                      constant.userName,
-                      _difficultyController.text,
-                      _answersCorrectController.text,
-                      _answers1Controller.text,
-                      _answers2Controller.text,
-                      _answers3Controller.text)
-                  .catchError((error) {
-                Get.snackbar('Alert', 'Nhập thất bại',
-                    duration: Duration(seconds: 4),
-                    animationDuration: Duration(milliseconds: 800),
-                    snackPosition: SnackPosition.TOP,
-                    backgroundColor: Colors.white);
-              });
-            }
-          },
-          child: Text('Thêm câu hỏi',
-              style: TextStyle(
-                  fontSize: widthSize * fontSizeButton,
-                  fontFamily: 'Poppins',
-                  color: Colors.white))),
-      SizedBox(height: heightSize * 0.01),
-    ]);
   }
 
   FutureBuilder<QuestionFile> buildFutureBuilder() {

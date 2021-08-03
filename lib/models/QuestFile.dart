@@ -4,7 +4,7 @@ import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
-Future<String> createQuestion(String title, String creator, String difficult,
+Future<String> createQuestion(String title, String creator, int difficult,
     String rightAns, String as1, String as2, String as3) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
@@ -18,9 +18,9 @@ Future<String> createQuestion(String title, String creator, String difficult,
           body: "[" +
               jsonEncode(<String, dynamic>{
                 "questionContent": title,
-                "difficulty": int.parse(difficult),
+                "difficulty": difficult,
                 "creator": "",
-                "status": "Approve",
+                "status": "APPROVED",
                 "answers": [
                   {
                     "answerContent": list.first,

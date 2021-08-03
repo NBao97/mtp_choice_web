@@ -3,9 +3,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
+import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 
 import '../../../constants.dart' as constant;
+import '../../../constants.dart';
+import '../../../responsive.dart';
 
 class RecentFiles extends StatelessWidget {
   @override
@@ -54,6 +57,29 @@ class _MyAppState extends State<QuestionFiles> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Bảng câu hỏi",
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      ElevatedButton.icon(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: defaultPadding * 1.5,
+                            vertical: defaultPadding /
+                                (Responsive.isMobile(context) ? 2 : 1),
+                          ),
+                        ),
+                        onPressed: () {
+                          Get.toNamed(AddQuestion.route);
+                        },
+                        icon: Icon(Icons.add),
+                        label: Text("Thêm câu hỏi"),
+                      ),
+                    ],
+                  ),
                   Container(
                     width: 1000.0,
                     alignment: Alignment.topRight,
@@ -94,10 +120,6 @@ class _MyAppState extends State<QuestionFiles> {
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    "Bảng câu hỏi",
-                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   SizedBox(
                     width: double.infinity,
