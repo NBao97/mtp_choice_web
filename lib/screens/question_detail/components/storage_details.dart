@@ -7,9 +7,13 @@ class StarageDetails extends StatelessWidget {
   const StarageDetails({
     Key? key,
   }) : super(key: key);
+  void countSeconds() {
+    Future.delayed(const Duration(seconds: 2));
+  }
 
   @override
   Widget build(BuildContext context) {
+    countSeconds();
     return Container(
       padding: EdgeInsets.all(constant.defaultPadding),
       decoration: BoxDecoration(
@@ -27,8 +31,7 @@ class StarageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: constant.defaultPadding),
-          StorageInfoCard(title: constant.status, stat: "Created"),
-          Text(constant.status.toString()),
+          StorageInfoCard(title: constant.status),
         ],
       ),
     );

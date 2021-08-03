@@ -58,18 +58,23 @@ class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
     required this.title,
-    required this.stat,
   }) : super(key: key);
 
-  final String title, stat;
+  final String title;
 
   void checkStatus() {
-    if (stat == 'Active') {
+    if (title == 'APPROVED') {
       colorS = Colors.blue;
       icon = Icons.check_circle_outline;
-    } else {
+    } else if (title == 'NOT_APPROVED') {
       colorS = Colors.red;
       icon = Icons.close_outlined;
+    } else if (title == 'KHAO_SAT_QUESTION') {
+      colorS = Colors.blueAccent;
+      icon = Icons.question_answer_outlined;
+    } else {
+      colorS = Colors.white;
+      icon = Icons.help_outline;
     }
   }
 

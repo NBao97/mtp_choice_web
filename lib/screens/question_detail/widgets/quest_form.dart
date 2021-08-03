@@ -89,7 +89,10 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.difficulty!.toString(),
+                      Text(
+                          quest.difficulty == null
+                              ? "0"
+                              : quest.difficulty!.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),

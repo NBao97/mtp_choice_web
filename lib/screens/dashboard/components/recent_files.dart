@@ -96,11 +96,14 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: Text(fileInfo.questionContent!.substring(0, 5)),
+            child: Text(fileInfo.questionContent!.length > 10
+                ? fileInfo.questionContent!.substring(0, 10)
+                : fileInfo.questionContent!),
           ),
         ],
       )),
-      DataCell(Text(fileInfo.difficulty!.toString())),
+      DataCell(Text(
+          fileInfo.difficulty == null ? '0' : fileInfo.difficulty!.toString())),
       DataCell(Text(
         (fileInfo.creator == null) ? "no information" : fileInfo.creator!,
       )),

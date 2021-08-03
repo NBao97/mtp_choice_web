@@ -41,7 +41,7 @@ class StarageDetails extends StatelessWidget {
           ),
           StorageInfoCard(
             svgSrc: "icons/folder.svg",
-            title: "tài khoản admin",
+            title: "Tài khoản admin",
           ),
         ],
       ),

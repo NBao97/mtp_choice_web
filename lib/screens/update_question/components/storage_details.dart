@@ -35,14 +35,14 @@ class StarageDetails extends StatelessWidget {
             svgSrc: "icons/media.svg",
             title: "video",
           ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "picture",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/media_file.svg",
-            title: "sound",
-          ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/folder.svg",
+          //   title: "picture",
+          // ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/media_file.svg",
+          //   title: "sound",
+          // ),
         ],
       ),
     );
