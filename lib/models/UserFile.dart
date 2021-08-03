@@ -64,7 +64,7 @@ Future<List<Users>> fetchUserAll(String questId) async {
 
 Future<String> patchUser(
     String userId, String phone, String password, String fullname) async {
-  final response = await http.patch(
+  final response = await http.put(
     Uri.parse('https://api.wimln.ml/api/User'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
@@ -77,7 +77,6 @@ Future<String> patchUser(
       "fullname": fullname,
     }),
   );
-  print(response.body);
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.

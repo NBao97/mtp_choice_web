@@ -86,9 +86,10 @@ class _MyAppState extends State<UpdateProfile> {
             final _repasswordController = TextEditingController(text: pas);
 
             (snapshot.data!.image == null)
-                ? constant.image = 'icons/Documents.svg'
+                ? constant.image =
+                    'https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png'
                 : constant.image = snapshot.data!.image!;
-            print(snapshot.data);
+
             return Form(
                 key: _formUpUs,
                 child: Padding(

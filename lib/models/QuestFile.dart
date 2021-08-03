@@ -8,41 +8,43 @@ Future<String> createQuestion(String title, String creator, String difficult,
     String rightAns, String as1, String as2, String as3) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
-  final response = await http.post(
-      Uri.parse('https://api.wimln.ml/api/Question'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + constant.key,
-      },
-      body: [
-        jsonEncode(<String, dynamic>{
-          "questionContent": title,
-          "difficulty": int.parse(difficult),
-          "creator": "Nguyen Hoang Ngoc Bao",
-          "answers": [
-            {
-              "answerContent": list.first,
-              "isCorrect": list.first == rightAns ? true : false,
-              "status": 1
-            },
-            {
-              "answerContent": list.elementAt(1),
-              "isCorrect": list.elementAt(1) == rightAns ? true : false,
-              "status": 1
-            },
-            {
-              "answerContent": list.elementAt(2),
-              "isCorrect": list.elementAt(2) == rightAns ? true : false,
-              "status": 1
-            },
-            {
-              "answerContent": list.elementAt(3),
-              "isCorrect": list.elementAt(3) == rightAns ? true : false,
-              "status": 1
-            }
-          ],
-        })
-      ]);
+
+  final response =
+      await http.post(Uri.parse('https://api.wimln.ml/api/Question'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ' + constant.key,
+          },
+          body: "[" +
+              jsonEncode(<String, dynamic>{
+                "questionContent": title,
+                "difficulty": int.parse(difficult),
+                "creator": "",
+                "status": "Approve",
+                "answers": [
+                  {
+                    "answerContent": list.first,
+                    "isCorrect": list.first == rightAns ? true : false,
+                    "status": 1
+                  },
+                  {
+                    "answerContent": list.elementAt(1),
+                    "isCorrect": list.elementAt(1) == rightAns ? true : false,
+                    "status": 1
+                  },
+                  {
+                    "answerContent": list.elementAt(2),
+                    "isCorrect": list.elementAt(2) == rightAns ? true : false,
+                    "status": 1
+                  },
+                  {
+                    "answerContent": list.elementAt(3),
+                    "isCorrect": list.elementAt(3) == rightAns ? true : false,
+                    "status": 1
+                  }
+                ],
+              }) +
+              "]");
 
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,

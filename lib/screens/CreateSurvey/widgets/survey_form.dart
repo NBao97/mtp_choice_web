@@ -1301,6 +1301,7 @@ class _MyAppState extends State<UpdateProfile> {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
+                    print('ok');
                     Form.of(primaryFocus!.context!)!.save();
                     if (_formKey.currentState!.validate()) {
                       // _startTimeController.text                               _endTimeController.text,
@@ -1315,24 +1316,8 @@ class _MyAppState extends State<UpdateProfile> {
                                   .toIso8601String(),
                               question,
                               answer)
-                          .then((result) async {
-                        if (result != "") {
-                          if (result.contains("Success")) {
-                            // Form.of(primaryFocus!.context!)!.deactivate();
-                          } else {
-                            Get.snackbar('Alert', 'Thất bại' + result,
-                                duration: Duration(seconds: 4),
-                                animationDuration: Duration(milliseconds: 800),
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.white);
-                          }
-                        }
-                      }).catchError((error) {
-                        Get.snackbar('Alert', 'Nhập thất bại',
-                            duration: Duration(seconds: 4),
-                            animationDuration: Duration(milliseconds: 800),
-                            snackPosition: SnackPosition.TOP,
-                            backgroundColor: Colors.white);
+                          .catchError((error) {
+                        print(error);
                       });
                     }
                   },

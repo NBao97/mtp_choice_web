@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:mtp_choice_web/models/SurveyFile.dart';
@@ -22,14 +23,18 @@ class SurveyFiles extends StatefulWidget {
 
 class _MyAppState extends State<SurveyFiles> {
   late Future<List<Survey>> futureData;
-
+  final TextEditingController _controller = TextEditingController(text: '');
   @override
   void initState() {
     super.initState();
     constant.questId = '';
+    _controller.clear();
     futureData = fetchSurAll(constant.questId);
   }
 
+  bool _isAscending = true;
+  int sortcolumn = 0;
+  List<Survey>? dataSearch = [];
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Survey>>(
@@ -37,8 +42,8 @@ class _MyAppState extends State<SurveyFiles> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Survey>? data = snapshot.data;
-            final _dtSource = DTS(
-              data: data,
+            MyData _dtSource = MyData(
+              data: (_controller.text == '') ? data : dataSearch,
             );
             return Container(
               padding: EdgeInsets.all(defaultPadding),
@@ -49,29 +54,137 @@ class _MyAppState extends State<SurveyFiles> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  TextField(
+                    controller: _controller,
+                    onSubmitted: (value) {
+                      setState(() {
+                        dataSearch = data!
+                            .where((user) => user.description!.contains(value))
+                            .toList();
+                      });
+                    }.call,
+                    decoration: InputDecoration(
+                      hintText: "Search",
+                      hintStyle: TextStyle(color: Colors.white),
+                      fillColor: constant.secondaryColor,
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            dataSearch = data!
+                                .where((user) =>
+                                    (user.description!
+                                        .contains(_controller.text)) ||
+                                    (user.startTime != null &&
+                                        user.startTime!
+                                            .contains(_controller.text)) ||
+                                    (user.endTime != null &&
+                                        user.endTime!
+                                            .contains(_controller.text)))
+                                .toList();
+                          });
+                        },
+                        child: Container(
+                          padding:
+                              EdgeInsets.all(constant.defaultPadding * 0.75),
+                          margin: EdgeInsets.symmetric(
+                              horizontal: constant.defaultPadding / 2),
+                          decoration: BoxDecoration(
+                            color: constant.primaryColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          child: SvgPicture.asset('icons/Search.svg'),
+                        ),
+                      ),
+                    ),
+                  ),
                   Text(
-                    "Người dùng mới",
+                    "Bảng khảo sát",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: PaginatedDataTable(
                       horizontalMargin: 0,
-                      showFirstLastButtons: true,
                       showCheckboxColumn: false,
                       columnSpacing: defaultPadding,
+                      sortColumnIndex: sortcolumn,
+                      sortAscending: _isAscending,
                       columns: [
                         DataColumn(
                           label: Text("Nội dung"),
                         ),
                         DataColumn(
-                          label: Text("Ngày tạo"),
-                        ),
+                            label: Text("Ngày tạo"),
+                            onSort: (columnIndex, sortAscending) {
+                              setState(() {
+                                if (columnIndex == sortcolumn) {
+                                  sortAscending = true;
+                                } else {
+                                  sortcolumn = columnIndex;
+                                }
+                                if (_controller.text == '') {
+                                  if (_isAscending == true) {
+                                    _isAscending = false;
+                                    data!.sort((a, b) =>
+                                        a.startTime!.compareTo(b.startTime!));
+                                  } else {
+                                    _isAscending = true;
+                                    data!.sort((a, b) =>
+                                        a.startTime!.compareTo(b.startTime!));
+                                  }
+                                } else {
+                                  if (_isAscending == true) {
+                                    _isAscending = false;
+                                    dataSearch!.sort((a, b) =>
+                                        a.startTime!.compareTo(b.startTime!));
+                                  } else {
+                                    _isAscending = true;
+                                    dataSearch!.sort((a, b) =>
+                                        a.startTime!.compareTo(b.startTime!));
+                                  }
+                                }
+                              });
+                            }),
                         DataColumn(
-                          label: Text("Ngày kết thúc"),
-                        ),
+                            label: Text("Ngày kết thúc"),
+                            onSort: (columnIndex, sortAscending) {
+                              setState(() {
+                                if (columnIndex == sortcolumn) {
+                                  sortAscending = true;
+                                } else {
+                                  sortcolumn = columnIndex;
+                                }
+                                if (_controller.text == '') {
+                                  if (_isAscending == true) {
+                                    _isAscending = false;
+                                    data!.sort((a, b) =>
+                                        a.endTime!.compareTo(b.endTime!));
+                                  } else {
+                                    _isAscending = true;
+                                    data!.sort((a, b) =>
+                                        a.endTime!.compareTo(b.endTime!));
+                                  }
+                                } else {
+                                  if (_isAscending == true) {
+                                    _isAscending = false;
+                                    dataSearch!.sort((a, b) =>
+                                        a.endTime!.compareTo(b.endTime!));
+                                  } else {
+                                    _isAscending = true;
+                                    dataSearch!.sort((a, b) =>
+                                        a.endTime!.compareTo(b.endTime!));
+                                  }
+                                }
+                              });
+                            }),
                       ],
-                      rowsPerPage: 10,
                       source: _dtSource,
                     ),
                   ),
@@ -86,45 +199,45 @@ class _MyAppState extends State<SurveyFiles> {
   }
 }
 
-class DTS extends DataTableSource {
-  DTS({
+class MyData extends DataTableSource {
+  // Generate some made-up data
+  MyData({
     required List<Survey>? data,
   }) : _data = data;
   final List<Survey>? _data;
 
-  @override
-  DataRow? getRow(int index) {
-    assert(index >= 0);
-
-    if (index >= _data!.length) {
-      return null;
-    }
+  bool get isRowCountApproximate => false;
+  int get rowCount => _data!.length;
+  int get selectedRowCount => 0;
+  DataRow getRow(int index) {
     final _user = _data![index];
-    return DataRow.byIndex(
-      index: index,
+    return DataRow(
       onSelectChanged: (value) {
         constant.questId = _user.gameId!;
         Get.toNamed(SurveyDetail.route);
       },
       cells: [
-        DataCell(Padding(
-          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: Text((_user.description!.length < 10)
-              ? '${_user.description}'
-              : _user.description!.substring(0, 10)),
+        DataCell(Row(
+          children: [
+            SvgPicture.asset(
+              "icons/media_file.svg",
+              height: 30,
+              width: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+              child: Text((_user.description!.length < 10)
+                  ? _user.description!
+                  : _user.description!.substring(0, 10)),
+            ),
+          ],
         )),
-        DataCell(Text('${_user.startTime.toString()}')),
-        DataCell(Text('${_user.endTime.toString()}')),
+        DataCell(
+            Text(_user.startTime == null ? "" : _user.startTime.toString())),
+        DataCell(Text(
+          _user.endTime == null ? "" : _user.endTime!.toString(),
+        )),
       ],
     );
   }
-
-  @override
-  bool get isRowCountApproximate => false;
-
-  @override
-  int get rowCount => _data!.length;
-
-  @override
-  int get selectedRowCount => 0;
 }
