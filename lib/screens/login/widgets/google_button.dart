@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/controllers/GoogleLogin.dart';
 import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
+import 'package:mtp_choice_web/constants.dart' as constant;
 
 class GoogleButton extends StatefulWidget {
   @override
@@ -37,7 +38,12 @@ class _GoogleButtonState extends State<GoogleButton> {
             if (result != "") {
               await login(result.toString()).then((value) async {
                 if (value.contains("Success")) {
-                  Navigator.of(context).pushNamed(FirstScreen.route);
+                  if (constant.log == 'log') {
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        '/', (Route<dynamic> route) => false);
+                  } else {
+                    Navigator.of(context).pushNamed(FirstScreen.route);
+                  }
                 } else {
                   Get.snackbar('Alert', 'Tài khoản chưa được đăng ký',
                       duration: Duration(seconds: 4),

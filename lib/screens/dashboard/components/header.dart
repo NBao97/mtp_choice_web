@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/login/login_page.dart';
 import 'package:provider/provider.dart';
-
+import 'package:mtp_choice_web/constants.dart' as constant;
 import '../../../constants.dart';
 
 class Header extends StatelessWidget {
@@ -40,6 +41,12 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> _signOut() async {
+      await FirebaseAuth.instance.signOut().then((value) =>
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              LoginPage.route, (Route<dynamic> route) => false));
+    }
+
     return Container(
       margin: EdgeInsets.only(left: defaultPadding),
       padding: EdgeInsets.symmetric(
@@ -77,7 +84,14 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ],
                   onChanged: (value) {
-                    Navigator.of(context).pushNamed(LoginPage.route);
+                    _signOut();
+                    constant.key = constant.id = constant.userName =
+                        constant.order = constant.search = constant.email =
+                            constant.questId =
+                                constant.image = constant.status = '';
+                    constant.form = 'text';
+                    constant.log = 'log';
+                    constant.page = 1;
                   }),
             ),
         ],

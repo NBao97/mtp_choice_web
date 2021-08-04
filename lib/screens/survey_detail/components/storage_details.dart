@@ -20,7 +20,7 @@ class StarageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Thống kê số câu hỏi",
+            "Thống kê khảo sát",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,

@@ -20,29 +20,29 @@ class StarageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Thống kê số câu hỏi",
+            "Khảo sát",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: defaultPadding),
-          StorageInfoCard(
-            svgSrc: "icons/Documents.svg",
-            title: "top100",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/media.svg",
-            title: "tài khoản mới",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "Tài khoản bị ẩn",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "Tài khoản admin",
-          ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/Documents.svg",
+          //   title: "top100",
+          // ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/media.svg",
+          //   title: "tài khoản mới",
+          // ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/folder.svg",
+          //   title: "Tài khoản bị ẩn",
+          // ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/folder.svg",
+          //   title: "Tài khoản admin",
+          // ),
         ],
       ),
     );

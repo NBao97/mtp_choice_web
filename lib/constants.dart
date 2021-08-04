@@ -17,3 +17,4 @@ String email = '';
 String questId = '';
 String image = '';
 String status = "";
+String log = '';

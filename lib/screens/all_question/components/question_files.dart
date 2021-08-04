@@ -138,7 +138,7 @@ class _MyAppState extends State<QuestionFiles> {
                           label: Text("Nội dung"),
                         ),
                         DataColumn(
-                          label: Text("độ khó"),
+                          label: Text("Độ khó"),
                         ),
                         DataColumn(
                           label: Text("Người tạo"),
@@ -211,7 +211,7 @@ class DTS extends DataTableSource {
           ),
         ),
         DataCell(Text(
-          '${_user.difficulty}',
+          _user.difficulty == null ? '0' : '${_user.difficulty}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
