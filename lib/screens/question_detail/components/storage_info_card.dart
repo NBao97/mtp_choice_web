@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -21,7 +19,7 @@ Future<dynamic> approveQuestion() async {
       'accept': 'text/plain',
       'Authorization': 'Bearer ' + constant.key,
     },
-    body: "[\"" + qusId + "\"]",
+    body: "[" + qusId + "]",
   );
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,

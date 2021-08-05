@@ -16,13 +16,14 @@ class RemindMain extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Thông báo",
+            "Danh sách feedback",
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(
               width: double.infinity,
               child: SingleChildScrollView(
                 reverse: true,
+                scrollDirection: Axis.vertical,
                 child: Flexible(
                   child: RemindersList(),
                 ),

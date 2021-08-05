@@ -17,7 +17,7 @@ class _MyAppState extends State<UpdateProfile> {
   }
 
   DateTime currentDate = DateTime.now();
-  final GlobalKey<FormState> _formKey =
+  GlobalKey<FormState> _formKey =
       new GlobalKey<FormState>(debugLabel: '_UpUserSFormState');
 
   final paddingTopForm,

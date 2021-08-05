@@ -20,7 +20,7 @@ Future<String> createQuestion(String title, String creator, int difficult,
                 "questionContent": title,
                 "difficulty": difficult,
                 "creator": "",
-                "status": "APPROVED",
+                "status": 1,
                 "answers": [
                   {
                     "answerContent": list.first,

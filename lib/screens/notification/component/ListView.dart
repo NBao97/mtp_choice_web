@@ -1,114 +1,178 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'Reminder.dart';
+import 'package:mtp_choice_web/constants.dart' as constant;
+import 'package:http/http.dart' as http;
 
-class RemindersList extends StatelessWidget {
-  final List<Reminder> remind = [
-    Reminder(
-      type: "icons/xd_file.svg",
-      name: "XD File",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "01-03-2021",
-      author: "Nguyễn văn A",
-    ),
-    Reminder(
-      type: "icons/Figma_file.svg",
-      name: "Figma File",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "27-02-2021",
-      author: "Nguyễn văn A",
-    ),
-    Reminder(
-      type: "icons/doc_file.svg",
-      name: "Documetns",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "23-02-2021",
-      author: "Nguyễn văn A",
-    ),
-    Reminder(
-      type: "icons/sound_file.svg",
-      name: "Sound File",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "21-02-2021",
-      author: "Nguyễn văn A",
-    ),
-    Reminder(
-      type: "icons/media_file.svg",
-      name: "Media File",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "23-02-2021",
-      author: "Dương thị D",
-    ),
-    Reminder(
-      type: "icons/pdf_file.svg",
-      name: "Sals PDF",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "25-02-2021",
-      author: "Đoàn văn C",
-    ),
-    Reminder(
-      type: "icons/excle_file.svg",
-      name: "Excel File",
-      description: "as xjkas njxnsajxmoasmxoas",
-      date: "25-02-2021",
-      author: "Nguyễn văn B",
-    ),
-  ];
+class Feedbacks {
+  final String? feedbackId, content, created, status;
+
+  Feedbacks({
+    this.feedbackId,
+    this.content,
+    this.created,
+    this.status,
+  });
+
+  factory Feedbacks.fromJson(Map<String, dynamic> json) {
+    return Feedbacks(
+      feedbackId: json['feedbackId'],
+      content: json['content'],
+      created: json['created'],
+      status: json['status'],
+    );
+  }
+}
+
+class Reminder {
+  final String? userId;
+  final List<Feedbacks>? fed;
+  Reminder({
+    this.userId,
+    this.fed,
+  });
+  factory Reminder.fromJson(Map<String, dynamic> json) {
+    return Reminder(
+      userId: json['userId'],
+      fed: json['feedbacks'] != null
+          ? json['feedbacks']
+              .map<Feedbacks>((data) => Feedbacks.fromJson(data))
+              .toList()
+          : null,
+    );
+  }
+}
+
+class Remind {
+  final String? userId, content, created;
+  Remind({this.userId, this.content, this.created});
+}
+
+Future<List<Reminder>> fetchFeedback(String orderBy) async {
+  String quesUrl = '';
+
+  if (orderBy != '') {
+    quesUrl = 'https://api.wimln.ml/api/Feedback?excludeRemoved=false';
+  } else {
+    quesUrl = 'https://api.wimln.ml/api/Feedback?excludeRemoved=true';
+  }
+
+  final response = await http.get(
+    Uri.parse('https://api.wimln.ml/api/Feedback?excludeRemoved=true'),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
+  print(response.statusCode.toString());
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    List jsonResponse = json.decode(response.body);
+
+    return jsonResponse.map((data) => new Reminder.fromJson(data)).toList();
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load feedback');
+  }
+}
+
+class RemindersList extends StatefulWidget {
+  const RemindersList({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<RemindersList> {
+  late Future<List<Reminder>> futureAlbum;
+
+  @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchFeedback(constant.order);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        separatorBuilder: (context, index) {
-          return Divider();
-        },
-        shrinkWrap: true,
-        itemCount: remind.length,
-        itemBuilder: (context, index) {
-          final item = remind[index];
-          return ListTile(
-              hoverColor: Colors.blueAccent,
-              title: Row(
-                children: [
-                  SvgPicture.asset(
-                    item.type!,
-                    height: 30.0,
-                  ),
-                  Text(item.name!)
-                ],
-              ),
-              subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Row(
+    return FutureBuilder<List<Reminder>>(
+        future: futureAlbum,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Reminder>? remind = snapshot.data;
+            List<Remind>? rem = [];
+            for (Reminder re in remind!) {
+              if (re.fed != null) {
+                for (Feedbacks fe in re.fed!) {
+                  rem.add(
+                    Remind(
+                        userId: re.userId,
+                        content: fe.content,
+                        created: fe.created),
+                  );
+                }
+              }
+            }
+            return ListView.separated(
+                separatorBuilder: (context, index) {
+                  return Divider();
+                },
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: rem.length,
+                itemBuilder: (context, index) {
+                  final item = rem[index];
+                  return ListTile(
+                      hoverColor: Colors.blueAccent,
+                      title: Row(
+                        children: [
+                          Icon(
+                            Icons.person_outline_rounded,
+                            color: Colors.white54,
+                            size: 30,
+                          ),
+                          Text(item.userId!)
+                        ],
+                      ),
+                      subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Padding(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "Nội dung: ",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                )),
                             Text(
-                              "Description: ",
+                              item.content == null ? '' : item.content!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.white),
+                            ),
+                            Text(
+                              item.created == null ? '' : item.created!,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
-                            Text(
-                              item.description!,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
-                            ),
-                          ],
-                        )),
-                    Text(
-                      item.date!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    Text(
-                      item.author!,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
-                    )
-                  ]));
+                          ]));
+                });
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
         });
   }
 }

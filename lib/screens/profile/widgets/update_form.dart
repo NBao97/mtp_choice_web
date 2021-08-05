@@ -21,7 +21,7 @@ class _MyAppState extends State<UpdateProfile> {
     futureAlbum = fetchUser();
   }
 
-  final GlobalKey<FormState> _formUpUs =
+  GlobalKey<FormState> _formUpUs =
       new GlobalKey<FormState>(debugLabel: '_UpUsFormState');
 
   final paddingTopForm,

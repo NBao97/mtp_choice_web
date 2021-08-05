@@ -20,6 +20,7 @@ class _AddFormState extends State<AcceptForm> {
   @override
   void initState() {
     super.initState();
+    print(qus);
     futureData = fetchUserAll(qus);
   }
 
@@ -56,13 +57,13 @@ class _AddFormState extends State<AcceptForm> {
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
-    final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-      primary: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      ),
-      backgroundColor: Colors.blue,
-    );
+    // final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+    //   primary: Colors.white,
+    //   shape: const RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //   ),
+    //   backgroundColor: Colors.blue,
+    // );
     return FutureBuilder<List<Users>>(
         future: futureData,
         builder: (context, snapshot) {
@@ -85,7 +86,7 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.userId!,
+                      Text(quest.userId == null ? '' : quest.userId!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
@@ -97,7 +98,7 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.email!,
+                      Text(quest.email == null ? '' : quest.email!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
@@ -133,7 +134,10 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.bonusPoint!.toString(),
+                      Text(
+                          quest.bonusPoint == null
+                              ? ''
+                              : quest.bonusPoint!.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
@@ -153,7 +157,7 @@ class _AddFormState extends State<AcceptForm> {
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-                      if (quest.his!.isNotEmpty)
+                      if (quest.his != null)
                         for (Histories hi in quest.his!)
                           Container(
                               child: Column(
@@ -167,7 +171,10 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(hi.score.toString(),
+                                Text(
+                                    hi.score != null
+                                        ? '0'
+                                        : hi.score.toString(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: fontSizeTextFormField)),
@@ -181,7 +188,10 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(hi.timeFinished!,
+                                Text(
+                                    hi.timeFinished == null
+                                        ? ''
+                                        : hi.timeFinished!,
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: fontSizeTextFormField)),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/controllers/MenuController.dart';
-import 'package:mtp_choice_web/models/SurveyFile.dart';
 import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
 import 'package:mtp_choice_web/screens/accept/accept_question.dart';
 import 'package:mtp_choice_web/screens/add/add_question.dart';

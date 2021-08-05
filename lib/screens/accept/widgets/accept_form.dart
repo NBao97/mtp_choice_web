@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AcceptForm extends StatelessWidget {
-  final GlobalKey<FormState> _formAc =
+  GlobalKey<FormState> _formAc =
       new GlobalKey<FormState>(debugLabel: '_AcceptFormState');
   // final _usernameController = TextEditingController();
 

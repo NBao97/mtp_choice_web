@@ -14,7 +14,7 @@ class AcceptForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AcceptForm> {
-  final GlobalKey<FormState> _formQus =
+  GlobalKey<FormState> _formQus =
       new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
   // final _usernameController = TextEditingController();
   late Future<List<QuestionFile>> futureData;

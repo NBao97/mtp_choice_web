@@ -184,8 +184,7 @@ class MyData extends DataTableSource {
     return DataRow(
       onSelectChanged: (value) {
         constant.questId = _user.userId!;
-        // print(constant.questId);
-        // print(_user.userId!);
+
         Get.toNamed(UserDetail.route);
       },
       cells: [

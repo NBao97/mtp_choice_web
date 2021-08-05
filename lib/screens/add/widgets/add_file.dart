@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
 
 class AddFile extends StatelessWidget {
-  final GlobalKey<FormState> _formAd =
+  GlobalKey<FormState> _formAd =
       new GlobalKey<FormState>(debugLabel: '_AddBFormState');
   // final _usernameController = TextEditingController();
 

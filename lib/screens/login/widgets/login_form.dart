@@ -5,7 +5,7 @@ import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'google_button.dart';
 
 class LoginForm extends StatelessWidget {
-  final GlobalKey<FormState> _formLog =
+  GlobalKey<FormState> _formLog =
       new GlobalKey<FormState>(debugLabel: '_LoginFormState');
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();

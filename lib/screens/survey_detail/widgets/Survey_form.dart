@@ -58,13 +58,13 @@ class _AddFormState extends State<AcceptForm> {
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
-    final ButtonStyle flatButtonStyle = TextButton.styleFrom(
-      primary: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-      ),
-      backgroundColor: Colors.blue,
-    );
+    // final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+    //   primary: Colors.white,
+    //   shape: const RoundedRectangleBorder(
+    //     borderRadius: BorderRadius.all(Radius.circular(5.0)),
+    //   ),
+    //   backgroundColor: Colors.blue,
+    // );
     return FutureBuilder<List<Survey>>(
         future: futureData,
         builder: (context, snapshot) {
