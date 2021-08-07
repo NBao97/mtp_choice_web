@@ -145,10 +145,10 @@ class _MyAppState extends State<RemindersList> {
             print("page length" + remind!.length.toString());
 
             List<Remind>? rem = [];
-            for (Reminder re in remind!) {
+            for (Reminder re in remind) {
               if (re.fed != null) {
                 for (Feedbacks fe in re.fed!) {
-                  rem!.add(
+                  rem.add(
                     Remind(
                         feedbackId: fe.feedbackId,
                         userId: re.userId,
@@ -158,7 +158,7 @@ class _MyAppState extends State<RemindersList> {
                 }
               }
             }
-            if (page > 1 && rem!.length == 0) {
+            if (page > 1 && rem.length == 0) {
               return SizedBox(
                 width: double.infinity, // <-- match_parent
                 child: ElevatedButton(
@@ -188,7 +188,7 @@ class _MyAppState extends State<RemindersList> {
                   },
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: rem!.length == 0 ? 0 : rem!.length,
+                  itemCount: rem.length == 0 ? 0 : rem.length,
                   itemBuilder: (context, index) {
                     final item = rem![index];
                     return ListTile(

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'flutter web login ui',
-        initialRoute: "/home",
+        initialRoute: "/login",
         routes: {
           LoginPage.route: (context) => LoginPage(),
           FirstScreen.route: (context) => FirstScreen(),

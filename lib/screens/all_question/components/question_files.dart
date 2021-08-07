@@ -183,7 +183,9 @@ class DTS extends DataTableSource {
       index: index,
       onSelectChanged: (value) {
         constant.questId = _user.questionId!;
-
+        if (constant.email == _user.creator) {
+          constant.order = 'update';
+        }
         Get.toNamed(QuestionDetail.route);
       },
       cells: [

@@ -5,6 +5,7 @@ import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/question_detail/widgets/quest_form.dart';
 import 'package:mtp_choice_web/screens/dashboard/components/header.dart';
 import 'package:mtp_choice_web/screens/main/components/side_menu.dart';
+import 'package:mtp_choice_web/screens/question_detail/widgets/update_quest.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -78,7 +79,7 @@ class DashboardScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
                       //     0.02, 0.012),
-                      AcceptForm(),
+                      (order == 'update') ? AddForm() : AcceptForm(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),
