@@ -223,7 +223,7 @@ class _MyAppState extends State<RemindersList> {
                                     }
                                   }).catchError((error) {
                                     Get.snackbar(
-                                        'Alert', 'Nhập thất bại' + error,
+                                        'Thông báo', 'Nhập thất bại' + error,
                                         duration: Duration(seconds: 4),
                                         animationDuration:
                                             Duration(milliseconds: 800),

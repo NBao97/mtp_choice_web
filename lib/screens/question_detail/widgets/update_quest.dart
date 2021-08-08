@@ -29,7 +29,6 @@ class _AddFormState extends State<AddForm> {
     super.initState();
     _futureQuestion =
         fetchQuestion(constant.page, constant.order, constant.questId);
-    constant.questId = '';
   }
 
   final paddingTopForm,
@@ -397,7 +396,7 @@ class _AddFormState extends State<AddForm> {
                                       answerId,
                                       answerContent)
                                   .catchError((error) {
-                                Get.snackbar('Alert', 'Nhập thất bại',
+                                Get.snackbar('Thông báo', 'Nhập thất bại',
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),

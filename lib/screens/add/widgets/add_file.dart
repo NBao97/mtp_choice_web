@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
 
-class AddFile extends StatelessWidget {
-  GlobalKey<FormState> _formAd =
-      new GlobalKey<FormState>(debugLabel: '_AddBFormState');
-  // final _usernameController = TextEditingController();
-
+class AddFile extends StatefulWidget {
   final paddingTopForm,
       fontSizeTextField,
       fontSizeTextFormField,
@@ -35,12 +31,21 @@ class AddFile extends StatelessWidget {
       this.errorFormMessage);
 
   @override
+  _AddFileState createState() => _AddFileState();
+}
+
+class _AddFileState extends State<AddFile> {
+  GlobalKey<FormState> _formAd =
+      new GlobalKey<FormState>(debugLabel: '_AddBFormState');
+
+  @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
-      padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
+      padding:
+          EdgeInsets.fromLTRB(widget.widthButton, 15, widget.widthButton, 15),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
@@ -52,13 +57,13 @@ class AddFile extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
                 right: widthSize * 0.05,
-                top: heightSize * paddingTopForm),
+                top: heightSize * widget.paddingTopForm),
             child: Column(children: <Widget>[
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu hỏi',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               ElevatedButton(
@@ -72,12 +77,12 @@ class AddFile extends StatelessWidget {
                   }
                 },
               ),
-              SizedBox(height: heightSize * spaceBetweenFields),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Đáp án',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -101,22 +106,23 @@ class AddFile extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 1',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -140,22 +146,23 @@ class AddFile extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.clear_sharp,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 2',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -179,22 +186,23 @@ class AddFile extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.clear_sharp,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 3',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -218,17 +226,18 @@ class AddFile extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.clear_sharp,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFieldAndButton),
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
@@ -236,7 +245,7 @@ class AddFile extends StatelessWidget {
                   },
                   child: Text('Thêm câu hỏi',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeButton,
+                          fontSize: widthSize * widget.fontSizeButton,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               SizedBox(height: heightSize * 0.01),

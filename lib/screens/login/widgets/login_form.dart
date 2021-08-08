@@ -4,12 +4,7 @@ import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 
 import 'google_button.dart';
 
-class LoginForm extends StatelessWidget {
-  GlobalKey<FormState> _formLog =
-      new GlobalKey<FormState>(debugLabel: '_LoginFormState');
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-
+class LoginForm extends StatefulWidget {
   final paddingTopForm,
       fontSizeTextField,
       fontSizeTextFormField,
@@ -36,12 +31,25 @@ class LoginForm extends StatelessWidget {
       this.errorFormMessage);
 
   @override
+  _LoginFormState createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  GlobalKey<FormState> _formLog =
+      new GlobalKey<FormState>(debugLabel: '_LoginFormState');
+
+  final _usernameController = TextEditingController();
+
+  final _passwordController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
-      padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
+      padding:
+          EdgeInsets.fromLTRB(widget.widthButton, 15, widget.widthButton, 15),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
@@ -53,13 +61,13 @@ class LoginForm extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
                 right: widthSize * 0.05,
-                top: heightSize * paddingTopForm),
+                top: heightSize * widget.paddingTopForm),
             child: Column(children: <Widget>[
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('UserID',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -82,22 +90,23 @@ class LoginForm extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.person,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Password',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               TextFormField(
@@ -121,17 +130,18 @@ class LoginForm extends StatelessWidget {
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
+                        fontSize: widthSize * widget.errorFormMessage),
                     prefixIcon: Icon(
                       Icons.lock,
-                      size: widthSize * iconFormSize,
+                      size: widthSize * widget.iconFormSize,
                       color: Colors.white,
                     ),
                   ),
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFieldAndButton),
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
@@ -141,15 +151,15 @@ class LoginForm extends StatelessWidget {
                   },
                   child: Text('Login',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeButton,
+                          fontSize: widthSize * widget.fontSizeButton,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
-              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+              SizedBox(height: heightSize * widget.spaceBetweenFieldAndButton),
               GoogleButton(),
               SizedBox(height: heightSize * 0.01),
               Text('Quên mật Khẩu?',
                   style: TextStyle(
-                      fontSize: widthSize * fontSizeForgotPassword,
+                      fontSize: widthSize * widget.fontSizeForgotPassword,
                       fontFamily: 'Poppins',
                       color: Colors.white))
             ])));

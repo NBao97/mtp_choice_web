@@ -52,7 +52,7 @@ Future<List<Users>> fetchUserAll(String questId) async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-    print(jsonResponse);
+
     return jsonResponse.map((data) => new Users.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,
@@ -61,8 +61,8 @@ Future<List<Users>> fetchUserAll(String questId) async {
   }
 }
 
-Future<String> patchUser(
-    String userId, String phone, String password, String fullname) async {
+Future<String> patchUser(String userId, String phone, String email,
+    String password, String fullname, String image) async {
   final response = await http.put(
     Uri.parse('https://api.wimln.ml/api/User'),
     headers: <String, String>{
@@ -71,7 +71,9 @@ Future<String> patchUser(
     },
     body: jsonEncode(<String, String>{
       "userId": userId,
+      "email": email,
       "phone": phone,
+      "image": image,
       "password": password,
       "fullname": fullname,
     }),
@@ -80,7 +82,7 @@ Future<String> patchUser(
     // If the server did return a 200 OK response,
     // then parse the JSON.
 
-    Get.snackbar('Alert', 'Nhập thành công',
+    Get.snackbar('Thông báo', 'Nhập thành công',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,

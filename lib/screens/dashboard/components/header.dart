@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
 import 'package:mtp_choice_web/screens/login/login_page.dart';
@@ -42,9 +44,9 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<void> _signOut() async {
-      await FirebaseAuth.instance.signOut().then((value) =>
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              LoginPage.route, (Route<dynamic> route) => false));
+      await FirebaseAuth.instance
+          .signOut()
+          .then((value) => Get.off(LoginPage.route));
     }
 
     return Container(
@@ -85,9 +87,9 @@ class ProfileCard extends StatelessWidget {
                   ],
                   onChanged: (value) {
                     _signOut();
-                    constant.key = constant.id = constant.userName =
-                        constant.order = constant.search = constant.email =
-                            constant.questId =
+                    constant.key = constant.imageUrl = constant.id =
+                        constant.userName = constant.order = constant.search =
+                            constant.email = constant.questId =
                                 constant.image = constant.status = '';
                     constant.form = 'text';
                     constant.log = 'log';

@@ -1,58 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:mtp_choice_web/controllers/MenuController.dart';
-import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
-import 'package:mtp_choice_web/screens/accept/accept_question.dart';
-import 'package:mtp_choice_web/screens/add/add_question.dart';
-import 'package:mtp_choice_web/screens/all_question/all_question.dart';
-import 'package:mtp_choice_web/screens/all_survey/all_survey.dart';
-import 'package:mtp_choice_web/screens/all_user/all_user.dart';
-import 'package:mtp_choice_web/screens/login/login_page.dart';
-import 'package:mtp_choice_web/screens/notification/notification.dart';
-import 'package:mtp_choice_web/screens/profile/update_screen.dart';
-import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
-import 'package:mtp_choice_web/screens/survey_detail/survey_detail.dart';
-import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
+import 'package:mtp_choice_web/screens/dashboard/dashboard_screen.dart';
+
 import 'package:provider/provider.dart';
 
-import '../../constants.dart';
-import 'main_screen.dart';
+import '../../responsive.dart';
+import 'components/side_menu.dart';
 
 class FirstScreen extends StatelessWidget {
-  static const String route = "/home";
+  static const String route = "/first";
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData.light().copyWith(
-        scaffoldBackgroundColor: bgColor,
-        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
-      ),
-      initialRoute: "/",
-      routes: {
-        QuestionDetail.route: (context) => QuestionDetail(),
-        LoginPage.route: (context) => LoginPage(),
-        AllUserScreen.route: (context) => AllUserScreen(),
-        AddQuestion.route: (context) => AddQuestion(),
-        AcceptQuestion.route: (context) => AcceptQuestion(),
-        NotificationScreen.route: (context) => NotificationScreen(),
-        UpdateScreen.route: (context) => UpdateScreen(),
-        AllQuestionScreen.route: (context) => AllQuestionScreen(),
-        UserDetail.route: (context) => UserDetail(),
-        AllSurveyScreen.route: (context) => AllSurveyScreen(),
-        SurveyDetail.route: (context) => SurveyDetail(),
-        CreateSurvey.route: (context) => CreateSurvey(),
-      },
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => MenuController(),
-          ),
-        ],
-        child: MainScreen(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MenuController(),
+        ),
+      ],
+      child: MainScreen(),
+    );
+  }
+}
+
+class MainScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      key: context.read<MenuController>().scaffoldKey,
+      drawer: SideMenu(),
+      body: SafeArea(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // We want this side menu only for large screen
+            if (Responsive.isDesktop(context))
+              Expanded(
+                // default flex = 1
+                // and it takes 1/6 part of the screen
+                child: SideMenu(),
+              ),
+            Expanded(
+              // It takes 5/6 part of the screen
+              flex: 5,
+              child: DashboardScreen(),
+            ),
+          ],
+        ),
       ),
     );
   }

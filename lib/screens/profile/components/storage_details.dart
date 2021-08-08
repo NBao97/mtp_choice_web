@@ -32,7 +32,9 @@ class StarageDetails extends StatelessWidget {
                   ),
                   SizedBox(height: defaultPadding),
                   StorageInfoCard(
-                    svgSrc: constant.image,
+                    svgSrc: constant.imageUrl == ''
+                        ? constant.image
+                        : constant.imageUrl,
                   ),
                   FileUploadButton(),
                 ],

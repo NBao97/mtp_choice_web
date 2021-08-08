@@ -1,8 +1,10 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
+import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);
@@ -87,7 +89,7 @@ class _MyAppState extends State<UpdateProfile> {
 
             (snapshot.data!.image == null)
                 ? constant.image =
-                    'https://cdn.icon-icons.com/icons2/1380/PNG/512/vcsconflicting_93497.png'
+                    'https://www.freeiconspng.com/thumbs/question-mark-icon/orange-question-mark-icon-png-clip-art-30.png'
                 : constant.image = snapshot.data!.image!;
 
             return Form(
@@ -329,14 +331,35 @@ class _MyAppState extends State<UpdateProfile> {
                       TextButton(
                           style: flatButtonStyle,
                           onPressed: () async {
+                            if (constant.imageUrl.isNotEmpty) {
+                              print('ok1');
+                              final TaskSnapshot? avaSnapshot =
+                                  await uploadFile(context, constant.imageUrl);
+
+                              if (avaSnapshot == null) {
+                                Get.snackbar('Thông báo', 'Lưu hình thất bại',
+                                    duration: Duration(seconds: 4),
+                                    animationDuration:
+                                        Duration(milliseconds: 800),
+                                    snackPosition: SnackPosition.TOP,
+                                    backgroundColor: Colors.white);
+                              } else {
+                                if (avaSnapshot.state == TaskState.success) {
+                                  constant.image =
+                                      await avaSnapshot.ref.getDownloadURL();
+                                }
+                              }
+                            }
                             if (_formUpUs.currentState!.validate()) {
                               patchUser(
                                       _usernameController.text,
                                       _phoneController.text,
+                                      snapshot.data!.email!,
                                       _passwordController.text,
-                                      _fullnameController.text)
+                                      _fullnameController.text,
+                                      constant.image)
                                   .catchError((error) {
-                                Get.snackbar('Alert', 'Nhập thất bại',
+                                Get.snackbar('Thông báo', 'Nhập thất bại',
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),

@@ -332,7 +332,7 @@ class _AddFormState extends State<AddForm> {
                                   _answers2Controller.text,
                                   _answers3Controller.text)
                               .catchError((error) {
-                            Get.snackbar('Alert', 'Nhập thất bại',
+                            Get.snackbar('Thông báo', 'Nhập thất bại',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,

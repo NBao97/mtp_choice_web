@@ -32,7 +32,6 @@ Future<List<Survey>> fetchSurAll(String questId) async {
 
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Game/khao-sat?gameIds=' + questId;
-    constant.questId = '';
   }
   // orderBy = '';
   // } else if (orderBy == 'first page') {
@@ -184,14 +183,14 @@ Future<String> postSurvey(String name, String des, String start, String end,
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    Get.snackbar('Alert', 'Nhập thành công',
+    Get.snackbar('Thông báo', 'Nhập thành công',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.white);
     return 'Success';
   } else {
-    Get.snackbar('Alert', 'Nhập thất bại ' + response.statusCode.toString(),
+    Get.snackbar('Thông báo', 'Nhập thất bại ' + response.statusCode.toString(),
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,

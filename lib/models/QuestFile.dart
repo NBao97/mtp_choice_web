@@ -49,7 +49,7 @@ Future<String> createQuestion(String title, String creator, int difficult,
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    Get.snackbar('Alert', 'Nhập thành công',
+    Get.snackbar('Thông báo', 'Nhập thành công',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,
@@ -58,7 +58,7 @@ Future<String> createQuestion(String title, String creator, int difficult,
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    Get.snackbar('Alert', 'Nhập thất bại',
+    Get.snackbar('Thông báo', 'Nhập thất bại',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,
@@ -69,7 +69,6 @@ Future<String> createQuestion(String title, String creator, int difficult,
 
 Future<String> updateQuestion(
     String qus, String title, int difficult, List id, List content) async {
-  print(qus);
   final response = await http.put(
       Uri.parse('https://api.wimln.ml/api/Question/' + qus),
       headers: <String, String>{
@@ -94,7 +93,7 @@ Future<String> updateQuestion(
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    Get.snackbar('Alert', 'Nhập thành công',
+    Get.snackbar('Thông báo', 'Nhập thành công',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,
@@ -103,7 +102,7 @@ Future<String> updateQuestion(
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    Get.snackbar('Alert', 'Nhập thất bại',
+    Get.snackbar('Thông báo', 'Nhập thất bại',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),
         snackPosition: SnackPosition.TOP,

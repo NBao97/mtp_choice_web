@@ -213,17 +213,6 @@ class _AddFormState extends State<AcceptForm> {
                                     height:
                                         heightSize * spaceBetweenFieldAndButton)
                               ]))
-                      // TextButton(
-                      //     style: flatButtonStyle,
-                      //     onPressed: () async {
-                      //       if (_formSur.currentState!.validate()) {}
-                      //     },
-                      //     child: Text('reset password',
-                      //         style: TextStyle(
-                      //             fontSize: widthSize * fontSizeButton,
-                      //             fontFamily: 'Poppins',
-                      //             color: Colors.white))),
-                      // SizedBox(height: heightSize * 0.01),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

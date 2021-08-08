@@ -6,6 +6,8 @@ import 'package:mtp_choice_web/screens/all_user/all_user.dart';
 import 'package:mtp_choice_web/screens/notification/notification.dart';
 import 'package:mtp_choice_web/screens/profile/update_screen.dart';
 
+import '../FirstScreen.dart';
+
 class SideMenu extends StatelessWidget {
   const SideMenu({
     Key? key,
@@ -23,8 +25,7 @@ class SideMenu extends StatelessWidget {
             title: "Home",
             svgSrc: IconData(58136, fontFamily: 'MaterialIcons'),
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/', (Route<dynamic> route) => false);
+              Navigator.of(context).pushNamed(FirstScreen.route);
             },
           ),
 

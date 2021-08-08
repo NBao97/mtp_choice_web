@@ -33,6 +33,29 @@ Future<dynamic> approveQuestion() async {
   }
 }
 
+Future<dynamic> arejectQuestion() async {
+  String url = 'https://api.wimln.ml/api/Question/reject';
+  final response = await http.put(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'accept': 'text/plain',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+    body: "[" + qusId + "]",
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    refQuest();
+    return "Success";
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    return response.statusCode.toString();
+  }
+}
+
 Future<String> refQuest() async {
   final response = await http.put(
     Uri.parse('https://api.wimln.ml/api/Question/refresh-altp-questions'),
@@ -52,6 +75,8 @@ Future<String> refQuest() async {
   }
 }
 
+String til = '';
+
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
@@ -62,14 +87,21 @@ class StorageInfoCard extends StatelessWidget {
 
   void checkStatus() {
     if (title == 'APPROVED') {
+      til = 'Đã chấp nhận';
       colorS = Colors.blue;
       icon = Icons.check_circle_outline;
     } else if (title == 'NOT_APPROVED') {
-      colorS = Colors.red;
-      icon = Icons.close_outlined;
+      til = 'Chờ duyệt';
+      colorS = Colors.yellowAccent;
+      icon = Icons.help_outline;
     } else if (title == 'KHAO_SAT_QUESTION') {
+      til = 'Câu hỏi khảo sát';
       colorS = Colors.blueAccent;
       icon = Icons.question_answer_outlined;
+    } else if (title == 'Xóa') {
+      til = 'Xóa';
+      colorS = Colors.red;
+      icon = Icons.close_outlined;
     } else {
       colorS = Colors.white;
       icon = Icons.help_outline;
@@ -78,7 +110,7 @@ class StorageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    constant.questId = '';
+
     checkStatus();
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),
@@ -112,14 +144,14 @@ class StorageInfoCard extends StatelessWidget {
                         if (value != "") {
                           if (value.contains("Success")) {
                             Get.snackbar(
-                                'Alert', 'Cập nhật trạng thái thành công',
+                                'Thông báo', 'Cập nhật trạng thái thành công',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.white);
                           } else {
-                            Get.snackbar(
-                                'Alert', 'Cập nhật trạng thái thất bại' + value,
+                            Get.snackbar('Thông báo',
+                                'Cập nhật trạng thái thất bại' + value,
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
@@ -128,7 +160,7 @@ class StorageInfoCard extends StatelessWidget {
                         }
                       }).catchError((error) {
                         Get.snackbar(
-                            'Alert', 'Cập nhật trạng thái thất bại' + error,
+                            'Thông báo', 'Cập nhật trạng thái thất bại' + error,
                             duration: Duration(seconds: 4),
                             animationDuration: Duration(milliseconds: 800),
                             snackPosition: SnackPosition.TOP,
@@ -136,7 +168,7 @@ class StorageInfoCard extends StatelessWidget {
                       });
                     },
                     child: Text(
-                      title,
+                      til,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

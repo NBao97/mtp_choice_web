@@ -1,11 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AcceptForm extends StatelessWidget {
-  GlobalKey<FormState> _formAc =
-      new GlobalKey<FormState>(debugLabel: '_AcceptFormState');
-  // final _usernameController = TextEditingController();
-
+class AcceptForm extends StatefulWidget {
   final paddingTopForm,
       fontSizeTextField,
       fontSizeTextFormField,
@@ -32,6 +28,14 @@ class AcceptForm extends StatelessWidget {
       this.errorFormMessage);
 
   @override
+  _AcceptFormState createState() => _AcceptFormState();
+}
+
+class _AcceptFormState extends State<AcceptForm> {
+  GlobalKey<FormState> _formAc =
+      new GlobalKey<FormState>(debugLabel: '_AcceptFormState');
+
+  @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
@@ -48,63 +52,68 @@ class AcceptForm extends StatelessWidget {
             padding: EdgeInsets.only(
                 left: widthSize * 0.05,
                 right: widthSize * 0.05,
-                top: heightSize * paddingTopForm),
+                top: heightSize * widget.paddingTopForm),
             child: Column(children: <Widget>[
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu hỏi:',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               Text('nội dung câu hỏi',
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Đáp án',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               Text('nội dung Đáp án',
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 1',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               Text('nội dung câu sai 1',
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 2',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               Text('nội dung câu sai 2',
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFields),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Câu sai 3',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: widthSize * widget.fontSizeTextField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
               Text('nội dung câu sai 3',
                   style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                      color: Colors.white,
+                      fontSize: widget.fontSizeTextFormField)),
+              SizedBox(height: heightSize * widget.spaceBetweenFieldAndButton),
               Row(children: <Widget>[
                 SizedBox(
                   width: 50,

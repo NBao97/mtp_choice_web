@@ -38,14 +38,9 @@ class _GoogleButtonState extends State<GoogleButton> {
             if (result != "") {
               await login(result.toString()).then((value) async {
                 if (value.contains("Success")) {
-                  if (constant.log == 'log') {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        '/', (Route<dynamic> route) => false);
-                  } else {
-                    Navigator.of(context).pushNamed(FirstScreen.route);
-                  }
+                  Get.toNamed(FirstScreen.route);
                 } else {
-                  Get.snackbar('Alert', 'Tài khoản chưa được đăng ký',
+                  Get.snackbar('Thông báo', 'Tài khoản chưa được đăng ký',
                       duration: Duration(seconds: 4),
                       animationDuration: Duration(milliseconds: 800),
                       snackPosition: SnackPosition.TOP,
