@@ -16,6 +16,7 @@ final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
   ),
 );
 dynamic bytes;
+String name = '';
 
 class FileUploadButton extends StatelessWidget {
   @override
@@ -27,14 +28,22 @@ class FileUploadButton extends StatelessWidget {
         XFile? _getImg = await pickImg();
 
         if (_getImg != null) {
-          constant.imageUrl = _getImg.path;
           bytes = await _getImg.readAsBytes();
-
-          Get.snackbar('Thông báo', 'Nhập hình thành công',
-              duration: Duration(seconds: 4),
-              animationDuration: Duration(milliseconds: 800),
-              snackPosition: SnackPosition.TOP,
-              backgroundColor: Colors.white);
+          name = _getImg.name;
+          if (bytes.lengthInBytes < 10485760) {
+            constant.imageUrl = _getImg.path;
+            Get.snackbar('Thông báo', 'Nhập hình thành công',
+                duration: Duration(seconds: 4),
+                animationDuration: Duration(milliseconds: 800),
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.white);
+          } else {
+            Get.snackbar('Thông báo', 'Nhập quá dung lượng 10mb',
+                duration: Duration(seconds: 4),
+                animationDuration: Duration(milliseconds: 800),
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.white);
+          }
         } else {
           Get.snackbar('Thông báo', 'Nhập thất bại',
               duration: Duration(seconds: 4),
@@ -72,5 +81,5 @@ Future<XFile?> pickImg() async {
 
 Future<XFile?> _pickByGallary() async {
   final ImagePicker _picker = ImagePicker();
-  return await _picker.pickImage(source: ImageSource.gallery);
+  return await _picker.pickVideo(source: ImageSource.gallery);
 }

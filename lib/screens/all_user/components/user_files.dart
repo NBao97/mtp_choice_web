@@ -72,7 +72,7 @@ class _MyAppState extends State<UserFiles> {
                         });
                       }.call,
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: "Tìm kiếm người dùng",
                         hintStyle: TextStyle(color: Colors.white),
                         fillColor: constant.secondaryColor,
                         filled: true,

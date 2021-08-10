@@ -23,7 +23,14 @@ class _MyAppState extends State<RecentFiles> {
     constant.questId = '';
     constant.page = 1;
     constant.order = 'first page';
+    constant.imageUrl = '';
+    constant.image = '';
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -84,6 +91,9 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
   return DataRow(
     onSelectChanged: (value) {
       constant.questId = fileInfo.questionId!;
+      if (constant.email == fileInfo.creator) {
+        constant.order = 'update';
+      }
       Get.toNamed(QuestionDetail.route);
     },
     cells: [

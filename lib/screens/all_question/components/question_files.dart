@@ -33,7 +33,16 @@ class _MyAppState extends State<QuestionFiles> {
     constant.order = '';
     constant.page = 1;
     constant.questId = '';
+    constant.imageUrl = '';
+
+    constant.image = '';
+
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   final TextEditingController _controller = TextEditingController();
@@ -73,6 +82,8 @@ class _MyAppState extends State<QuestionFiles> {
                           ),
                         ),
                         onPressed: () {
+                          constant.imageUrl = '';
+                          constant.form = 'text';
                           Get.toNamed(AddQuestion.route);
                         },
                         icon: Icon(Icons.add),
@@ -91,7 +102,7 @@ class _MyAppState extends State<QuestionFiles> {
                         setState(() {});
                       },
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: "Tìm kiếm câu hỏi",
                         hintStyle: TextStyle(color: Colors.white),
                         fillColor: constant.secondaryColor,
                         filled: true,

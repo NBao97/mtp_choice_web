@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:mtp_choice_web/controllers/VideoController.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
+import 'package:video_player/video_player.dart';
 
 class AddForm extends StatefulWidget {
   AddForm({Key? key}) : super(key: key);
@@ -24,11 +26,11 @@ String ques = '';
 
 class _AddFormState extends State<AddForm> {
   Future<List<QuestionFile>>? _futureQuestion;
+  final String qus = constant.questId;
   @override
   void initState() {
     super.initState();
-    _futureQuestion =
-        fetchQuestion(constant.page, constant.order, constant.questId);
+    _futureQuestion = fetchQuestion(constant.page, constant.order, qus);
   }
 
   final paddingTopForm,
@@ -156,6 +158,17 @@ class _AddFormState extends State<AddForm> {
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
+                      if (quest.imageUrl != null)
+                        SizedBox(
+                          height: 300,
+                          width: 400,
+                          child: Image.network(quest.imageUrl!),
+                        ),
+                      if (quest.videoUrl != null)
+                        VideoItems(
+                          videoPlayerController:
+                              VideoPlayerController.network(quest.videoUrl!),
+                        ),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Đáp án',
@@ -202,6 +215,10 @@ class _AddFormState extends State<AddForm> {
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
+                      VideoItems(
+                        videoPlayerController: VideoPlayerController.network(
+                            "https://firebasestorage.googleapis.com/v0/b/mcqfb-56f80.appspot.com/o/avatar%2F28b77b90-f92d-11eb-9173-5996192c2a36?alt=media&token=193a3e46-0566-4413-99af-07ee59d5e88a"),
+                      ),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu sai 1',

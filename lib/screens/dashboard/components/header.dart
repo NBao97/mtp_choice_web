@@ -75,13 +75,13 @@ class ProfileCard extends StatelessWidget {
                   iconSize: 20,
                   elevation: 16,
                   hint: Text(
-                    "Nguyễn Hoàng Ngọc Bảo",
+                    constant.userName,
                     style: TextStyle(color: Colors.white),
                   ),
                   style: const TextStyle(color: Colors.white),
                   items: [
                     DropdownMenuItem<String>(
-                      child: Text("Log out"),
+                      child: Text("Đăng xuất"),
                       value: "Log out",
                     ),
                   ],

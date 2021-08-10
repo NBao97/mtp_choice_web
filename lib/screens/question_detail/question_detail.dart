@@ -79,6 +79,7 @@ class DashboardScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
                       //     0.02, 0.012),
+
                       (order == 'update') ? AddForm() : AcceptForm(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),

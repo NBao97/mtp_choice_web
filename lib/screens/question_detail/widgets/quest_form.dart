@@ -1,7 +1,11 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
+import 'package:mtp_choice_web/controllers/VideoController.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import '../../../constants.dart' as constant;
+import 'package:video_player/video_player.dart';
 
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
@@ -18,11 +22,12 @@ class _AddFormState extends State<AcceptForm> {
       new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
   // final _usernameController = TextEditingController();
   late Future<List<QuestionFile>> futureData;
-  String qus = constant.questId;
+  final String qus = constant.questId;
 
   @override
   void initState() {
     super.initState();
+    print('??2' + constant.page.toString() + constant.order + constant.questId);
     futureData = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -61,7 +66,9 @@ class _AddFormState extends State<AcceptForm> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final QuestionFile quest = snapshot.data!.single;
+
             constant.status = quest.status!;
+
             return Form(
                 key: _formQus,
                 child: Padding(
@@ -81,6 +88,18 @@ class _AddFormState extends State<AcceptForm> {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
+                      SizedBox(height: heightSize * spaceBetweenFields),
+                      if (quest.imageUrl != null)
+                        SizedBox(
+                          height: 300,
+                          width: 400,
+                          child: Image.network(quest.imageUrl!),
+                        ),
+                      if (quest.videoUrl != null)
+                        VideoItems(
+                          videoPlayerController:
+                              VideoPlayerController.network(quest.videoUrl!),
+                        ),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,

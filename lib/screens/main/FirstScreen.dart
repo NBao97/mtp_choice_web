@@ -10,7 +10,7 @@ import '../../responsive.dart';
 import 'components/side_menu.dart';
 
 class FirstScreen extends StatelessWidget {
-  static const String route = "/first";
+  static const String route = "/home";
   @override
   Widget build(BuildContext context) {
     return MultiProvider(

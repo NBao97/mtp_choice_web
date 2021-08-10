@@ -6,12 +6,12 @@ import 'package:http/http.dart' as http;
 Future<List<QuestionFile>> fetchQuestion(
     int page, String orderBy, String questId) async {
   String quesUrl = '';
-
+  print(questId);
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
 
     orderBy = '';
-  } else if (orderBy == 'first page') {
+  } else if (questId == '' && orderBy == 'first page') {
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=false&PageNumber=1&PageSize=4';
     constant.order = '';
@@ -21,7 +21,7 @@ Future<List<QuestionFile>> fetchQuestion(
             page.toString() +
             '&PageSize=10';
   }
-
+  print("cai nay la url " + quesUrl);
   final response = await http.get(
     Uri.parse(quesUrl),
     headers: <String, String>{
@@ -63,7 +63,12 @@ class Answers {
 }
 
 class QuestionFile {
-  final String? questionContent, creator, questionId, status;
+  final String? questionContent,
+      creator,
+      questionId,
+      status,
+      imageUrl,
+      videoUrl;
   final int? difficulty;
   final List<Answers>? ans;
   QuestionFile(
@@ -71,7 +76,9 @@ class QuestionFile {
       this.difficulty,
       this.creator,
       this.questionId,
+      this.imageUrl,
       this.ans,
+      this.videoUrl,
       this.status});
 
   factory QuestionFile.fromJson(Map<String, dynamic> json) {
@@ -81,6 +88,8 @@ class QuestionFile {
       creator: json['creator'],
       questionId: json['questionId'],
       status: json['status'],
+      imageUrl: json['imageUrl'],
+      videoUrl: json['videoUrl'],
       ans: json['answers'] != null
           ? json['answers']
               .map<Answers>((data) => Answers.fromJson(data))

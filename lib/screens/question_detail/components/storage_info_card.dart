@@ -10,49 +10,48 @@ Color colorS = Colors.blue;
 IconData icon = Icons.check_circle_outline;
 final String qusId = constant.questId;
 
-Future<dynamic> approveQuestion() async {
-  String url = 'https://api.wimln.ml/api/Question/approve';
-  final response = await http.put(
-    Uri.parse(url),
-    headers: <String, String>{
-      'Content-Type': 'application/json ; charset=UTF-8',
-      'accept': 'text/plain',
-      'Authorization': 'Bearer ' + constant.key,
-    },
-    body: "[" + qusId + "]",
-  );
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    refQuest();
-    return "Success";
-  } else {
-    // If   the server did not return a 200 OK response,
-    // then throw an exception.
-    return response.statusCode.toString();
-  }
-}
+Future<dynamic> approveQuestion(String til) async {
+  String url = '';
+  if (til == 'Xóa') {
+    url = 'https://api.wimln.ml/api/Question/reject';
 
-Future<dynamic> arejectQuestion() async {
-  String url = 'https://api.wimln.ml/api/Question/reject';
-  final response = await http.put(
-    Uri.parse(url),
-    headers: <String, String>{
-      'Content-Type': 'application/json ; charset=UTF-8',
-      'accept': 'text/plain',
-      'Authorization': 'Bearer ' + constant.key,
-    },
-    body: "[" + qusId + "]",
-  );
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    refQuest();
-    return "Success";
+    final response = await http.delete(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json ; charset=UTF-8',
+        'accept': 'text/plain',
+        'Authorization': 'Bearer ' + constant.key,
+      },
+      body: "[\"" + qusId + "\"]",
+    );
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      return "Success";
+    } else {
+      // If   the server did not return a 200 OK response,
+      // then throw an exception.
+      return response.statusCode.toString();
+    }
   } else {
-    // If   the server did not return a 200 OK response,
-    // then throw an exception.
-    return response.statusCode.toString();
+    url = 'https://api.wimln.ml/api/Question/approve';
+    final response = await http.put(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Content-Type': 'application/json ; charset=UTF-8',
+        'accept': 'text/plain',
+        'Authorization': 'Bearer ' + constant.key,
+      },
+      body: "[\"" + qusId + "\"]",
+    );
+    if (response.statusCode == 200) {
+      return "Success";
+    } else {
+      // If   the server did not return a 200 OK response,
+      // then throw an exception.
+      return response.statusCode.toString();
+    }
   }
 }
 
@@ -110,7 +109,6 @@ class StorageInfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     checkStatus();
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),
@@ -140,7 +138,7 @@ class StorageInfoCard extends StatelessWidget {
                       primary: bgColor,
                     ),
                     onPressed: () async {
-                      await approveQuestion().then((value) async {
+                      await approveQuestion(title).then((value) async {
                         if (value != "") {
                           if (value.contains("Success")) {
                             Get.snackbar(

@@ -20,6 +20,8 @@ class _MyAppState extends State<UpdateProfile> {
   @override
   void initState() {
     super.initState();
+    constant.imageUrl = '';
+    constant.image = '';
     futureAlbum = fetchUser();
   }
 
@@ -228,7 +230,7 @@ class _MyAppState extends State<UpdateProfile> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              Icons.contact_phone_outlined,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -271,7 +273,7 @@ class _MyAppState extends State<UpdateProfile> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              Icons.security_outlined,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -318,7 +320,7 @@ class _MyAppState extends State<UpdateProfile> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              Icons.security_update_warning,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -332,7 +334,6 @@ class _MyAppState extends State<UpdateProfile> {
                           style: flatButtonStyle,
                           onPressed: () async {
                             if (constant.imageUrl.isNotEmpty) {
-                              print('ok1');
                               final TaskSnapshot? avaSnapshot =
                                   await uploadFile(context, constant.imageUrl);
 

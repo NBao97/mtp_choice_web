@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
-import 'package:mtp_choice_web/screens/add/components/upload_button.dart';
+import 'package:mtp_choice_web/screens/add/components/upload_button_vi.dart';
+
 import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
 
 import '../../../constants.dart';
 
-class AddFile extends StatefulWidget {
-  AddFile({Key? key}) : super(key: key);
+class AddFileVi extends StatefulWidget {
+  AddFileVi({Key? key}) : super(key: key);
 
   @override
   _AddFormState createState() {
@@ -21,9 +22,9 @@ class AddFile extends StatefulWidget {
   }
 }
 
-class _AddFormState extends State<AddFile> {
+class _AddFormState extends State<AddFileVi> {
   GlobalKey<FormState> _formAdf =
-      new GlobalKey<FormState>(debugLabel: '_AddFFormStateF');
+      new GlobalKey<FormState>(debugLabel: '_AddFFormStateVi');
   final _questionContentController = TextEditingController();
   // final _difficultyController = TextEditingController(text: "0");
   final _answersCorrectController = TextEditingController();
@@ -343,6 +344,7 @@ class _AddFormState extends State<AddFile> {
                               await uploadFile(context, constant.imageUrl);
 
                           if (avaSnapshot == null) {
+                            print('something wrong');
                             Get.snackbar('Thông báo', 'Lưu hình thất bại',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
@@ -355,7 +357,7 @@ class _AddFormState extends State<AddFile> {
                             }
 
                             if (_formAdf.currentState!.validate()) {
-                              createQuestion(
+                              createQuestionVi(
                                       _questionContentController.text,
                                       constant.userName,
                                       _value,

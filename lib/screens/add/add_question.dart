@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import '../../constants.dart';
 import 'components/storage_details.dart';
+import 'widgets/add_file_video.dart';
 
 class AddQuestion extends StatelessWidget {
   static const String route = "/AddQuestion";
@@ -79,8 +80,9 @@ class DashboardScreen extends StatelessWidget {
                       SizedBox(height: defaultPadding),
                       constant.form == 'text'
                           ? AddForm()
-                          : AddFile(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02,
-                              0.014, 0.02, 0.012),
+                          : (constant.form == 'picture')
+                              ? AddFile()
+                              : AddFileVi(),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),

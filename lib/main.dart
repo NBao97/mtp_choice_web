@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
-import 'package:mtp_choice_web/screens/accept/accept_question.dart';
+
 import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/all_question/all_question.dart';
 import 'package:mtp_choice_web/screens/all_survey/all_survey.dart';
@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
           QuestionDetail.route: (context) => QuestionDetail(),
           AllUserScreen.route: (context) => AllUserScreen(),
           AddQuestion.route: (context) => AddQuestion(),
-          AcceptQuestion.route: (context) => AcceptQuestion(),
           NotificationScreen.route: (context) => NotificationScreen(),
           UpdateScreen.route: (context) => UpdateScreen(),
           AllQuestionScreen.route: (context) => AllQuestionScreen(),

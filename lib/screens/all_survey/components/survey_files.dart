@@ -29,7 +29,6 @@ class _MyAppState extends State<SurveyFiles> {
   @override
   void initState() {
     super.initState();
-    constant.questId = '';
     _controller.clear();
     futureData = fetchSurAll(constant.questId);
   }
@@ -90,7 +89,7 @@ class _MyAppState extends State<SurveyFiles> {
                       });
                     }.call,
                     decoration: InputDecoration(
-                      hintText: "Search",
+                      hintText: "Tìm kiếm khảo sát",
                       hintStyle: TextStyle(color: Colors.white),
                       fillColor: constant.secondaryColor,
                       filled: true,

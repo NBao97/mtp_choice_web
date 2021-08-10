@@ -48,16 +48,13 @@ class FileUploadButton extends StatelessWidget {
 
 Future<fb_storage.TaskSnapshot?> uploadFile(context, String imgPath) async {
   try {
-    print('ok2');
     fb_storage.FirebaseStorage storage = fb_storage.FirebaseStorage.instance;
 
     if (imgPath.isNotEmpty) {
-      print('ok3');
       var uniqueId = Uuid().v1();
 
       fb_storage.TaskSnapshot av =
           await storage.ref().child("avatar/$uniqueId").putData(bytes);
-      print('ok5 ');
       return av;
     }
     return null;

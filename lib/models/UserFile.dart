@@ -30,7 +30,9 @@ Future<List<Users>> fetchUserAll(String questId) async {
   // int page, String orderBy,
   String quesUrl = '';
   if (questId != '') {
-    quesUrl = 'https://api.wimln.ml/api/User/many?userIds=' + questId;
+    quesUrl = 'https://api.wimln.ml/api/User/many?userIds=' +
+        questId +
+        '&includeHistory=true';
   }
   // orderBy = '';
   // } else if (orderBy == 'first page') {
@@ -96,15 +98,21 @@ Future<String> patchUser(String userId, String phone, String email,
 }
 
 class Game {
-  final String? gameDescription;
-
+  final String? gameDescription, gameId, time;
+  final int? status;
   Game({
     this.gameDescription,
+    this.gameId,
+    this.status,
+    this.time,
   });
 
   factory Game.fromJson(Map<String, dynamic> json) {
     return Game(
       gameDescription: json['gameDescription'],
+      status: json['status'],
+      time: json['time'],
+      gameId: json['gameId'],
     );
   }
 }
@@ -136,9 +144,7 @@ class Histories {
       totalQuestion: json['totalQuestion'],
       numOfCorrect: json['numOfCorrect'],
       status: json['status'],
-      game: json['game'] != null
-          ? json['game'].map<Game>((data) => Game.fromJson(data))
-          : null,
+      game: json['game'] != null ? Game.fromJson(json['game']) : null,
     );
   }
 }

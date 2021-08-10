@@ -15,13 +15,12 @@ class AcceptForm extends StatefulWidget {
 
 class _AddFormState extends State<AcceptForm> {
   late Future<List<Users>> futureData;
-  String qus = constant.questId;
 
   @override
   void initState() {
     super.initState();
-    print(qus);
-    futureData = fetchUserAll(qus);
+
+    futureData = fetchUserAll(constant.questId);
   }
 
   // final GlobalKey<FormState> _formSur =
@@ -172,7 +171,8 @@ class _AddFormState extends State<AcceptForm> {
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
                                 Text(
-                                    hi.score != null
+                                    hi.score != null ||
+                                            hi.score.toString() == 'null'
                                         ? '0'
                                         : hi.score.toString(),
                                     style: TextStyle(
@@ -195,20 +195,10 @@ class _AddFormState extends State<AcceptForm> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: fontSizeTextFormField)),
-                                SizedBox(
-                                    height: heightSize * spaceBetweenFields),
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('Tên game',
-                                        style: TextStyle(
-                                            fontSize:
-                                                widthSize * fontSizeTextField,
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white))),
-                                Text(hi.game!.gameDescription!,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: fontSizeTextFormField)),
+                                Divider(
+                                  thickness: 5.0,
+                                  color: Colors.blueAccent,
+                                ),
                                 SizedBox(
                                     height:
                                         heightSize * spaceBetweenFieldAndButton)

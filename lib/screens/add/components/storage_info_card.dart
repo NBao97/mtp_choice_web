@@ -22,6 +22,7 @@ class StorageInfoCard extends StatelessWidget {
       ),
       onPressed: () {
         constant.form = title;
+
         Get.back();
         Get.toNamed(AddQuestion.route);
       },
