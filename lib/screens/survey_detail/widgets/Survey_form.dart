@@ -259,6 +259,13 @@ class Chart extends StatelessWidget {
                   showTitle: true,
                   radius: 12,
                 ),
+                PieChartSectionData(
+                  color: Colors.deepOrange,
+                  value: 100 - (nlist.first + nlist.last + nlist[1] + nlist[2]),
+                  showTitle: true,
+                  title: 'Not Started',
+                  radius: 10,
+                ),
               ],
             ),
           ),
