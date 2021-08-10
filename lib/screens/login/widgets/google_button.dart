@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/controllers/GoogleLogin.dart';
+import 'package:mtp_choice_web/screens/login/login_page.dart';
 import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 
@@ -37,8 +38,20 @@ class _GoogleButtonState extends State<GoogleButton> {
           await signInWithGoogle().then((result) async {
             if (result != "") {
               await login(result.toString()).then((value) async {
+                print(value);
                 if (value.contains("Success")) {
                   Get.toNamed(FirstScreen.route);
+                } else if (value.contains("Permiss")) {
+                  Get.snackbar(
+                      'Thông báo', 'Bạn không có quyền truy cập trang này',
+                      duration: Duration(seconds: 4),
+                      animationDuration: Duration(milliseconds: 800),
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: Colors.white);
+                  constant.key = constant.imageUrl = constant.id =
+                      constant.userName = constant.order = constant.search =
+                          constant.email = constant.questId =
+                              constant.image = constant.status = '';
                 } else {
                   Get.snackbar('Thông báo', 'Tài khoản chưa được đăng ký',
                       duration: Duration(seconds: 4),

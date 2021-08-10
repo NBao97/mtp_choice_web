@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mtp_choice_web/constants.dart' as constant;
+import 'package:mtp_choice_web/models/UserFile.dart';
 
 Future<String> login(String title) async {
   final response = await http.post(
@@ -17,10 +18,12 @@ Future<String> login(String title) async {
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-
+    String res = '';
     constant.key = response.body.toString();
+    await fetchUser().then((value) =>
+        (constant.id != "ADMIN") ? res = 'Permiss' : res = 'Success');
 
-    return 'Success ';
+    return res;
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.

@@ -180,7 +180,7 @@ class _MyAppState extends State<Reminders> {
                       controller: _controller,
                       onSubmitted: (value) {
                         setState(() {
-                          dataSearch = rem!
+                          dataSearch = rem
                               .where((user) => user.userId!.contains(value))
                               .toList();
                         });
@@ -198,7 +198,7 @@ class _MyAppState extends State<Reminders> {
                         suffixIcon: InkWell(
                           onTap: () {
                             setState(() {
-                              dataSearch = rem!
+                              dataSearch = rem
                                   .where((user) =>
                                       user.userId!.contains(_controller.text))
                                   .toList();
@@ -248,11 +248,11 @@ class _MyAppState extends State<Reminders> {
                                 if (_controller.text == '') {
                                   if (_isAscending == true) {
                                     _isAscending = false;
-                                    rem!.sort((a, b) =>
+                                    rem.sort((a, b) =>
                                         a.created!.compareTo(b.created!));
                                   } else {
                                     _isAscending = true;
-                                    rem!.sort((a, b) =>
+                                    rem.sort((a, b) =>
                                         a.created!.compareTo(b.created!));
                                   }
                                 } else {

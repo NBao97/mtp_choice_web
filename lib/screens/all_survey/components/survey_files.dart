@@ -30,6 +30,7 @@ class _MyAppState extends State<SurveyFiles> {
   void initState() {
     super.initState();
     _controller.clear();
+    constant.questId = '';
     futureData = fetchSurAll(constant.questId);
   }
 

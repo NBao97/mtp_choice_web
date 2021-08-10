@@ -169,6 +169,7 @@ class _AddFormState extends State<AddForm> {
                           videoPlayerController:
                               VideoPlayerController.network(quest.videoUrl!),
                         ),
+                      SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Đáp án',
@@ -215,10 +216,6 @@ class _AddFormState extends State<AddForm> {
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      VideoItems(
-                        videoPlayerController: VideoPlayerController.network(
-                            "https://firebasestorage.googleapis.com/v0/b/mcqfb-56f80.appspot.com/o/avatar%2F28b77b90-f92d-11eb-9173-5996192c2a36?alt=media&token=193a3e46-0566-4413-99af-07ee59d5e88a"),
-                      ),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu sai 1',
@@ -422,7 +419,7 @@ class _AddFormState extends State<AddForm> {
                               });
                             }
                           },
-                          child: Text('Thêm câu hỏi',
+                          child: Text('Cập nhật câu hỏi',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeButton,
                                   fontFamily: 'Poppins',

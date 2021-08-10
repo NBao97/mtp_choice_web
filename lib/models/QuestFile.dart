@@ -21,7 +21,7 @@ Future<String> createQuestion(String title, String creator, int difficult,
                 "difficulty": difficult,
                 "creator": "",
                 "imageUrl": constant.image,
-                "status": 0,
+                "status": 1,
                 "answers": [
                   {
                     "answerContent": list.first,
