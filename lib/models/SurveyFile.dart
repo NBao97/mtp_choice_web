@@ -61,6 +61,34 @@ Future<List<Survey>> fetchSurAll(String questId) async {
   }
 }
 
+Future<String> removeSurvey(String fed) async {
+  String url = 'https://api.wimln.ml/api/Game/khao-sat';
+  final response = await http.delete(
+    Uri.parse(url),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'accept': 'text/plain',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+    body: "[\"" + fed + "\"]",
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+
+    return "Success";
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    Get.snackbar('Tình trạng', 'Xóa thất bại',
+        duration: Duration(seconds: 4),
+        animationDuration: Duration(milliseconds: 800),
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.white);
+    return response.statusCode.toString();
+  }
+}
+
 Future<String> postSurvey(String name, String des, String start, String end,
     List ques, List ans) async {
   // jsonEncode(<String, dynamic>{

@@ -1,8 +1,10 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mtp_choice_web/controllers/VideoController.dart';
+import 'package:mtp_choice_web/models/QuestFile.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';
 import '../../../constants.dart' as constant;
 import 'package:video_player/video_player.dart';
@@ -23,11 +25,10 @@ class _AddFormState extends State<AcceptForm> {
   // final _usernameController = TextEditingController();
   late Future<List<QuestionFile>> futureData;
   final String qus = constant.questId;
-
+  int _value = 0;
   @override
   void initState() {
     super.initState();
-    print('??2' + constant.page.toString() + constant.order + constant.questId);
     futureData = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -61,6 +62,14 @@ class _AddFormState extends State<AcceptForm> {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
 
+    final ButtonStyle flatButtonStyle = TextButton.styleFrom(
+      primary: Colors.white,
+      padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      backgroundColor: Colors.blue,
+    );
     return FutureBuilder<List<QuestionFile>>(
         future: futureData,
         builder: (context, snapshot) {
@@ -68,12 +77,17 @@ class _AddFormState extends State<AcceptForm> {
             final QuestionFile quest = snapshot.data!.single;
 
             constant.status = quest.status!;
-
+            final _descriptController = TextEditingController(
+                text: quest.questionDescription == null
+                    ? ""
+                    : quest.questionDescription);
+            final _hintController = TextEditingController(
+                text: (quest.questionHint == null) ? '' : quest.questionHint);
             return Form(
                 key: _formQus,
                 child: Padding(
                     padding: EdgeInsets.only(
-                        left: widthSize * 0.05,
+                        left: widthSize * 0.04,
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
@@ -84,34 +98,133 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.questionContent!,
+                      TextFormField(
+                          readOnly: true,
+                          initialValue: quest.questionContent!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       if (quest.imageUrl != null)
-                        SizedBox(
-                          height: 300,
-                          width: 400,
-                          child: Image.network(quest.imageUrl!),
-                        ),
+                        if (quest.imageUrl != "")
+                          SizedBox(
+                            height: 300,
+                            width: 400,
+                            child: Image.network(quest.imageUrl!),
+                          ),
                       if (quest.videoUrl != null)
-                        VideoItems(
-                          videoPlayerController:
-                              VideoPlayerController.network(quest.videoUrl!),
-                        ),
+                        if (quest.videoUrl != "")
+                          VideoItems(
+                            videoPlayerController:
+                                VideoPlayerController.network(quest.videoUrl!),
+                          ),
+                      SizedBox(height: heightSize * spaceBetweenFields),
+                      DropdownButton(
+                          value: _value,
+                          items: [
+                            DropdownMenuItem(
+                              child: Text("Dễ"),
+                              value: 0,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Trung Bình"),
+                              value: 1,
+                            ),
+                            DropdownMenuItem(
+                              child: Text("Khó"),
+                              value: 2,
+                            )
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _value = int.parse(value.toString());
+
+                              // _answers1Controller.text = answerContent[1];
+                              // _answers1Controller.text = answerContent[1];
+                            });
+                          },
+                          hint: Text("Select item")),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Độ khó',
+                          child: Text('Chỉ dẫn',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(
-                          quest.difficulty == null
-                              ? "0"
-                              : quest.difficulty!.toString(),
+                      TextFormField(
+                          controller: _hintController,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'không thể để trống Chỉ dẫn';
+                            }
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * errorFormMessage),
+                            prefixIcon: Icon(
+                              Icons.find_in_page_outlined,
+                              size: widthSize * iconFormSize,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeTextFormField)),
+                      SizedBox(height: heightSize * spaceBetweenFields),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Khái quát',
+                              style: TextStyle(
+                                  fontSize: widthSize * fontSizeTextField,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          controller: _descriptController,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'không thể để trống Khái quát';
+                            }
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * errorFormMessage),
+                            prefixIcon: Icon(
+                              Icons.description_outlined,
+                              size: widthSize * iconFormSize,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
@@ -123,7 +236,10 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text((quest.creator == null) ? "" : quest.creator!,
+                      TextFormField(
+                          readOnly: true,
+                          initialValue:
+                              (quest.creator == null) ? "" : quest.creator!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
@@ -145,8 +261,9 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(
-                                    (ans.answerContent == null)
+                                TextFormField(
+                                    readOnly: true,
+                                    initialValue: (ans.answerContent == null)
                                         ? ''
                                         : ans.answerContent!,
                                     style: TextStyle(
@@ -157,6 +274,43 @@ class _AddFormState extends State<AcceptForm> {
                               ]))
                       else
                         Text('Something wong happen'),
+                      TextButton(
+                          style: flatButtonStyle,
+                          onPressed: () async {
+                            if (_formQus.currentState!.validate()) {
+                              updateQuestion(
+                                      quest.questionId!,
+                                      quest.questionContent!,
+                                      _value,
+                                      [
+                                        quest.ans!.first.questionId,
+                                        quest.ans![1].questionId,
+                                        quest.ans![2].questionId,
+                                        quest.ans![3].questionId
+                                      ],
+                                      [
+                                        quest.ans!.first.answerContent,
+                                        quest.ans![1].answerContent,
+                                        quest.ans![2].answerContent,
+                                        quest.ans![3].answerContent
+                                      ],
+                                      _hintController.text,
+                                      _descriptController.text)
+                                  .catchError((error) {
+                                Get.snackbar('Thông báo', 'Nhập thất bại',
+                                    duration: Duration(seconds: 4),
+                                    animationDuration:
+                                        Duration(milliseconds: 800),
+                                    snackPosition: SnackPosition.TOP,
+                                    backgroundColor: Colors.white);
+                              });
+                            }
+                          },
+                          child: Text('Cập nhật chỉ dẫn',
+                              style: TextStyle(
+                                  fontSize: widthSize * fontSizeButton,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

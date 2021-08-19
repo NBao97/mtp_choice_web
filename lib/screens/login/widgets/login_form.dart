@@ -81,11 +81,11 @@ class _LoginFormState extends State<LoginForm> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:  BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
@@ -121,11 +121,11 @@ class _LoginFormState extends State<LoginForm> {
                   obscureText: true,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:  BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(

@@ -21,8 +21,12 @@ class SideMenu extends StatelessWidget {
           DrawerHeader(
             child: Image.asset('images/mtp_logo.png'),
           ),
+          Divider(
+            color: Colors.white,
+            thickness: 2,
+          ),
           DrawerListTile(
-            title: "Home",
+            title: "Trang chủ",
             svgSrc: IconData(58136, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(FirstScreen.route);
@@ -50,14 +54,14 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Notification",
+            title: "Feedback",
             svgSrc: IconData(62002, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(NotificationScreen.route);
             },
           ),
           DrawerListTile(
-            title: "Profile",
+            title: "Thông tin người Dùng",
             svgSrc: IconData(62074, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(UpdateScreen.route);
@@ -91,17 +95,27 @@ class DrawerListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPressed,
-      horizontalTitleGap: 0.0,
-      leading: Icon(
-        svgSrc,
-        color: Colors.white54,
-        size: 16,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(color: Colors.white54),
+    return Container(
+      child: Column(
+        children: [
+          ListTile(
+            onTap: onPressed,
+            horizontalTitleGap: 0.0,
+            leading: Icon(
+              svgSrc,
+              color: Colors.white54,
+              size: 16,
+            ),
+            title: Text(
+              title,
+              style: TextStyle(color: Colors.white54),
+            ),
+          ),
+          Divider(
+            color: Colors.white,
+            thickness: 2,
+          ),
+        ],
       ),
     );
   }

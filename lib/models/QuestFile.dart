@@ -4,8 +4,16 @@ import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
-Future<String> createQuestion(String title, String creator, int difficult,
-    String rightAns, String as1, String as2, String as3) async {
+Future<String> createQuestion(
+    String title,
+    String creator,
+    int difficult,
+    String rightAns,
+    String as1,
+    String as2,
+    String as3,
+    String questionDescription,
+    String questionHint) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
 
@@ -20,28 +28,30 @@ Future<String> createQuestion(String title, String creator, int difficult,
                 "questionContent": title,
                 "difficulty": difficult,
                 "creator": "",
+                "questionDescription": questionDescription,
+                "questionHint": questionHint,
                 "imageUrl": constant.image,
-                "status": 1,
+                "status": 0,
                 "answers": [
                   {
                     "answerContent": list.first,
                     "isCorrect": list.first == rightAns ? true : false,
-                    "status": 1
+                    "status": 0
                   },
                   {
                     "answerContent": list.elementAt(1),
                     "isCorrect": list.elementAt(1) == rightAns ? true : false,
-                    "status": 1
+                    "status": 0
                   },
                   {
                     "answerContent": list.elementAt(2),
                     "isCorrect": list.elementAt(2) == rightAns ? true : false,
-                    "status": 1
+                    "status": 0
                   },
                   {
                     "answerContent": list.elementAt(3),
                     "isCorrect": list.elementAt(3) == rightAns ? true : false,
-                    "status": 1
+                    "status": 0
                   }
                 ],
               }) +
@@ -68,8 +78,16 @@ Future<String> createQuestion(String title, String creator, int difficult,
   }
 }
 
-Future<String> createQuestionVi(String title, String creator, int difficult,
-    String rightAns, String as1, String as2, String as3) async {
+Future<String> createQuestionVi(
+    String title,
+    String creator,
+    int difficult,
+    String rightAns,
+    String as1,
+    String as2,
+    String as3,
+    String questionDescription,
+    String questionHint) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
 
@@ -84,6 +102,8 @@ Future<String> createQuestionVi(String title, String creator, int difficult,
                 "questionContent": title,
                 "difficulty": difficult,
                 "creator": "",
+                "questionDescription": questionDescription,
+                "questionHint": questionHint,
                 "videoUrl": constant.image,
                 "status": 1,
                 "answers": [
@@ -133,8 +153,8 @@ Future<String> createQuestionVi(String title, String creator, int difficult,
   }
 }
 
-Future<String> updateQuestion(
-    String qus, String title, int difficult, List id, List content) async {
+Future<String> updateQuestion(String qus, String title, int difficult, List id,
+    List content, String questionDescription, String questionHint) async {
   final response = await http.put(
       Uri.parse('https://api.wimln.ml/api/Question/' + qus),
       headers: <String, String>{
@@ -144,6 +164,8 @@ Future<String> updateQuestion(
       body: jsonEncode(<String, dynamic>{
         "questionContent": title,
         "difficulty": difficult,
+        "questionDescription": questionDescription,
+        "questionHint": questionHint,
         "answers": [
           {
             "answerId": id.first,

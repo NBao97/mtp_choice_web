@@ -83,7 +83,10 @@ class _AddFormState extends State<AddForm> {
                 TextEditingController(text: quest.questionContent);
             // final _difficultyController = TextEditingController(text: "0");
             final _answersCorrectController = TextEditingController();
-
+            final _descriptController =
+                TextEditingController(text: quest.questionDescription);
+            final _hintController =
+                TextEditingController(text: quest.questionHint);
             for (Answers an in quest.ans!) {
               if (an.isCorrect == true) {
                 _answersCorrectController.text = an.answerContent!;
@@ -95,10 +98,13 @@ class _AddFormState extends State<AddForm> {
                 answerContent.add(an.answerContent);
               }
             }
-            print('it is answer' + _answersCorrectController.text);
+            if (_answersCorrectController.text == '') {
+              _answersCorrectController.text = answerContent[0];
+            }
 
             final _answers1Controller =
                 TextEditingController(text: answerContent[1]);
+
             final _answers2Controller =
                 TextEditingController(text: answerContent[2]);
             final _answers3Controller =
@@ -134,15 +140,15 @@ class _AddFormState extends State<AddForm> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -159,16 +165,18 @@ class _AddFormState extends State<AddForm> {
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       if (quest.imageUrl != null)
-                        SizedBox(
-                          height: 300,
-                          width: 400,
-                          child: Image.network(quest.imageUrl!),
-                        ),
+                        if (quest.imageUrl != "")
+                          SizedBox(
+                            height: 300,
+                            width: 400,
+                            child: Image.network(quest.imageUrl!),
+                          ),
                       if (quest.videoUrl != null)
-                        VideoItems(
-                          videoPlayerController:
-                              VideoPlayerController.network(quest.videoUrl!),
-                        ),
+                        if (quest.videoUrl != "")
+                          VideoItems(
+                            videoPlayerController:
+                                VideoPlayerController.network(quest.videoUrl!),
+                          ),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -192,15 +200,15 @@ class _AddFormState extends State<AddForm> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -238,15 +246,15 @@ class _AddFormState extends State<AddForm> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -284,15 +292,15 @@ class _AddFormState extends State<AddForm> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -330,15 +338,101 @@ class _AddFormState extends State<AddForm> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * errorFormMessage),
+                            prefixIcon: Icon(
+                              Icons.clear_sharp,
+                              size: widthSize * iconFormSize,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeTextFormField)),
+                      SizedBox(height: heightSize * spaceBetweenFields),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Chỉ dẫn',
+                              style: TextStyle(
+                                  fontSize: widthSize * fontSizeTextField,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          controller: _hintController,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'không thể để trống câu sai';
+                            }
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * errorFormMessage),
+                            prefixIcon: Icon(
+                              Icons.clear_sharp,
+                              size: widthSize * iconFormSize,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: fontSizeTextFormField)),
+                      SizedBox(height: heightSize * spaceBetweenFields),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Khái quát',
+                              style: TextStyle(
+                                  fontSize: widthSize * fontSizeTextField,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          controller: _descriptController,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'không thể để trống câu sai';
+                            }
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -408,7 +502,9 @@ class _AddFormState extends State<AddForm> {
                                       _questionContentController.text,
                                       _value,
                                       answerId,
-                                      answerContent)
+                                      answerContent,
+                                      _hintController.text,
+                                      _descriptController.text)
                                   .catchError((error) {
                                 Get.snackbar('Thông báo', 'Nhập thất bại',
                                     duration: Duration(seconds: 4),

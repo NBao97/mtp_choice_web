@@ -243,6 +243,7 @@ class MyData extends DataTableSource {
       cells: [
         DataCell(Row(
           children: [
+            Text("  "),
             SvgPicture.asset(
               "icons/media_file.svg",
               height: 30,

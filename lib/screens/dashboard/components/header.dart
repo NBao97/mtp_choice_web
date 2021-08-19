@@ -16,23 +16,40 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (!Responsive.isDesktop(context))
-          IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: context.read<MenuController>().controlMenu,
-          ),
-        if (!Responsive.isMobile(context))
-          Text(
-            "Home",
-            style: Theme.of(context).textTheme.headline6,
-          ),
-        if (!Responsive.isMobile(context))
-          Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
-        ProfileCard()
-      ],
-    );
+    return Container(
+        margin: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.indigo),
+            borderRadius: BorderRadius.all(Radius.circular(10.0) //
+                ),
+            color: constant.secondaryColor),
+        child: Row(
+          children: [
+            if (!Responsive.isDesktop(context))
+              IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
+                onPressed: context.read<MenuController>().controlMenu,
+              ),
+            if (!Responsive.isMobile(context))
+              Icon(
+                IconData(58136, fontFamily: 'MaterialIcons'),
+                color: Colors.white54,
+                size: 20,
+              ),
+            Text("    "),
+            Text(
+              "Home",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            if (!Responsive.isMobile(context))
+              Spacer(flex: Responsive.isDesktop(context) ? 2 : 1),
+            ProfileCard()
+          ],
+        ));
   }
 }
 
@@ -46,7 +63,7 @@ class ProfileCard extends StatelessWidget {
     Future<void> _signOut() async {
       await FirebaseAuth.instance
           .signOut()
-          .then((value) => Get.off(LoginPage.route));
+          .then((value) => Get.toNamed(LoginPage.route));
     }
 
     return Container(

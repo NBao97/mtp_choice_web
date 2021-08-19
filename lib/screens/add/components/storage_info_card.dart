@@ -18,7 +18,7 @@ class StorageInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: bgColor,
+        primary: Colors.black12,
       ),
       onPressed: () {
         constant.form = title;

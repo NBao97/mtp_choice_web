@@ -20,7 +20,7 @@ class StarageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Thống kê khảo sát",
+            "Lựa chọn hành động",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -29,19 +29,7 @@ class StarageDetails extends StatelessWidget {
           SizedBox(height: defaultPadding),
           StorageInfoCard(
             svgSrc: "icons/Documents.svg",
-            title: "top100",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/media.svg",
-            title: "tài khoản mới",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "Tài khoản bị ẩn",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "tài khoản admin",
+            title: "Xóa",
           ),
         ],
       ),

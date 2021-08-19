@@ -33,6 +33,9 @@ Future<List<Users>> fetchUserAll(String questId) async {
     quesUrl = 'https://api.wimln.ml/api/User/many?userIds=' +
         questId +
         '&includeHistory=true';
+  } else if (constant.order == "top100") {
+    quesUrl =
+        "https://api.wimln.ml/api/User/many?OrderBy=bonusPoint&IsAscending=false&PageNumber=1&PageSize=100";
   }
   // orderBy = '';
   // } else if (orderBy == 'first page') {
@@ -54,7 +57,7 @@ Future<List<Users>> fetchUserAll(String questId) async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
-
+    constant.order = "";
     return jsonResponse.map((data) => new Users.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,

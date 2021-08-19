@@ -71,11 +71,6 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      Text(
-                        "Nội dung feedback",
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      SizedBox(height: defaultPadding),
                       // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
                       //     0.02, 0.012),
                       RemindMain(),

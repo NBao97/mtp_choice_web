@@ -44,6 +44,7 @@ class _MyAppState extends State<UpdateProfile> {
       this.fontSizeForgotPassword,
       this.fontSizeSnackBar,
       this.errorFormMessage);
+
   @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
@@ -94,11 +95,12 @@ class _MyAppState extends State<UpdateProfile> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
@@ -113,8 +115,7 @@ class _MyAppState extends State<UpdateProfile> {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
+              SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Nội dung khảo sát',
@@ -133,11 +134,12 @@ class _MyAppState extends State<UpdateProfile> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
@@ -152,8 +154,7 @@ class _MyAppState extends State<UpdateProfile> {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
+              SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Ngày bắt đầu',
@@ -200,11 +201,12 @@ class _MyAppState extends State<UpdateProfile> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
@@ -219,8 +221,7 @@ class _MyAppState extends State<UpdateProfile> {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
+              SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text('Ngày kết thúc',
@@ -267,94 +268,12 @@ class _MyAppState extends State<UpdateProfile> {
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black87, width: 2)),
+                    enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(width: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.topLeft,
-                  child: Text('Câu hỏi',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Câu hỏi không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    question.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
+                    focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 2)),
                     labelStyle: TextStyle(color: Colors.white),
                     errorStyle: TextStyle(
@@ -369,965 +288,521 @@ class _MyAppState extends State<UpdateProfile> {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
+              SizedBox(
+                height: heightSize * spaceBetweenFields,
+              ),
               Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
+                  alignment: Alignment.center,
+                  child: Text('Bảng câu hỏi',
                       style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
+                          fontSize: fontSizeTextFormField,
                           fontFamily: 'Poppins',
                           color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
               Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Câu hỏi',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Câu hỏi không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    question.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Câu hỏi',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Câu hỏi không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    question.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Câu hỏi',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Câu hỏi không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    question.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Câu hỏi',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Câu hỏi không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    question.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              SizedBox(height: heightSize * spaceBetweenFields),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Lựa chọn',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  maxLines: null,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Lựa chọn không thể để trống';
-                    }
-                  },
-                  onSaved: (value) {
-                    answer.add(value);
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.red, width: 2)),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields),
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton(
+                      child: Text('Thêm câu hỏi',
+                          style: TextStyle(
+                              fontSize: fontSizeTextFormField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blueAccent,
+                      ),
+                      onPressed: () async {
+                        setState(() {});
+                      })),
+              SizedBox(
+                height: 610,
+                width: 650,
+                child: Container(
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueAccent, width: 2)),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Câu hỏi 1',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text('Câu hỏi',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Câu hỏi không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                question.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.chat_outlined,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                        ])),
+              ),
+              SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+              SizedBox(
+                height: 610,
+                width: 650,
+                child: Container(
+                    margin: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueAccent, width: 2)),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Câu hỏi 2',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          Align(
+                              alignment: Alignment.topLeft,
+                              child: Text('Câu hỏi',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Câu hỏi không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                question.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.chat_outlined,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                          Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Lựa chọn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                          TextFormField(
+                              maxLines: null,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'Lựa chọn không thể để trống';
+                                }
+                              },
+                              onSaved: (value) {
+                                answer.add(value);
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.check_circle_outline,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
+                          SizedBox(height: heightSize * spaceBetweenFields / 2),
+                        ])),
+              ),
               SizedBox(height: heightSize * spaceBetweenFieldAndButton),
               TextButton(
                   style: flatButtonStyle,

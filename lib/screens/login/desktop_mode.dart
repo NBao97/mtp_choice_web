@@ -13,7 +13,7 @@ class _DesktopModeState extends State<DesktopMode> {
     final double heightSize = MediaQuery.of(context).size.height;
 
     return Container(
-        color: Color.fromRGBO(191, 0, 255, 1),
+        color: Colors.blue[900],
         child: Center(
             child: Container(
                 height: heightSize * 0.8,

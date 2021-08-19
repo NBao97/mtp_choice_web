@@ -121,15 +121,15 @@ class _MyAppState extends State<UpdateProfile> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -170,15 +170,15 @@ class _MyAppState extends State<UpdateProfile> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -216,15 +216,15 @@ class _MyAppState extends State<UpdateProfile> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -259,15 +259,15 @@ class _MyAppState extends State<UpdateProfile> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,
@@ -306,15 +306,15 @@ class _MyAppState extends State<UpdateProfile> {
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                             fillColor: Colors.white,
-                            border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.red, width: 2)),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: UnderlineInputBorder(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.lightBlueAccent, width: 2)),
                             labelStyle: TextStyle(color: Colors.white),
                             errorStyle: TextStyle(
                                 color: Colors.white,

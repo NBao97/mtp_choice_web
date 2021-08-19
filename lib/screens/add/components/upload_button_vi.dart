@@ -23,7 +23,7 @@ class FileUploadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: raisedButtonStyle,
-      child: Text('UPLOAD FILE'),
+      child: Text('Hãy nhập video'),
       onPressed: () async {
         XFile? _getImg = await pickImg();
 
@@ -32,7 +32,7 @@ class FileUploadButton extends StatelessWidget {
           name = _getImg.name;
           if (bytes.lengthInBytes < 10485760) {
             constant.imageUrl = _getImg.path;
-            Get.snackbar('Thông báo', 'Nhập hình thành công',
+            Get.snackbar('Thông báo', 'Nhập video thành công',
                 duration: Duration(seconds: 4),
                 animationDuration: Duration(milliseconds: 800),
                 snackPosition: SnackPosition.TOP,

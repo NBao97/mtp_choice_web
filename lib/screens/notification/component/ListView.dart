@@ -11,11 +11,12 @@ import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 
 class Feedbacks {
-  final String? feedbackId, content, created, status;
+  final String? feedbackId, content, created, status, imageUrl;
 
   Feedbacks({
     this.feedbackId,
     this.content,
+    this.imageUrl,
     this.created,
     this.status,
   });
@@ -24,6 +25,7 @@ class Feedbacks {
     return Feedbacks(
       feedbackId: json['feedbackId'],
       content: json['content'],
+      imageUrl: json['imageUrl'],
       created: json['created'],
       status: json['status'],
     );
@@ -50,8 +52,13 @@ class Reminder {
 }
 
 class Remind {
-  final String? userId, content, created, feedbackId;
-  Remind({this.userId, this.content, this.created, this.feedbackId});
+  final String? userId, content, created, feedbackId, imageUrl;
+  Remind(
+      {this.userId,
+      this.content,
+      this.created,
+      this.feedbackId,
+      this.imageUrl});
 }
 
 Future<List<Reminder>> fetchFeedback() async {
@@ -151,6 +158,7 @@ class _MyAppState extends State<Reminders> {
                         feedbackId: fe.feedbackId,
                         userId: re.userId,
                         content: fe.content,
+                        imageUrl: fe.imageUrl,
                         created: fe.created),
                   );
                 }
@@ -231,7 +239,7 @@ class _MyAppState extends State<Reminders> {
                       sortAscending: _isAscending,
                       columns: [
                         DataColumn(
-                          label: Text("ID Người dùng"),
+                          label: Text("    ID Người dùng"),
                         ),
                         DataColumn(
                           label: Text("Nội dung"),
@@ -302,12 +310,31 @@ class MyData extends DataTableSource {
       onSelectChanged: (value) {
         Get.defaultDialog(
             title: 'Nội dung FeedBack',
-            middleText: _user.content!.toString(),
+            content: Container(
+              child: _user.imageUrl != null
+                  ? Container(
+                      height: 300,
+                      width: 400,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.network(
+                              _user.imageUrl!,
+                              height: 250,
+                            ),
+                            Text(_user.content!.toString())
+                          ]),
+                    )
+                  : Align(
+                      alignment: Alignment.center,
+                      child: Text(_user.content!.toString())),
+            ),
             backgroundColor: Colors.black87);
       },
       cells: [
         DataCell(Row(
           children: [
+            Text("  "),
             SvgPicture.asset(
               "icons/media_file.svg",
               height: 30,

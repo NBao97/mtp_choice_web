@@ -28,7 +28,7 @@ Future<dynamic> approveQuestion(String til) async {
       // If the server did return a 200 OK response,
       // then parse the JSON.
 
-      return "Success";
+      return "SuccessD";
     } else {
       // If   the server did not return a 200 OK response,
       // then throw an exception.
@@ -110,73 +110,76 @@ class StorageInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     checkStatus();
-    return Container(
-      margin: EdgeInsets.only(top: defaultPadding),
-      padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
-        color: bgColor.withOpacity(0.15),
-        border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(defaultPadding),
-        ),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: Colors.black12,
       ),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            size: 20,
-            color: colorS,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: bgColor,
-                    ),
-                    onPressed: () async {
-                      await approveQuestion(title).then((value) async {
-                        if (value != "") {
-                          if (value.contains("Success")) {
-                            Get.snackbar(
-                                'Thông báo', 'Cập nhật trạng thái thành công',
-                                duration: Duration(seconds: 4),
-                                animationDuration: Duration(milliseconds: 800),
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.white);
-                          } else {
-                            Get.snackbar('Thông báo',
-                                'Cập nhật trạng thái thất bại' + value,
-                                duration: Duration(seconds: 4),
-                                animationDuration: Duration(milliseconds: 800),
-                                snackPosition: SnackPosition.TOP,
-                                backgroundColor: Colors.white);
-                          }
-                        }
-                      }).catchError((error) {
-                        Get.snackbar(
-                            'Thông báo', 'Cập nhật trạng thái thất bại' + error,
-                            duration: Duration(seconds: 4),
-                            animationDuration: Duration(milliseconds: 800),
-                            snackPosition: SnackPosition.TOP,
-                            backgroundColor: Colors.white);
-                      });
-                    },
-                    child: Text(
-                      til,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  )
-                ],
-              ),
+      onPressed: () async {
+        await approveQuestion(title).then((value) async {
+          if (value != "") {
+            if (value == "Success") {
+              Get.snackbar('Thông báo', 'Cập nhật trạng thái thành công',
+                  duration: Duration(seconds: 4),
+                  animationDuration: Duration(milliseconds: 800),
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.white);
+            } else if (value == "SuccessD") {
+              Get.snackbar('Thông báo', 'Xóa thành công',
+                  duration: Duration(seconds: 4),
+                  animationDuration: Duration(milliseconds: 800),
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.white);
+            } else {
+              Get.snackbar('Thông báo', 'Cập nhật trạng thái thất bại' + value,
+                  duration: Duration(seconds: 4),
+                  animationDuration: Duration(milliseconds: 800),
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.white);
+            }
+          }
+        }).catchError((error) {
+          Get.snackbar('Thông báo', 'Cập nhật trạng thái thất bại' + error,
+              duration: Duration(seconds: 4),
+              animationDuration: Duration(milliseconds: 800),
+              snackPosition: SnackPosition.TOP,
+              backgroundColor: Colors.white);
+        });
+      },
+      child: Container(
+          margin: EdgeInsets.only(top: defaultPadding),
+          padding: EdgeInsets.all(defaultPadding),
+          decoration: BoxDecoration(
+            color: bgColor.withOpacity(0.15),
+            border: Border.all(width: 2, color: primaryColor.withOpacity(0.15)),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(defaultPadding),
             ),
           ),
-        ],
-      ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: colorS,
+              ),
+              Expanded(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: defaultPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        til,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }

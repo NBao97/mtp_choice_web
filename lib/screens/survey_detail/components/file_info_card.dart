@@ -62,13 +62,6 @@ class FileInfoCard extends StatelessWidget {
                     .caption!
                     .copyWith(color: Colors.white70),
               ),
-              // Text(
-              //   info.totalStorage!,
-              //   style: Theme.of(context)
-              //       .textTheme
-              //       .caption!
-              //       .copyWith(color: Colors.white),
-              // ),
             ],
           )
         ],

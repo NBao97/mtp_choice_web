@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/components/storage_info_card.dart';
 
 import '../../../constants.dart';
 
@@ -26,6 +27,7 @@ class StarageDetails extends StatelessWidget {
             ),
           ),
           SizedBox(height: defaultPadding),
+          StorageInfoCard(),
           // StorageInfoCard(
           //   svgSrc: "icons/Documents.svg",
           //   title: "top100",

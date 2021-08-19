@@ -71,22 +71,31 @@ class DashboardScreen extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 5,
-                  child: Column(
-                    children: [
-                      Text(
-                        "Tạo câu hỏi",
-                        style: Theme.of(context).textTheme.subtitle1,
+                  child: Container(
+                    padding: EdgeInsets.only(top: 20),
+                    decoration: new BoxDecoration(
+                      image: new DecorationImage(
+                        image: new AssetImage('images/login-bg.png'),
+                        fit: BoxFit.cover,
                       ),
-                      SizedBox(height: defaultPadding),
-                      constant.form == 'text'
-                          ? AddForm()
-                          : (constant.form == 'picture')
-                              ? AddFile()
-                              : AddFileVi(),
-                      if (Responsive.isMobile(context))
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Tạo câu hỏi",
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
                         SizedBox(height: defaultPadding),
-                      if (Responsive.isMobile(context)) StarageDetails(),
-                    ],
+                        constant.form == 'text'
+                            ? AddForm()
+                            : (constant.form == 'picture')
+                                ? AddFile()
+                                : AddFileVi(),
+                        if (Responsive.isMobile(context))
+                          SizedBox(height: defaultPadding),
+                        if (Responsive.isMobile(context)) StarageDetails(),
+                      ],
+                    ),
                   ),
                 ),
                 if (!Responsive.isMobile(context))

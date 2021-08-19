@@ -22,7 +22,7 @@ class FileUploadButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: raisedButtonStyle,
-      child: Text('UPLOAD FILE'),
+      child: Text('Cập nhật ảnh'),
       onPressed: () async {
         XFile? _getImg = await pickImg();
 

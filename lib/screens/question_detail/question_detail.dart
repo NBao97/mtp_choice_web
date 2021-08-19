@@ -72,15 +72,25 @@ class DashboardScreen extends StatelessWidget {
                   flex: 5,
                   child: Column(
                     children: [
-                      Text(
-                        "Nội dung câu hỏi",
-                        style: Theme.of(context).textTheme.subtitle1,
-                      ),
-                      SizedBox(height: defaultPadding),
-                      // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
-                      //     0.02, 0.012),
+                      Container(
+                          padding: EdgeInsets.only(top: 20),
+                          decoration: new BoxDecoration(
+                            image: new DecorationImage(
+                              image: new AssetImage('images/login-bg.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(children: [
+                            Text(
+                              "Nội dung câu hỏi",
+                              style: Theme.of(context).textTheme.subtitle1,
+                            ),
+                            SizedBox(height: defaultPadding),
+                            // AddForm(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014,
+                            //     0.02, 0.012),
 
-                      (order == 'update') ? AddForm() : AcceptForm(),
+                            (order == 'update') ? AddForm() : AcceptForm(),
+                          ])),
                       if (Responsive.isMobile(context))
                         SizedBox(height: defaultPadding),
                       if (Responsive.isMobile(context)) StarageDetails(),

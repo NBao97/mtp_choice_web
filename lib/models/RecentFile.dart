@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 Future<List<QuestionFile>> fetchQuestion(
     int page, String orderBy, String questId) async {
   String quesUrl = '';
-  print(questId);
+
   if (questId != '') {
     quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
 
@@ -15,13 +15,19 @@ Future<List<QuestionFile>> fetchQuestion(
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=false&PageNumber=1&PageSize=4';
     constant.order = '';
+  } else if (constant.search != "") {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?OrderBy=questionContent&questionContentSearch=' +
+            constant.search +
+            '&IsAscending=false&PageNumber=' +
+            page.toString() +
+            '&PageSize=10';
   } else {
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=questionContent&IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
   }
-  print("cai nay la url " + quesUrl);
   final response = await http.get(
     Uri.parse(quesUrl),
     headers: <String, String>{
@@ -67,12 +73,16 @@ class QuestionFile {
       creator,
       questionId,
       status,
+      questionHint,
+      questionDescription,
       imageUrl,
       videoUrl;
   final int? difficulty;
   final List<Answers>? ans;
   QuestionFile(
       {this.questionContent,
+      this.questionHint,
+      this.questionDescription,
       this.difficulty,
       this.creator,
       this.questionId,
@@ -90,6 +100,8 @@ class QuestionFile {
       status: json['status'],
       imageUrl: json['imageUrl'],
       videoUrl: json['videoUrl'],
+      questionDescription: json['questionDescription'],
+      questionHint: json['questionHint'],
       ans: json['answers'] != null
           ? json['answers']
               .map<Answers>((data) => Answers.fromJson(data))

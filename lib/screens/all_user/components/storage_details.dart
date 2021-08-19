@@ -31,18 +31,14 @@ class StarageDetails extends StatelessWidget {
             svgSrc: "icons/Documents.svg",
             title: "top100",
           ),
-          StorageInfoCard(
-            svgSrc: "icons/media.svg",
-            title: "tài khoản mới",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "Tài khoản bị ẩn",
-          ),
-          StorageInfoCard(
-            svgSrc: "icons/folder.svg",
-            title: "tài khoản admin",
-          ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/media.svg",
+          //   title: "tài khoản mới",
+          // ),
+          // StorageInfoCard(
+          //   svgSrc: "icons/folder.svg",
+          //   title: "tài khoản admin",
+          // ),
         ],
       ),
     );

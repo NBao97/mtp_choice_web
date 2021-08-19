@@ -34,7 +34,6 @@ class _MyAppState extends State<QuestionFiles> {
     constant.page = 1;
     constant.questId = '';
     constant.imageUrl = '';
-
     constant.image = '';
 
     futureData = fetchQuestion(constant.page, constant.order, constant.questId);
@@ -99,7 +98,11 @@ class _MyAppState extends State<QuestionFiles> {
                       textInputAction: TextInputAction.search,
                       onSubmitted: (value) {
                         constant.search = _controller.text;
-                        setState(() {});
+                        setState(() {
+                          constant.page = 1;
+                          futureData = fetchQuestion(
+                              constant.page, constant.order, constant.questId);
+                        });
                       },
                       decoration: InputDecoration(
                         hintText: "Tìm kiếm câu hỏi",
@@ -114,7 +117,11 @@ class _MyAppState extends State<QuestionFiles> {
                         suffixIcon: InkWell(
                           onTap: () {
                             constant.search = _controller.text;
-                            setState(() {});
+                            setState(() {
+                              constant.page = 1;
+                              futureData = fetchQuestion(constant.page,
+                                  constant.order, constant.questId);
+                            });
                           },
                           child: Container(
                             padding:
@@ -146,7 +153,7 @@ class _MyAppState extends State<QuestionFiles> {
                       columnSpacing: constant.defaultPadding,
                       columns: [
                         DataColumn(
-                          label: Text("Nội dung"),
+                          label: Text("    Nội dung"),
                         ),
                         DataColumn(
                           label: Text("Độ khó"),
@@ -203,6 +210,7 @@ class DTS extends DataTableSource {
         DataCell(
           Row(
             children: [
+              Text("  "),
               SvgPicture.asset(
                 "icons/xd_file.svg",
                 height: 30,

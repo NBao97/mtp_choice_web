@@ -31,6 +31,8 @@ class _AddFormState extends State<AddFileVi> {
   final _answers1Controller = TextEditingController();
   final _answers2Controller = TextEditingController();
   final _answers3Controller = TextEditingController();
+  final _descriptController = TextEditingController();
+  final _hintController = TextEditingController();
   Future<QuestionFile>? _futureQuestion;
 
   final paddingTopForm,
@@ -99,13 +101,13 @@ class _AddFormState extends State<AddFileVi> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
-                        border: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.red, width: 2)),
-                        enabledBorder: UnderlineInputBorder(
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
                         labelStyle: TextStyle(color: Colors.white),
@@ -122,10 +124,10 @@ class _AddFormState extends State<AddFileVi> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Obx(
                     () => imgS.isEmpty
-                        ? SizedBox(height: heightSize * spaceBetweenFields)
+                        ? SizedBox(height: heightSize * spaceBetweenFields / 2)
                         : SizedBox(
                             height: 300,
                             width: 200,
@@ -133,7 +135,7 @@ class _AddFormState extends State<AddFileVi> {
                           ),
                   ),
                   FileUploadButton(),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text('Đáp án',
@@ -153,13 +155,13 @@ class _AddFormState extends State<AddFileVi> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
-                        border: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.red, width: 2)),
-                        enabledBorder: UnderlineInputBorder(
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
                         labelStyle: TextStyle(color: Colors.white),
@@ -176,7 +178,7 @@ class _AddFormState extends State<AddFileVi> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text('Câu sai 1',
@@ -196,13 +198,13 @@ class _AddFormState extends State<AddFileVi> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
-                        border: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.red, width: 2)),
-                        enabledBorder: UnderlineInputBorder(
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
                         labelStyle: TextStyle(color: Colors.white),
@@ -219,7 +221,7 @@ class _AddFormState extends State<AddFileVi> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text('Câu sai 2',
@@ -239,13 +241,13 @@ class _AddFormState extends State<AddFileVi> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
-                        border: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.red, width: 2)),
-                        enabledBorder: UnderlineInputBorder(
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
                         labelStyle: TextStyle(color: Colors.white),
@@ -262,7 +264,7 @@ class _AddFormState extends State<AddFileVi> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text('Câu sai 3',
@@ -282,13 +284,13 @@ class _AddFormState extends State<AddFileVi> {
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         fillColor: Colors.white,
-                        border: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                             borderSide:
-                                BorderSide(color: Colors.red, width: 2)),
-                        enabledBorder: UnderlineInputBorder(
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                             borderSide:
                                 BorderSide(color: Colors.white, width: 2)),
                         labelStyle: TextStyle(color: Colors.white),
@@ -305,7 +307,7 @@ class _AddFormState extends State<AddFileVi> {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text('Độ khó',
@@ -313,6 +315,92 @@ class _AddFormState extends State<AddFileVi> {
                               fontSize: widthSize * fontSizeTextField,
                               fontFamily: 'Poppins',
                               color: Colors.white))),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Chỉ dẫn',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _hintController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'không thể để trống câu sai';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.find_in_page_outlined,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Khái quát',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  TextFormField(
+                      maxLines: null,
+                      controller: _descriptController,
+                      validator: (value) {
+                        if (value == '') {
+                          return 'không thể để trống câu sai';
+                        }
+                      },
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.black87, width: 2)),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2)),
+                        labelStyle: TextStyle(color: Colors.white),
+                        errorStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: widthSize * errorFormMessage),
+                        prefixIcon: Icon(
+                          Icons.description_outlined,
+                          size: widthSize * iconFormSize,
+                          color: Colors.white,
+                        ),
+                      ),
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: fontSizeTextFormField)),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   DropdownButton(
                       value: _value,
                       items: [
@@ -339,13 +427,12 @@ class _AddFormState extends State<AddFileVi> {
                   TextButton(
                       style: flatButtonStyle,
                       onPressed: () async {
-                        if (constant.imageUrl.isNotEmpty) {
+                        if (constant.imageUrl != '') {
                           final TaskSnapshot? avaSnapshot =
                               await uploadFile(context, constant.imageUrl);
 
                           if (avaSnapshot == null) {
-                            print('something wrong');
-                            Get.snackbar('Thông báo', 'Lưu hình thất bại',
+                            Get.snackbar('Thông báo', 'Lưu video thất bại',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
@@ -364,7 +451,9 @@ class _AddFormState extends State<AddFileVi> {
                                       _answersCorrectController.text,
                                       _answers1Controller.text,
                                       _answers2Controller.text,
-                                      _answers3Controller.text)
+                                      _answers3Controller.text,
+                                      _descriptController.text,
+                                      _hintController.text)
                                   .catchError((error) {
                                 Get.snackbar('Thông báo', 'Nhập thất bại',
                                     duration: Duration(seconds: 4),
@@ -376,7 +465,7 @@ class _AddFormState extends State<AddFileVi> {
                             }
                           }
                         }
-                        Get.snackbar('Thông báo', 'Xin hãy nhập hình',
+                        Get.snackbar('Thông báo', 'Xin hãy nhập video',
                             duration: Duration(seconds: 4),
                             animationDuration: Duration(milliseconds: 800),
                             snackPosition: SnackPosition.TOP,

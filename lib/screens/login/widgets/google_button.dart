@@ -38,7 +38,6 @@ class _GoogleButtonState extends State<GoogleButton> {
           await signInWithGoogle().then((result) async {
             if (result != "") {
               await login(result.toString()).then((value) async {
-                print(value);
                 if (value.contains("Success")) {
                   Get.toNamed(FirstScreen.route);
                 } else if (value.contains("Permiss")) {
@@ -87,7 +86,7 @@ class _GoogleButtonState extends State<GoogleButton> {
                     Padding(
                       padding: const EdgeInsets.only(left: 18),
                       child: Text(
-                        'Continue with Google',
+                        'Login with Google',
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.01,
                           color: Colors.blueGrey,

@@ -117,7 +117,7 @@ class _MyAppState extends State<UserFiles> {
                       sortAscending: _isAscending,
                       columns: [
                         DataColumn(
-                          label: Text(" UserID"),
+                          label: Text("    UserID"),
                         ),
                         DataColumn(
                           label: Text("Chức vụ"),
@@ -135,7 +135,7 @@ class _MyAppState extends State<UserFiles> {
                                   if (_isAscending == true) {
                                     _isAscending = false;
                                     data!.sort((a, b) =>
-                                        a.bonusPoint!.compareTo(b.bonusPoint!));
+                                        b.bonusPoint!.compareTo(a.bonusPoint!));
                                   } else {
                                     _isAscending = true;
                                     data!.sort((a, b) =>
@@ -145,7 +145,7 @@ class _MyAppState extends State<UserFiles> {
                                   if (_isAscending == true) {
                                     _isAscending = false;
                                     dataSearch!.sort((a, b) =>
-                                        a.bonusPoint!.compareTo(b.bonusPoint!));
+                                        b.bonusPoint!.compareTo(a.bonusPoint!));
                                   } else {
                                     _isAscending = true;
                                     dataSearch!.sort((a, b) =>
@@ -190,6 +190,7 @@ class MyData extends DataTableSource {
       cells: [
         DataCell(Row(
           children: [
+            Text("  "),
             SvgPicture.asset(
               "icons/media_file.svg",
               height: 30,

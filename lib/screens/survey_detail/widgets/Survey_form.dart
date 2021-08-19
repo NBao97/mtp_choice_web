@@ -151,11 +151,7 @@ class _AddFormState extends State<AcceptForm> {
                                             children: [
                                           if (hi.answe!.first.answerId ==
                                               an.answerId)
-                                            Chart(
-                                                hi.answe!.first.answerPercent!,
-                                                hi.answe![1].answerPercent!,
-                                                hi.answe![2].answerPercent!,
-                                                hi.answe![3].answerPercent!),
+                                            Chart(hi.answe!),
                                           Align(
                                               alignment: Alignment.centerLeft,
                                               child: Text('câu trả lời',
@@ -218,13 +214,29 @@ class _AddFormState extends State<AcceptForm> {
 }
 
 class Chart extends StatelessWidget {
-  Chart(this.a, this.b, this.c, this.d);
-  final double a, b, c, d;
+  Chart(this.a);
+  final List<Answers> a;
 
   @override
   Widget build(BuildContext context) {
-    var nlist = [a, b, c, d];
-    nlist.sort((a, b) => a.compareTo(b));
+    List color = [
+      primaryColor,
+      Color(0xFF26E5FF),
+      primaryColor.withOpacity(0.1),
+      Colors.deepOrange,
+      constant.secondaryColor,
+      Colors.blueAccent,
+      Colors.yellowAccent,
+      Colors.blueAccent,
+      Colors.orange,
+      Colors.amber
+    ];
+    List radi = [25, 23, 20, 18, 16, 14, 12, 10, 8, 5];
+    double d = 0;
+    int i = 0;
+    for (Answers an in a) {
+      d = d + an.answerPercent!;
+    }
     return SizedBox(
       height: 200,
       child: Stack(
@@ -235,33 +247,16 @@ class Chart extends StatelessWidget {
               centerSpaceRadius: 70,
               startDegreeOffset: -90,
               sections: [
-                PieChartSectionData(
-                  color: primaryColor,
-                  value: nlist.first,
-                  showTitle: true,
-                  radius: 25,
-                ),
-                PieChartSectionData(
-                  color: Color(0xFF26E5FF),
-                  value: nlist[1],
-                  showTitle: true,
-                  radius: 20,
-                ),
-                PieChartSectionData(
-                  color: primaryColor.withOpacity(0.1),
-                  value: nlist[2],
-                  showTitle: true,
-                  radius: 15,
-                ),
-                PieChartSectionData(
-                  color: Color(0xffb74093),
-                  value: nlist.last,
-                  showTitle: true,
-                  radius: 12,
-                ),
+                for (i = 0; i < a.length; i++)
+                  PieChartSectionData(
+                    color: color[i],
+                    value: a[i].answerPercent != null ? a[i].answerPercent : 0,
+                    showTitle: true,
+                    radius: radi[i],
+                  ),
                 PieChartSectionData(
                   color: Colors.deepOrange,
-                  value: 100 - (nlist.first + nlist.last + nlist[1] + nlist[2]),
+                  value: 100 - d,
                   showTitle: true,
                   title: 'Not Started',
                   radius: 10,

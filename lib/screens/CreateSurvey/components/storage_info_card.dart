@@ -6,14 +6,13 @@ import '../../../constants.dart';
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({
     Key? key,
-    required this.title,
-    required this.svgSrc,
   }) : super(key: key);
-
-  final String title, svgSrc;
 
   @override
   Widget build(BuildContext context) {
+    final double widthSize = MediaQuery.of(context).size.width;
+    final double heightSize = MediaQuery.of(context).size.height;
+
     return Container(
       margin: EdgeInsets.only(top: defaultPadding),
       padding: EdgeInsets.all(defaultPadding),
@@ -26,25 +25,9 @@ class StorageInfoCard extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            height: 20,
-            width: 20,
-            child: SvgPicture.asset(svgSrc),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ),
+              height: heightSize * 0.2,
+              width: widthSize * 0.15,
+              child: Image.asset('images/mtp_logo.png')),
         ],
       ),
     );
