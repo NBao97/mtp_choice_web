@@ -236,13 +236,20 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      TextFormField(
-                          readOnly: true,
-                          initialValue:
-                              (quest.creator == null) ? "" : quest.creator!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: TextFormField(
+                              readOnly: true,
+                              initialValue:
+                                  (quest.creator == null) ? "" : quest.creator!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       if (quest.ans!.isNotEmpty)
                         for (Answers ans in quest.ans!)
@@ -261,14 +268,22 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                TextFormField(
-                                    readOnly: true,
-                                    initialValue: (ans.answerContent == null)
-                                        ? ''
-                                        : ans.answerContent!,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: fontSizeTextFormField)),
+                                Container(
+                                    margin: const EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      bottom: BorderSide(color: Colors.white),
+                                    )),
+                                    child: TextFormField(
+                                        readOnly: true,
+                                        initialValue:
+                                            (ans.answerContent == null)
+                                                ? ''
+                                                : ans.answerContent!,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
                                 SizedBox(
                                     height: heightSize * spaceBetweenFields),
                               ]))

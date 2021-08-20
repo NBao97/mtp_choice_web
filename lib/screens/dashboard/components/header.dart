@@ -4,7 +4,18 @@ import 'package:get/get.dart';
 
 import 'package:mtp_choice_web/controllers/MenuController.dart';
 import 'package:mtp_choice_web/responsive.dart';
+import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
+import 'package:mtp_choice_web/screens/add/add_question.dart';
+import 'package:mtp_choice_web/screens/all_question/all_question.dart';
+import 'package:mtp_choice_web/screens/all_survey/all_survey.dart';
+import 'package:mtp_choice_web/screens/all_user/all_user.dart';
 import 'package:mtp_choice_web/screens/login/login_page.dart';
+import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
+import 'package:mtp_choice_web/screens/notification/notification.dart';
+import 'package:mtp_choice_web/screens/profile/update_screen.dart';
+import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
+import 'package:mtp_choice_web/screens/survey_detail/survey_detail.dart';
+import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
 import 'package:provider/provider.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import '../../../constants.dart';
@@ -13,9 +24,47 @@ class Header extends StatelessWidget {
   const Header({
     Key? key,
   }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    String til = 'home';
+    IconData ic = IconData(58136, fontFamily: 'MaterialIcons');
+    if (ModalRoute.of(context)!.settings.name == FirstScreen.route) {
+      til = "Trang chủ";
+      ic = IconData(58136, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == AllUserScreen.route) {
+      til = "Trang quản lý tài khoản";
+      ic = IconData(60692, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name ==
+        NotificationScreen.route) {
+      til = "Trang Feedback";
+      ic = IconData(62002, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == UpdateScreen.route) {
+      til = "Trang thông tin người dùng";
+      ic = IconData(62074, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name ==
+        AllQuestionScreen.route) {
+      til = "Trang quản lý câu hỏi";
+      ic = IconData(62173, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == QuestionDetail.route) {
+      til = "Nội dung câu hỏi";
+      ic = IconData(62173, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == SurveyDetail.route) {
+      til = "Kết quả khảo sát";
+      ic = IconData(983246, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == UserDetail.route) {
+      til = "Thông tin người dùng";
+      ic = IconData(58520, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == CreateSurvey.route) {
+      til = "Trang tạo khảo sát";
+      ic = IconData(58617, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == AddQuestion.route) {
+      til = "Trang tạo câu hỏi";
+      ic = IconData(58619, fontFamily: 'MaterialIcons');
+    } else if (ModalRoute.of(context)!.settings.name == AllSurveyScreen.route) {
+      til = "Bảng khảo sát";
+      ic = IconData(58617, fontFamily: 'MaterialIcons');
+    }
+
     return Container(
         margin: const EdgeInsets.all(15.0),
         padding: const EdgeInsets.all(5.0),
@@ -36,13 +85,13 @@ class Header extends StatelessWidget {
               ),
             if (!Responsive.isMobile(context))
               Icon(
-                IconData(58136, fontFamily: 'MaterialIcons'),
+                ic,
                 color: Colors.white54,
                 size: 20,
               ),
             Text("    "),
             Text(
-              "Home",
+              til,
               style: Theme.of(context).textTheme.headline6,
             ),
             if (!Responsive.isMobile(context))

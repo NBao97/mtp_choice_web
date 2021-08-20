@@ -85,10 +85,17 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.userId == null ? '' : quest.userId!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(quest.userId == null ? '' : quest.userId!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -97,10 +104,17 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.email == null ? '' : quest.email!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(quest.email == null ? '' : quest.email!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -109,10 +123,17 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text((quest.phone == null) ? "" : quest.phone!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text((quest.phone == null) ? "" : quest.phone!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -121,10 +142,18 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.fullname == null ? '' : quest.fullname!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                              quest.fullname == null ? '' : quest.fullname!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -133,13 +162,20 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(
-                          quest.bonusPoint == null
-                              ? ''
-                              : quest.bonusPoint!.toString(),
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                              quest.bonusPoint == null
+                                  ? ''
+                                  : quest.bonusPoint!.toString(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -148,13 +184,20 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(
-                          (quest.userRole == 'ADMIN')
-                              ? 'Quản lý'
-                              : 'Người Dùng',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                              (quest.userRole == 'ADMIN')
+                                  ? 'Quản lý'
+                                  : 'Người Dùng',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
                       if (quest.his != null)
                         for (Histories hi in quest.his!)
@@ -170,14 +213,21 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(
-                                    hi.score != null ||
-                                            hi.score.toString() == 'null'
-                                        ? '0'
-                                        : hi.score.toString(),
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: fontSizeTextFormField)),
+                                Container(
+                                    margin: const EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      bottom: BorderSide(color: Colors.white),
+                                    )),
+                                    child: Text(
+                                        hi.score != null ||
+                                                hi.score.toString() == 'null'
+                                            ? '0'
+                                            : hi.score.toString(),
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
                                 SizedBox(
                                     height: heightSize * spaceBetweenFields),
                                 Align(
@@ -188,13 +238,20 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(
-                                    hi.timeFinished == null
-                                        ? ''
-                                        : hi.timeFinished!,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: fontSizeTextFormField)),
+                                Container(
+                                    margin: const EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      bottom: BorderSide(color: Colors.white),
+                                    )),
+                                    child: Text(
+                                        hi.timeFinished == null
+                                            ? ''
+                                            : hi.timeFinished!,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
                                 Divider(
                                   thickness: 5.0,
                                   color: Colors.blueAccent,

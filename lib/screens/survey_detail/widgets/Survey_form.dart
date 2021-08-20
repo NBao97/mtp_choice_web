@@ -87,10 +87,19 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text(quest.description == null ? "" : quest.description!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                            quest.description == null ? "" : quest.description!,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: fontSizeTextFormField),
+                          )),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -99,10 +108,18 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text((quest.startTime == null) ? "" : quest.startTime!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                              (quest.startTime == null) ? "" : quest.startTime!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
@@ -111,12 +128,19 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
-                      Text((quest.endTime == null) ? "" : quest.endTime!,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                      Container(
+                          margin: const EdgeInsets.all(15.0),
+                          padding: const EdgeInsets.all(3.0),
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.white),
+                          )),
+                          child: Text(
+                              (quest.endTime == null) ? "" : quest.endTime!,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFields),
-
                       if (quest.qus!.isNotEmpty)
                         for (Questions hi in quest.qus!)
                           Container(
@@ -131,13 +155,20 @@ class _AddFormState extends State<AcceptForm> {
                                                 widthSize * fontSizeTextField,
                                             fontFamily: 'Poppins',
                                             color: Colors.white))),
-                                Text(
-                                    (hi.questionContent == null)
-                                        ? ""
-                                        : hi.questionContent!,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: fontSizeTextFormField)),
+                                Container(
+                                    margin: const EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(3.0),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                      bottom: BorderSide(color: Colors.white),
+                                    )),
+                                    child: Text(
+                                        (hi.questionContent == null)
+                                            ? ""
+                                            : hi.questionContent!,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
                                 SizedBox(
                                     height: heightSize * spaceBetweenFields),
                                 SizedBox(
@@ -160,15 +191,26 @@ class _AddFormState extends State<AcceptForm> {
                                                           fontSizeTextField,
                                                       fontFamily: 'Poppins',
                                                       color: Colors.white))),
-                                          Text(an.answerContent!.toString(),
-                                              // (an.answerContent == null)
-                                              //     ? ""
-                                              //     : an.answerContent!
-                                              //         .toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      fontSizeTextFormField)),
+                                          Container(
+                                              margin:
+                                                  const EdgeInsets.all(15.0),
+                                              padding:
+                                                  const EdgeInsets.all(3.0),
+                                              decoration: BoxDecoration(
+                                                  border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.white),
+                                              )),
+                                              child: Text(
+                                                  an.answerContent!.toString(),
+                                                  // (an.answerContent == null)
+                                                  //     ? ""
+                                                  //     : an.answerContent!
+                                                  //         .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize:
+                                                          fontSizeTextFormField))),
                                           SizedBox(
                                               height: heightSize *
                                                   spaceBetweenFields),
@@ -191,17 +233,6 @@ class _AddFormState extends State<AcceptForm> {
                                     height: heightSize * spaceBetweenFields),
                               ])),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton)
-                      // TextButton(
-                      //     style: flatButtonStyle,
-                      //     onPressed: () async {
-                      //       if (_formSur.currentState!.validate()) {}
-                      //     },
-                      //     child: Text('reset password',
-                      //         style: TextStyle(
-                      //             fontSize: widthSize * fontSizeButton,
-                      //             fontFamily: 'Poppins',
-                      //             color: Colors.white))),
-                      // SizedBox(height: heightSize * 0.01),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
