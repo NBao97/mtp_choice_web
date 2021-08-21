@@ -157,6 +157,8 @@ class _AddFormState extends State<AcceptForm> {
                           validator: (value) {
                             if (value == '') {
                               return 'không thể để trống Chỉ dẫn';
+                            } else if (value.toString().length > 150) {
+                              return 'Chỉ dẫn không thể lớn hơn 150 ký tự';
                             }
                           },
                           cursorColor: Colors.white,
@@ -199,6 +201,8 @@ class _AddFormState extends State<AcceptForm> {
                           validator: (value) {
                             if (value == '') {
                               return 'không thể để trống Khái quát';
+                            } else if (value.toString().length > 150) {
+                              return 'Khái quát không thể lớn hơn 150 ký tự';
                             }
                           },
                           cursorColor: Colors.white,

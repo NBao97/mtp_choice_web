@@ -176,11 +176,6 @@ class _MyAppState extends State<Reminders> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Bảng Người dùng ",
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  SizedBox(height: defaultPadding),
                   Container(
                     width: 1000.0,
                     alignment: Alignment.topRight,

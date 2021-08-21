@@ -89,6 +89,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'Câu hỏi không thể để trống';
+                        } else if (value.toString().length > 150) {
+                          return 'Câu hỏi không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -132,6 +134,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'Đáp án không thể để trống';
+                        } else if (value.toString().length > 150) {
+                          return 'Đáp án không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -175,6 +179,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống câu sai';
+                        } else if (value.toString().length > 150) {
+                          return 'Câu sai không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -218,6 +224,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống câu sai';
+                        } else if (value.toString().length > 150) {
+                          return 'Câu sai không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -261,6 +269,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống câu sai';
+                        } else if (value.toString().length > 150) {
+                          return 'Câu sai không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -303,6 +313,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống câu sai';
+                        } else if (value.toString().length > 150) {
+                          return 'Chỉ dẫn không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -345,6 +357,8 @@ class _AddFormState extends State<AddForm> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống câu sai';
+                        } else if (value.toString().length > 150) {
+                          return 'Khái quát không thể lớn hơn 150 ký tự';
                         }
                       },
                       cursorColor: Colors.white,

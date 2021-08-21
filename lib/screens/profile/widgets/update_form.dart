@@ -22,6 +22,7 @@ class _MyAppState extends State<UpdateProfile> {
     super.initState();
     constant.imageUrl = '';
     constant.image = '';
+
     futureAlbum = fetchUser();
   }
 
@@ -56,6 +57,7 @@ class _MyAppState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
+    bool _passwordVisible = false;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
       padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
@@ -85,7 +87,7 @@ class _MyAppState extends State<UpdateProfile> {
             (snapshot.data!.password == null)
                 ? pas = ''
                 : pas = snapshot.data!.password!;
-
+            (pas.contains("string")) ? pas = "1234Mul!" : '';
             final _passwordController = TextEditingController(text: pas);
             final _repasswordController = TextEditingController(text: pas);
 
@@ -113,8 +115,11 @@ class _MyAppState extends State<UpdateProfile> {
                           enabled: false,
                           controller: _usernameController,
                           validator: (value) {
-                            if (value == 'something') {
+                            if (value == '') {
                               return 'Nhập tên người dùng của bạn để tiếp tục';
+                            }
+                            if (value.toString().length > 150) {
+                              return 'Tên không thể lớn hơn 50 ký tự';
                             }
                           },
                           cursorColor: Colors.white,
@@ -155,16 +160,11 @@ class _MyAppState extends State<UpdateProfile> {
                       TextFormField(
                           controller: _fullnameController,
                           validator: (value) {
-                            // String check = 'something';
-                            // GetUtils.isEmail(value!)
-                            //     ? check = 'something'
-                            //     : check = 'fail';
-                            // if (value == '') {
-                            //   return 'Email không thể bỏ trống';
-                            // }
-                            // if (check == 'fail') {
-                            //   return 'Email không hợp lệ';
-                            // }
+                            if (value == "") {
+                              return 'Họ và tên không thể để trống';
+                            } else if (value.toString().length > 150) {
+                              return 'Họ và tên không thể lớn hơn 150 ký tự';
+                            }
                           },
                           cursorColor: Colors.white,
                           keyboardType: TextInputType.text,
@@ -250,11 +250,17 @@ class _MyAppState extends State<UpdateProfile> {
                       TextFormField(
                           controller: _passwordController,
                           validator: (value) {
-                            if (value == 'something') {
+                            if (value == '') {
                               return 'Mật khẩu không thể bỏ trống';
+                            } else if (value.toString().length < 8) {
+                              return 'Mật khẩu không thể ít hơn 8 ký tự';
+                            } else if (GetUtils.hasMatch(value,
+                                    r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$') ==
+                                false) {
+                              return 'Mật khẩu cần ít nhất 1 chữ hoa, 1 chữ thường, 1 số,1 ký tự đặc biệt';
                             }
                           },
-                          obscureText: true,
+                          obscureText: _passwordVisible,
                           cursorColor: Colors.white,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
@@ -277,6 +283,22 @@ class _MyAppState extends State<UpdateProfile> {
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                  print(_passwordVisible);
+                                });
+                              },
+                            ),
                           ),
                           textAlign: TextAlign.start,
                           style: TextStyle(
@@ -297,11 +319,11 @@ class _MyAppState extends State<UpdateProfile> {
                                 _passwordController.text) {
                               return 'Mật khẩu phải giống xác nhận mật khẩu';
                             }
-                            if (value == 'something') {
+                            if (value == '') {
                               return 'xác nhận mật khẩu không thể để trống';
                             }
                           },
-                          obscureText: true,
+                          obscureText: _passwordVisible,
                           cursorColor: Colors.white,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
@@ -323,6 +345,21 @@ class _MyAppState extends State<UpdateProfile> {
                               Icons.security_update_warning,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                // Based on passwordVisible state choose the icon
+                                _passwordVisible
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
+                                color: Theme.of(context).primaryColorDark,
+                              ),
+                              onPressed: () {
+                                // Update the state i.e. toogle the state of passwordVisible variable
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
                             ),
                           ),
                           textAlign: TextAlign.start,
