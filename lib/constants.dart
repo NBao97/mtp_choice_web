@@ -20,3 +20,4 @@ String image = '';
 String imageUrl = '';
 String status = "";
 String log = '';
+String imageU = '';

@@ -70,7 +70,12 @@ class _AddFormState extends State<AcceptForm> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final Survey quest = snapshot.data!.single;
-
+            (DateTime.now().isAfter(DateTime.parse(quest.startTime!)))
+                ? constant.order = "Delete"
+                : (DateTime.now().isBefore(DateTime.parse(quest.endTime!)))
+                    ? constant.order = "Delete"
+                    : constant.order = "";
+            print("cái này" + constant.order);
             // constant.status = quest.userStatus!;
             return Form(
                 // key: _formSur,

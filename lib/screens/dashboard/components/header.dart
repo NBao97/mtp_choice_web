@@ -128,16 +128,24 @@ class ProfileCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            'images/profile_pic.png',
-            height: 38,
-          ),
+          (constant.imageU == '')
+              ? Image.asset(
+                  'images/profile_pic.png',
+                  height: 38,
+                )
+              : Image.network(
+                  constant.imageU,
+                  height: 38,
+                ),
           if (!Responsive.isMobile(context))
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: DropdownButton<String>(
-                  icon: const Icon(Icons.arrow_downward),
+                  icon: const Icon(
+                    Icons.arrow_downward,
+                    color: Colors.white,
+                  ),
                   iconSize: 20,
                   elevation: 16,
                   hint: Text(
