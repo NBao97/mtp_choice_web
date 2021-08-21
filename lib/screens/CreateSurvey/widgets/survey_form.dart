@@ -178,6 +178,9 @@ class _MyAppState extends State<UpdateProfile> {
                     } else if (DateTime.parse(value!)
                         .isAfter(DateTime.parse(_endTimeController.text))) {
                       return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
+                    } else if (DateTime.parse(value!)
+                        .isBefore(DateTime.now())) {
+                      return 'Ngày bắt đầu không thể xảy ra trước hôm nay';
                     }
                   },
                   onTap: () async {
@@ -244,7 +247,7 @@ class _MyAppState extends State<UpdateProfile> {
                       return 'Nội dung không thể để trống';
                     } else if (DateTime.parse(value!)
                         .isBefore(DateTime.parse(_startTimeController.text))) {
-                      return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
+                      return 'Ngày kết thúc không thể xảy ra trước ngày bắt đầu';
                     }
                   },
                   onTap: () async {
