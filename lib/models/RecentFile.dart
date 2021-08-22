@@ -24,9 +24,10 @@ Future<List<QuestionFile>> fetchQuestion(
             '&PageSize=10';
   } else {
     quesUrl =
-        'https://api.wimln.ml/api/Question?OrderBy=questionContent&IsAscending=false&PageNumber=' +
+        'https://api.wimln.ml/api/Question?IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
+    print(page.toString());
   }
   final response = await http.get(
     Uri.parse(quesUrl),
@@ -39,6 +40,7 @@ Future<List<QuestionFile>> fetchQuestion(
     // If the server did return a 200 OK response,
     // then parse the JSON.
     List jsonResponse = json.decode(response.body);
+
     return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
   } else {
     // If   the server did not return a 200 OK response,

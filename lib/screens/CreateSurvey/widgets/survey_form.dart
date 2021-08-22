@@ -178,8 +178,7 @@ class _MyAppState extends State<UpdateProfile> {
                     } else if (DateTime.parse(value!)
                         .isAfter(DateTime.parse(_endTimeController.text))) {
                       return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
-                    } else if (DateTime.parse(value!)
-                        .isBefore(DateTime.now())) {
+                    } else if (DateTime.parse(value).isBefore(DateTime.now())) {
                       return 'Ngày bắt đầu không thể xảy ra trước hôm nay';
                     }
                   },
@@ -349,7 +348,7 @@ class _MyAppState extends State<UpdateProfile> {
           children: [
             Align(
                 alignment: Alignment.centerLeft,
-                child: Text('Câu hỏi ' + i.toString(),
+                child: Text('Câu hỏi ' + (i + 1).toString(),
                     style: TextStyle(
                         fontSize: MediaQuery.of(context).size.width * 0.01,
                         fontFamily: 'Poppins',

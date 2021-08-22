@@ -338,8 +338,8 @@ class _AddFormState extends State<AddFileVi> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống chỉ dẫn';
-                        } else if (value.toString().length > 150) {
-                          return 'Chỉ dẫn không thể lớn hơn 150 ký tự';
+                        } else if (value.toString().length > 250) {
+                          return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
                         }
                       },
                       cursorColor: Colors.white,
@@ -383,8 +383,8 @@ class _AddFormState extends State<AddFileVi> {
                       validator: (value) {
                         if (value == '') {
                           return 'không thể để trống khái quát';
-                        } else if (value.toString().length > 150) {
-                          return 'Khái quát không thể lớn hơn 150 ký tự';
+                        } else if (value.toString().length > 250) {
+                          return 'Khái quát không thể lớn hơn 250 ký tự';
                         }
                       },
                       cursorColor: Colors.white,

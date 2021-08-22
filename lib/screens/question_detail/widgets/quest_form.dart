@@ -157,8 +157,8 @@ class _AddFormState extends State<AcceptForm> {
                           validator: (value) {
                             if (value == '') {
                               return 'không thể để trống Chỉ dẫn';
-                            } else if (value.toString().length > 150) {
-                              return 'Chỉ dẫn không thể lớn hơn 150 ký tự';
+                            } else if (value.toString().length > 250) {
+                              return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
                             }
                           },
                           cursorColor: Colors.white,
@@ -201,8 +201,8 @@ class _AddFormState extends State<AcceptForm> {
                           validator: (value) {
                             if (value == '') {
                               return 'không thể để trống Khái quát';
-                            } else if (value.toString().length > 150) {
-                              return 'Khái quát không thể lớn hơn 150 ký tự';
+                            } else if (value.toString().length > 250) {
+                              return 'Khái quát không thể lớn hơn 250 ký tự';
                             }
                           },
                           cursorColor: Colors.white,
@@ -292,7 +292,7 @@ class _AddFormState extends State<AcceptForm> {
                                     height: heightSize * spaceBetweenFields),
                               ]))
                       else
-                        Text('Something wong happen'),
+                        Text('Xin lỗi chúng tôi đang gặp một số vấn đề'),
                       TextButton(
                           style: flatButtonStyle,
                           onPressed: () async {
@@ -316,7 +316,8 @@ class _AddFormState extends State<AcceptForm> {
                                       _hintController.text,
                                       _descriptController.text)
                                   .catchError((error) {
-                                Get.snackbar('Thông báo', 'Nhập thất bại',
+                                Get.snackbar(
+                                    'Thông báo', 'Nhập thất bại ' + error,
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),
