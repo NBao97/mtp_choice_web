@@ -27,7 +27,6 @@ Future<List<QuestionFile>> fetchQuestion(
         'https://api.wimln.ml/api/Question?IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
-    print(page.toString());
   }
   final response = await http.get(
     Uri.parse(quesUrl),

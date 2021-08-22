@@ -1,8 +1,7 @@
-import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobx/mobx.dart';
+
 import 'package:mtp_choice_web/controllers/VideoController.dart';
 import 'package:mtp_choice_web/models/QuestFile.dart';
 import 'package:mtp_choice_web/models/RecentFile.dart';

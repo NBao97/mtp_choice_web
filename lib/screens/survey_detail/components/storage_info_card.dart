@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/SurveyFile.dart';
 import '../../../constants.dart' as constant;
 import '../../../constants.dart';
-import '../survey_detail.dart';
 
 class StorageInfoCard extends StatelessWidget {
   const StorageInfoCard({

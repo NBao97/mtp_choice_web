@@ -61,7 +61,6 @@ Future<fb_storage.TaskSnapshot?> uploadFile(context, String imgPath) async {
     }
     return null;
   } catch (e) {
-    print("Some error: $e");
     throw e;
   }
 }

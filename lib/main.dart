@@ -16,7 +16,6 @@ import 'package:get/get.dart';
 import 'constants.dart';
 import 'screens/main/FirstScreen.dart';
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:mtp_choice_web/constants.dart' as constant;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

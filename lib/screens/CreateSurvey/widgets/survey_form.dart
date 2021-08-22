@@ -4,6 +4,8 @@ import 'package:mtp_choice_web/models/SurveyFile.dart';
 
 List question = [];
 List answer = [];
+TextEditingController _descriptionController = TextEditingController();
+TextEditingController _endTimeController = TextEditingController();
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({Key? key}) : super(key: key);
@@ -18,6 +20,8 @@ class _MyAppState extends State<UpdateProfile> {
   void initState() {
     question.clear();
     answer.clear();
+    _descriptionController.clear();
+    _endTimeController.clear();
     super.initState();
   }
 
@@ -65,11 +69,7 @@ class _MyAppState extends State<UpdateProfile> {
       backgroundColor: Colors.blue,
     );
 
-    TextEditingController _descriptionController = TextEditingController();
-
     // TextEditingController _startTimeController = TextEditingController();
-
-    TextEditingController _endTimeController = TextEditingController();
 
     return Form(
         key: _formKey,
@@ -273,6 +273,8 @@ class _MyAppState extends State<UpdateProfile> {
               TextButton(
                   style: flatButtonStyle,
                   onPressed: () async {
+                    question.clear();
+                    answer.clear();
                     Form.of(primaryFocus!.context!)!.save();
                     if (_formKey.currentState!.validate()) {
                       // _startTimeController.text                               _endTimeController.text,
@@ -285,9 +287,6 @@ class _MyAppState extends State<UpdateProfile> {
                           .catchError((error) {
                         print(error);
                       });
-                    } else {
-                      question.clear();
-                      answer.clear();
                     }
                   },
                   child: Text('Tạo khảo sát',

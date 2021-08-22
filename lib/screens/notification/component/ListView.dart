@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../constants.dart';
 import '../notification.dart';
-import 'Reminder.dart';
+
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 

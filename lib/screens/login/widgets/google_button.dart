@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mtp_choice_web/controllers/GoogleLogin.dart';
-import 'package:mtp_choice_web/screens/login/login_page.dart';
+
 import 'package:mtp_choice_web/screens/main/FirstScreen.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 

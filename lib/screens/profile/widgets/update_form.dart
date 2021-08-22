@@ -14,6 +14,8 @@ class UpdateProfile extends StatefulWidget {
       _MyAppState(0, 0.01, 18, 0.08, 0.02, 0.08, 150, 0.02, 0.014, 0.02, 0.012);
 }
 
+bool _passwordVisible = true;
+
 class _MyAppState extends State<UpdateProfile> {
   late Future<Users> futureAlbum;
 
@@ -22,7 +24,7 @@ class _MyAppState extends State<UpdateProfile> {
     super.initState();
     constant.imageUrl = '';
     constant.image = '';
-
+    _passwordVisible = true;
     futureAlbum = fetchUser();
   }
 
@@ -57,7 +59,7 @@ class _MyAppState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
-    bool _passwordVisible = false;
+
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
       padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
@@ -87,7 +89,7 @@ class _MyAppState extends State<UpdateProfile> {
             (snapshot.data!.password == null)
                 ? pas = ''
                 : pas = snapshot.data!.password!;
-            (pas.contains("string")) ? pas = "1234Mul!" : '';
+            (pas.contains("string")) ? pas = "1234Mul!" : ' ';
             final _passwordController = TextEditingController(text: pas);
             final _repasswordController = TextEditingController(text: pas);
 
@@ -294,8 +296,9 @@ class _MyAppState extends State<UpdateProfile> {
                               onPressed: () {
                                 // Update the state i.e. toogle the state of passwordVisible variable
                                 setState(() {
-                                  _passwordVisible = !_passwordVisible;
-                                  print(_passwordVisible);
+                                  _passwordVisible == true
+                                      ? _passwordVisible = false
+                                      : _passwordVisible = true;
                                 });
                               },
                             ),
@@ -355,9 +358,10 @@ class _MyAppState extends State<UpdateProfile> {
                                 color: Theme.of(context).primaryColorDark,
                               ),
                               onPressed: () {
-                                // Update the state i.e. toogle the state of passwordVisible variable
                                 setState(() {
-                                  _passwordVisible = !_passwordVisible;
+                                  _passwordVisible == true
+                                      ? _passwordVisible = false
+                                      : _passwordVisible = true;
                                 });
                               },
                             ),

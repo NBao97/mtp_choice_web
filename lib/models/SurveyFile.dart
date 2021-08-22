@@ -184,8 +184,6 @@ Future<String> postSurvey(
   //     }
   //   ],
   // }
-  print(start);
-  print(end);
   final response =
       await http.post(Uri.parse('https://api.wimln.ml/api/Game/khao-sat'),
           headers: <String, String>{

@@ -75,7 +75,6 @@ class _AddFormState extends State<AcceptForm> {
                 ? constant.order = "Delete"
                 : constant.order = "";
 
-            print("cái này" + constant.order);
             // constant.status = quest.userStatus!;
             return Form(
                 // key: _formSur,
