@@ -36,7 +36,7 @@ class Header extends StatelessWidget {
       ic = IconData(60692, fontFamily: 'MaterialIcons');
     } else if (ModalRoute.of(context)!.settings.name ==
         NotificationScreen.route) {
-      til = "Trang Feedback";
+      til = "Trang phản hồi";
       ic = IconData(62002, fontFamily: 'MaterialIcons');
     } else if (ModalRoute.of(context)!.settings.name == UpdateScreen.route) {
       til = "Trang thông tin người dùng";

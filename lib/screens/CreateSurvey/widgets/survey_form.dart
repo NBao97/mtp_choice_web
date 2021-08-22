@@ -16,6 +16,8 @@ class UpdateProfile extends StatefulWidget {
 class _MyAppState extends State<UpdateProfile> {
   @override
   void initState() {
+    question.clear();
+    answer.clear();
     super.initState();
   }
 
@@ -62,13 +64,10 @@ class _MyAppState extends State<UpdateProfile> {
       ),
       backgroundColor: Colors.blue,
     );
-    TextEditingController _nameController = TextEditingController();
 
     TextEditingController _descriptionController = TextEditingController();
-    // final _quesController = TextEditingController();
-    // final _ansTimeController = TextEditingController();
 
-    TextEditingController _startTimeController = TextEditingController();
+    // TextEditingController _startTimeController = TextEditingController();
 
     TextEditingController _endTimeController = TextEditingController();
 
@@ -80,47 +79,6 @@ class _MyAppState extends State<UpdateProfile> {
                 right: widthSize * 0.05,
                 top: heightSize * paddingTopForm),
             child: Column(children: <Widget>[
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Tên khảo sát ',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  controller: _nameController,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Nhập tên khảo sát của bạn để tiếp tục';
-                    } else if (value.toString().length > 150) {
-                      return 'Tên không thể lớn hơn 150 ký tự';
-                    }
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black87, width: 2)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.chat_outlined,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Nội dung khảo sát',
@@ -162,75 +120,75 @@ class _MyAppState extends State<UpdateProfile> {
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
               SizedBox(height: heightSize * spaceBetweenFields / 2),
-              Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Ngày bắt đầu',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeTextField,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              TextFormField(
-                  readOnly: true,
-                  controller: _startTimeController,
-                  validator: (value) {
-                    if (value == '') {
-                      return 'Nội dung không thể để trống';
-                    } else if (DateTime.parse(value!)
-                        .isAfter(DateTime.parse(_endTimeController.text))) {
-                      return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
-                    } else if (DateTime.parse(value).isBefore(DateTime.now())) {
-                      return 'Ngày bắt đầu không thể xảy ra trước hôm nay';
-                    }
-                  },
-                  onTap: () async {
-                    showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2019, 1),
-                      lastDate: DateTime(2021, 12),
-                      builder: (context, child) {
-                        return Theme(
-                          data: ThemeData.light().copyWith(
-                            primaryColor: Colors.blueAccent,
-                            accentColor: const Color(0xFF8CE7F1),
-                            colorScheme:
-                                ColorScheme.light(primary: Colors.blueAccent),
-                            buttonTheme: ButtonThemeData(
-                                textTheme: ButtonTextTheme.primary),
-                          ),
-                          child: child!,
-                        );
-                      },
-                    ).then((pickedDate) {
-                      //do whatever you want
-                      _startTimeController.text = pickedDate!.toIso8601String();
-                    });
-                  },
-                  cursorColor: Colors.white,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.black87, width: 2)),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 2)),
-                    labelStyle: TextStyle(color: Colors.white),
-                    errorStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: widthSize * errorFormMessage),
-                    prefixIcon: Icon(
-                      Icons.check_circle_outline,
-                      size: widthSize * iconFormSize,
-                      color: Colors.white,
-                    ),
-                  ),
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.white, fontSize: fontSizeTextFormField)),
-              SizedBox(height: heightSize * spaceBetweenFields / 2),
+              // Align(
+              //     alignment: Alignment.centerLeft,
+              //     child: Text('Ngày bắt đầu',
+              //         style: TextStyle(
+              //             fontSize: widthSize * fontSizeTextField,
+              //             fontFamily: 'Poppins',
+              //             color: Colors.white))),
+              // TextFormField(
+              //     readOnly: true,
+              //     controller: _startTimeController,
+              //     validator: (value) {
+              //       if (value == '') {
+              //         return 'Nội dung không thể để trống';
+              //       } else if (DateTime.parse(value!)
+              //           .isAfter(DateTime.parse(_endTimeController.text))) {
+              //         return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
+              //       } else if (DateTime.parse(value).isBefore(DateTime.now())) {
+              //         return 'Ngày bắt đầu không thể xảy ra trước hôm nay';
+              //       }
+              //     },
+              //     onTap: () async {
+              //       showDatePicker(
+              //         context: context,
+              //         initialDate: DateTime.now(),
+              //         firstDate: DateTime(2019, 1),
+              //         lastDate: DateTime(2021, 12),
+              //         builder: (context, child) {
+              //           return Theme(
+              //             data: ThemeData.light().copyWith(
+              //               primaryColor: Colors.blueAccent,
+              //               accentColor: const Color(0xFF8CE7F1),
+              //               colorScheme:
+              //                   ColorScheme.light(primary: Colors.blueAccent),
+              //               buttonTheme: ButtonThemeData(
+              //                   textTheme: ButtonTextTheme.primary),
+              //             ),
+              //             child: child!,
+              //           );
+              //         },
+              //       ).then((pickedDate) {
+              //         //do whatever you want
+              //         _startTimeController.text = pickedDate!.toIso8601String();
+              //       });
+              //     },
+              //     cursorColor: Colors.white,
+              //     keyboardType: TextInputType.text,
+              //     decoration: InputDecoration(
+              //       fillColor: Colors.white,
+              //       border: OutlineInputBorder(
+              //           borderSide:
+              //               BorderSide(color: Colors.black87, width: 2)),
+              //       enabledBorder: OutlineInputBorder(
+              //           borderSide: BorderSide(color: Colors.white, width: 2)),
+              //       focusedBorder: OutlineInputBorder(
+              //           borderSide: BorderSide(color: Colors.white, width: 2)),
+              //       labelStyle: TextStyle(color: Colors.white),
+              //       errorStyle: TextStyle(
+              //           color: Colors.white,
+              //           fontSize: widthSize * errorFormMessage),
+              //       prefixIcon: Icon(
+              //         Icons.check_circle_outline,
+              //         size: widthSize * iconFormSize,
+              //         color: Colors.white,
+              //       ),
+              //     ),
+              //     textAlign: TextAlign.start,
+              //     style: TextStyle(
+              //         color: Colors.white, fontSize: fontSizeTextFormField)),
+              // SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text('Ngày kết thúc',
@@ -244,8 +202,8 @@ class _MyAppState extends State<UpdateProfile> {
                   validator: (value) {
                     if (value == '') {
                       return 'Nội dung không thể để trống';
-                    } else if (DateTime.parse(value!)
-                        .isBefore(DateTime.parse(_startTimeController.text))) {
+                    } else if (DateTime.parse(value!).isBefore(
+                        DateTime.parse(DateTime.now().toIso8601String()))) {
                       return 'Ngày kết thúc không thể xảy ra trước ngày bắt đầu';
                     }
                   },
@@ -319,15 +277,17 @@ class _MyAppState extends State<UpdateProfile> {
                     if (_formKey.currentState!.validate()) {
                       // _startTimeController.text                               _endTimeController.text,
                       postSurvey(
-                              _nameController.text,
                               _descriptionController.text,
-                              _startTimeController.text,
+                              DateTime.now().toIso8601String(),
                               _endTimeController.text,
                               question,
                               answer)
                           .catchError((error) {
                         print(error);
                       });
+                    } else {
+                      question.clear();
+                      answer.clear();
                     }
                   },
                   child: Text('Tạo khảo sát',
@@ -473,7 +433,7 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               maxLines: null,
               validator: (value) {
                 if (value == '') {
-                  return 'Lựa chọn không thể để trống';
+                  return 'Lựa chọn đầu không thể để trống';
                 } else if (value.toString().length > 150) {
                   return 'Lựa chọn không thể lớn hơn 150 ký tự';
                 }
@@ -514,7 +474,7 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               maxLines: null,
               validator: (value) {
                 if (value == '') {
-                  return 'Lựa chọn không thể để trống';
+                  return 'Cần it nhất 2 lựa chọn';
                 } else if (value.toString().length > 150) {
                   return 'Lựa chọn không thể lớn hơn 150 ký tự';
                 }
@@ -554,9 +514,7 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
           TextFormField(
               maxLines: null,
               validator: (value) {
-                if (value == '') {
-                  return 'Lựa chọn không thể để trống';
-                } else if (value.toString().length > 150) {
+                if (value.toString().length > 150) {
                   return 'Lựa chọn không thể lớn hơn 150 ký tự';
                 }
               },
@@ -595,9 +553,7 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
           TextFormField(
               maxLines: null,
               validator: (value) {
-                if (value == '') {
-                  return 'Lựa chọn không thể để trống';
-                } else if (value.toString().length > 150) {
+                if (value.toString().length > 150) {
                   return 'Lựa chọn không thể lớn hơn 150 ký tự';
                 }
               },

@@ -18,13 +18,13 @@ class RemindMain extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "Nội dung feedback",
+              "Nội dung phản hồi",
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
           SizedBox(height: defaultPadding),
           Text(
-            "Danh sách feedback",
+            "Danh sách phản hồi",
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(

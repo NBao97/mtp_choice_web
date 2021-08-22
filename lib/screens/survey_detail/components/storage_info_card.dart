@@ -25,7 +25,7 @@ class StorageInfoCard extends StatelessWidget {
           primary: Colors.black12,
         ),
         onPressed: () async {
-          (constant.order != "Delete")
+          (constant.order == "Delete")
               ? await removeSurvey(constant.questId).then((value) async {
                   if (value != "") {
                     if (value.contains("Success")) {
@@ -62,7 +62,7 @@ class StorageInfoCard extends StatelessWidget {
               Radius.circular(defaultPadding),
             ),
           ),
-          child: (constant.order != "Delete")
+          child: (constant.order == "Delete")
               ? Row(
                   children: [
                     SizedBox(

@@ -54,7 +54,7 @@ class SideMenu extends StatelessWidget {
             },
           ),
           DrawerListTile(
-            title: "Feedback",
+            title: "Phản hồi",
             svgSrc: IconData(62002, fontFamily: 'MaterialIcons'),
             onPressed: () {
               Navigator.of(context).pushNamed(NotificationScreen.route);

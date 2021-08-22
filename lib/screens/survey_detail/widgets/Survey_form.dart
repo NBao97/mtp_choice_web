@@ -70,11 +70,11 @@ class _AddFormState extends State<AcceptForm> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final Survey quest = snapshot.data!.single;
-            (DateTime.now().isAfter(DateTime.parse(quest.startTime!)))
+            (DateTime.now().isBefore(DateTime.parse(quest.startTime!)) ||
+                    DateTime.now().isAfter(DateTime.parse(quest.endTime!)))
                 ? constant.order = "Delete"
-                : (DateTime.now().isBefore(DateTime.parse(quest.endTime!)))
-                    ? constant.order = "Delete"
-                    : constant.order = "";
+                : constant.order = "";
+
             print("cái này" + constant.order);
             // constant.status = quest.userStatus!;
             return Form(
@@ -188,51 +188,80 @@ class _AddFormState extends State<AcceptForm> {
                                           if (hi.answe!.first.answerId ==
                                               an.answerId)
                                             Chart(hi.answe!),
-                                          Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text('câu trả lời',
-                                                  style: TextStyle(
-                                                      fontSize: widthSize *
-                                                          fontSizeTextField,
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white))),
-                                          Container(
-                                              margin:
-                                                  const EdgeInsets.all(15.0),
-                                              padding:
-                                                  const EdgeInsets.all(3.0),
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                bottom: BorderSide(
-                                                    color: Colors.white),
-                                              )),
-                                              child: Text(
-                                                  an.answerContent!.toString(),
-                                                  // (an.answerContent == null)
-                                                  //     ? ""
-                                                  //     : an.answerContent!
-                                                  //         .toString(),
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize:
-                                                          fontSizeTextFormField))),
-                                          SizedBox(
-                                              height: heightSize *
-                                                  spaceBetweenFields),
-                                          Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text('Phần trăm',
-                                                  style: TextStyle(
-                                                      fontSize: widthSize *
-                                                          fontSizeTextField,
-                                                      fontFamily: 'Poppins',
-                                                      color: Colors.white))),
-                                          Text(an.answerPercent.toString(),
-                                              //an.answerPercent!.toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      fontSizeTextFormField)),
+                                          Row(children: [
+                                            SizedBox(
+                                              width: 500,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text('câu trả lời',
+                                                          style: TextStyle(
+                                                              fontSize: widthSize *
+                                                                  fontSizeTextField,
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: Colors
+                                                                  .white))),
+                                                  Container(
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              15.0),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              3.0),
+                                                      decoration: BoxDecoration(
+                                                          border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Colors.white),
+                                                      )),
+                                                      child: Wrap(
+                                                        children: [
+                                                          Text(
+                                                              an.answerContent!
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize:
+                                                                      fontSizeTextFormField))
+                                                        ],
+                                                      )),
+                                                ],
+                                              ),
+                                            ),
+                                            Spacer(),
+                                            SizedBox(
+                                              width: 100,
+                                              child: Column(
+                                                children: [
+                                                  Align(
+                                                      alignment:
+                                                          Alignment.centerLeft,
+                                                      child: Text('Phần trăm',
+                                                          style: TextStyle(
+                                                              fontSize: widthSize *
+                                                                  fontSizeTextField,
+                                                              fontFamily:
+                                                                  'Poppins',
+                                                              color: Colors
+                                                                  .white))),
+                                                  Text(
+                                                      an.answerPercent
+                                                          .toString(),
+                                                      //an.answerPercent!.toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize:
+                                                              fontSizeTextFormField)),
+                                                ],
+                                              ),
+                                            )
+                                          ])
                                         ])),
                                 SizedBox(
                                     height: heightSize * spaceBetweenFields),
@@ -294,7 +323,7 @@ class Chart extends StatelessWidget {
                   color: Colors.deepOrange,
                   value: 100 - d,
                   showTitle: true,
-                  title: 'Not Started',
+                  title: 'Chưa có người chọn',
                   radius: 10,
                 ),
               ],

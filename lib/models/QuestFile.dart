@@ -184,18 +184,7 @@ Future<String> updateQuestion(
           {"answerId": id[3], "answerContent": content[3], "isCorrect": false}
         ],
       }));
-  print(jsonEncode(<String, dynamic>{
-    "questionContent": title,
-    "difficulty": difficult,
-    "questionDescription": questionDescription,
-    "questionHint": questionHint,
-    "answers": [
-      {"answerId": id.first, "answerContent": content.first, "isCorrect": true},
-      {"answerId": id[1], "answerContent": content[1], "isCorrect": false},
-      {"answerId": id[2], "answerContent": content[2], "isCorrect": false},
-      {"answerId": id[3], "answerContent": content[3], "isCorrect": false}
-    ]
-  }));
+
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.

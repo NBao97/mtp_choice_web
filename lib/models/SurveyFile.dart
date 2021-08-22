@@ -89,8 +89,8 @@ Future<String> removeSurvey(String fed) async {
   }
 }
 
-Future<String> postSurvey(String name, String des, String start, String end,
-    List ques, List ans) async {
+Future<String> postSurvey(
+    String des, String start, String end, List ques, List ans) async {
   // jsonEncode(<String, dynamic>{
   //   "name": name,
   //   "description": des,
@@ -184,6 +184,8 @@ Future<String> postSurvey(String name, String des, String start, String end,
   //     }
   //   ],
   // }
+  print(start);
+  print(end);
   final response =
       await http.post(Uri.parse('https://api.wimln.ml/api/Game/khao-sat'),
           headers: <String, String>{
@@ -191,7 +193,6 @@ Future<String> postSurvey(String name, String des, String start, String end,
             'Authorization': 'Bearer ' + constant.key,
           },
           body: jsonEncode(<String, dynamic>{
-            "name": name,
             "description": des,
             "startTime": start,
             "endTime": end,
@@ -201,9 +202,15 @@ Future<String> postSurvey(String name, String des, String start, String end,
                   "questionContent": ques[i],
                   "answers": [
                     for (int an = 0; an < 4; an++)
-                      {
-                        "answerContent": ans[i + an + 3 * i],
-                      },
+                      if (ans[i + an + 3 * i] != null ||
+                          ans[i + an + 3 * i]
+                                  .toString()
+                                  .replaceAll(' ', '')
+                                  .isEmpty ==
+                              false)
+                        {
+                          "answerContent": ans[i + an + 3 * i],
+                        },
                   ]
                 },
             ],

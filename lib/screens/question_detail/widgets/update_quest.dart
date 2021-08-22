@@ -127,6 +127,9 @@ class _AddFormState extends State<AddForm> {
                                   color: Colors.white))),
                       TextFormField(
                           maxLines: null,
+                          readOnly: (quest.status == "KHAO_SAT_QUESTION")
+                              ? true
+                              : false,
                           controller: _questionContentController,
                           onChanged: (value) {
                             ques = value;
@@ -182,12 +185,18 @@ class _AddFormState extends State<AddForm> {
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Đáp án',
+                          child: Text(
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? 'Lựa chọn'
+                                  : 'Đáp án',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
                       TextFormField(
+                          readOnly: (quest.status == "KHAO_SAT_QUESTION")
+                              ? true
+                              : false,
                           maxLines: null,
                           controller: _answersCorrectController,
                           onChanged: (value) {
@@ -230,12 +239,18 @@ class _AddFormState extends State<AddForm> {
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Câu sai 1',
+                          child: Text(
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? 'Lựa chọn'
+                                  : 'Câu sai 1',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
                       TextFormField(
+                          readOnly: (quest.status == "KHAO_SAT_QUESTION")
+                              ? true
+                              : false,
                           maxLines: null,
                           controller: _answers1Controller,
                           onChanged: (value) {
@@ -266,7 +281,9 @@ class _AddFormState extends State<AddForm> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? Icons.check_circle_outline
+                                  : Icons.clear_sharp,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -278,12 +295,18 @@ class _AddFormState extends State<AddForm> {
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Câu sai 2',
+                          child: Text(
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? 'Lựa chọn'
+                                  : 'Câu sai 2',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
                       TextFormField(
+                          readOnly: (quest.status == "KHAO_SAT_QUESTION")
+                              ? true
+                              : false,
                           maxLines: null,
                           controller: _answers2Controller,
                           onChanged: (value) {
@@ -314,7 +337,9 @@ class _AddFormState extends State<AddForm> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? Icons.check_circle_outline
+                                  : Icons.clear_sharp,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -326,12 +351,18 @@ class _AddFormState extends State<AddForm> {
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
-                          child: Text('Câu sai 3',
+                          child: Text(
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? 'Lựa chọn'
+                                  : 'Câu sai 3',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
                                   color: Colors.white))),
                       TextFormField(
+                          readOnly: (quest.status == "KHAO_SAT_QUESTION")
+                              ? true
+                              : false,
                           maxLines: null,
                           controller: _answers3Controller,
                           onChanged: (value) {
@@ -362,7 +393,9 @@ class _AddFormState extends State<AddForm> {
                                 color: Colors.white,
                                 fontSize: widthSize * errorFormMessage),
                             prefixIcon: Icon(
-                              Icons.clear_sharp,
+                              (quest.status == "KHAO_SAT_QUESTION")
+                                  ? Icons.check_circle_outline
+                                  : Icons.clear_sharp,
                               size: widthSize * iconFormSize,
                               color: Colors.white,
                             ),
@@ -372,168 +405,185 @@ class _AddFormState extends State<AddForm> {
                               color: Colors.white,
                               fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Chỉ dẫn',
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Chỉ dẫn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : TextFormField(
+                              maxLines: null,
+                              controller: _hintController,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'không thể để trống câu sai';
+                                } else if (value.toString().length > 250) {
+                                  return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
+                                }
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.lightBlueAccent,
+                                        width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.clear_sharp,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
                               style: TextStyle(
-                                  fontSize: widthSize * fontSizeTextField,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
-                      TextFormField(
-                          maxLines: null,
-                          controller: _hintController,
-                          validator: (value) {
-                            if (value == '') {
-                              return 'không thể để trống câu sai';
-                            } else if (value.toString().length > 250) {
-                              return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
-                            }
-                          },
-                          cursorColor: Colors.white,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black87, width: 2)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.lightBlueAccent, width: 2)),
-                            labelStyle: TextStyle(color: Colors.white),
-                            errorStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: widthSize * errorFormMessage),
-                            prefixIcon: Icon(
-                              Icons.clear_sharp,
-                              size: widthSize * iconFormSize,
-                              color: Colors.white,
-                            ),
-                          ),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Khái quát',
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Khái quát',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : TextFormField(
+                              maxLines: null,
+                              controller: _descriptController,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'không thể để trống câu sai';
+                                } else if (value.toString().length > 250) {
+                                  return 'Khái quát không thể lớn hơn 250 ký tự';
+                                }
+                              },
+                              cursorColor: Colors.white,
+                              keyboardType: TextInputType.text,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black87, width: 2)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 2)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.lightBlueAccent,
+                                        width: 2)),
+                                labelStyle: TextStyle(color: Colors.white),
+                                errorStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: widthSize * errorFormMessage),
+                                prefixIcon: Icon(
+                                  Icons.clear_sharp,
+                                  size: widthSize * iconFormSize,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              textAlign: TextAlign.start,
                               style: TextStyle(
-                                  fontSize: widthSize * fontSizeTextField,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
-                      TextFormField(
-                          maxLines: null,
-                          controller: _descriptController,
-                          validator: (value) {
-                            if (value == '') {
-                              return 'không thể để trống câu sai';
-                            } else if (value.toString().length > 250) {
-                              return 'Khái quát không thể lớn hơn 250 ký tự';
-                            }
-                          },
-                          cursorColor: Colors.white,
-                          keyboardType: TextInputType.text,
-                          decoration: InputDecoration(
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.black87, width: 2)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2)),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.lightBlueAccent, width: 2)),
-                            labelStyle: TextStyle(color: Colors.white),
-                            errorStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: widthSize * errorFormMessage),
-                            prefixIcon: Icon(
-                              Icons.clear_sharp,
-                              size: widthSize * iconFormSize,
-                              color: Colors.white,
-                            ),
-                          ),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: fontSizeTextFormField)),
+                                  color: Colors.white,
+                                  fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Độ khó',
-                              style: TextStyle(
-                                  fontSize: widthSize * fontSizeTextField,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
-                      DropdownButton(
-                          value: _value,
-                          items: [
-                            DropdownMenuItem(
-                              child: Text("Dễ"),
-                              value: 0,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Trung Bình"),
-                              value: 1,
-                            ),
-                            DropdownMenuItem(
-                              child: Text("Khó"),
-                              value: 2,
-                            )
-                          ],
-                          onChanged: (value) {
-                            setState(() {
-                              _value = int.parse(value.toString());
-                              if (ques != '') {
-                                _questionContentController.text = ques;
-                              }
-                              _answersCorrectController.text = answerContent[0];
-                              _answers1Controller.text = answerContent[1];
-                              _answers1Controller.text = answerContent[1];
-                              _answers2Controller.text = answerContent[2];
-                              _answers3Controller.text = answerContent[3];
-                            });
-                          },
-                          hint: Text("Select item")),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text('Độ khó',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeTextField,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : DropdownButton(
+                              value: _value,
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text("Dễ"),
+                                  value: 0,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Trung Bình"),
+                                  value: 1,
+                                ),
+                                DropdownMenuItem(
+                                  child: Text("Khó"),
+                                  value: 2,
+                                )
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  _value = int.parse(value.toString());
+                                  if (ques != '') {
+                                    _questionContentController.text = ques;
+                                  }
+                                  _answersCorrectController.text =
+                                      answerContent[0];
+                                  _answers1Controller.text = answerContent[1];
+                                  _answers1Controller.text = answerContent[1];
+                                  _answers2Controller.text = answerContent[2];
+                                  _answers3Controller.text = answerContent[3];
+                                });
+                              },
+                              hint: Text("Select item")),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-                      TextButton(
-                          style: flatButtonStyle,
-                          onPressed: () async {
-                            answerContent.clear();
-                            answerContent = [
-                              _answersCorrectController.text,
-                              _answers1Controller.text,
-                              _answers2Controller.text,
-                              _answers3Controller.text
-                            ];
-                            if (_formAdf.currentState!.validate()) {
-                              updateQuestion(
-                                      quest.questionId!,
-                                      _questionContentController.text,
-                                      _value,
-                                      answerId,
-                                      answerContent,
-                                      _hintController.text,
-                                      _descriptController.text)
-                                  .catchError((error) {
-                                Get.snackbar('Thông báo', 'Nhập thất bại',
-                                    duration: Duration(seconds: 4),
-                                    animationDuration:
-                                        Duration(milliseconds: 800),
-                                    snackPosition: SnackPosition.TOP,
-                                    backgroundColor: Colors.white);
-                              });
-                            }
-                          },
-                          child: Text('Cập nhật câu hỏi',
-                              style: TextStyle(
-                                  fontSize: widthSize * fontSizeButton,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : TextButton(
+                              style: flatButtonStyle,
+                              onPressed: () async {
+                                answerContent.clear();
+                                answerContent = [
+                                  _answersCorrectController.text,
+                                  _answers1Controller.text,
+                                  _answers2Controller.text,
+                                  _answers3Controller.text
+                                ];
+                                if (_formAdf.currentState!.validate()) {
+                                  updateQuestion(
+                                          quest.questionId!,
+                                          _questionContentController.text,
+                                          _value,
+                                          answerId,
+                                          answerContent,
+                                          _hintController.text,
+                                          _descriptController.text)
+                                      .catchError((error) {
+                                    Get.snackbar('Thông báo', 'Nhập thất bại',
+                                        duration: Duration(seconds: 4),
+                                        animationDuration:
+                                            Duration(milliseconds: 800),
+                                        snackPosition: SnackPosition.TOP,
+                                        backgroundColor: Colors.white);
+                                  });
+                                }
+                              },
+                              child: Text('Cập nhật câu hỏi',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeButton,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
                       SizedBox(height: heightSize * 0.01),
                     ])));
           } else if (snapshot.hasError) {
