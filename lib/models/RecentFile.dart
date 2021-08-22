@@ -17,14 +17,14 @@ Future<List<QuestionFile>> fetchQuestion(
     constant.order = '';
   } else if (constant.search != "") {
     quesUrl =
-        'https://api.wimln.ml/api/Question?OrderBy=questionContent&questionContentSearch=' +
+        'https://api.wimln.ml/api/Question?OrderBy=created&questionContentSearch=' +
             constant.search +
             '&IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
   } else {
     quesUrl =
-        'https://api.wimln.ml/api/Question?IsAscending=false&PageNumber=' +
+        'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=false&PageNumber=' +
             page.toString() +
             '&PageSize=10';
   }

@@ -5,15 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 Future<String> createQuestion(
-    String title,
-    String creator,
-    int difficult,
-    String rightAns,
-    String as1,
-    String as2,
-    String as3,
-    String questionDescription,
-    String questionHint) async {
+  String title,
+  String creator,
+  int difficult,
+  String rightAns,
+  String as1,
+  String as2,
+  String as3,
+  String questionDescription,
+) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
 
@@ -29,7 +29,6 @@ Future<String> createQuestion(
                 "difficulty": difficult,
                 "creator": "",
                 "questionDescription": questionDescription,
-                "questionHint": questionHint,
                 "imageUrl": constant.image,
                 "status": 1,
                 "answers": [
@@ -86,8 +85,7 @@ Future<String> createQuestionVi(
     String as1,
     String as2,
     String as3,
-    String questionDescription,
-    String questionHint) async {
+    String questionDescription) async {
   var list = [rightAns, as1, as2, as3];
   list = list..shuffle();
 
@@ -103,7 +101,6 @@ Future<String> createQuestionVi(
                 "difficulty": difficult,
                 "creator": "",
                 "questionDescription": questionDescription,
-                "questionHint": questionHint,
                 "videoUrl": constant.image,
                 "status": 1,
                 "answers": [
@@ -159,7 +156,6 @@ Future<String> updateQuestion(
   int difficult,
   List id,
   List content,
-  String questionHint,
   String questionDescription,
 ) async {
   final response = await http.put(
@@ -172,7 +168,6 @@ Future<String> updateQuestion(
         "questionContent": title,
         "difficulty": difficult,
         "questionDescription": questionDescription,
-        "questionHint": questionHint,
         "\"" + "answers" + "\"": [
           {
             "answerId": id.first,

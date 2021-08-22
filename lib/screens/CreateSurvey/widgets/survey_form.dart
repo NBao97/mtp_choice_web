@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mtp_choice_web/models/SurveyFile.dart';
+
+import '../create_survey.dart';
 
 List question = [];
 List answer = [];
@@ -62,13 +65,20 @@ class _MyAppState extends State<UpdateProfile> {
     final double heightSize = MediaQuery.of(context).size.height;
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
+      padding: EdgeInsets.fromLTRB(widthButton / 2, 15, widthButton / 2, 15),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(5.0)),
+      ),
+      backgroundColor: Colors.blue,
+    );
+    final ButtonStyle flatButtonStyle2 = TextButton.styleFrom(
+      primary: Colors.white,
       padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
       ),
       backgroundColor: Colors.blue,
     );
-
     // TextEditingController _startTimeController = TextEditingController();
 
     return Form(
@@ -269,32 +279,55 @@ class _MyAppState extends State<UpdateProfile> {
                 height: heightSize * spaceBetweenFields,
               ),
               ..._getFriends(),
+              SizedBox(
+                height: heightSize * spaceBetweenFields,
+              ),
+              Row(
+                children: [
+                  Row(children: [
+                    TextButton(
+                        style: flatButtonStyle,
+                        onPressed: () async {
+                          question.clear();
+                          answer.clear();
+                          Form.of(primaryFocus!.context!)!.save();
+                          if (_formKey.currentState!.validate()) {
+                            // _startTimeController.text                               _endTimeController.text,
+                            postSurvey(
+                                    _descriptionController.text,
+                                    DateTime.now().toIso8601String(),
+                                    _endTimeController.text,
+                                    question,
+                                    answer)
+                                .catchError((error) {
+                              print(error);
+                            });
+                          }
+                        },
+                        child: Text('Tạo khảo sát',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Poppins',
+                                color: Colors.white)))
+                  ]),
+                  Spacer(),
+                  Row(children: [
+                    TextButton(
+                        style: flatButtonStyle2,
+                        onPressed: () async {
+                          Get.back();
+                          Get.toNamed(CreateSurvey.route);
+                        },
+                        child: Text('Tạo khảo sát khác',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Poppins',
+                                color: Colors.white)))
+                  ]),
+                ],
+              ),
+
               SizedBox(height: heightSize * spaceBetweenFieldAndButton),
-              TextButton(
-                  style: flatButtonStyle,
-                  onPressed: () async {
-                    question.clear();
-                    answer.clear();
-                    Form.of(primaryFocus!.context!)!.save();
-                    if (_formKey.currentState!.validate()) {
-                      // _startTimeController.text                               _endTimeController.text,
-                      postSurvey(
-                              _descriptionController.text,
-                              DateTime.now().toIso8601String(),
-                              _endTimeController.text,
-                              question,
-                              answer)
-                          .catchError((error) {
-                        print(error);
-                      });
-                    }
-                  },
-                  child: Text('Tạo khảo sát',
-                      style: TextStyle(
-                          fontSize: widthSize * fontSizeButton,
-                          fontFamily: 'Poppins',
-                          color: Colors.white))),
-              SizedBox(height: heightSize * 0.01),
             ])));
   }
 

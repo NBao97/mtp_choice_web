@@ -20,7 +20,7 @@ class StarageDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Tình trạng người dùng",
+            "MC360",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
@@ -28,7 +28,8 @@ class StarageDetails extends StatelessWidget {
           ),
           SizedBox(height: defaultPadding),
           StorageInfoCard(title: "Active", status: "Active"),
-          StorageInfoCard(title: "Banned", status: "Deactive"),
+
+          // StorageInfoCard(title: "Banned", status: "Deactive"),
         ],
       ),
     );

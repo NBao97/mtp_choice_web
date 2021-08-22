@@ -11,11 +11,14 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return DesktopMode();
-        // }
-      },
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return DesktopMode();
+          // }
+        },
+      ),
     );
   }
 }

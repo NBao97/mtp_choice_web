@@ -121,6 +121,10 @@ class _AddFormState extends State<AcceptForm> {
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
                           : DropdownButton(
+                              icon: const Icon(
+                                Icons.arrow_downward,
+                                color: Colors.white,
+                              ),
                               value: _value,
                               items: [
                                 DropdownMenuItem(
@@ -157,46 +161,6 @@ class _AddFormState extends State<AcceptForm> {
                                       color: Colors.white))),
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
-                          : TextFormField(
-                              controller: _hintController,
-                              validator: (value) {
-                                if (value == '') {
-                                  return 'không thể để trống Chỉ dẫn';
-                                } else if (value.toString().length > 250) {
-                                  return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
-                                }
-                              },
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black87, width: 2)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.lightBlueAccent,
-                                        width: 2)),
-                                labelStyle: TextStyle(color: Colors.white),
-                                errorStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: widthSize * errorFormMessage),
-                                prefixIcon: Icon(
-                                  Icons.find_in_page_outlined,
-                                  size: widthSize * iconFormSize,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: fontSizeTextFormField)),
-                      SizedBox(height: heightSize * spaceBetweenFields),
-                      (quest.status == "KHAO_SAT_QUESTION")
-                          ? Text("")
                           : Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Khái quát',
@@ -207,6 +171,7 @@ class _AddFormState extends State<AcceptForm> {
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
                           : TextFormField(
+                              maxLines: null,
                               controller: _descriptController,
                               validator: (value) {
                                 if (value == '') {
@@ -326,7 +291,6 @@ class _AddFormState extends State<AcceptForm> {
                                         quest.ans![2].answerContent,
                                         quest.ans![3].answerContent
                                       ],
-                                      _hintController.text,
                                       _descriptController.text)
                                   .catchError((error) {
                                 Get.snackbar(

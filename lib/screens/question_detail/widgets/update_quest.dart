@@ -85,8 +85,7 @@ class _AddFormState extends State<AddForm> {
             final _answersCorrectController = TextEditingController();
             final _descriptController =
                 TextEditingController(text: quest.questionDescription);
-            final _hintController =
-                TextEditingController(text: quest.questionHint);
+
             for (Answers an in quest.ans!) {
               if (an.isCorrect == true) {
                 _answersCorrectController.text = an.answerContent!;
@@ -416,47 +415,6 @@ class _AddFormState extends State<AddForm> {
                                       color: Colors.white))),
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
-                          : TextFormField(
-                              maxLines: null,
-                              controller: _hintController,
-                              validator: (value) {
-                                if (value == '') {
-                                  return 'không thể để trống câu sai';
-                                } else if (value.toString().length > 250) {
-                                  return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
-                                }
-                              },
-                              cursorColor: Colors.white,
-                              keyboardType: TextInputType.text,
-                              decoration: InputDecoration(
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black87, width: 2)),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.lightBlueAccent,
-                                        width: 2)),
-                                labelStyle: TextStyle(color: Colors.white),
-                                errorStyle: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: widthSize * errorFormMessage),
-                                prefixIcon: Icon(
-                                  Icons.clear_sharp,
-                                  size: widthSize * iconFormSize,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: fontSizeTextFormField)),
-                      SizedBox(height: heightSize * spaceBetweenFields),
-                      (quest.status == "KHAO_SAT_QUESTION")
-                          ? Text("")
                           : Align(
                               alignment: Alignment.centerLeft,
                               child: Text('Khái quát',
@@ -471,7 +429,7 @@ class _AddFormState extends State<AddForm> {
                               controller: _descriptController,
                               validator: (value) {
                                 if (value == '') {
-                                  return 'không thể để trống câu sai';
+                                  return 'không thể để trống Khái quát';
                                 } else if (value.toString().length > 250) {
                                   return 'Khái quát không thể lớn hơn 250 ký tự';
                                 }
@@ -517,6 +475,10 @@ class _AddFormState extends State<AddForm> {
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
                           : DropdownButton(
+                              icon: const Icon(
+                                Icons.arrow_downward,
+                                color: Colors.white,
+                              ),
                               value: _value,
                               items: [
                                 DropdownMenuItem(
@@ -567,7 +529,6 @@ class _AddFormState extends State<AddForm> {
                                           _value,
                                           answerId,
                                           answerContent,
-                                          _hintController.text,
                                           _descriptController.text)
                                       .catchError((error) {
                                     Get.snackbar('Thông báo', 'Nhập thất bại',

@@ -27,7 +27,7 @@ class _AddFormState extends State<AddForm> {
   final _answers2Controller = TextEditingController();
   final _answers3Controller = TextEditingController();
   final _descriptController = TextEditingController();
-  final _hintController = TextEditingController();
+
   Future<QuestionFile>? _futureQuestion;
 
   final paddingTopForm,
@@ -303,56 +303,13 @@ class _AddFormState extends State<AddForm> {
                   SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Chỉ dẫn',
-                          style: TextStyle(
-                              fontSize: widthSize * fontSizeTextField,
-                              fontFamily: 'Poppins',
-                              color: Colors.white))),
-                  TextFormField(
-                      controller: _hintController,
-                      validator: (value) {
-                        if (value == '') {
-                          return 'không thể để trống câu sai';
-                        } else if (value.toString().length > 250) {
-                          return 'Chỉ dẫn không thể lớn hơn 250 ký tự';
-                        }
-                      },
-                      cursorColor: Colors.white,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.black87, width: 2)),
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 2)),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 2)),
-                        labelStyle: TextStyle(color: Colors.white),
-                        errorStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: widthSize * errorFormMessage),
-                        prefixIcon: Icon(
-                          Icons.find_in_page_outlined,
-                          size: widthSize * iconFormSize,
-                          color: Colors.white,
-                        ),
-                      ),
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: fontSizeTextFormField)),
-                  SizedBox(height: heightSize * spaceBetweenFields / 2),
-                  Align(
-                      alignment: Alignment.centerLeft,
                       child: Text('Khái quát',
                           style: TextStyle(
                               fontSize: widthSize * fontSizeTextField,
                               fontFamily: 'Poppins',
                               color: Colors.white))),
                   TextFormField(
+                      maxLines: null,
                       controller: _descriptController,
                       validator: (value) {
                         if (value == '') {
@@ -397,6 +354,10 @@ class _AddFormState extends State<AddForm> {
                               fontFamily: 'Poppins',
                               color: Colors.white))),
                   DropdownButton(
+                      icon: const Icon(
+                        Icons.arrow_downward,
+                        color: Colors.white,
+                      ),
                       value: _value,
                       items: [
                         DropdownMenuItem(
@@ -425,16 +386,15 @@ class _AddFormState extends State<AddForm> {
                         if (_formAdf.currentState!.validate()) {
                           constant.image = "";
                           createQuestion(
-                                  _questionContentController.text,
-                                  constant.userName,
-                                  _value,
-                                  _answersCorrectController.text,
-                                  _answers1Controller.text,
-                                  _answers2Controller.text,
-                                  _answers3Controller.text,
-                                  _descriptController.text,
-                                  _hintController.text)
-                              .catchError((error) {
+                            _questionContentController.text,
+                            constant.userName,
+                            _value,
+                            _answersCorrectController.text,
+                            _answers1Controller.text,
+                            _answers2Controller.text,
+                            _answers3Controller.text,
+                            _descriptController.text,
+                          ).catchError((error) {
                             Get.snackbar('Thông báo', 'Nhập thất bại',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
