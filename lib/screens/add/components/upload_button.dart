@@ -27,14 +27,23 @@ class FileUploadButton extends StatelessWidget {
         XFile? _getImg = await pickImg();
 
         if (_getImg != null) {
-          constant.imageUrl = _getImg.path;
           bytes = await _getImg.readAsBytes();
+          if (bytes.lengthInBytes < 10485760) {
+            constant.imageUrl = _getImg.path;
+            bytes = await _getImg.readAsBytes();
 
-          Get.snackbar('Thông báo', 'Nhập hình thành công',
-              duration: Duration(seconds: 4),
-              animationDuration: Duration(milliseconds: 800),
-              snackPosition: SnackPosition.TOP,
-              backgroundColor: Colors.white);
+            Get.snackbar('Thông báo', 'Nhập hình thành công',
+                duration: Duration(seconds: 4),
+                animationDuration: Duration(milliseconds: 800),
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.white);
+          } else {
+            Get.snackbar('Thông báo', 'Nhập quá dung lượng 10mb',
+                duration: Duration(seconds: 4),
+                animationDuration: Duration(milliseconds: 800),
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.white);
+          }
         } else {
           Get.snackbar('Thông báo', 'Nhập thất bại',
               duration: Duration(seconds: 4),

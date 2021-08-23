@@ -31,6 +31,11 @@ class _AddFormState extends State<AddFile> {
   final _answers2Controller = TextEditingController();
   final _answers3Controller = TextEditingController();
   final _descriptController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    constant.imageUrl = '';
+  }
 
   Future<QuestionFile>? _futureQuestion;
 
@@ -59,7 +64,7 @@ class _AddFormState extends State<AddFile> {
       this.fontSizeSnackBar,
       this.errorFormMessage);
   int _value = 0;
-  var imgS = imageUrl.obs;
+
   @override
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
@@ -126,15 +131,6 @@ class _AddFormState extends State<AddFile> {
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
                   SizedBox(height: heightSize * spaceBetweenFields / 2),
-                  Obx(
-                    () => imgS.isEmpty
-                        ? SizedBox(height: heightSize * spaceBetweenFields / 2)
-                        : SizedBox(
-                            height: 300,
-                            width: 200,
-                            child: Image.network(imgS.string),
-                          ),
-                  ),
                   FileUploadButton(),
                   SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
@@ -399,7 +395,7 @@ class _AddFormState extends State<AddFile> {
                   TextButton(
                       style: flatButtonStyle,
                       onPressed: () async {
-                        if (constant.imageUrl.isNotEmpty) {
+                        if (constant.imageUrl != '') {
                           final TaskSnapshot? avaSnapshot =
                               await uploadFile(context, constant.imageUrl);
 
@@ -414,25 +410,40 @@ class _AddFormState extends State<AddFile> {
                               constant.image =
                                   await avaSnapshot.ref.getDownloadURL();
                             }
-
+                            List answerContent = [
+                              _answersCorrectController.text,
+                              _answers1Controller.text,
+                              _answers2Controller.text,
+                              _answers3Controller.text
+                            ];
                             if (_formAdf.currentState!.validate()) {
-                              createQuestion(
-                                _questionContentController.text,
-                                constant.userName,
-                                _value,
-                                _answersCorrectController.text,
-                                _answers1Controller.text,
-                                _answers2Controller.text,
-                                _answers3Controller.text,
-                                _descriptController.text,
-                              ).catchError((error) {
-                                Get.snackbar('Thông báo', 'Nhập thất bại',
+                              if (answerContent.toSet().toList().length < 4) {
+                                Get.snackbar(
+                                    'Thông báo', 'Câu trả lời không được trùng',
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),
                                     snackPosition: SnackPosition.TOP,
                                     backgroundColor: Colors.white);
-                              });
+                              } else {
+                                createQuestion(
+                                  _questionContentController.text,
+                                  constant.userName,
+                                  _value,
+                                  _answersCorrectController.text,
+                                  _answers1Controller.text,
+                                  _answers2Controller.text,
+                                  _answers3Controller.text,
+                                  _descriptController.text,
+                                ).catchError((error) {
+                                  Get.snackbar('Thông báo', 'Nhập thất bại',
+                                      duration: Duration(seconds: 4),
+                                      animationDuration:
+                                          Duration(milliseconds: 800),
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: Colors.white);
+                                });
+                              }
                             }
                           }
                         }

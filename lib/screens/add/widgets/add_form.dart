@@ -383,24 +383,40 @@ class _AddFormState extends State<AddForm> {
                   TextButton(
                       style: flatButtonStyle,
                       onPressed: () async {
+                        List answerContent = [
+                          _answersCorrectController.text,
+                          _answers1Controller.text,
+                          _answers2Controller.text,
+                          _answers3Controller.text
+                        ];
                         if (_formAdf.currentState!.validate()) {
-                          constant.image = "";
-                          createQuestion(
-                            _questionContentController.text,
-                            constant.userName,
-                            _value,
-                            _answersCorrectController.text,
-                            _answers1Controller.text,
-                            _answers2Controller.text,
-                            _answers3Controller.text,
-                            _descriptController.text,
-                          ).catchError((error) {
-                            Get.snackbar('Thông báo', 'Nhập thất bại',
+                          if (answerContent.toSet().toList().length < 4) {
+                            Get.snackbar(
+                                'Thông báo', 'Câu trả lời không được trùng',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.white);
-                          });
+                          } else {
+                            constant.image = "";
+                            createQuestion(
+                              _questionContentController.text,
+                              constant.userName,
+                              _value,
+                              _answersCorrectController.text,
+                              _answers1Controller.text,
+                              _answers2Controller.text,
+                              _answers3Controller.text,
+                              _descriptController.text,
+                            ).catchError((error) {
+                              Get.snackbar('Thông báo', 'Nhập thất bại',
+                                  duration: Duration(seconds: 4),
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  snackPosition: SnackPosition.TOP,
+                                  backgroundColor: Colors.white);
+                            });
+                          }
                         }
                       },
                       child: Text('Thêm câu hỏi',
