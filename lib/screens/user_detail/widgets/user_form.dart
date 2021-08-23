@@ -203,63 +203,110 @@ class _AddFormState extends State<AcceptForm> {
                         for (Histories hi in quest.his!)
                           Container(
                               child: Column(
+                            children: [
+                              Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('điểm',
-                                        style: TextStyle(
-                                            fontSize:
-                                                widthSize * fontSizeTextField,
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white))),
-                                Container(
-                                    margin: const EdgeInsets.all(15.0),
-                                    padding: const EdgeInsets.all(3.0),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                      bottom: BorderSide(color: Colors.white),
-                                    )),
-                                    child: Text(
-                                        hi.score != null ||
-                                                hi.score.toString() == 'null'
-                                            ? '0'
-                                            : hi.score.toString(),
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: fontSizeTextFormField))),
-                                SizedBox(
-                                    height: heightSize * spaceBetweenFields),
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('thời gian hoàn thành',
-                                        style: TextStyle(
-                                            fontSize:
-                                                widthSize * fontSizeTextField,
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white))),
-                                Container(
-                                    margin: const EdgeInsets.all(15.0),
-                                    padding: const EdgeInsets.all(3.0),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                      bottom: BorderSide(color: Colors.white),
-                                    )),
-                                    child: Text(
-                                        hi.timeFinished == null
-                                            ? ''
-                                            : hi.timeFinished!,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: fontSizeTextFormField))),
-                                Divider(
-                                  thickness: 5.0,
-                                  color: Colors.blueAccent,
-                                ),
-                                SizedBox(
-                                    height:
-                                        heightSize * spaceBetweenFieldAndButton)
-                              ]))
+                                    SizedBox(
+                                      width: 100,
+                                    ),
+                                    Container(
+                                        child: Column(children: [
+                                      Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('điểm',
+                                              style: TextStyle(
+                                                  fontSize: widthSize *
+                                                      fontSizeTextField,
+                                                  fontFamily: 'Poppins',
+                                                  color: Colors.white))),
+                                      Container(
+                                          margin: const EdgeInsets.all(15.0),
+                                          padding: const EdgeInsets.all(3.0),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                            bottom:
+                                                BorderSide(color: Colors.white),
+                                          )),
+                                          child: Text(
+                                              hi.score != null ||
+                                                      hi.score.toString() ==
+                                                          'null'
+                                                  ? '0'
+                                                  : hi.score.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      fontSizeTextFormField))),
+                                    ])),
+                                    SizedBox(
+                                      width: 100,
+                                    ),
+                                    Container(
+                                        child: Column(children: [
+                                      Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('thời gian hoàn thành',
+                                              style: TextStyle(
+                                                  fontSize: widthSize *
+                                                      fontSizeTextField,
+                                                  fontFamily: 'Poppins',
+                                                  color: Colors.white))),
+                                      Container(
+                                          margin: const EdgeInsets.all(15.0),
+                                          padding: const EdgeInsets.all(3.0),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                            bottom:
+                                                BorderSide(color: Colors.white),
+                                          )),
+                                          child: Text(
+                                              hi.timeFinished == null
+                                                  ? ''
+                                                  : hi.timeFinished!,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      fontSizeTextFormField))),
+                                    ])),
+                                    SizedBox(
+                                      width: 100,
+                                    ),
+                                    Container(
+                                        child: Column(children: [
+                                      Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('Ngày hoàn thành',
+                                              style: TextStyle(
+                                                  fontSize: widthSize *
+                                                      fontSizeTextField,
+                                                  fontFamily: 'Poppins',
+                                                  color: Colors.white))),
+                                      Container(
+                                          margin: const EdgeInsets.all(15.0),
+                                          padding: const EdgeInsets.all(3.0),
+                                          decoration: BoxDecoration(
+                                              border: Border(
+                                            bottom:
+                                                BorderSide(color: Colors.white),
+                                          )),
+                                          child: Text(
+                                              hi.date == null || hi.date == ''
+                                                  ? ''
+                                                  : hi.date!,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize:
+                                                      fontSizeTextFormField))),
+                                    ])),
+                                  ]),
+                              Divider(
+                                color: Colors.white,
+                                thickness: 2,
+                              ),
+                            ],
+                          )),
+                      SizedBox(height: heightSize * spaceBetweenFieldAndButton),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

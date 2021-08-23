@@ -80,8 +80,6 @@ class _AddFormState extends State<AcceptForm> {
                 text: quest.questionDescription == null
                     ? ""
                     : quest.questionDescription);
-            final _hintController = TextEditingController(
-                text: (quest.questionHint == null) ? '' : quest.questionHint);
             return Form(
                 key: _formQus,
                 child: Padding(
