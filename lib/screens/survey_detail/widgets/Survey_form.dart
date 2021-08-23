@@ -16,13 +16,13 @@ class AcceptForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AcceptForm> {
-  late Future<List<Survey>> futureData;
+  late Future<List<Survey>> futureDataAllSurvey;
   String qus = constant.questId;
 
   @override
   void initState() {
     super.initState();
-    futureData = fetchSurAll(qus);
+    futureDataAllSurvey = fetchSurAll(qus);
   }
 
   // final GlobalKey<FormState> _formSur =
@@ -66,7 +66,7 @@ class _AddFormState extends State<AcceptForm> {
     //   backgroundColor: Colors.blue,
     // );
     return FutureBuilder<List<Survey>>(
-        future: futureData,
+        future: futureDataAllSurvey,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final Survey quest = snapshot.data!.single;
@@ -284,11 +284,11 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List color = [
-      primaryColor,
+      Colors.white,
       Color(0xFF26E5FF),
-      primaryColor.withOpacity(0.1),
+      Colors.green,
       Colors.deepOrange,
-      constant.secondaryColor,
+      Colors.greenAccent,
       Colors.blueAccent,
       Colors.yellowAccent,
       Colors.blueAccent,

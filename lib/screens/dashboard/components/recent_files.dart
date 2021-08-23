@@ -16,7 +16,7 @@ class RecentFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<RecentFiles> {
-  late Future<List<QuestionFile>> futureData;
+  late Future<List<QuestionFile>> futureDataQuestFirst;
   @override
   void initState() {
     super.initState();
@@ -25,7 +25,8 @@ class _MyAppState extends State<RecentFiles> {
     constant.order = 'first page';
     constant.imageUrl = '';
     constant.image = '';
-    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
+    futureDataQuestFirst =
+        fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   @override
@@ -36,7 +37,7 @@ class _MyAppState extends State<RecentFiles> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<QuestionFile>>(
-        future: futureData,
+        future: futureDataQuestFirst,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<QuestionFile>? data = snapshot.data;

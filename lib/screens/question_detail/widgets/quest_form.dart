@@ -22,13 +22,13 @@ class _AddFormState extends State<AcceptForm> {
   GlobalKey<FormState> _formQus =
       new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
   // final _usernameController = TextEditingController();
-  late Future<List<QuestionFile>> futureData;
+  late Future<List<QuestionFile>> futureDataQuestForm;
   final String qus = constant.questId;
   int _value = 0;
   @override
   void initState() {
     super.initState();
-    futureData = fetchQuestion(constant.page, constant.order, qus);
+    futureDataQuestForm = fetchQuestion(constant.page, constant.order, qus);
   }
 
   final paddingTopForm,
@@ -70,7 +70,7 @@ class _AddFormState extends State<AcceptForm> {
       backgroundColor: Colors.blue,
     );
     return FutureBuilder<List<QuestionFile>>(
-        future: futureData,
+        future: futureDataQuestForm,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final QuestionFile quest = snapshot.data!.single;

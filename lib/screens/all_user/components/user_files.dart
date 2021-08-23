@@ -22,7 +22,7 @@ class UserFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<UserFiles> {
-  late Future<List<Users>> futureData;
+  late Future<List<Users>> futureDataAccount;
   final TextEditingController _controller = TextEditingController(text: '');
   bool _isAscending = true;
   @override
@@ -30,7 +30,7 @@ class _MyAppState extends State<UserFiles> {
     super.initState();
     constant.questId = '';
     _controller.clear();
-    futureData = fetchUserAll(constant.questId);
+    futureDataAccount = fetchUserAll(constant.questId);
   }
 
   List<Users>? dataSearch = [];
@@ -38,7 +38,7 @@ class _MyAppState extends State<UserFiles> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Users>>(
-        future: futureData,
+        future: futureDataAccount,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Users>? data = snapshot.data;

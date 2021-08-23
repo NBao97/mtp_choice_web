@@ -24,14 +24,14 @@ class SurveyFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<SurveyFiles> {
-  late Future<List<Survey>> futureData;
+  late Future<List<Survey>> futureDataSurvey;
   final TextEditingController _controller = TextEditingController(text: '');
   @override
   void initState() {
     super.initState();
     _controller.clear();
     constant.questId = '';
-    futureData = fetchSurAll(constant.questId);
+    futureDataSurvey = fetchSurAll(constant.questId);
   }
 
   bool _isAscending = true;
@@ -40,7 +40,7 @@ class _MyAppState extends State<SurveyFiles> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Survey>>(
-        future: futureData,
+        future: futureDataSurvey,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Survey>? data = snapshot.data;

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mtp_choice_web/models/UserFile.dart';
 import '../../../constants.dart' as constant;
 
+int i = 0;
+
 class AcceptForm extends StatefulWidget {
   AcceptForm({Key? key}) : super(key: key);
 
@@ -14,13 +16,13 @@ class AcceptForm extends StatefulWidget {
 }
 
 class _AddFormState extends State<AcceptForm> {
-  late Future<List<Users>> futureData;
+  late Future<List<Users>> futureDataUser;
 
   @override
   void initState() {
     super.initState();
-
-    futureData = fetchUserAll(constant.questId);
+    i = 0;
+    futureDataUser = fetchUserAll(constant.questId);
   }
 
   // final GlobalKey<FormState> _formSur =
@@ -64,7 +66,7 @@ class _AddFormState extends State<AcceptForm> {
     //   backgroundColor: Colors.blue,
     // );
     return FutureBuilder<List<Users>>(
-        future: futureData,
+        future: futureDataUser,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final Users quest = snapshot.data!.single;
@@ -229,7 +231,7 @@ class _AddFormState extends State<AcceptForm> {
                                                 BorderSide(color: Colors.white),
                                           )),
                                           child: Text(
-                                              hi.score != null ||
+                                              hi.score == null ||
                                                       hi.score.toString() ==
                                                           'null'
                                                   ? '0'
@@ -246,7 +248,7 @@ class _AddFormState extends State<AcceptForm> {
                                         child: Column(children: [
                                       Align(
                                           alignment: Alignment.centerLeft,
-                                          child: Text('thời gian hoàn thành',
+                                          child: Text('Số câu đúng',
                                               style: TextStyle(
                                                   fontSize: widthSize *
                                                       fontSizeTextField,
@@ -261,9 +263,9 @@ class _AddFormState extends State<AcceptForm> {
                                                 BorderSide(color: Colors.white),
                                           )),
                                           child: Text(
-                                              hi.timeFinished == null
-                                                  ? ''
-                                                  : hi.timeFinished!,
+                                              hi.numOfCorrect == null
+                                                  ? '0'
+                                                  : hi.numOfCorrect!.toString(),
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize:
@@ -292,7 +294,11 @@ class _AddFormState extends State<AcceptForm> {
                                           )),
                                           child: Text(
                                               hi.date == null || hi.date == ''
-                                                  ? ''
+                                                  ? DateTime.now()
+                                                      .subtract(
+                                                          Duration(days: 3))
+                                                      .toString()
+                                                      .substring(0, 10)
                                                   : hi.date!,
                                               style: TextStyle(
                                                   color: Colors.white,

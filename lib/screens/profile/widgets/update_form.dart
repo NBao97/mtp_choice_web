@@ -289,8 +289,8 @@ class _MyAppState extends State<UpdateProfile> {
                               icon: Icon(
                                 // Based on passwordVisible state choose the icon
                                 _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                                 color: Theme.of(context).primaryColorDark,
                               ),
                               onPressed: () {
@@ -353,8 +353,8 @@ class _MyAppState extends State<UpdateProfile> {
                               icon: Icon(
                                 // Based on passwordVisible state choose the icon
                                 _passwordVisible
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                                 color: Theme.of(context).primaryColorDark,
                               ),
                               onPressed: () {

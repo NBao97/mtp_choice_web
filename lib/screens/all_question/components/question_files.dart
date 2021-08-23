@@ -26,7 +26,7 @@ class QuestionFiles extends StatefulWidget {
 }
 
 class _MyAppState extends State<QuestionFiles> {
-  late Future<List<QuestionFile>> futureData;
+  late Future<List<QuestionFile>> futureDataQuest;
   @override
   void initState() {
     super.initState();
@@ -36,7 +36,8 @@ class _MyAppState extends State<QuestionFiles> {
     constant.imageUrl = '';
     constant.image = '';
 
-    futureData = fetchQuestion(constant.page, constant.order, constant.questId);
+    futureDataQuest =
+        fetchQuestion(constant.page, constant.order, constant.questId);
   }
 
   @override
@@ -49,7 +50,7 @@ class _MyAppState extends State<QuestionFiles> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<QuestionFile>>(
-        future: futureData,
+        future: futureDataQuest,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<QuestionFile>? data = snapshot.data;
@@ -100,7 +101,7 @@ class _MyAppState extends State<QuestionFiles> {
                         constant.search = _controller.text;
                         setState(() {
                           constant.page = 1;
-                          futureData = fetchQuestion(
+                          futureDataQuest = fetchQuestion(
                               constant.page, constant.order, constant.questId);
                         });
                       },
@@ -119,7 +120,7 @@ class _MyAppState extends State<QuestionFiles> {
                             constant.search = _controller.text;
                             setState(() {
                               constant.page = 1;
-                              futureData = fetchQuestion(constant.page,
+                              futureDataQuest = fetchQuestion(constant.page,
                                   constant.order, constant.questId);
                             });
                           },
