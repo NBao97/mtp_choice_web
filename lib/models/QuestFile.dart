@@ -159,9 +159,7 @@ Future<String> updateQuestion(
     String questionDescription,
     String video,
     String image) async {
-  print('ok');
-  print(video);
-  print(image);
+
   final response = await http.put(
       Uri.parse('https://api.wimln.ml/api/Question/' + qus),
       headers: <String, String>{
