@@ -86,14 +86,16 @@ class _AddFormState extends State<AddForm> {
             final QuestionFile quest = snapshot.data!.single;
             constant.status = quest.status!;
             if (check == 0) {
-              _value = quest.difficulty!;
+              if (quest.difficulty != null) _value = quest.difficulty!;
             }
+
             final _questionContentController =
                 TextEditingController(text: quest.questionContent);
             // final _difficultyController = TextEditingController(text: "0");
             final _answersCorrectController = TextEditingController();
             final _descriptController =
                 TextEditingController(text: quest.questionDescription);
+
             if (answerContent.isEmpty == true) {
               for (Answers an in quest.ans!) {
                 if (an.isCorrect == true) {

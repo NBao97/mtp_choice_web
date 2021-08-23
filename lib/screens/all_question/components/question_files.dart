@@ -153,7 +153,13 @@ class _MyAppState extends State<QuestionFiles> {
 
                       onPageChanged: (value) => {
                         if (value > constant.page)
-                          {constant.page = constant.page + 1, setState(() {})}
+                          {
+                            setState(() {
+                              constant.page = constant.page + 1;
+                              futureDataQuest = fetchQuestion(constant.page,
+                                  constant.order, constant.questId);
+                            })
+                          }
                       },
                       showCheckboxColumn: false,
                       showFirstLastButtons: false,

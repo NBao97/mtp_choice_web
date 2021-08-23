@@ -64,7 +64,7 @@ Future<fb_storage.TaskSnapshot?> uploadFile(context, String imgPath) async {
       var uniqueId = Uuid().v1();
 
       fb_storage.TaskSnapshot av =
-          await storage.ref().child("avatar/$uniqueId").putData(bytes);
+          await storage.ref().child("imageVideo/$uniqueId").putData(bytes);
 
       return av;
     }
