@@ -387,7 +387,7 @@ class _MyAppState extends State<UpdateProfile> {
                                     backgroundColor: Colors.white);
                               } else {
                                 if (avaSnapshot.state == TaskState.success) {
-                                  constant.image =
+                                  constant.imageU = constant.image =
                                       await avaSnapshot.ref.getDownloadURL();
                                 }
                               }

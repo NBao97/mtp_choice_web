@@ -31,7 +31,7 @@ class _MyAppState extends State<QuestionFiles> {
   void initState() {
     super.initState();
     constant.order = '';
-    constant.page = 1;
+
     constant.questId = '';
     constant.imageUrl = '';
     constant.image = '';
@@ -42,6 +42,12 @@ class _MyAppState extends State<QuestionFiles> {
 
   @override
   void dispose() {
+    constant.page = 1;
+    constant.order = '';
+
+    constant.questId = '';
+    constant.imageUrl = '';
+    constant.image = '';
     super.dispose();
   }
 

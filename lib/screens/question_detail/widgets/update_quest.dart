@@ -19,17 +19,25 @@ class AddForm extends StatefulWidget {
   }
 }
 
-int _value = 0;
 List answerId = [];
 List answerContent = [];
 String ques = '';
+int check = 0;
 
 class _AddFormState extends State<AddForm> {
+  GlobalKey<FormState> _formAdf =
+      new GlobalKey<FormState>(debugLabel: '_updateFormState');
   Future<List<QuestionFile>>? _futureQuestion;
   final String qus = constant.questId;
+  int _value = 0;
   @override
   void initState() {
     super.initState();
+    answerContent.clear();
+    answerId.clear();
+    ques = '';
+    _value = 0;
+    check = 0;
     _futureQuestion = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -59,11 +67,10 @@ class _AddFormState extends State<AddForm> {
       this.errorFormMessage);
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> _formAdf =
-        new GlobalKey<FormState>(debugLabel: '_updateFormState');
-
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
+    String image = '';
+    String video = '';
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
       padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
@@ -78,29 +85,30 @@ class _AddFormState extends State<AddForm> {
           if (snapshot.hasData) {
             final QuestionFile quest = snapshot.data!.single;
             constant.status = quest.status!;
-
+            if (check == 0) {
+              _value = quest.difficulty!;
+            }
             final _questionContentController =
                 TextEditingController(text: quest.questionContent);
             // final _difficultyController = TextEditingController(text: "0");
             final _answersCorrectController = TextEditingController();
             final _descriptController =
                 TextEditingController(text: quest.questionDescription);
+            if (answerContent.isEmpty == true) {
+              for (Answers an in quest.ans!) {
+                if (an.isCorrect == true) {
+                  _answersCorrectController.text = an.answerContent!;
 
-            for (Answers an in quest.ans!) {
-              if (an.isCorrect == true) {
-                _answersCorrectController.text = an.answerContent!;
-
-                answerId.insert(0, an.answerId);
-                answerContent.insert(0, an.answerContent);
-              } else {
-                answerId.add(an.answerId);
-                answerContent.add(an.answerContent);
+                  answerId.insert(0, an.answerId);
+                  answerContent.insert(0, an.answerContent);
+                } else {
+                  answerId.add(an.answerId);
+                  answerContent.add(an.answerContent);
+                }
               }
-            }
-            if (_answersCorrectController.text == '') {
+            } else {
               _answersCorrectController.text = answerContent[0];
             }
-
             final _answers1Controller =
                 TextEditingController(text: answerContent[1]);
 
@@ -108,6 +116,16 @@ class _AddFormState extends State<AddForm> {
                 TextEditingController(text: answerContent[2]);
             final _answers3Controller =
                 TextEditingController(text: answerContent[3]);
+            if (quest.videoUrl != null) {
+              if (quest.videoUrl != '') {
+                video = quest.videoUrl!;
+              }
+            }
+            if (quest.imageUrl != null) {
+              if (quest.imageUrl != '') {
+                image = quest.imageUrl!;
+              }
+            }
 
             return Form(
                 key: _formAdf,
@@ -453,7 +471,7 @@ class _AddFormState extends State<AddForm> {
                                     color: Colors.white,
                                     fontSize: widthSize * errorFormMessage),
                                 prefixIcon: Icon(
-                                  Icons.clear_sharp,
+                                  Icons.description_outlined,
                                   size: widthSize * iconFormSize,
                                   color: Colors.white,
                                 ),
@@ -497,12 +515,12 @@ class _AddFormState extends State<AddForm> {
                               onChanged: (value) {
                                 setState(() {
                                   _value = int.parse(value.toString());
+                                  check++;
                                   if (ques != '') {
                                     _questionContentController.text = ques;
                                   }
                                   _answersCorrectController.text =
                                       answerContent[0];
-                                  _answers1Controller.text = answerContent[1];
                                   _answers1Controller.text = answerContent[1];
                                   _answers2Controller.text = answerContent[2];
                                   _answers3Controller.text = answerContent[3];
@@ -529,7 +547,9 @@ class _AddFormState extends State<AddForm> {
                                           _value,
                                           answerId,
                                           answerContent,
-                                          _descriptController.text)
+                                          _descriptController.text,
+                                          video,
+                                          image)
                                       .catchError((error) {
                                     Get.snackbar('Thông báo', 'Nhập thất bại',
                                         duration: Duration(seconds: 4),

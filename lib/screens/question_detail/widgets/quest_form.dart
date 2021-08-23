@@ -28,6 +28,7 @@ class _AddFormState extends State<AcceptForm> {
   @override
   void initState() {
     super.initState();
+    _value = 0;
     futureDataQuestForm = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -60,7 +61,8 @@ class _AddFormState extends State<AcceptForm> {
   Widget build(BuildContext context) {
     final double widthSize = MediaQuery.of(context).size.width;
     final double heightSize = MediaQuery.of(context).size.height;
-
+    String image = '';
+    String video = '';
     final ButtonStyle flatButtonStyle = TextButton.styleFrom(
       primary: Colors.white,
       padding: EdgeInsets.fromLTRB(widthButton, 15, widthButton, 15),
@@ -80,6 +82,17 @@ class _AddFormState extends State<AcceptForm> {
                 text: quest.questionDescription == null
                     ? ""
                     : quest.questionDescription);
+            if (quest.videoUrl != null) {
+              if (quest.videoUrl != '') {
+                video = quest.videoUrl!;
+              }
+            }
+            if (quest.imageUrl != null) {
+              if (quest.imageUrl != '') {
+                image = quest.imageUrl!;
+              }
+            }
+            _value = quest.difficulty!;
             return Form(
                 key: _formQus,
                 child: Padding(
@@ -289,7 +302,9 @@ class _AddFormState extends State<AcceptForm> {
                                         quest.ans![2].answerContent,
                                         quest.ans![3].answerContent
                                       ],
-                                      _descriptController.text)
+                                      _descriptController.text,
+                                      video,
+                                      image)
                                   .catchError((error) {
                                 Get.snackbar(
                                     'Thông báo', 'Nhập thất bại ' + error,
