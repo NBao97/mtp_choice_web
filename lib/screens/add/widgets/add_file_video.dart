@@ -10,8 +10,6 @@ import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
 
-import '../../../constants.dart';
-
 class AddFileVi extends StatefulWidget {
   AddFileVi({Key? key}) : super(key: key);
 
@@ -316,14 +314,6 @@ class _AddFormState extends State<AddFileVi> {
                   SizedBox(height: heightSize * spaceBetweenFields / 2),
                   Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Độ khó',
-                          style: TextStyle(
-                              fontSize: widthSize * fontSizeTextField,
-                              fontFamily: 'Poppins',
-                              color: Colors.white))),
-                  SizedBox(height: heightSize * spaceBetweenFields / 2),
-                  Align(
-                      alignment: Alignment.centerLeft,
                       child: Text('Khái quát',
                           style: TextStyle(
                               fontSize: widthSize * fontSizeTextField,
@@ -367,6 +357,14 @@ class _AddFormState extends State<AddFileVi> {
                           color: Colors.white,
                           fontSize: fontSizeTextFormField)),
                   SizedBox(height: heightSize * spaceBetweenFields / 2),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Độ khó',
+                          style: TextStyle(
+                              fontSize: widthSize * fontSizeTextField,
+                              fontFamily: 'Poppins',
+                              color: Colors.white))),
+                  SizedBox(height: heightSize * spaceBetweenFields / 2),
                   DropdownButton(
                       icon: const Icon(
                         Icons.arrow_downward,
@@ -397,38 +395,38 @@ class _AddFormState extends State<AddFileVi> {
                   TextButton(
                       style: flatButtonStyle,
                       onPressed: () async {
-                        if (constant.imageUrl != '') {
-                          final TaskSnapshot? avaSnapshot =
-                              await uploadFile(context, constant.imageUrl);
-
-                          if (avaSnapshot == null) {
-                            Get.snackbar('Thông báo', 'Lưu video thất bại',
+                        List answerContent = [
+                          _answersCorrectController.text,
+                          _answers1Controller.text,
+                          _answers2Controller.text,
+                          _answers3Controller.text
+                        ];
+                        if (_formAdf.currentState!.validate()) {
+                          if (answerContent.toSet().toList().length < 4) {
+                            Get.snackbar(
+                                'Thông báo', 'Câu trả lời không được trùng',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.white);
                           } else {
-                            if (avaSnapshot.state == TaskState.success) {
-                              constant.image =
-                                  await avaSnapshot.ref.getDownloadURL();
-                            }
+                            if (constant.imageUrl != '') {
+                              final TaskSnapshot? avaSnapshot =
+                                  await uploadFile(context, constant.imageUrl);
 
-                            List answerContent = [
-                              _answersCorrectController.text,
-                              _answers1Controller.text,
-                              _answers2Controller.text,
-                              _answers3Controller.text
-                            ];
-                            if (_formAdf.currentState!.validate()) {
-                              if (answerContent.toSet().toList().length < 4) {
-                                Get.snackbar(
-                                    'Thông báo', 'Câu trả lời không được trùng',
+                              if (avaSnapshot == null) {
+                                Get.snackbar('Thông báo', 'Lưu video thất bại',
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),
                                     snackPosition: SnackPosition.TOP,
                                     backgroundColor: Colors.white);
                               } else {
+                                if (avaSnapshot.state == TaskState.success) {
+                                  constant.image =
+                                      await avaSnapshot.ref.getDownloadURL();
+                                }
+
                                 createQuestionVi(
                                         _questionContentController.text,
                                         constant.userName,
@@ -447,14 +445,22 @@ class _AddFormState extends State<AddFileVi> {
                                       backgroundColor: Colors.white);
                                 });
                               }
+                            } else {
+                              Get.snackbar('Thông báo', 'Xin hãy nhập video',
+                                  duration: Duration(seconds: 4),
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  snackPosition: SnackPosition.TOP,
+                                  backgroundColor: Colors.white);
                             }
                           }
+                        } else {
+                          Get.snackbar('Thông báo', 'Nhập thất bại ',
+                              duration: Duration(seconds: 4),
+                              animationDuration: Duration(milliseconds: 800),
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.white);
                         }
-                        Get.snackbar('Thông báo', 'Xin hãy nhập video',
-                            duration: Duration(seconds: 4),
-                            animationDuration: Duration(milliseconds: 800),
-                            snackPosition: SnackPosition.TOP,
-                            backgroundColor: Colors.white);
                       },
                       child: Text('Thêm câu hỏi',
                           style: TextStyle(

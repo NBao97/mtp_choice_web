@@ -9,8 +9,6 @@ import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';
 
-import '../../../constants.dart';
-
 class AddFile extends StatefulWidget {
   AddFile({Key? key}) : super(key: key);
 
@@ -395,37 +393,38 @@ class _AddFormState extends State<AddFile> {
                   TextButton(
                       style: flatButtonStyle,
                       onPressed: () async {
-                        if (constant.imageUrl != '') {
-                          final TaskSnapshot? avaSnapshot =
-                              await uploadFile(context, constant.imageUrl);
-
-                          if (avaSnapshot == null) {
-                            Get.snackbar('Thông báo', 'Lưu hình thất bại',
+                        List answerContent = [
+                          _answersCorrectController.text,
+                          _answers1Controller.text,
+                          _answers2Controller.text,
+                          _answers3Controller.text
+                        ];
+                        if (_formAdf.currentState!.validate()) {
+                          if (answerContent.toSet().toList().length < 4) {
+                            Get.snackbar(
+                                'Thông báo', 'Câu trả lời không được trùng',
                                 duration: Duration(seconds: 4),
                                 animationDuration: Duration(milliseconds: 800),
                                 snackPosition: SnackPosition.TOP,
                                 backgroundColor: Colors.white);
                           } else {
-                            if (avaSnapshot.state == TaskState.success) {
-                              constant.image =
-                                  await avaSnapshot.ref.getDownloadURL();
-                            }
-                            List answerContent = [
-                              _answersCorrectController.text,
-                              _answers1Controller.text,
-                              _answers2Controller.text,
-                              _answers3Controller.text
-                            ];
-                            if (_formAdf.currentState!.validate()) {
-                              if (answerContent.toSet().toList().length < 4) {
-                                Get.snackbar(
-                                    'Thông báo', 'Câu trả lời không được trùng',
+                            if (constant.imageUrl != '') {
+                              final TaskSnapshot? avaSnapshot =
+                                  await uploadFile(context, constant.imageUrl);
+
+                              if (avaSnapshot == null) {
+                                Get.snackbar('Thông báo', 'Lưu hình thất bại',
                                     duration: Duration(seconds: 4),
                                     animationDuration:
                                         Duration(milliseconds: 800),
                                     snackPosition: SnackPosition.TOP,
                                     backgroundColor: Colors.white);
                               } else {
+                                if (avaSnapshot.state == TaskState.success) {
+                                  constant.image =
+                                      await avaSnapshot.ref.getDownloadURL();
+                                }
+
                                 createQuestion(
                                   _questionContentController.text,
                                   constant.userName,
@@ -436,7 +435,8 @@ class _AddFormState extends State<AddFile> {
                                   _answers3Controller.text,
                                   _descriptController.text,
                                 ).catchError((error) {
-                                  Get.snackbar('Thông báo', 'Nhập thất bại',
+                                  Get.snackbar(
+                                      'Thông báo', 'Nhập thất bại ' + error,
                                       duration: Duration(seconds: 4),
                                       animationDuration:
                                           Duration(milliseconds: 800),
@@ -444,14 +444,22 @@ class _AddFormState extends State<AddFile> {
                                       backgroundColor: Colors.white);
                                 });
                               }
+                            } else {
+                              Get.snackbar('Thông báo', 'Xin hãy nhập hình',
+                                  duration: Duration(seconds: 4),
+                                  animationDuration:
+                                      Duration(milliseconds: 800),
+                                  snackPosition: SnackPosition.TOP,
+                                  backgroundColor: Colors.white);
                             }
                           }
+                        } else {
+                          Get.snackbar('Thông báo', 'Nhập thất bại ',
+                              duration: Duration(seconds: 4),
+                              animationDuration: Duration(milliseconds: 800),
+                              snackPosition: SnackPosition.TOP,
+                              backgroundColor: Colors.white);
                         }
-                        Get.snackbar('Thông báo', 'Xin hãy nhập hình',
-                            duration: Duration(seconds: 4),
-                            animationDuration: Duration(milliseconds: 800),
-                            snackPosition: SnackPosition.TOP,
-                            backgroundColor: Colors.white);
                       },
                       child: Text('Thêm câu hỏi',
                           style: TextStyle(

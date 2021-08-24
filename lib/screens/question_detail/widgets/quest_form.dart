@@ -92,7 +92,7 @@ class _AddFormState extends State<AcceptForm> {
                 image = quest.imageUrl!;
               }
             }
-            _value = quest.difficulty!;
+            if (quest.difficulty != null) _value = quest.difficulty!;
             return Form(
                 key: _formQus,
                 child: Padding(
@@ -282,45 +282,47 @@ class _AddFormState extends State<AcceptForm> {
                               ]))
                       else
                         Text('Xin lỗi chúng tôi đang gặp một số vấn đề'),
-                      TextButton(
-                          style: flatButtonStyle,
-                          onPressed: () async {
-                            if (_formQus.currentState!.validate()) {
-                              updateQuestion(
-                                      quest.questionId!,
-                                      quest.questionContent!,
-                                      _value,
-                                      [
-                                        quest.ans!.first.questionId,
-                                        quest.ans![1].questionId,
-                                        quest.ans![2].questionId,
-                                        quest.ans![3].questionId
-                                      ],
-                                      [
-                                        quest.ans!.first.answerContent,
-                                        quest.ans![1].answerContent,
-                                        quest.ans![2].answerContent,
-                                        quest.ans![3].answerContent
-                                      ],
-                                      _descriptController.text,
-                                      video,
-                                      image)
-                                  .catchError((error) {
-                                Get.snackbar(
-                                    'Thông báo', 'Nhập thất bại ' + error,
-                                    duration: Duration(seconds: 4),
-                                    animationDuration:
-                                        Duration(milliseconds: 800),
-                                    snackPosition: SnackPosition.TOP,
-                                    backgroundColor: Colors.white);
-                              });
-                            }
-                          },
-                          child: Text('Cập nhật chỉ dẫn',
-                              style: TextStyle(
-                                  fontSize: widthSize * fontSizeButton,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : TextButton(
+                              style: flatButtonStyle,
+                              onPressed: () async {
+                                if (_formQus.currentState!.validate()) {
+                                  updateQuestion(
+                                          quest.questionId!,
+                                          quest.questionContent!,
+                                          _value,
+                                          [
+                                            quest.ans!.first.questionId,
+                                            quest.ans![1].questionId,
+                                            quest.ans![2].questionId,
+                                            quest.ans![3].questionId
+                                          ],
+                                          [
+                                            quest.ans!.first.answerContent,
+                                            quest.ans![1].answerContent,
+                                            quest.ans![2].answerContent,
+                                            quest.ans![3].answerContent
+                                          ],
+                                          _descriptController.text,
+                                          video,
+                                          image)
+                                      .catchError((error) {
+                                    Get.snackbar(
+                                        'Thông báo', 'Nhập thất bại ' + error,
+                                        duration: Duration(seconds: 4),
+                                        animationDuration:
+                                            Duration(milliseconds: 800),
+                                        snackPosition: SnackPosition.TOP,
+                                        backgroundColor: Colors.white);
+                                  });
+                                }
+                              },
+                              child: Text('Cập nhật chỉ dẫn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeButton,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
