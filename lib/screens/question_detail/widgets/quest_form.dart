@@ -18,6 +18,8 @@ class AcceptForm extends StatefulWidget {
   }
 }
 
+int check = 0;
+
 class _AddFormState extends State<AcceptForm> {
   GlobalKey<FormState> _formQus =
       new GlobalKey<FormState>(debugLabel: '_UpQusFormState');
@@ -29,6 +31,7 @@ class _AddFormState extends State<AcceptForm> {
   void initState() {
     super.initState();
     _value = 0;
+    check = 0;
     futureDataQuestForm = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -76,7 +79,9 @@ class _AddFormState extends State<AcceptForm> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final QuestionFile quest = snapshot.data!.single;
-
+            if (check == 0) {
+              if (quest.difficulty != null) _value = quest.difficulty!;
+            }
             constant.status = quest.status!;
             final _descriptController = TextEditingController(
                 text: quest.questionDescription == null
@@ -92,7 +97,6 @@ class _AddFormState extends State<AcceptForm> {
                 image = quest.imageUrl!;
               }
             }
-            if (quest.difficulty != null) _value = quest.difficulty!;
             return Form(
                 key: _formQus,
                 child: Padding(
@@ -101,6 +105,7 @@ class _AddFormState extends State<AcceptForm> {
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
+                      Text("Tác giả " + quest.creator!),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu hỏi:',
@@ -153,6 +158,7 @@ class _AddFormState extends State<AcceptForm> {
                               ],
                               onChanged: (value) {
                                 setState(() {
+                                  check++;
                                   _value = int.parse(value.toString());
 
                                   // _answers1Controller.text = answerContent[1];
@@ -244,44 +250,47 @@ class _AddFormState extends State<AcceptForm> {
                       SizedBox(height: heightSize * spaceBetweenFields),
                       if (quest.ans!.isNotEmpty)
                         for (Answers ans in quest.ans!)
-                          Container(
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        (quest.status == "KHAO_SAT_QUESTION")
-                                            ? "Lựa chọn"
-                                            : (ans.isCorrect == true)
-                                                ? 'Đáp án'
-                                                : 'Câu sai',
-                                        style: TextStyle(
-                                            fontSize:
-                                                widthSize * fontSizeTextField,
-                                            fontFamily: 'Poppins',
-                                            color: Colors.white))),
-                                Container(
-                                    margin: const EdgeInsets.all(15.0),
-                                    padding: const EdgeInsets.all(3.0),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                      bottom: BorderSide(color: Colors.white),
-                                    )),
-                                    child: TextFormField(
-                                        readOnly: true,
-                                        initialValue:
-                                            (ans.answerContent == null)
-                                                ? ''
-                                                : ans.answerContent!,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: fontSizeTextFormField))),
-                                SizedBox(
-                                    height: heightSize * spaceBetweenFields),
-                              ]))
-                      else
-                        Text('Xin lỗi chúng tôi đang gặp một số vấn đề'),
+                          if (ans.answerContent != "")
+                            Container(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                  Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                          (quest.status == "KHAO_SAT_QUESTION")
+                                              ? "Lựa chọn"
+                                              : (ans.isCorrect == true)
+                                                  ? 'Đáp án'
+                                                  : 'Câu sai',
+                                          style: TextStyle(
+                                              fontSize:
+                                                  widthSize * fontSizeTextField,
+                                              fontFamily: 'Poppins',
+                                              color: Colors.white))),
+                                  Container(
+                                      margin: const EdgeInsets.all(15.0),
+                                      padding: const EdgeInsets.all(3.0),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                        bottom: BorderSide(color: Colors.white),
+                                      )),
+                                      child: TextFormField(
+                                          readOnly: true,
+                                          initialValue:
+                                              (ans.answerContent == null)
+                                                  ? ''
+                                                  : ans.answerContent!,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize:
+                                                  fontSizeTextFormField))),
+                                  SizedBox(
+                                      height: heightSize * spaceBetweenFields),
+                                ]))
+                          else
+                            Text('Xin lỗi chúng tôi đang gặp một số vấn đề'),
                       (quest.status == "KHAO_SAT_QUESTION")
                           ? Text("")
                           : TextButton(

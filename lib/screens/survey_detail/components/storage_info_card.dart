@@ -24,33 +24,31 @@ class StorageInfoCard extends StatelessWidget {
           primary: Colors.black12,
         ),
         onPressed: () async {
-          (constant.order == "Delete")
-              ? await removeSurvey(constant.questId).then((value) async {
-                  if (value != "") {
-                    if (value.contains("Success")) {
-                      Get.snackbar('Thông báo', 'Xóa thành công',
-                          duration: Duration(seconds: 4),
-                          animationDuration: Duration(milliseconds: 800),
-                          snackPosition: SnackPosition.TOP,
-                          backgroundColor: Colors.white);
-                    } else {
-                      Get.snackbar(
-                          'Thông báo', 'Cập nhật trạng thái thất bại' + value,
-                          duration: Duration(seconds: 4),
-                          animationDuration: Duration(milliseconds: 800),
-                          snackPosition: SnackPosition.TOP,
-                          backgroundColor: Colors.white);
-                    }
-                  }
-                }).catchError((error) {
-                  Get.snackbar(
-                      'Thông báo', 'Cập nhật trạng thái thất bại' + error,
+          if (constant.order == "Delete")
+            await removeSurvey(constant.questId).then((value) async {
+              if (value != "") {
+                if (value.contains("Success")) {
+                  Get.snackbar('Thông báo', 'Xóa thành công',
                       duration: Duration(seconds: 4),
                       animationDuration: Duration(milliseconds: 800),
                       snackPosition: SnackPosition.TOP,
                       backgroundColor: Colors.white);
-                })
-              : null;
+                } else {
+                  Get.snackbar(
+                      'Thông báo', 'Cập nhật trạng thái thất bại' + value,
+                      duration: Duration(seconds: 4),
+                      animationDuration: Duration(milliseconds: 800),
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: Colors.white);
+                }
+              }
+            }).catchError((error) {
+              Get.snackbar('Thông báo', 'Cập nhật trạng thái thất bại' + error,
+                  duration: Duration(seconds: 4),
+                  animationDuration: Duration(milliseconds: 800),
+                  snackPosition: SnackPosition.TOP,
+                  backgroundColor: Colors.white);
+            });
         },
         child: Container(
           margin: EdgeInsets.only(top: defaultPadding),

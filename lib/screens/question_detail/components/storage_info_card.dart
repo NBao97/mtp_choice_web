@@ -1,78 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
-import 'package:mtp_choice_web/constants.dart' as constant;
+import 'package:mtp_choice_web/models/QuestFile.dart';
 
 import '../../../constants.dart';
 
 Color colorS = Colors.blue;
 IconData icon = Icons.check_circle_outline;
-final String qusId = constant.questId;
-
-Future<dynamic> approveQuestion(String til) async {
-  String url = '';
-  if (til == 'Xóa') {
-    url = 'https://api.wimln.ml/api/Question/reject';
-
-    final response = await http.delete(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json ; charset=UTF-8',
-        'accept': 'text/plain',
-        'Authorization': 'Bearer ' + constant.key,
-      },
-      body: "[\"" + qusId + "\"]",
-    );
-    if (response.statusCode == 200) {
-      // If the server did return a 200 OK response,
-      // then parse the JSON.
-
-      return "SuccessD";
-    } else {
-      // If   the server did not return a 200 OK response,
-      // then throw an exception.
-      return response.statusCode.toString();
-    }
-  } else {
-    url = 'https://api.wimln.ml/api/Question/approve';
-    final response = await http.put(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Content-Type': 'application/json ; charset=UTF-8',
-        'accept': 'text/plain',
-        'Authorization': 'Bearer ' + constant.key,
-      },
-      body: "[\"" + qusId + "\"]",
-    );
-    if (response.statusCode == 200) {
-      return "Success";
-    } else {
-      // If   the server did not return a 200 OK response,
-      // then throw an exception.
-      return response.statusCode.toString();
-    }
-  }
-}
-
-Future<String> refQuest() async {
-  final response = await http.put(
-    Uri.parse('https://api.wimln.ml/api/Question/refresh-altp-questions'),
-    headers: <String, String>{
-      'Content-Type': 'application/json ; charset=UTF-8',
-      'Authorization': 'Bearer ' + constant.key,
-    },
-  );
-  if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
-    return "Success";
-  } else {
-    // If   the server did not return a 200 OK response,
-    // then throw an exception.
-    return response.statusCode.toString();
-  }
-}
 
 String til = '';
 

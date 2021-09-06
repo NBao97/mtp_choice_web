@@ -80,8 +80,15 @@ class _AddFormState extends State<AcceptForm> {
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
+                      (quest.image != null || quest.image != '')
+                          ? Image.network(
+                              quest.image!,
+                              height: 150,
+                              width: 200,
+                            )
+                          : Text(''),
                       Align(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.center,
                           child: Text('User ID:',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
@@ -98,10 +105,10 @@ class _AddFormState extends State<AcceptForm> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField))),
-                      SizedBox(height: heightSize * spaceBetweenFields),
+                      SizedBox(height: heightSize * spaceBetweenFields / 2),
                       Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Email',
+                          alignment: Alignment.center,
+                          child: Text('Địa chỉ email',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
                                   fontFamily: 'Poppins',
@@ -117,9 +124,9 @@ class _AddFormState extends State<AcceptForm> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField))),
-                      SizedBox(height: heightSize * spaceBetweenFields),
+                      SizedBox(height: heightSize * spaceBetweenFields / 2),
                       Align(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.center,
                           child: Text('phone',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
@@ -136,9 +143,9 @@ class _AddFormState extends State<AcceptForm> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField))),
-                      SizedBox(height: heightSize * spaceBetweenFields),
+                      SizedBox(height: heightSize * spaceBetweenFields / 2),
                       Align(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.center,
                           child: Text('Họ và tên',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
@@ -156,9 +163,9 @@ class _AddFormState extends State<AcceptForm> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField))),
-                      SizedBox(height: heightSize * spaceBetweenFields),
+                      SizedBox(height: heightSize * spaceBetweenFields / 2),
                       Align(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.center,
                           child: Text('Điểm thưởng',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
@@ -178,9 +185,9 @@ class _AddFormState extends State<AcceptForm> {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField))),
-                      SizedBox(height: heightSize * spaceBetweenFieldAndButton),
+                      SizedBox(height: heightSize * spaceBetweenFields / 2),
                       Align(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.center,
                           child: Text('Vai trò',
                               style: TextStyle(
                                   fontSize: widthSize * fontSizeTextField,
@@ -210,7 +217,7 @@ class _AddFormState extends State<AcceptForm> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SizedBox(
-                                      width: 100,
+                                      width: 60,
                                     ),
                                     Container(
                                         child: Column(children: [
@@ -242,13 +249,13 @@ class _AddFormState extends State<AcceptForm> {
                                                       fontSizeTextFormField))),
                                     ])),
                                     SizedBox(
-                                      width: 100,
+                                      width: 60,
                                     ),
                                     Container(
                                         child: Column(children: [
                                       Align(
                                           alignment: Alignment.centerLeft,
-                                          child: Text('Số câu đúng',
+                                          child: Text('Tên game',
                                               style: TextStyle(
                                                   fontSize: widthSize *
                                                       fontSizeTextField,
@@ -263,16 +270,23 @@ class _AddFormState extends State<AcceptForm> {
                                                 BorderSide(color: Colors.white),
                                           )),
                                           child: Text(
-                                              hi.numOfCorrect == null
+                                              hi.game!.gameDescription == null
                                                   ? '0'
-                                                  : hi.numOfCorrect!.toString(),
+                                                  : hi.game!.gameDescription!
+                                                              .length >
+                                                          25
+                                                      ? hi.game!
+                                                          .gameDescription!
+                                                          .substring(0, 25)
+                                                      : hi.game!
+                                                          .gameDescription!,
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontSize:
                                                       fontSizeTextFormField))),
                                     ])),
                                     SizedBox(
-                                      width: 100,
+                                      width: 46,
                                     ),
                                     Container(
                                         child: Column(children: [

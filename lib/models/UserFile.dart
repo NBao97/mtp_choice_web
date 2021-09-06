@@ -19,6 +19,7 @@ Future<Users> fetchUser() async {
     // then parse the JSON.
     constant.id = Users.fromJson(json.decode(response.body)).userRole!;
     constant.imageU = Users.fromJson(json.decode(response.body)).image!;
+    constant.userName = Users.fromJson(json.decode(response.body)).fullname!;
     return Users.fromJson(json.decode(response.body));
   } else {
     // If   the server did not return a 200 OK response,
@@ -87,7 +88,8 @@ Future<String> patchUser(String userId, String phone, String email,
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-
+    constant.imageU = image;
+    constant.userName = fullname;
     Get.snackbar('Thông báo', 'Nhập thành công',
         duration: Duration(seconds: 4),
         animationDuration: Duration(milliseconds: 800),

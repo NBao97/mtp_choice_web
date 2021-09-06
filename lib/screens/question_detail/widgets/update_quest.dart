@@ -108,7 +108,11 @@ class _AddFormState extends State<AddForm> {
                   answerContent.add(an.answerContent);
                 }
               }
+              print(answerContent);
             } else {
+              _answersCorrectController.text = answerContent[0];
+            }
+            if (quest.status == "KHAO_SAT_QUESTION") {
               _answersCorrectController.text = answerContent[0];
             }
             final _answers1Controller =
@@ -137,6 +141,7 @@ class _AddFormState extends State<AddForm> {
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
+                      Text("Tác giả " + quest.creator!),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu hỏi',
@@ -219,7 +224,7 @@ class _AddFormState extends State<AddForm> {
                           maxLines: null,
                           controller: _answersCorrectController,
                           onChanged: (value) {
-                            answerContent[0] = value;
+                            answerContent.first = value;
                           },
                           validator: (value) {
                             if (value == '') {

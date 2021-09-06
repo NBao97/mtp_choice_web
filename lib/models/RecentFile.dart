@@ -24,7 +24,7 @@ Future<List<QuestionFile>> fetchQuestion(
             '&PageSize=10';
   } else {
     quesUrl =
-        'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=false&PageNumber=' +
+        'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=true&PageNumber=' +
             page.toString() +
             '&PageSize=10';
   }
@@ -45,7 +45,7 @@ Future<List<QuestionFile>> fetchQuestion(
   } else {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load album');
+    throw Exception('Failed to load question');
   }
 }
 

@@ -89,7 +89,7 @@ class _MyAppState extends State<UpdateProfile> {
             (snapshot.data!.password == null)
                 ? pas = ''
                 : pas = snapshot.data!.password!;
-            (pas.contains("string")) ? pas = "1234Mul!" : ' ';
+            if (pas.contains("string")) pas = "1234Mul!";
             final _passwordController = TextEditingController(text: pas);
             final _repasswordController = TextEditingController(text: pas);
 

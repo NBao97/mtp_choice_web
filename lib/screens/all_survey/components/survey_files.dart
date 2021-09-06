@@ -141,7 +141,7 @@ class _MyAppState extends State<SurveyFiles> {
                       sortAscending: _isAscending,
                       columns: [
                         DataColumn(
-                          label: Text("Nội dung"),
+                          label: Text("  Nội dung"),
                         ),
                         DataColumn(
                             label: Text("Ngày tạo"),
@@ -251,9 +251,9 @@ class MyData extends DataTableSource {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: Text((_user.description!.length < 10)
+              child: Text((_user.description!.length < 20)
                   ? _user.description!
-                  : _user.description!.substring(0, 10)),
+                  : _user.description!.substring(0, 20)),
             ),
           ],
         )),
