@@ -7,7 +7,7 @@ import '../create_survey.dart';
 
 List question = [];
 List answer = [];
-TextEditingController _descriptionController = TextEditingController();
+TextEditingController _descriptionController = TextEditingController(text: " ");
 TextEditingController _endTimeController = TextEditingController();
 
 class UpdateProfile extends StatefulWidget {
@@ -101,8 +101,10 @@ class _MyAppState extends State<UpdateProfile> {
                   validator: (value) {
                     if (value == '') {
                       return 'Nội dung không thể để trống';
-                    } else if (value.toString().length > 50) {
-                      return 'Nội dung không thể lớn hơn 50 ký tự';
+                    } else if (value.toString().length > 500) {
+                      return 'Nội dung không thể lớn hơn 500 ký tự';
+                    } else if (value.toString().length < 20) {
+                      return 'Nội dung không thể nhỏ hơn 20 ký tự';
                     }
                   },
                   cursorColor: Colors.white,
@@ -130,75 +132,6 @@ class _MyAppState extends State<UpdateProfile> {
                   style: TextStyle(
                       color: Colors.white, fontSize: fontSizeTextFormField)),
               SizedBox(height: heightSize * spaceBetweenFields / 2),
-              // Align(
-              //     alignment: Alignment.centerLeft,
-              //     child: Text('Ngày bắt đầu',
-              //         style: TextStyle(
-              //             fontSize: widthSize * fontSizeTextField,
-              //             fontFamily: 'Poppins',
-              //             color: Colors.white))),
-              // TextFormField(
-              //     readOnly: true,
-              //     controller: _startTimeController,
-              //     validator: (value) {
-              //       if (value == '') {
-              //         return 'Nội dung không thể để trống';
-              //       } else if (DateTime.parse(value!)
-              //           .isAfter(DateTime.parse(_endTimeController.text))) {
-              //         return 'Ngày bắt đầu không thể xảy ra sau ngày kết thúc';
-              //       } else if (DateTime.parse(value).isBefore(DateTime.now())) {
-              //         return 'Ngày bắt đầu không thể xảy ra trước hôm nay';
-              //       }
-              //     },
-              //     onTap: () async {
-              //       showDatePicker(
-              //         context: context,
-              //         initialDate: DateTime.now(),
-              //         firstDate: DateTime(2019, 1),
-              //         lastDate: DateTime(2021, 12),
-              //         builder: (context, child) {
-              //           return Theme(
-              //             data: ThemeData.light().copyWith(
-              //               primaryColor: Colors.blueAccent,
-              //               accentColor: const Color(0xFF8CE7F1),
-              //               colorScheme:
-              //                   ColorScheme.light(primary: Colors.blueAccent),
-              //               buttonTheme: ButtonThemeData(
-              //                   textTheme: ButtonTextTheme.primary),
-              //             ),
-              //             child: child!,
-              //           );
-              //         },
-              //       ).then((pickedDate) {
-              //         //do whatever you want
-              //         _startTimeController.text = pickedDate!.toIso8601String();
-              //       });
-              //     },
-              //     cursorColor: Colors.white,
-              //     keyboardType: TextInputType.text,
-              //     decoration: InputDecoration(
-              //       fillColor: Colors.white,
-              //       border: OutlineInputBorder(
-              //           borderSide:
-              //               BorderSide(color: Colors.black87, width: 2)),
-              //       enabledBorder: OutlineInputBorder(
-              //           borderSide: BorderSide(color: Colors.white, width: 2)),
-              //       focusedBorder: OutlineInputBorder(
-              //           borderSide: BorderSide(color: Colors.white, width: 2)),
-              //       labelStyle: TextStyle(color: Colors.white),
-              //       errorStyle: TextStyle(
-              //           color: Colors.white,
-              //           fontSize: widthSize * errorFormMessage),
-              //       prefixIcon: Icon(
-              //         Icons.check_circle_outline,
-              //         size: widthSize * iconFormSize,
-              //         color: Colors.white,
-              //       ),
-              //     ),
-              //     textAlign: TextAlign.start,
-              //     style: TextStyle(
-              //         color: Colors.white, fontSize: fontSizeTextFormField)),
-              // SizedBox(height: heightSize * spaceBetweenFields / 2),
               Align(
                   alignment: Alignment.topLeft,
                   child: Text('Ngày kết thúc',
@@ -214,7 +147,7 @@ class _MyAppState extends State<UpdateProfile> {
                       return 'Nội dung không thể để trống';
                     } else if (DateTime.parse(value!).isBefore(
                         DateTime.parse(DateTime.now().toIso8601String()))) {
-                      return 'Ngày kết thúc không thể xảy ra trước ngày bắt đầu';
+                      return 'Ngày kết thúc không thể xảy ra trong quá khứ';
                     }
                   },
                   onTap: () async {
@@ -326,7 +259,6 @@ class _MyAppState extends State<UpdateProfile> {
                   ]),
                 ],
               ),
-
               SizedBox(height: heightSize * spaceBetweenFieldAndButton),
             ])));
   }
@@ -454,165 +386,409 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               textAlign: TextAlign.start,
               style: TextStyle(color: Colors.white, fontSize: 18)),
           SizedBox(height: heightSize * 0.08 / 2),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Lựa chọn',
-                  style: TextStyle(
-                      fontSize: widthSize * 0.01,
-                      fontFamily: 'Poppins',
-                      color: Colors.white))),
-          TextFormField(
-              maxLines: null,
-              validator: (value) {
-                if (value == '') {
-                  return 'Lựa chọn đầu không thể để trống';
-                } else if (value.toString().length > 50) {
-                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
-                }
-              },
-              onSaved: (value) {
-                answer.add(value);
-              },
-              cursorColor: Colors.white,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87, width: 2)),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                labelStyle: TextStyle(color: Colors.white),
-                errorStyle:
-                    TextStyle(color: Colors.white, fontSize: widthSize * 0.012),
-                prefixIcon: Icon(
-                  Icons.check_circle_outline,
-                  size: widthSize * 0.02,
-                  color: Colors.white,
-                ),
-              ),
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white, fontSize: 18)),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn bắt buộc',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'Lựa chọn bắt buộc không thể để trống';
+                            } else if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ])),
+            Spacer(),
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn bắt buộc',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value == '') {
+                              return 'Lựa chọn bắt buộc không thể để trống';
+                            } else if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ]))
+          ]),
           SizedBox(height: heightSize * 0.08 / 2),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Lựa chọn',
-                  style: TextStyle(
-                      fontSize: widthSize * 0.01,
-                      fontFamily: 'Poppins',
-                      color: Colors.white))),
-          TextFormField(
-              maxLines: null,
-              validator: (value) {
-                if (value == '') {
-                  return 'Cần it nhất 2 lựa chọn';
-                } else if (value.toString().length > 50) {
-                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
-                }
-              },
-              onSaved: (value) {
-                answer.add(value);
-              },
-              cursorColor: Colors.white,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87, width: 2)),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                labelStyle: TextStyle(color: Colors.white),
-                errorStyle:
-                    TextStyle(color: Colors.white, fontSize: widthSize * 0.012),
-                prefixIcon: Icon(
-                  Icons.check_circle_outline,
-                  size: widthSize * 0.02,
-                  color: Colors.white,
-                ),
-              ),
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white, fontSize: 18)),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ])),
+            Spacer(),
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ]))
+          ]),
           SizedBox(height: heightSize * 0.08 / 2),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Lựa chọn',
-                  style: TextStyle(
-                      fontSize: widthSize * 0.01,
-                      fontFamily: 'Poppins',
-                      color: Colors.white))),
-          TextFormField(
-              maxLines: null,
-              validator: (value) {
-                if (value.toString().length > 50) {
-                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
-                }
-              },
-              onSaved: (value) {
-                answer.add(value);
-              },
-              cursorColor: Colors.white,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87, width: 2)),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                labelStyle: TextStyle(color: Colors.white),
-                errorStyle:
-                    TextStyle(color: Colors.white, fontSize: widthSize * 0.012),
-                prefixIcon: Icon(
-                  Icons.check_circle_outline,
-                  size: widthSize * 0.02,
-                  color: Colors.white,
-                ),
-              ),
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white, fontSize: 18)),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ])),
+            Spacer(),
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ]))
+          ]),
           SizedBox(height: heightSize * 0.08 / 2),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Text('Lựa chọn',
-                  style: TextStyle(
-                      fontSize: widthSize * 0.01,
-                      fontFamily: 'Poppins',
-                      color: Colors.white))),
-          TextFormField(
-              maxLines: null,
-              validator: (value) {
-                if (value.toString().length > 50) {
-                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
-                }
-              },
-              onSaved: (value) {
-                answer.add(value);
-              },
-              cursorColor: Colors.white,
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black87, width: 2)),
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
-                labelStyle: TextStyle(color: Colors.white),
-                errorStyle:
-                    TextStyle(color: Colors.white, fontSize: widthSize * 0.012),
-                prefixIcon: Icon(
-                  Icons.check_circle_outline,
-                  size: widthSize * 0.02,
-                  color: Colors.white,
-                ),
-              ),
-              textAlign: TextAlign.start,
-              style: TextStyle(color: Colors.white, fontSize: 18)),
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ])),
+            Spacer(),
+            Container(
+                width: widthSize / 6,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text('Lựa chọn',
+                              style: TextStyle(
+                                  fontSize: widthSize * 0.01,
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white))),
+                      TextFormField(
+                          maxLines: null,
+                          validator: (value) {
+                            if (value.toString().length > 50) {
+                              return 'Lựa chọn không thể lớn hơn 50 ký tự';
+                            }
+                          },
+                          onSaved: (value) {
+                            answer.add(value);
+                          },
+                          cursorColor: Colors.white,
+                          keyboardType: TextInputType.text,
+                          decoration: InputDecoration(
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black87, width: 2)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 2)),
+                            labelStyle: TextStyle(color: Colors.white),
+                            errorStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: widthSize * 0.012),
+                            prefixIcon: Icon(
+                              Icons.check_circle_outline,
+                              size: widthSize * 0.02,
+                              color: Colors.white,
+                            ),
+                          ),
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.white, fontSize: 18)),
+                    ]))
+          ]),
           SizedBox(height: heightSize * 0.08 / 2),
         ]));
   }

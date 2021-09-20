@@ -247,7 +247,13 @@ class DTS extends DataTableSource {
           ),
         ),
         DataCell(Text(
-          _user.difficulty == null ? '0' : '${_user.difficulty}',
+          (('${_user.difficulty}').toString() == "0")
+              ? 'Dễ'
+              : (('${_user.difficulty}').toString() == "1")
+                  ? "Trung bình"
+                  : (('${_user.difficulty}').toString() == "2")
+                      ? "Khó"
+                      : 'Dễ',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,

@@ -114,7 +114,14 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
         ],
       )),
       DataCell(Text(
-          fileInfo.difficulty == null ? '0' : fileInfo.difficulty!.toString())),
+        (('${fileInfo.difficulty}').toString() == "0")
+            ? 'Dễ'
+            : (('${fileInfo.difficulty}').toString() == "1")
+                ? "Trung bình"
+                : (('${fileInfo.difficulty}').toString() == "2")
+                    ? "Khó"
+                    : 'Dễ',
+      )),
       DataCell(Text(
         (fileInfo.creator == null) ? "no information" : fileInfo.creator!,
       )),
