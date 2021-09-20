@@ -36,6 +36,7 @@ class StorageInfoCard extends StatelessWidget {
       colorS = Colors.red;
       icon = Icons.close_outlined;
     } else {
+      til = title;
       colorS = Colors.white;
       icon = Icons.help_outline;
     }

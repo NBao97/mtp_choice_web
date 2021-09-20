@@ -17,6 +17,8 @@ class RecentFiles extends StatelessWidget {
   }
 }
 
+List<QuestionFile>? dataSave = [];
+
 class QuestionFiles extends StatefulWidget {
   const QuestionFiles({
     Key? key,
@@ -106,6 +108,7 @@ class _MyAppState extends State<QuestionFiles> {
                       onSubmitted: (value) {
                         constant.search = _controller.text;
                         setState(() {
+                          dataSave!.clear();
                           constant.page = 1;
                           futureDataQuest = fetchQuestion(
                               constant.page, constant.order, constant.questId);
@@ -125,6 +128,7 @@ class _MyAppState extends State<QuestionFiles> {
                           onTap: () {
                             constant.search = _controller.text;
                             setState(() {
+                              dataSave!.clear();
                               constant.page = 1;
                               futureDataQuest = fetchQuestion(constant.page,
                                   constant.order, constant.questId);
@@ -152,10 +156,10 @@ class _MyAppState extends State<QuestionFiles> {
                       horizontalMargin: 0,
 
                       onPageChanged: (value) => {
-                        if (value > constant.page)
+                        if (value > constant.page + 100)
                           {
                             setState(() {
-                              constant.page = constant.page + 1;
+                              constant.page = constant.page + 100;
                               futureDataQuest = fetchQuestion(constant.page,
                                   constant.order, constant.questId);
                             })
@@ -193,8 +197,6 @@ class _MyAppState extends State<QuestionFiles> {
         });
   }
 }
-
-List<QuestionFile>? dataSave = [];
 
 class DTS extends DataTableSource {
   DTS({

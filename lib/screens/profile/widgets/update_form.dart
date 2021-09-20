@@ -120,7 +120,7 @@ class _MyAppState extends State<UpdateProfile> {
                             if (value == '') {
                               return 'Nhập tên người dùng của bạn để tiếp tục';
                             }
-                            if (value.toString().length > 150) {
+                            if (value.toString().length > 50) {
                               return 'Tên không thể lớn hơn 50 ký tự';
                             }
                           },
@@ -164,8 +164,8 @@ class _MyAppState extends State<UpdateProfile> {
                           validator: (value) {
                             if (value == "") {
                               return 'Họ và tên không thể để trống';
-                            } else if (value.toString().length > 150) {
-                              return 'Họ và tên không thể lớn hơn 150 ký tự';
+                            } else if (value.toString().length > 50) {
+                              return 'Họ và tên không thể lớn hơn 50 ký tự';
                             }
                           },
                           cursorColor: Colors.white,

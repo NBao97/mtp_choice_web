@@ -101,8 +101,8 @@ class _MyAppState extends State<UpdateProfile> {
                   validator: (value) {
                     if (value == '') {
                       return 'Nội dung không thể để trống';
-                    } else if (value.toString().length > 150) {
-                      return 'Nội dung không thể lớn hơn 150 ký tự';
+                    } else if (value.toString().length > 50) {
+                      return 'Nội dung không thể lớn hơn 50 ký tự';
                     }
                   },
                   cursorColor: Colors.white,
@@ -425,8 +425,8 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               validator: (value) {
                 if (value == '') {
                   return 'Câu hỏi không thể để trống';
-                } else if (value.toString().length > 150) {
-                  return 'Câu hỏi không thể lớn hơn 150 ký tự';
+                } else if (value.toString().length > 500) {
+                  return 'Câu hỏi không thể lớn hơn 500 ký tự';
                 }
               },
               onSaved: (value) {
@@ -466,8 +466,8 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               validator: (value) {
                 if (value == '') {
                   return 'Lựa chọn đầu không thể để trống';
-                } else if (value.toString().length > 150) {
-                  return 'Lựa chọn không thể lớn hơn 150 ký tự';
+                } else if (value.toString().length > 50) {
+                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
                 }
               },
               onSaved: (value) {
@@ -507,8 +507,8 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
               validator: (value) {
                 if (value == '') {
                   return 'Cần it nhất 2 lựa chọn';
-                } else if (value.toString().length > 150) {
-                  return 'Lựa chọn không thể lớn hơn 150 ký tự';
+                } else if (value.toString().length > 50) {
+                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
                 }
               },
               onSaved: (value) {
@@ -546,8 +546,8 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
           TextFormField(
               maxLines: null,
               validator: (value) {
-                if (value.toString().length > 150) {
-                  return 'Lựa chọn không thể lớn hơn 150 ký tự';
+                if (value.toString().length > 50) {
+                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
                 }
               },
               onSaved: (value) {
@@ -585,8 +585,8 @@ class _FriendTextFieldsState extends State<FriendTextFields> {
           TextFormField(
               maxLines: null,
               validator: (value) {
-                if (value.toString().length > 150) {
-                  return 'Lựa chọn không thể lớn hơn 150 ký tự';
+                if (value.toString().length > 50) {
+                  return 'Lựa chọn không thể lớn hơn 50 ký tự';
                 }
               },
               onSaved: (value) {

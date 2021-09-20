@@ -193,8 +193,8 @@ class _AddFormState extends State<AcceptForm> {
                               validator: (value) {
                                 if (value == '') {
                                   return 'không thể để trống Khái quát';
-                                } else if (value.toString().length > 250) {
-                                  return 'Khái quát không thể lớn hơn 250 ký tự';
+                                } else if (value.toString().length > 500) {
+                                  return 'Khái quát không thể lớn hơn 500 ký tự';
                                 }
                               },
                               cursorColor: Colors.white,

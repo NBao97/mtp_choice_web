@@ -209,123 +209,71 @@ class _AddFormState extends State<AcceptForm> {
                                   fontSize: fontSizeTextFormField))),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
                       if (quest.his != null)
-                        for (Histories hi in quest.his!)
-                          Container(
-                              child: Column(
-                            children: [
-                              Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 60,
-                                    ),
-                                    Container(
-                                        child: Column(children: [
-                                      Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text('điểm',
-                                              style: TextStyle(
-                                                  fontSize: widthSize *
-                                                      fontSizeTextField,
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.white))),
-                                      Container(
-                                          margin: const EdgeInsets.all(15.0),
-                                          padding: const EdgeInsets.all(3.0),
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                            bottom:
-                                                BorderSide(color: Colors.white),
-                                          )),
-                                          child: Text(
-                                              hi.score == null ||
-                                                      hi.score.toString() ==
-                                                          'null'
-                                                  ? '0'
-                                                  : hi.score.toString(),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      fontSizeTextFormField))),
-                                    ])),
-                                    SizedBox(
-                                      width: 60,
-                                    ),
-                                    Container(
-                                        child: Column(children: [
-                                      Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text('Tên game',
-                                              style: TextStyle(
-                                                  fontSize: widthSize *
-                                                      fontSizeTextField,
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.white))),
-                                      Container(
-                                          margin: const EdgeInsets.all(15.0),
-                                          padding: const EdgeInsets.all(3.0),
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                            bottom:
-                                                BorderSide(color: Colors.white),
-                                          )),
-                                          child: Text(
-                                              hi.game!.gameDescription == null
-                                                  ? '0'
-                                                  : hi.game!.gameDescription!
-                                                              .length >
-                                                          25
-                                                      ? hi.game!
-                                                          .gameDescription!
-                                                          .substring(0, 25)
-                                                      : hi.game!
-                                                          .gameDescription!,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      fontSizeTextFormField))),
-                                    ])),
-                                    SizedBox(
-                                      width: 46,
-                                    ),
-                                    Container(
-                                        child: Column(children: [
-                                      Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text('Ngày hoàn thành',
-                                              style: TextStyle(
-                                                  fontSize: widthSize *
-                                                      fontSizeTextField,
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.white))),
-                                      Container(
-                                          margin: const EdgeInsets.all(15.0),
-                                          padding: const EdgeInsets.all(3.0),
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                            bottom:
-                                                BorderSide(color: Colors.white),
-                                          )),
-                                          child: Text(
-                                              hi.date == null || hi.date == ''
-                                                  ? DateTime.now()
-                                                      .subtract(
-                                                          Duration(days: 3))
-                                                      .toString()
-                                                      .substring(0, 10)
-                                                  : hi.date!,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize:
-                                                      fontSizeTextFormField))),
-                                    ])),
-                                  ]),
-                              Divider(
-                                color: Colors.white,
-                                thickness: 2,
+                        Theme(
+                          data: Theme.of(context)
+                              .copyWith(dividerColor: Colors.white),
+                          child: DataTable(
+                            dividerThickness: 2,
+                            columns: const <DataColumn>[
+                              DataColumn(
+                                label: Text(
+                                  'Điểm',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Tên game',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Ngày chơi',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
                               ),
                             ],
-                          )),
+                            rows: <DataRow>[
+                              for (Histories hi in quest.his!)
+                                DataRow(
+                                  cells: <DataCell>[
+                                    DataCell(
+                                      Text(
+                                          hi.score == null ||
+                                                  hi.score.toString() == 'null'
+                                              ? '0'
+                                              : hi.score.toString(),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: fontSizeTextFormField)),
+                                    ),
+                                    DataCell(Text(
+                                        hi.game!.gameDescription == null
+                                            ? '0'
+                                            : hi.game!.gameDescription!.length >
+                                                    25
+                                                ? hi.game!.gameDescription!
+                                                    .substring(0, 25)
+                                                : hi.game!.gameDescription!,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
+                                    DataCell(Text(
+                                        hi.date == null || hi.date == ''
+                                            ? DateTime.now()
+                                                .subtract(Duration(days: 3))
+                                                .toString()
+                                                .substring(0, 10)
+                                            : hi.date!,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: fontSizeTextFormField))),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
                       SizedBox(height: heightSize * spaceBetweenFieldAndButton),
                     ])));
           } else if (snapshot.hasError) {

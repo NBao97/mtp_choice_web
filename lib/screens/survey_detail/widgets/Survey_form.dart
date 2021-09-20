@@ -249,8 +249,15 @@ class _AddFormState extends State<AcceptForm> {
                                                               color: Colors
                                                                   .white))),
                                                   Text(
-                                                      an.answerPercent
-                                                          .toString(),
+                                                      (an.answerPercent!
+                                                                  .toString()
+                                                                  .length >
+                                                              6)
+                                                          ? an.answerPercent!
+                                                              .toStringAsFixed(
+                                                                  3)
+                                                          : an.answerPercent!
+                                                              .toString(),
                                                       //an.answerPercent!.toString(),
                                                       style: TextStyle(
                                                           color: Colors.white,

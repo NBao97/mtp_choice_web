@@ -30,7 +30,7 @@ Future<String> createQuestion(
                 "creator": "",
                 "questionDescription": questionDescription,
                 if (constant.image != '') "imageUrl": constant.image,
-                "status": 0,
+                "status": 1,
                 "answers": [
                   {
                     "answerContent": list.first,
