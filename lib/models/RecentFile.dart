@@ -21,12 +21,12 @@ Future<List<QuestionFile>> fetchQuestion(
             constant.search +
             '&IsAscending=false&PageNumber=' +
             page.toString() +
-            '&PageSize=100';
+            '&PageSize=1000';
   } else {
     quesUrl =
         'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=true&PageNumber=' +
             page.toString() +
-            '&PageSize=100';
+            '&PageSize=1000';
   }
 
   final response = await http.get(

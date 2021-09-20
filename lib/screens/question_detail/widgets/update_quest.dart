@@ -584,7 +584,7 @@ class _AddFormState extends State<AddForm> {
                                       fontSize: widthSize * fontSizeButton,
                                       fontFamily: 'Poppins',
                                       color: Colors.white))),
-                      SizedBox(height: heightSize * 0.01),
+                      SizedBox(height: heightSize * spaceBetweenFields),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

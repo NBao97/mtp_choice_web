@@ -226,27 +226,47 @@ class _AddFormState extends State<AcceptForm> {
                                   color: Colors.white,
                                   fontSize: fontSizeTextFormField)),
                       SizedBox(height: heightSize * spaceBetweenFields),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text('Người tạo',
-                              style: TextStyle(
-                                  fontSize: widthSize * fontSizeTextField,
-                                  fontFamily: 'Poppins',
-                                  color: Colors.white))),
-                      Container(
-                          margin: const EdgeInsets.all(15.0),
-                          padding: const EdgeInsets.all(3.0),
-                          decoration: BoxDecoration(
-                              border: Border(
-                            bottom: BorderSide(color: Colors.white),
-                          )),
-                          child: TextFormField(
-                              readOnly: true,
-                              initialValue:
-                                  (quest.creator == null) ? "" : quest.creator!,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: fontSizeTextFormField))),
+                      (quest.status == "KHAO_SAT_QUESTION")
+                          ? Text("")
+                          : TextButton(
+                              style: flatButtonStyle,
+                              onPressed: () async {
+                                if (_formQus.currentState!.validate()) {
+                                  updateQuestion(
+                                          quest.questionId!,
+                                          quest.questionContent!,
+                                          _value,
+                                          [
+                                            quest.ans!.first.questionId,
+                                            quest.ans![1].questionId,
+                                            quest.ans![2].questionId,
+                                            quest.ans![3].questionId
+                                          ],
+                                          [
+                                            quest.ans!.first.answerContent,
+                                            quest.ans![1].answerContent,
+                                            quest.ans![2].answerContent,
+                                            quest.ans![3].answerContent
+                                          ],
+                                          _descriptController.text,
+                                          video,
+                                          image)
+                                      .catchError((error) {
+                                    Get.snackbar(
+                                        'Thông báo', 'Nhập thất bại ' + error,
+                                        duration: Duration(seconds: 4),
+                                        animationDuration:
+                                            Duration(milliseconds: 800),
+                                        snackPosition: SnackPosition.TOP,
+                                        backgroundColor: Colors.white);
+                                  });
+                                }
+                              },
+                              child: Text('Cập nhật chỉ dẫn',
+                                  style: TextStyle(
+                                      fontSize: widthSize * fontSizeButton,
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white))),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       if (quest.ans!.isNotEmpty)
                         for (Answers ans in quest.ans!)
@@ -290,48 +310,7 @@ class _AddFormState extends State<AcceptForm> {
                                       height: heightSize * spaceBetweenFields),
                                 ]))
                           else
-                            Text('Xin lỗi chúng tôi đang gặp một số vấn đề'),
-                      (quest.status == "KHAO_SAT_QUESTION")
-                          ? Text("")
-                          : TextButton(
-                              style: flatButtonStyle,
-                              onPressed: () async {
-                                if (_formQus.currentState!.validate()) {
-                                  updateQuestion(
-                                          quest.questionId!,
-                                          quest.questionContent!,
-                                          _value,
-                                          [
-                                            quest.ans!.first.questionId,
-                                            quest.ans![1].questionId,
-                                            quest.ans![2].questionId,
-                                            quest.ans![3].questionId
-                                          ],
-                                          [
-                                            quest.ans!.first.answerContent,
-                                            quest.ans![1].answerContent,
-                                            quest.ans![2].answerContent,
-                                            quest.ans![3].answerContent
-                                          ],
-                                          _descriptController.text,
-                                          video,
-                                          image)
-                                      .catchError((error) {
-                                    Get.snackbar(
-                                        'Thông báo', 'Nhập thất bại ' + error,
-                                        duration: Duration(seconds: 4),
-                                        animationDuration:
-                                            Duration(milliseconds: 800),
-                                        snackPosition: SnackPosition.TOP,
-                                        backgroundColor: Colors.white);
-                                  });
-                                }
-                              },
-                              child: Text('Cập nhật chỉ dẫn',
-                                  style: TextStyle(
-                                      fontSize: widthSize * fontSizeButton,
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white))),
+                            Text('Xin lỗi câu hỏi này có một số vấn đề'),
                     ])));
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

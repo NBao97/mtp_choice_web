@@ -156,10 +156,10 @@ class _MyAppState extends State<QuestionFiles> {
                       horizontalMargin: 0,
 
                       onPageChanged: (value) => {
-                        if (value > constant.page + 100)
+                        if (value > constant.page * 1000)
                           {
                             setState(() {
-                              constant.page = constant.page + 100;
+                              constant.page = constant.page + 1;
                               futureDataQuest = fetchQuestion(constant.page,
                                   constant.order, constant.questId);
                             })
