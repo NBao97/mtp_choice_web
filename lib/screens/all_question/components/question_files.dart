@@ -33,11 +33,10 @@ class _MyAppState extends State<QuestionFiles> {
   void initState() {
     super.initState();
     constant.order = '';
-
+    dataSave!.clear();
     constant.questId = '';
     constant.imageUrl = '';
     constant.image = '';
-
     futureDataQuest =
         fetchQuestion(constant.page, constant.order, constant.questId);
   }
@@ -107,8 +106,8 @@ class _MyAppState extends State<QuestionFiles> {
                       textInputAction: TextInputAction.search,
                       onSubmitted: (value) {
                         constant.search = _controller.text;
+                        dataSave!.clear();
                         setState(() {
-                          dataSave!.clear();
                           constant.page = 1;
                           futureDataQuest = fetchQuestion(
                               constant.page, constant.order, constant.questId);
@@ -127,8 +126,8 @@ class _MyAppState extends State<QuestionFiles> {
                         suffixIcon: InkWell(
                           onTap: () {
                             constant.search = _controller.text;
+                            dataSave!.clear();
                             setState(() {
-                              dataSave!.clear();
                               constant.page = 1;
                               futureDataQuest = fetchQuestion(constant.page,
                                   constant.order, constant.questId);
@@ -193,6 +192,15 @@ class _MyAppState extends State<QuestionFiles> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
+          if (snapshot.hasData == false) {
+            return Container(
+                padding: EdgeInsets.all(constant.defaultPadding),
+                decoration: BoxDecoration(
+                  color: constant.secondaryColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                ),
+                child: Text("Xin hảy đợi một chút câu hỏi đang được hiển thị"));
+          }
           return CircularProgressIndicator();
         });
   }
@@ -206,12 +214,14 @@ class DTS extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     assert(index >= 0);
-    _data!.addAll(dataSave!);
-    if (index >= _data!.length) {
+    if (dataSave!.length != _data!.length)
+      for (int x = 0; x < _data!.length; x++) dataSave!.add(_data![x]);
+
+    if (index >= dataSave!.length) {
       return null;
     }
-    final _user = _data![index];
-    dataSave!.add(_user);
+    final _user = dataSave![index];
+
     return DataRow.byIndex(
       index: index,
       onSelectChanged: (value) {
