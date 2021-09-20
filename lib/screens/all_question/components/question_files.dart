@@ -156,7 +156,7 @@ class _MyAppState extends State<QuestionFiles> {
                       horizontalMargin: 0,
 
                       onPageChanged: (value) => {
-                        if (value > constant.page * 1000)
+                        if (value > constant.page * 1000 - 50)
                           {
                             setState(() {
                               constant.page = constant.page + 1;
