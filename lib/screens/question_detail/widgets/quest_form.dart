@@ -105,7 +105,12 @@ class _AddFormState extends State<AcceptForm> {
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
-                      Text("Tác giả " + quest.creator!),
+                      Text("Tác giả " +
+                          (quest.creator == ""
+                              ? " "
+                              : quest.creator == null
+                                  ? " "
+                                  : quest.creator!)),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu hỏi:',
