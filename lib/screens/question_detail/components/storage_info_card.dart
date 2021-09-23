@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:mtp_choice_web/models/QuestFile.dart';
+import 'package:mtp_choice_web/screens/all_question/all_question.dart';
 
 import '../../../constants.dart';
 
@@ -68,6 +69,7 @@ class StorageInfoCard extends StatelessWidget {
                   animationDuration: Duration(milliseconds: 800),
                   snackPosition: SnackPosition.TOP,
                   backgroundColor: Colors.white);
+              Get.toNamed(AllQuestionScreen.route);
             } else {
               Get.snackbar('Thông báo', 'Cập nhật trạng thái thất bại' + value,
                   duration: Duration(seconds: 4),
