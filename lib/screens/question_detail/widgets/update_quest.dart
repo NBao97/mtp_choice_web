@@ -149,6 +149,10 @@ class _AddFormState extends State<AddForm> {
                               : quest.creatorUserId == null
                                   ? " "
                                   : quest.creatorUserId!)),
+                      Text("Version " +
+                          (quest.version == null
+                              ? "0"
+                              : quest.version!.toString())),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu hỏi',
