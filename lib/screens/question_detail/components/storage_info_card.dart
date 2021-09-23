@@ -35,7 +35,7 @@ class StorageInfoCard extends StatelessWidget {
       til = ' Xóa câu hỏi';
       colorS = Colors.red;
       icon = Icons.close_outlined;
-    } else if (title == 'DELETE') {
+    } else if (title == 'DELETED') {
       til = ' Đã xóa';
       colorS = Colors.red;
       icon = Icons.close_outlined;
