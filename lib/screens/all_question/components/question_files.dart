@@ -250,11 +250,31 @@ class DTS extends DataTableSource {
                         size: 20,
                         color: Colors.white,
                       ))
-                  : SvgPicture.asset(
-                      "icons/xd_file.svg",
-                      height: 30,
-                      width: 30,
-                    ),
+                  : _user.status == "NOT_APPROVED"
+                      ? Container(
+                          width: 30,
+                          height: 30,
+                          color: Colors.orange,
+                          child: Icon(
+                            Icons.motion_photos_pause,
+                            size: 20,
+                            color: Colors.white,
+                          ))
+                      : _user.status == "KHAO_SAT_QUESTION"
+                          ? Container(
+                              width: 30,
+                              height: 30,
+                              color: Colors.deepPurple,
+                              child: Icon(
+                                Icons.query_stats_rounded,
+                                size: 20,
+                                color: Colors.white,
+                              ))
+                          : SvgPicture.asset(
+                              "icons/xd_file.svg",
+                              height: 30,
+                              width: 30,
+                            ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: constant.defaultPadding),
