@@ -96,14 +96,16 @@ class _AddFormState extends State<AddForm> {
             final _descriptController =
                 TextEditingController(text: quest.questionDescription);
 
-            if (answerContent.isEmpty == true) {
+            if (answerContent.isEmpty == true && check == 0) {
               for (Answers an in quest.ans!) {
                 if (an.isCorrect == true) {
+                  check++;
                   _answersCorrectController.text = an.answerContent!;
 
                   answerId.insert(0, an.answerId);
                   answerContent.insert(0, an.answerContent);
                 } else {
+                  check++;
                   answerId.add(an.answerId);
                   answerContent.add(an.answerContent);
                 }
@@ -115,13 +117,13 @@ class _AddFormState extends State<AddForm> {
             if (quest.status == "KHAO_SAT_QUESTION") {
               _answersCorrectController.text = answerContent[0];
             }
-            final _answers1Controller =
-                TextEditingController(text: answerContent[1]);
+            final _answers1Controller = TextEditingController(
+                text: answerContent.isEmpty ? '' : answerContent[1]);
 
-            final _answers2Controller =
-                TextEditingController(text: answerContent[2]);
-            final _answers3Controller =
-                TextEditingController(text: answerContent[3]);
+            final _answers2Controller = TextEditingController(
+                text: answerContent.isEmpty ? '' : answerContent[2]);
+            final _answers3Controller = TextEditingController(
+                text: answerContent.isEmpty ? '' : answerContent[3]);
             if (quest.videoUrl != null) {
               if (quest.videoUrl != '') {
                 video = quest.videoUrl!;

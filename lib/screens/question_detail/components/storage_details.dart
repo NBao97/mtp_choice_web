@@ -33,7 +33,7 @@ class StarageDetails extends StatelessWidget {
                   StorageInfoCard(title: constant.status),
                   (constant.status == "KHAO_SAT_QUESTION")
                       ? Text("")
-                      : (constant.status == "DELETED")
+                      : (constant.status == "DELETE")
                           ? Text("")
                           : (constant.status == "Xóa")
                               ? Text("")
