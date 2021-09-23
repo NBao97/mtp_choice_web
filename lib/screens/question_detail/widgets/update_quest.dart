@@ -141,7 +141,12 @@ class _AddFormState extends State<AddForm> {
                         right: widthSize * 0.05,
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
-                      Text("Tác giả " + quest.creator!),
+                      Text("Tác giả " +
+                          (quest.creatorUserId == ""
+                              ? " "
+                              : quest.creatorUserId == null
+                                  ? " "
+                                  : quest.creatorUserId!)),
                       Align(
                           alignment: Alignment.centerLeft,
                           child: Text('Câu hỏi',

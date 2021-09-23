@@ -19,6 +19,8 @@ class AcceptForm extends StatefulWidget {
 }
 
 int check = 0;
+List answerId = [];
+List answerContent = [];
 
 class _AddFormState extends State<AcceptForm> {
   GlobalKey<FormState> _formQus =
@@ -32,6 +34,8 @@ class _AddFormState extends State<AcceptForm> {
     super.initState();
     _value = 0;
     check = 0;
+    answerContent.clear();
+    answerId.clear();
     futureDataQuestForm = fetchQuestion(constant.page, constant.order, qus);
   }
 
@@ -97,6 +101,18 @@ class _AddFormState extends State<AcceptForm> {
                 image = quest.imageUrl!;
               }
             }
+            if (answerContent.isEmpty == true) {
+              for (Answers an in quest.ans!) {
+                if (an.isCorrect == true) {
+                  answerId.insert(0, an.answerId);
+                  answerContent.insert(0, an.answerContent);
+                } else {
+                  answerId.add(an.answerId);
+                  answerContent.add(an.answerContent);
+                }
+              }
+              print(answerContent);
+            }
             return Form(
                 key: _formQus,
                 child: Padding(
@@ -106,11 +122,11 @@ class _AddFormState extends State<AcceptForm> {
                         top: heightSize * paddingTopForm),
                     child: Column(children: <Widget>[
                       Text("Tác giả " +
-                          (quest.creator == ""
+                          (quest.creatorUserId == ""
                               ? " "
-                              : quest.creator == null
+                              : quest.creatorUserId == null
                                   ? " "
-                                  : quest.creator!)),
+                                  : quest.creatorUserId!)),
                       Text("Version " +
                           (quest.version == null
                               ? "0"
@@ -245,18 +261,8 @@ class _AddFormState extends State<AcceptForm> {
                                           quest.questionId!,
                                           quest.questionContent!,
                                           _value,
-                                          [
-                                            quest.ans!.first.questionId,
-                                            quest.ans![1].questionId,
-                                            quest.ans![2].questionId,
-                                            quest.ans![3].questionId
-                                          ],
-                                          [
-                                            quest.ans!.first.answerContent,
-                                            quest.ans![1].answerContent,
-                                            quest.ans![2].answerContent,
-                                            quest.ans![3].answerContent
-                                          ],
+                                          answerId,
+                                          answerContent,
                                           _descriptController.text,
                                           video,
                                           image)

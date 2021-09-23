@@ -92,7 +92,7 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
   return DataRow(
     onSelectChanged: (value) {
       constant.questId = fileInfo.questionId!;
-      if (constant.email == fileInfo.creator) {
+      if (constant.email == fileInfo.creatorUserId) {
         constant.order = 'update';
       }
       Get.toNamed(QuestionDetail.route);
@@ -123,7 +123,9 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
                     : 'Dễ',
       )),
       DataCell(Text(
-        (fileInfo.creator == null) ? "Không có thông tin" : fileInfo.creator!,
+        (fileInfo.creatorUserId == null)
+            ? "Không có thông tin"
+            : fileInfo.creatorUserId!,
       )),
     ],
   );

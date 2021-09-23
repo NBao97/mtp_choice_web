@@ -226,7 +226,7 @@ class DTS extends DataTableSource {
       index: index,
       onSelectChanged: (value) {
         constant.questId = _user.questionId!;
-        if (constant.email == _user.creator) {
+        if (constant.email == _user.creatorUserId) {
           constant.order = 'update';
         }
         Get.toNamed(QuestionDetail.route);
@@ -269,7 +269,9 @@ class DTS extends DataTableSource {
           maxLines: 1,
         )),
         DataCell(Text(
-          (_user.creator == null) ? "Không có thông tin" : '${_user.creator}',
+          (_user.creatorUserId == null)
+              ? "Không có thông tin"
+              : '${_user.creatorUserId}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,

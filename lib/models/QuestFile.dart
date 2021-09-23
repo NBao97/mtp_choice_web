@@ -159,29 +159,44 @@ Future<String> updateQuestion(
     String questionDescription,
     String video,
     String image) async {
-  final response = await http.put(
-      Uri.parse('https://api.wimln.ml/api/Question/' + qus),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer ' + constant.key,
-      },
-      body: jsonEncode(<String, dynamic>{
-        "questionContent": title,
-        "difficulty": difficult,
-        "questionDescription": questionDescription,
-        if (video != '') "videoUrl": video,
-        if (image != '') "imageUrl": image,
-        "\"" + "answers" + "\"": [
-          {
-            "answerId": id.first,
-            "answerContent": content.first,
-            "isCorrect": true
+  print(jsonEncode(<String, dynamic>{
+    "questionContent": title,
+    "difficulty": difficult,
+    "questionDescription": questionDescription,
+    if (video != '') "videoUrl": video,
+    if (image != '') "imageUrl": image,
+    "answers": [
+      {"answerId": id.first, "answerContent": content.first, "isCorrect": true},
+      for (int i = 1; i < content.length; i++)
+        {"answerId": id[i], "answerContent": content[i], "isCorrect": false},
+    ],
+  }));
+  final response =
+      await http.put(Uri.parse('https://api.wimln.ml/api/Question/' + qus),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': 'Bearer ' + constant.key,
           },
-          {"answerId": id[1], "answerContent": content[1], "isCorrect": false},
-          {"answerId": id[2], "answerContent": content[2], "isCorrect": false},
-          {"answerId": id[3], "answerContent": content[3], "isCorrect": false}
-        ],
-      }));
+          body: jsonEncode(<String, dynamic>{
+            "questionContent": title,
+            "difficulty": difficult,
+            "questionDescription": questionDescription,
+            if (video != '') "videoUrl": video,
+            if (image != '') "imageUrl": image,
+            "answers": [
+              {
+                "answerId": id.first,
+                "answerContent": content.first,
+                "isCorrect": true
+              },
+              for (int i = 1; i < content.length; i++)
+                {
+                  "answerId": id[i],
+                  "answerContent": content[i],
+                  "isCorrect": false
+                },
+            ],
+          }));
 
   if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,
