@@ -123,7 +123,7 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
                     : 'Dễ',
       )),
       DataCell(Text(
-        (fileInfo.creator == null) ? "no information" : fileInfo.creator!,
+        (fileInfo.creator == null) ? "Không có thông tin" : fileInfo.creator!,
       )),
     ],
   );

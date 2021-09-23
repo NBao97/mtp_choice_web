@@ -32,7 +32,11 @@ class StorageInfoCard extends StatelessWidget {
       colorS = Colors.blueAccent;
       icon = Icons.question_answer_outlined;
     } else if (title == 'Xóa') {
-      til = 'Xóa';
+      til = ' Xóa câu hỏi';
+      colorS = Colors.red;
+      icon = Icons.close_outlined;
+    } else if (title == 'DELETED') {
+      til = ' Đã xóa';
       colorS = Colors.red;
       icon = Icons.close_outlined;
     } else {

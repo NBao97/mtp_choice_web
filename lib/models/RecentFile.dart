@@ -79,11 +79,12 @@ class QuestionFile {
       questionDescription,
       imageUrl,
       videoUrl;
-  final int? difficulty;
+  final int? difficulty, version;
   final List<Answers>? ans;
   QuestionFile(
       {this.questionContent,
       this.questionHint,
+      this.version,
       this.questionDescription,
       this.difficulty,
       this.creator,
@@ -97,11 +98,12 @@ class QuestionFile {
     return QuestionFile(
       questionContent: json['questionContent'],
       difficulty: json['difficulty'],
-      creator: json['creator'],
+      creator: json['creatorUserId'],
       questionId: json['questionId'],
       status: json['status'],
       imageUrl: json['imageUrl'],
       videoUrl: json['videoUrl'],
+      version: json['version'],
       questionDescription: json['questionDescription'],
       questionHint: json['questionHint'],
       ans: json['answers'] != null

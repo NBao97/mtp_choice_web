@@ -31,9 +31,13 @@ class StarageDetails extends StatelessWidget {
                   ),
                   SizedBox(height: constant.defaultPadding),
                   StorageInfoCard(title: constant.status),
-                  (constant.status != "KHAO_SAT_QUESTION")
-                      ? StorageInfoCard(title: 'Xóa')
-                      : Text(""),
+                  (constant.status == "KHAO_SAT_QUESTION")
+                      ? Text("")
+                      : (constant.status == "DELETED")
+                          ? Text("")
+                          : (constant.status == "Xóa")
+                              ? Text("")
+                              : StorageInfoCard(title: 'Xóa'),
                 ],
               ),
             )

@@ -269,7 +269,7 @@ class DTS extends DataTableSource {
           maxLines: 1,
         )),
         DataCell(Text(
-          (_user.creator == null) ? "no information" : '${_user.creator}',
+          (_user.creator == null) ? "Không có thông tin" : '${_user.creator}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
