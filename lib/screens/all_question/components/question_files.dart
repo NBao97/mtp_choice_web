@@ -37,6 +37,7 @@ class _MyAppState extends State<QuestionFiles> {
     constant.questId = '';
     constant.imageUrl = '';
     constant.image = '';
+    constant.search = '';
     futureDataQuest =
         fetchQuestion(constant.page, constant.order, constant.questId);
   }
