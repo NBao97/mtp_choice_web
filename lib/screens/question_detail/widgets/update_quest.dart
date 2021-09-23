@@ -207,16 +207,20 @@ class _AddFormState extends State<AddForm> {
                       if (quest.imageUrl != null)
                         if (quest.imageUrl != "")
                           SizedBox(
-                            height: 300,
+                            height: 200,
                             width: 400,
                             child: Image.network(quest.imageUrl!),
                           ),
                       if (quest.videoUrl != null)
                         if (quest.videoUrl != "")
-                          VideoItems(
-                            videoPlayerController:
-                                VideoPlayerController.network(quest.videoUrl!),
-                          ),
+                          SizedBox(
+                              height: 300,
+                              width: 400,
+                              child: VideoItems(
+                                videoPlayerController:
+                                    VideoPlayerController.network(
+                                        quest.videoUrl!),
+                              )),
                       SizedBox(height: heightSize * spaceBetweenFields),
                       Align(
                           alignment: Alignment.centerLeft,
