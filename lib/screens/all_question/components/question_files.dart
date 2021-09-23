@@ -178,6 +178,9 @@ class _MyAppState extends State<QuestionFiles> {
                         DataColumn(
                           label: Text("Người tạo"),
                         ),
+                        DataColumn(
+                          label: Text("Phiên bản "),
+                        ),
                       ],
                       rowsPerPage: 10,
                       source: _dtSource,
@@ -237,11 +240,21 @@ class DTS extends DataTableSource {
           Row(
             children: [
               Text("  "),
-              SvgPicture.asset(
-                "icons/xd_file.svg",
-                height: 30,
-                width: 30,
-              ),
+              _user.status == "DELETED"
+                  ? Container(
+                      width: 30,
+                      height: 30,
+                      color: Colors.lightBlue,
+                      child: Icon(
+                        Icons.delete_forever_outlined,
+                        size: 20,
+                        color: Colors.white,
+                      ))
+                  : SvgPicture.asset(
+                      "icons/xd_file.svg",
+                      height: 30,
+                      width: 30,
+                    ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: constant.defaultPadding),
@@ -273,6 +286,12 @@ class DTS extends DataTableSource {
           (_user.creatorUserId == null)
               ? "Không có thông tin"
               : '${_user.creatorUserId}',
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 2,
+        )),
+        DataCell(Text(
+          (_user.version == null) ? "0" : '${_user.version}',
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,

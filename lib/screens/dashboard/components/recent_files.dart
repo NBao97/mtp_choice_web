@@ -70,6 +70,9 @@ class _MyAppState extends State<RecentFiles> {
                         DataColumn(
                           label: Text("Người tạo"),
                         ),
+                        DataColumn(
+                          label: Text("Phiên bản"),
+                        ),
                       ],
                       rows: List.generate(
                         data!.length,
@@ -100,11 +103,21 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
     cells: [
       DataCell(Row(
         children: [
-          SvgPicture.asset(
-            "icons/media_file.svg",
-            height: 30,
-            width: 30,
-          ),
+          fileInfo.status == "DELETED"
+              ? Container(
+                  width: 30,
+                  height: 30,
+                  color: Colors.lightBlue,
+                  child: Icon(
+                    Icons.delete_forever_outlined,
+                    size: 20,
+                    color: Colors.white,
+                  ))
+              : SvgPicture.asset(
+                  "icons/xd_file.svg",
+                  height: 30,
+                  width: 30,
+                ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
             child: Text(fileInfo.questionContent!.length > 10
@@ -126,6 +139,9 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
         (fileInfo.creatorUserId == null)
             ? "Không có thông tin"
             : fileInfo.creatorUserId!,
+      )),
+      DataCell(Text(
+        (fileInfo.version == null) ? "0" : fileInfo.version!.toString(),
       )),
     ],
   );
