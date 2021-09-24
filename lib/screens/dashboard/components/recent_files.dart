@@ -140,8 +140,12 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
                         ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            child: Text(fileInfo.questionContent!.length > 10
-                ? fileInfo.questionContent!.substring(0, 10)
+            child: Text(fileInfo.questionContent!.length > 40
+                ? fileInfo.questionContent!.substring(0, 20) +
+                    "..." +
+                    fileInfo.questionContent!.substring(
+                        fileInfo.questionContent!.length - 20,
+                        fileInfo.questionContent!.length)
                 : fileInfo.questionContent!),
           ),
         ],
@@ -160,9 +164,11 @@ DataRow recentFileDataRow(QuestionFile fileInfo) {
             ? "Không có thông tin"
             : fileInfo.creatorUserId!,
       )),
-      DataCell(Text(
-        (fileInfo.version == null) ? "0" : fileInfo.version!.toString(),
-      )),
+      DataCell(Align(
+          alignment: Alignment.center,
+          child: Text(
+            (fileInfo.version == null) ? "0" : fileInfo.version!.toString(),
+          ))),
     ],
   );
 }

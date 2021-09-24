@@ -279,8 +279,12 @@ class DTS extends DataTableSource {
                 padding: const EdgeInsets.symmetric(
                     horizontal: constant.defaultPadding),
                 child: Text(
-                  _user.questionContent!.length > 10
-                      ? _user.questionContent!.substring(0, 10)
+                  _user.questionContent!.length > 40
+                      ? _user.questionContent!.substring(0, 20) +
+                          "..." +
+                          _user.questionContent!.substring(
+                              _user.questionContent!.length - 20,
+                              _user.questionContent!.length)
                       : _user.questionContent!,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -310,12 +314,14 @@ class DTS extends DataTableSource {
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         )),
-        DataCell(Text(
-          (_user.version == null) ? "0" : '${_user.version}',
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        )),
+        DataCell(Align(
+            alignment: Alignment.center,
+            child: Text(
+              (_user.version == null) ? "0" : '${_user.version}',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ))),
       ],
     );
   }
