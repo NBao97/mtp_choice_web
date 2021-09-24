@@ -101,14 +101,15 @@ class DrawerListTile extends StatelessWidget {
           ListTile(
             onTap: onPressed,
             horizontalTitleGap: 0.0,
+            hoverColor: Colors.black87,
             leading: Icon(
               svgSrc,
-              color: Colors.white54,
+              color: Colors.white,
               size: 16,
             ),
             title: Text(
               title,
-              style: TextStyle(color: Colors.white54),
+              style: TextStyle(color: Colors.white),
             ),
           ),
           Divider(
