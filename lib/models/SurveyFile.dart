@@ -92,35 +92,31 @@ Future<String> removeSurvey(String fed) async {
 
 Future<String> postSurvey(
     String des, String start, String end, List ques, List ans) async {
-  final response =
-      await http.post(Uri.parse('https://api.wimln.ml/api/Game/khao-sat'),
-          headers: <String, String>{
-            'Content-Type': 'application/json ; charset=UTF-8',
-            'Authorization': 'Bearer ' + constant.key,
-          },
-          body: jsonEncode(<String, dynamic>{
-            "description": des,
-            "startTime": start,
-            "endTime": end,
-            "questions": [
-              for (int i = 0; i < ques.length; i++)
-                {
-                  "questionContent": ques[i],
-                  "answers": [
-                    for (int an = 0; an < 8; an++)
-                      if (ans[i + an + 7 * i] != null ||
-                          ans[i + an + 7 * i]
-                                  .toString()
-                                  .replaceAll(' ', '')
-                                  .isEmpty ==
-                              false)
-                        {
-                          "answerContent": ans[i + an + 7 * i],
-                        },
-                  ]
-                },
-            ],
-          }));
+  final response = await http.post(
+      Uri.parse('https://api.wimln.ml/api/Game/khao-sat'),
+      headers: <String, String>{
+        'Content-Type': 'application/json ; charset=UTF-8',
+        'Authorization': 'Bearer ' + constant.key,
+      },
+      body: jsonEncode(<String, dynamic>{
+        "description": des,
+        "startTime": start,
+        "endTime": end,
+        "questions": [
+          for (int i = 0; i < ques.length; i++)
+            {
+              "questionContent": ques[i],
+              "answers": [
+                for (int an = 0; an < 8; an++)
+                  if (ans[i + an + 7 * i] != null ||
+                      ans[i + an + 7 * i].toString().trim().isEmpty == false)
+                    {
+                      "answerContent": ans[i + an + 7 * i],
+                    },
+              ]
+            },
+        ],
+      }));
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
