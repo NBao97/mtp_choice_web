@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:mtp_choice_web/models/RecentFile.dart';
+import 'package:mtp_choice_web/DTO/QuestionDTO.dart';
+import 'package:mtp_choice_web/models/QuestFile.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 import '../../../constants.dart' as constant;
 

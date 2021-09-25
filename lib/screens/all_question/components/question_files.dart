@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:mtp_choice_web/models/RecentFile.dart';
+import 'package:mtp_choice_web/models/QuestFile.dart';
+import 'package:mtp_choice_web/DTO/QuestionDTO.dart';
 import 'package:mtp_choice_web/screens/add/add_question.dart';
 import 'package:mtp_choice_web/screens/question_detail/question_detail.dart';
 

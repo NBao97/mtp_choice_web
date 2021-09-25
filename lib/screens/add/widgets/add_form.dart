@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:mtp_choice_web/models/RecentFile.dart';
+import 'package:mtp_choice_web/DTO/QuestionDTO.dart';
 import 'dart:async';
 import '../../../constants.dart' as constant;
 import 'package:mtp_choice_web/models/QuestFile.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:mtp_choice_web/DTO/UserDTO.dart';
 import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:mtp_choice_web/screens/user_detail/user_detail.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;

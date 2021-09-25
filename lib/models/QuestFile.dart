@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:mtp_choice_web/DTO/QuestionDTO.dart';
+
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -280,5 +282,51 @@ Future<String> refQuest() async {
     // If   the server did not return a 200 OK response,
     // then throw an exception.
     return response.statusCode.toString();
+  }
+}
+
+Future<List<QuestionFile>> fetchQuestion(
+    int page, String orderBy, String questId) async {
+  String quesUrl = '';
+
+  if (questId != '') {
+    quesUrl = 'https://api.wimln.ml/api/Question?questionIds=' + questId;
+
+    orderBy = '';
+  } else if (questId == '' && orderBy == 'first page') {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=false&PageNumber=1&PageSize=4';
+    constant.order = '';
+  } else if (constant.search != "") {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?OrderBy=created&questionContentSearch=' +
+            constant.search +
+            '&IsAscending=false&PageNumber=' +
+            page.toString() +
+            '&PageSize=1000';
+  } else {
+    quesUrl =
+        'https://api.wimln.ml/api/Question?OrderBy=created&IsAscending=true&PageNumber=' +
+            page.toString() +
+            '&PageSize=1000';
+  }
+
+  final response = await http.get(
+    Uri.parse(quesUrl),
+    headers: <String, String>{
+      'Content-Type': 'application/json ; charset=UTF-8',
+      'Authorization': 'Bearer ' + constant.key,
+    },
+  );
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    List jsonResponse = json.decode(response.body);
+    print(quesUrl);
+    return jsonResponse.map((data) => new QuestionFile.fromJson(data)).toList();
+  } else {
+    // If   the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load question');
   }
 }

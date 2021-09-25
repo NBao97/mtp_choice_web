@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mtp_choice_web/DTO/UserDTO.dart';
 import 'package:mtp_choice_web/models/UserFile.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:mtp_choice_web/screens/profile/components/upload_button.dart';

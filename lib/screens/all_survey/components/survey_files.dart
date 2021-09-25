@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:mtp_choice_web/DTO/SurveyDTO.dart';
 import 'package:mtp_choice_web/constants.dart' as constant;
 import 'package:mtp_choice_web/models/SurveyFile.dart';
 import 'package:mtp_choice_web/screens/CreateSurvey/create_survey.dart';
